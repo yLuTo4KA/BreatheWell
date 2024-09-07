@@ -1,0 +1,17 @@
+
+.notAuth-page {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    &::before {
+        content: url("../../../../assets/images/Gradient.png");
+        position: absolute;
+        top: 0;
+    }
+    &__logo {
+        z-index: 10;
+    }
+}

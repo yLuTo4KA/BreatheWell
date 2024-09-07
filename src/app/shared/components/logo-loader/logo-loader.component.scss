@@ -1,0 +1,46 @@
+.logo-loader {
+    border: 1px solid var(--stroke-light);
+    border-radius: 50px;
+    min-width: 171px;
+    height: 47px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__process {
+        width: 20px;
+        height: 20px;
+        border: 1px solid #9747FF99;
+        border-radius: 50%;
+        margin-right: 10px;
+        position: relative;
+        &::before {
+            content: "";
+            position: absolute;
+            width: 7.5px;
+            height: 7.5px;
+            border: 1px solid #9747FF;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: expand 5s linear infinite;
+        }
+    }
+    &__title {
+        font-size: 18px;
+        font-weight: 500;
+    }
+}
+
+
+@keyframes expand {
+    0% {
+      transform: translate(-50%, -50%) scale(1); /* 7.5 / 20 = 0.375 */
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(2.375);
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
