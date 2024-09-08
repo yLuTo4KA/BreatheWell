@@ -10,7 +10,7 @@ import { StartPageComponent } from './core/pages/start-page/start-page.component
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/welcome',
+    redirectTo: '/start',
     pathMatch: 'full'
   },
   {
@@ -25,7 +25,7 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: '/start/welcome',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'welcome',
@@ -48,7 +48,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/welcome',
+    redirectTo: '/start',
     pathMatch: 'full'
   },
 ];
