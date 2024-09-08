@@ -23,11 +23,15 @@
     &__swiper {
         width: 100%;
         text-align: left;
+        min-height: 216px;
+        max-height: 356px;
+        height: 100%;
+        margin-bottom: 40px;
 
         &-slide {
-            height: 320px;
-            max-height: 100%;
             min-height: 200px;
+            max-height: 320px;
+            height: 100%;
             width: 229.7px !important;
             padding: 16px;
             border-radius: 20px;
