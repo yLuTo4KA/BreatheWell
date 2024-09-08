@@ -32,7 +32,7 @@ export class ShellComponent implements OnInit {
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
       const currentUrl = this.router.url;
-      this.showFooter = currentUrl !== '/notAuth' && currentUrl !== '/welcome' && currentUrl !== '/welcome-slider';
+      this.showFooter = currentUrl !== '/notAuth' && currentUrl !== '/welcome' && currentUrl !== '/welcome-slider' && currentUrl !== '/cta';
     });
     this.authService.deauth();
     this.authService.auth().subscribe();

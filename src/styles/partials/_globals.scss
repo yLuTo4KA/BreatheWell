@@ -38,7 +38,16 @@ h4 {
   font-size: 18px;
   font-weight: 500;
 }
-
+swiper-container::part(pagination) {
+  position: sticky;
+  margin-top: 16px;
+}
+swiper-container::part(bullet) {
+  background-color: var(--blue-light);
+}
+swiper-container::part(bullet-active) {
+  background-color: var(--purple);
+}
 :root {
   --tg-theme-bg-color: #050726;
   --tg-theme-text-color: #e5e6e8;
@@ -56,6 +65,7 @@ h4 {
   --primary-buttons: #2E59FF;
   --secondary-text: #939AB2;
   --purple: #C997F8;
+  --blue-light: #B5CAFF;
   
   
 }

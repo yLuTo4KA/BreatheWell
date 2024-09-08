@@ -1,6 +1,6 @@
 <div class="welcome-slider-page">
-    <div class="page-container --center">
-        <div class="welcome-slider-page__paginator-list">
+    <div class="page-container --center" [style.paddingInline.px]="currentPage === 4 ? 0 : 16">
+        <div class="welcome-slider-page__paginator-list" [style.paddingInline.px]="currentPage === 4 ? 16 : 0">
             <div class="welcome-slider-page__paginator-item" *ngFor="let i of pages" [ngClass]="{'active': currentPage === i}" (click)="changePage(i)"></div>
         </div>
         <div class="welcome-slider-page__content">
@@ -23,8 +23,10 @@
                 <app-button (click)="changePage(currentPage + 1)"><h4>Звучит интересно</h4></app-button>
             </ng-container>
             <ng-container *ngIf="currentPage === 4">
-                <div class="slider-content"></div>
-                <app-button (click)="changePage(currentPage + 1)"><h4>Дальше</h4></app-button>
+                <div class="slider-content">
+                    <app-slide-slider></app-slide-slider>
+                </div>
+                <app-button (click)="changePage(currentPage + 1)" [style.paddingInline.px]="16"><h4>Дальше</h4></app-button>
             </ng-container>
             <ng-container *ngIf="currentPage === 5">
                 <div class="slider-content"></div>
@@ -32,7 +34,7 @@
             </ng-container>
             <ng-container *ngIf="currentPage === 6">
                 <div class="slider-content"></div>
-                <app-button><h4>Дальше</h4></app-button>
+                <app-button routerLink="/cta"><h4>Дальше</h4></app-button>
             </ng-container>
         </div>
     </div>
