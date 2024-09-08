@@ -13,6 +13,11 @@
         align-items: center;
         margin-bottom: 16px;
         position: relative;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+
         &::before {
             content: url('../../../../../../assets/images/blur.png');
             position: absolute;
@@ -20,6 +25,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
+
         &-icon {
             z-index: 100;
         }
@@ -35,5 +41,6 @@
 
     &__text {
         padding: 26px 5px 0;
+        font-size: 18px;
     }
 }
