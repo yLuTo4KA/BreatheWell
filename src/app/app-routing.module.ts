@@ -4,6 +4,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { NotAuthComponent } from './core/components/not-auth/not-auth.component';
 import { WelcomeComponent } from './core/pages/welcome/welcome.component';
 import { WelcomeSliderComponent } from './core/pages/welcome-slider/welcome-slider.component';
+import { CtaComponent } from './core/pages/cta/cta.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,11 @@ const routes: Routes = [
     component: WelcomeSliderComponent,
     canActivate: [AuthGuard],
     data: {animation: 'WelcomeSliderPage'}
+  },
+  {
+    path: 'cta',
+    component: CtaComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: '**',

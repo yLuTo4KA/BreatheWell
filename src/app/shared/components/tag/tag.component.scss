@@ -1,0 +1,11 @@
+:host {
+    display: flex;
+    justify-content: center;
+}
+.tag {
+    color: var(--dark-purple);
+    border: 1px solid var(--stroke-light);
+    width: max-content;
+    border-radius: 28px;
+    font-weight: 300;
+}
