@@ -1,0 +1,17 @@
+<div class="slide-info">
+    <div class="slide-info__img" *ngIf="iconName">
+        <mat-icon aria-hidden="false" aria-label="icon" [svgIcon]="iconName" [style.width.px]="100" [style.height.px]="100"></mat-icon>
+    </div>
+    <h2 class="slide-info__title" *ngIf="title" [ngClass]="'text-' + color">
+        {{title}}
+    </h2>
+    <h1 class="slide-info__stats" *ngIf="stats">
+        {{stats}}
+    </h1>
+    <p class="slide-info__stats_sub" *ngIf="statsSub">
+        {{statsSub}}
+    </p>
+    <p class="slide-info__text page-info-text" *ngIf="text">
+        {{text}}
+    </p>
+</div>

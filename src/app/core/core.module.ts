@@ -11,13 +11,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { WelcomeSliderComponent } from './pages/welcome-slider/welcome-slider.component';
+import { SlideInfoComponent } from './pages/welcome-slider/components/slide-info/slide-info.component';
 
 
 
 @NgModule({
   imports: [CommonModule,RouterModule,SharedModule, MatIconModule, TranslateModule],
-  declarations: [ShellComponent, NotAuthComponent, FooterComponent, WelcomeComponent, WelcomeSliderComponent],
-  exports: [ShellComponent, NotAuthComponent, FooterComponent, WelcomeComponent],
+  declarations: [ShellComponent, NotAuthComponent, FooterComponent, WelcomeComponent, WelcomeSliderComponent, SlideInfoComponent],
+  exports: [ShellComponent, NotAuthComponent, FooterComponent, WelcomeComponent, SlideInfoComponent],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

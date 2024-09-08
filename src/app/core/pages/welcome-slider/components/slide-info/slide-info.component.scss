@@ -1,0 +1,25 @@
+.slide-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    &__img {
+        width: 160px;
+        height: 160px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        filter: drop-shadow(0 0 35px #5E57CD);
+        margin-bottom: 16px;
+    }
+    &__stats {
+        line-height: 1;
+    }
+    &__title {
+        margin-bottom: 16px;
+    }
+    &__text {
+        padding: 26px 5px 0;
+    }
+}
