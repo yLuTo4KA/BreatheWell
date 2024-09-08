@@ -1,15 +1,17 @@
 <div class="cta-page page-bg-jungle">
     <div class="page-container --center">
         <div class="cta-page__info">
+            <app-tag tagName="Дыхательная практика" [fontSize]="16" [paddingX]="17" [height]="30" class="cta-page__info-tag"></app-tag>
             <h3>Давайте попробуем короткое упражнение на дыхание</h3>
             <div class="cta-page__devider devider"></div>
             <h4 class="cta-page__info-citate">
                 Это займет <span class="text-purple">меньше 1 минуты</span>
             </h4>
         </div>
-        <app-button [paddingX]="5" [paddingY]="15">
+        <app-button class="cta-page__info-btn" [paddingX]="5" [paddingY]="15">
             <h4>Хочу Попробовать</h4>
         </app-button>
+        <router-link class="text-grey" routerLink="/notAuth">В другой раз</router-link>
     </div>
     
 </div>

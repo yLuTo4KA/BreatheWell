@@ -29,12 +29,16 @@
                 <app-button (click)="changePage(currentPage + 1)" [style.paddingInline.px]="16"><h4>Дальше</h4></app-button>
             </ng-container>
             <ng-container *ngIf="currentPage === 5">
-                <div class="slider-content"></div>
+                <div class="slider-content --center --phone">
+                    <app-tag class="slider-content__tag" tagName="Контент"></app-tag>
+                    <h2 class="slider-content__title">Делаем сложное <span class="text-purple">простым</span></h2>
+                    <p class="text-grey slider-content__subtitle">Все уроки объясняются простым языком и понятными примерами их использования в жизни</p>
+                </div>
                 <app-button (click)="changePage(currentPage + 1)"><h4>Дальше</h4></app-button>
             </ng-container>
             <ng-container *ngIf="currentPage === 6">
                 <div class="slider-content"></div>
-                <app-button routerLink="/cta"><h4>Дальше</h4></app-button>
+                <app-button routerLink="/start/cta"><h4>Дальше</h4></app-button>
             </ng-container>
         </div>
     </div>
