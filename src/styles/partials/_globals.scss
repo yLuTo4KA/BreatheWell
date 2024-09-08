@@ -81,7 +81,7 @@ swiper-container::part(bullet-active) {
 
 .page {
   &-bg-jungle {
-    background-image: url('/assets/images/welcome-bg.png');
+    background-image: url('../../assets/images/welcome-bg.png');
     background-repeat: no-repeat;     
     background-position: top center;   
     background-size: cover;             
@@ -164,7 +164,7 @@ router-link {
 }
 .devider {
   width: 100%;
-  background-image: url('/assets/images/Devider.png');
+  background-image: url('../../assets/images/Devider.png');
   height: 5px;
   width: 181px;
   background-repeat: no-repeat;     
