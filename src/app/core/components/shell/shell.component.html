@@ -1,6 +1,6 @@
 <div class="page container">
-  <div class="page-body">
-    <router-outlet></router-outlet>
+  <div class="page-body" [@routeAnimations]="prepareRoute(outlet)">
+    <router-outlet #outlet="outlet"></router-outlet>
   </div>
   <div class="page-footer" *ngIf="showFooter">
     <app-footer></app-footer>
