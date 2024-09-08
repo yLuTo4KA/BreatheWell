@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./welcome-slider.component.scss']
 })
 export class WelcomeSliderComponent {
-
+  pages = [1,2,3,4,5,6]
+  currentPage = 1;
+  changePage(page: any): void{
+    this.currentPage = page;
+  }
 }

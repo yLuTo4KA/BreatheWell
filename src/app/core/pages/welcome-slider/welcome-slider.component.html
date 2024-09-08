@@ -1,1 +1,39 @@
-<p>welcome-slider works!</p>
+<div class="welcome-slider-page">
+    <div class="page-container --center">
+        <div class="welcome-slider-page__paginator-list">
+            <div class="welcome-slider-page__paginator-item" *ngFor="let i of pages" [ngClass]="{'active': currentPage === i}" (click)="changePage(i)"></div>
+        </div>
+        <div class="welcome-slider-page__content">
+            <ng-container *ngIf="currentPage === 1">
+                <div class="slider-content">
+                    <app-slide-info iconName="lungs" title="Знаете ли вы" stats="90%" text="людей не дышат правильно или не используют дыхательные техники в повседневной жизни"></app-slide-info>
+                </div>
+                <app-button (click)="changePage(currentPage + 1)"><h4>Дальше</h4></app-button>
+            </ng-container>
+            <ng-container *ngIf="currentPage === 2">
+                <div class="slider-content">
+                    <app-slide-info iconName="confusion" title="Плохая новость" color="red" text="Неправильное дыхание может привести к усталости, стрессу, проблемам с концентрацией и сном"></app-slide-info>
+                </div>
+                <app-button (click)="changePage(currentPage + 1)"><h4>Как это исправить?</h4></app-button>
+            </ng-container>
+            <ng-container *ngIf="currentPage === 3">
+                <div class="slider-content">
+                    <app-slide-info iconName="smile" title="Хорошая новость" color="green" stats="5" statsSub="Минут" text="использования нашего приложения поможет справится со стрессом, улучшить сон и повысить энергию"></app-slide-info>
+                </div>
+                <app-button (click)="changePage(currentPage + 1)"><h4>Звучит интересно</h4></app-button>
+            </ng-container>
+            <ng-container *ngIf="currentPage === 4">
+                <div class="slider-content"></div>
+                <app-button (click)="changePage(currentPage + 1)"><h4>Дальше</h4></app-button>
+            </ng-container>
+            <ng-container *ngIf="currentPage === 5">
+                <div class="slider-content"></div>
+                <app-button (click)="changePage(currentPage + 1)"><h4>Дальше</h4></app-button>
+            </ng-container>
+            <ng-container *ngIf="currentPage === 6">
+                <div class="slider-content"></div>
+                <app-button><h4>Дальше</h4></app-button>
+            </ng-container>
+        </div>
+    </div>
+</div>

@@ -3,11 +3,12 @@
   
 }
 html, body {
-  color: white;
+  color: var(--primary-text);
   font-family: var(--font);
   background-color: var(--main-background);
   font-weight: 400;
   overflow: hidden;
+  line-height: 1.6;
 }
 
 p {
@@ -23,8 +24,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 48px;
-  font-weight: bold;
+  font-size: 55px;
+  font-weight: 600;
 }
 h2 {
   font-size: 32px;
@@ -49,11 +50,13 @@ h4 {
   --tg-theme-button-text-color: #0a0a0a;
   --tg-theme-secondary-bg-color: #f3f2f9;
   --font: "Geologica";
+  --primary-text: #EEF0F2;
   --main-background: #050726;
   --stroke-light: #414360;
   --primary-buttons: #2E59FF;
   --secondary-text: #939AB2;
   --purple: #C997F8;
+  
   
 }
 
@@ -103,6 +106,7 @@ h4 {
   }
   &-info-text {
     font-size: 14px;
+    color: var(--secondary-text);
   }
 }
 
@@ -152,5 +156,11 @@ h4 {
 .text {
   &-purple {
     color: var(--purple);
+  }
+  &-green {
+    color: #68CD72;
+  }
+  &-red {
+    color: #FF9BA7;
   }
 }
