@@ -12,8 +12,17 @@
         justify-content: center;
         align-items: center;
         margin-bottom: 16px;
-        filter: drop-shadow(0 0 30px #5E57CD);
-
+        position: relative;
+        &::before {
+            content: url('../../../../../../assets/images/blur.png');
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        &-icon {
+            z-index: 100;
+        }
     }
 
     &__stats {
