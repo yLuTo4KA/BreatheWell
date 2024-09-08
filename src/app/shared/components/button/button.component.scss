@@ -1,0 +1,21 @@
+:host {
+    width: 100%;
+    flex: 0;
+}
+.button {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    background: var(--primary-buttons);
+    border-radius: 6px;
+    cursor: pointer;
+    line-height: 1;
+    &.--small {
+        width: 75px;
+        padding: 7px 0;
+    }
+    &.--disabled {
+        pointer-events: none;
+        background: var(--gray);
+    }
+}

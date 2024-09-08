@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { NotAuthComponent } from './core/components/not-auth/not-auth.component';
 import { WelcomeComponent } from './core/pages/welcome/welcome.component';
+import { WelcomeSliderComponent } from './core/pages/welcome-slider/welcome-slider.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,13 @@ const routes: Routes = [
     path: 'welcome',
     component: WelcomeComponent,
     canActivate: [AuthGuard],
+    data: {animation: 'WelcomePage'}
+  },
+  {
+    path: 'welcome-slider',
+    component: WelcomeSliderComponent,
+    canActivate: [AuthGuard],
+    data: {animation: 'WelcomeSliderPage'}
   },
   {
     path: '**',

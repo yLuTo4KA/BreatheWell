@@ -9,13 +9,15 @@ import { AuthInterceptor } from './services/auth.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
+import { WelcomeComponent } from './pages/welcome/welcome.component';
+import { WelcomeSliderComponent } from './pages/welcome-slider/welcome-slider.component';
 
 
 
 @NgModule({
   imports: [CommonModule,RouterModule,SharedModule, MatIconModule, TranslateModule],
-  declarations: [ShellComponent, NotAuthComponent, FooterComponent],
-  exports: [ShellComponent, NotAuthComponent, FooterComponent],
+  declarations: [ShellComponent, NotAuthComponent, FooterComponent, WelcomeComponent, WelcomeSliderComponent],
+  exports: [ShellComponent, NotAuthComponent, FooterComponent, WelcomeComponent],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
