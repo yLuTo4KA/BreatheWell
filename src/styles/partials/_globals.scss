@@ -38,9 +38,11 @@ h4 {
   font-size: 18px;
   font-weight: 500;
 }
+swiper-container::part(container){
+  overflow: visible;
+}
 swiper-container::part(pagination) {
-  position: sticky;
-  margin-top: 16px;
+  bottom: -30px;
 }
 swiper-container::part(bullet) {
   background-color: var(--blue-light);
