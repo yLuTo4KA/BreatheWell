@@ -30,9 +30,15 @@ h1 {
 h2 {
   font-size: 32px;
   font-weight: 500;
+  line-height: 1.1;
+}
+img{
+  display: block;
+  max-width: 100%;
 }
 h3 {
-
+  font-size: 24px;
+  font-weight: 500;
 }
 h4 {
   font-size: 18px;
@@ -67,6 +73,7 @@ swiper-container::part(bullet-active) {
   --primary-buttons: #2E59FF;
   --secondary-text: #939AB2;
   --purple: #C997F8;
+  --dark-purple: #8062CE;
   --blue-light: #B5CAFF;
   
   
@@ -74,7 +81,7 @@ swiper-container::part(bullet-active) {
 
 .page {
   &-bg-jungle {
-    background-image: url('../../assets/images/welcome-bg.png');
+    background-image: url('/assets/images/welcome-bg.png');
     background-repeat: no-repeat;     
     background-position: top center;   
     background-size: cover;             
@@ -122,8 +129,8 @@ swiper-container::part(bullet-active) {
   }
 }
 
-.router-link {
-  color: var(--gold);
+router-link {
+  font-weight: 300;
 }
 
 .modal {
@@ -157,7 +164,7 @@ swiper-container::part(bullet-active) {
 }
 .devider {
   width: 100%;
-  background-image: url('../../assets/images/Devider.png');
+  background-image: url('/assets/images/Devider.png');
   height: 5px;
   width: 181px;
   background-repeat: no-repeat;     
@@ -174,5 +181,8 @@ swiper-container::part(bullet-active) {
   }
   &-red {
     color: #FF9BA7;
+  }
+  &-grey {
+    color: var(--secondary-text);
   }
 }

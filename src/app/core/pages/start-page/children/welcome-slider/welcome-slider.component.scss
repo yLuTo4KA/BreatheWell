@@ -1,36 +1,69 @@
 .welcome-slider-page {
     height: 100vh;
+
     &__paginator {
-        
+
         &-list {
             display: flex;
             width: 100%;
             margin-bottom: 30px;
             z-index: 999;
         }
+
         &-item {
             flex: 1;
             height: 5px;
             margin-right: 10px;
             border-radius: 12px;
             background-color: var(--stroke-light);
+
             &:last-child {
                 margin-right: 0;
             }
+
             &.active {
                 background-color: var(--primary-text);
             }
         }
     }
+
     &__content {
         width: 100%;
         display: flex;
         flex-direction: column;
         flex: 1;
+
     }
-    
+
 }
 
 .slider-content {
     flex: 1;
+    text-align: center;
+
+    &.--center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        margin-bottom: 35px;
+    }
+    &.--phone {
+        background: url('/assets/images/phone.png') top center / 75% auto no-repeat;
+    }
+
+    &__img {
+        &-phone {
+            margin-bottom: 24px;
+        }
+
+    }
+
+    &__tag {
+        margin-bottom: 16px;
+    }
+
+    &__title {
+        margin-bottom: 10px;
+    }
 }

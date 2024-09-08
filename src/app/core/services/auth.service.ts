@@ -69,7 +69,7 @@ export class AuthService extends ApiService {
             }),
             finalize(() => {
                 this.loadingSubject.next(false);
-                this.router.navigate(['/welcome']);
+                this.router.navigate(['/start']);
             }),
             catchError((error: HttpErrorResponse) => {
                 return throwError(() => error);
