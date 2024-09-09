@@ -1,44 +1,77 @@
 <div class="welcome-slider-page">
     <div class="page-container --center" [style.paddingInline.px]="currentPage === 4 ? 0 : 16">
         <div class="welcome-slider-page__paginator-list" [style.paddingInline.px]="currentPage === 4 ? 16 : 0">
-            <div class="welcome-slider-page__paginator-item" *ngFor="let i of pages" [ngClass]="{'active': currentPage === i}" (click)="changePage(i)"></div>
+            <div class="welcome-slider-page__paginator-item" *ngFor="let i of pages"
+                [ngClass]="{'active': currentPage === i}" (click)="changePage(i)"></div>
         </div>
         <div class="welcome-slider-page__content">
             <ng-container *ngIf="currentPage === 1">
                 <div class="slider-content">
-                    <app-slide-info iconName="lungs" title="Знаете ли вы" stats="90%" text="людей не дышат правильно или не используют дыхательные техники в повседневной жизни"></app-slide-info>
+                    <app-slide-info iconName="lungs" title="Знаете ли вы" stats="90%"
+                        text="людей не дышат правильно или не используют дыхательные техники в повседневной жизни"></app-slide-info>
                 </div>
-                <app-button (click)="changePage(currentPage + 1)"><h4>Дальше</h4></app-button>
+                <app-button (click)="changePage(currentPage + 1)">
+                    <h4>Дальше</h4>
+                </app-button>
             </ng-container>
             <ng-container *ngIf="currentPage === 2">
                 <div class="slider-content">
-                    <app-slide-info iconName="confusion" title="Плохая новость" color="red" text="Неправильное дыхание может привести к усталости, стрессу, проблемам с концентрацией и сном"></app-slide-info>
+                    <app-slide-info iconName="confusion" title="Плохая новость" color="red"
+                        text="Неправильное дыхание может привести к усталости, стрессу, проблемам с концентрацией и сном"></app-slide-info>
                 </div>
-                <app-button (click)="changePage(currentPage + 1)"><h4>Как это исправить?</h4></app-button>
+                <app-button (click)="changePage(currentPage + 1)">
+                    <h4>Как это исправить?</h4>
+                </app-button>
             </ng-container>
             <ng-container *ngIf="currentPage === 3">
                 <div class="slider-content">
-                    <app-slide-info iconName="smile" title="Хорошая новость" color="green" stats="5" statsSub="Минут" text="использования нашего приложения поможет справится со стрессом, улучшить сон и повысить энергию"></app-slide-info>
+                    <app-slide-info iconName="smile" title="Хорошая новость" color="green" stats="5" statsSub="Минут"
+                        text="использования нашего приложения поможет справится со стрессом, улучшить сон и повысить энергию"></app-slide-info>
                 </div>
-                <app-button (click)="changePage(currentPage + 1)"><h4>Звучит интересно</h4></app-button>
+                <app-button (click)="changePage(currentPage + 1)">
+                    <h4>Звучит интересно</h4>
+                </app-button>
             </ng-container>
             <ng-container *ngIf="currentPage === 4">
                 <div class="slider-content">
                     <app-slide-slider></app-slide-slider>
                 </div>
-                <app-button (click)="changePage(currentPage + 1)" [style.paddingInline.px]="16"><h4>Дальше</h4></app-button>
+                <app-button (click)="changePage(currentPage + 1)" [style.paddingInline.px]="16">
+                    <h4>Дальше</h4>
+                </app-button>
             </ng-container>
             <ng-container *ngIf="currentPage === 5">
                 <div class="slider-content --center --phone">
                     <app-tag class="slider-content__tag" tagName="Контент"></app-tag>
                     <h2 class="slider-content__title">Делаем сложное <span class="text-purple">простым</span></h2>
-                    <p class="text-grey slider-content__subtitle">Все уроки объясняются простым языком и понятными примерами их использования в жизни</p>
+                    <p class="text-grey slider-content__subtitle">Все уроки объясняются простым языком и понятными
+                        примерами их использования в жизни</p>
                 </div>
-                <app-button (click)="changePage(currentPage + 1)"><h4>Дальше</h4></app-button>
+                <app-button (click)="changePage(currentPage + 1)">
+                    <h4>Дальше</h4>
+                </app-button>
             </ng-container>
             <ng-container *ngIf="currentPage === 6">
-                <div class="slider-content"></div>
-                <app-button routerLink="/start/cta"><h4>Дальше</h4></app-button>
+                <div class="slider-content">
+                    <div class="slider-content__stat">
+                        <div class="slider-content__stat-info">
+                            <mat-icon aria-hidden="false" aria-label="up" svgIcon="arrow"
+                                class="slider-content__stat-icon"></mat-icon>
+                            <h1>83%</h1>
+                        </div>
+                        <p>Excelent</p>
+                        <p>Focus</p>
+                        <img class="slider-content__stat-img" src="assets/images/stat.png" alt="stat">
+                        <p class="slider-content__stat-days">14 days</p>
+                    </div>
+                    <h2 class="slider-content__title">Вы в <span class="text-purple">надежных руках</span></h2>
+                    <p class="text-grey slider-content__subtitle">Уже в течение первых 3 дней более <span
+                            class="text-blue-light">83% пользователей</span> достигли успехов в <span
+                            class="text-blue-light">снижении тревожности</span></p>
+                </div>
+                <app-button routerLink="/start/cta">
+                    <h4>Дальше</h4>
+                </app-button>
             </ng-container>
         </div>
     </div>

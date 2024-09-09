@@ -21,5 +21,25 @@ export class AppComponent {
       'smile',
       this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/smile.svg")
     );
+    this.matIconRegistry.addSvgIcon(
+      'arrow',
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/arrowUp.svg")
+    );
+    this.matIconRegistry.addSvgIcon(
+      'settings',
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/settings.svg")
+    );
+    this.matIconRegistry.addSvgIcon(
+      'forest',
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/forest.svg")
+    );
+    this.matIconRegistry.addSvgIcon(
+      'arrowOpen',
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/arrowOpen.svg")
+    );
+    this.matIconRegistry.addSvgIcon(
+      'close',
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/close.svg")
+    );
   }
 }

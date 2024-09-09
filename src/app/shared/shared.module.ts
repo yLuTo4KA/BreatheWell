@@ -5,17 +5,21 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { LogoLoaderComponent } from './components/logo-loader/logo-loader.component';
 import { TagComponent } from './components/tag/tag.component';
+import { SelectButtonComponent } from './components/select-button/select-button.component';
+import { MiniButtonComponent } from './components/mini-button/mini-button.component';
 
 @NgModule({
   imports: [
     CommonModule,
     MatIconModule,
   ],
-  declarations: [ ButtonComponent, LogoLoaderComponent, TagComponent],
+  declarations: [ ButtonComponent, LogoLoaderComponent, TagComponent, SelectButtonComponent, MiniButtonComponent],
   exports: [    
     ButtonComponent,
     LogoLoaderComponent,
-    TagComponent
+    TagComponent,
+    MiniButtonComponent,
+    SelectButtonComponent
   ]
 })
 export class SharedModule {}
