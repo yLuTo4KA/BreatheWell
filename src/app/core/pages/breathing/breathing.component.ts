@@ -14,6 +14,7 @@ export class BreathingComponent {
 
   breathSpeedUp = 3; // длительность вдоха
   breathSpeedDown = 4; // выдоха
+  currentSpeed: number = this.breathSpeedUp;
 
   breathHold = 2; // задержка после вдоха
   exhaleHold = 5; // после выдоха
@@ -21,7 +22,7 @@ export class BreathingComponent {
   currentHold = this.breathHold;
 
   timer = 3; // таймер
-  currentSpeed: number = this.breathSpeedUp; // текущая длительность вдоха/выдоха
+  
 
   paused = false;
   currentTimeout: any;
@@ -33,6 +34,7 @@ export class BreathingComponent {
     setInterval(() => {
       if (this.paused) return;
       this.timer--;
+      console.log(this.timer);
       if (this.timer <= 0) {
         switch (this.breathProcess) {
           case "up":
