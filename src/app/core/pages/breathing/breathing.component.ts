@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BehaviorSubject, of } from 'rxjs';
 
 @Component({
   selector: 'app-breathing',
@@ -7,16 +8,61 @@ import { Component } from '@angular/core';
 })
 export class BreathingComponent {
   breathingData: any | null = null;
-  breathProcess: "up" | "down" | "pause" = "pause";
-  breathSpeedUp = 5;
-  breathSpeedDown = 4;
-  breathSpeedPause = 3;
-  currentSpeed: number = this.breathSpeedPause;
+  duration = 7;
+
+  breathProcess: "up" | "down" | "started" = "started"; // состояния
+
+  breathSpeedUp = 3; // длительность вдоха
+  breathSpeedDown = 4; // выдоха
+
+  breathHold = 2; // задержка после вдоха
+  exhaleHold = 5; // после выдоха
+
+  currentHold = this.breathHold;
+
+  timer = 3; // таймер
+  currentSpeed: number = this.breathSpeedUp; // текущая длительность вдоха/выдоха
+
   paused = false;
   currentTimeout: any;
+  action: string = "Приготовьтесь!"
+
+  private start$ = new BehaviorSubject<boolean>(false);
 
   ngOnInit() {
-    this.startBreath();
+    setInterval(() => {
+      if (this.paused) return;
+      this.timer--;
+      if (this.timer <= 0) {
+        switch (this.breathProcess) {
+          case "up":
+            this.timer = this.breathHold;
+            if (this.breathHold > 0) {
+              this.action = "Задержите дыхание"
+            }
+
+            break;
+          case "down":
+            this.timer = this.exhaleHold;
+            if (this.exhaleHold > 0) {
+              this.action = "Задержите дыхание"
+            }
+            break;
+          case "started":
+            if (!this.start$.value) {
+              this.start$.next(true);
+            }
+            break;
+        }
+      }
+    }, 1000)
+    this.start$.subscribe((response) => {
+      console.log(response);
+      if (response) {
+        this.startBreath();
+      }
+    })
+
   }
 
   startBreath(): void {
@@ -24,26 +70,20 @@ export class BreathingComponent {
   }
 
   setBreathTimeout(callback: () => void, delay: number): void {
-    if(this.paused) return;
-
+    if (this.paused) return;
     this.currentTimeout = setTimeout(() => {
-      if(!this.paused) {
+      if (!this.paused) {
         callback();
       }
-    }, delay * 1000)
+    }, (delay * 1000) + (this.currentHold * 1000))
   }
 
   up(): void {
     this.breathProcess = 'up';
     this.currentSpeed = this.breathSpeedUp;
-    this.setBreathTimeout(() => {
-      this.down();
-    }, this.currentSpeed)
-  }
-
-  pause(): void {
-    this.breathProcess = 'pause';
-    this.currentSpeed = this.breathSpeedPause;
+    this.currentHold = this.breathHold;
+    this.timer = this.breathSpeedUp;
+    this.action = "Вдох"
     this.setBreathTimeout(() => {
       this.down();
     }, this.currentSpeed)
@@ -52,6 +92,9 @@ export class BreathingComponent {
   down(): void {
     this.breathProcess = 'down';
     this.currentSpeed = this.breathSpeedDown;
+    this.currentHold = this.exhaleHold;
+    this.timer = this.breathSpeedDown;
+    this.action = "Выдох"
     this.setBreathTimeout(() => {
       this.up();
     }, this.currentSpeed)
@@ -59,23 +102,36 @@ export class BreathingComponent {
 
   pauseOn(): void {
     this.paused = true;
+    this.timer = 0;
     clearTimeout(this.currentTimeout);
   }
-  resumeBreath(): void {
-    this.paused = false;
-    switch(this.breathProcess) {
+  pauseOff(): void {
+    switch (this.breathProcess) {
       case 'up':
-        this.up();
-        break;
-      case 'pause':
-        this.pause();
+        if (this.paused) {
+          this.paused = false;
+          this.down();
+        }
         break;
       case 'down':
-        this.down();
+        if (this.paused) {
+          this.paused = false;
+          this.up();
+        }
         break;
     }
+    this.paused = false;
   }
 
+  getTimer(): string {
+    const minutes = Math.floor(this.timer / 60);
+    const seconds = this.timer % 60;
+
+    const minutesDisplay = minutes
+    const secondsDisplay = seconds < 10 ? `0${seconds}` : seconds;
+
+    return `${minutesDisplay}:${secondsDisplay}`;
+  }
 
 
   getProcessClass(): string {

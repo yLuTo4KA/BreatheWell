@@ -19,11 +19,12 @@ import { CtaComponent } from './pages/start-page/children/cta/cta.component';
 import { StartPageComponent } from './pages/start-page/start-page.component';
 import { HomeComponent } from './pages/home/home.component';
 import { BreathingComponent } from './pages/breathing/breathing.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 register();
 
 
 @NgModule({
-  imports: [CommonModule,RouterModule,SharedModule, MatIconModule, TranslateModule],
+  imports: [CommonModule,RouterModule,SharedModule, MatIconModule, TranslateModule, BrowserAnimationsModule],
   declarations: [ShellComponent, NotAuthComponent, FooterComponent, WelcomeComponent, WelcomeSliderComponent, SlideInfoComponent, SlideSliderComponent, CtaComponent, StartPageComponent, HomeComponent, BreathingComponent],
   exports: [ShellComponent, NotAuthComponent, FooterComponent, WelcomeComponent, SlideInfoComponent,SlideSliderComponent, CtaComponent, StartPageComponent, HomeComponent, BreathingComponent],
   providers: [

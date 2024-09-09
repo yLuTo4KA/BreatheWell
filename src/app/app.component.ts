@@ -41,5 +41,9 @@ export class AppComponent {
       'close',
       this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/close.svg")
     );
+    this.matIconRegistry.addSvgIcon(
+      'lips',
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/lips.svg")
+    );
   }
 }

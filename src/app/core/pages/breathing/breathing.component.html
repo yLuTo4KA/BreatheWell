@@ -9,11 +9,13 @@
             <app-mini-button icon="close" [iconHeight]="18.75" [iconWidth]="18.75" routerLink="/home"></app-mini-button>
         </div>
         <div class="breathing-page__body-content">
+            <mat-icon svgIcon="lips" [style.width.px]="32" [style.height.px]="18"></mat-icon>
             <div class="breath-circle" [ngClass]="getProcessClass()" [style.--animation-speed]="currentSpeed + 's'">
-                
+                <h2 class="breath-circle__timer">{{getTimer()}}</h2>
             </div>
+            <h2 class="breath-title">{{action}}</h2>
+            <app-tag class="breath-duration" [tagName]="duration + ' мин'"></app-tag>
         </div>
-        <div class="breathing-page__body-footer">foot</div>
     </div>
     <ng-template #loading>
         <div class="breathing-page__loading">

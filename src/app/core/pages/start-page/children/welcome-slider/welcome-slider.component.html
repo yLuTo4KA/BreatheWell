@@ -5,7 +5,7 @@
                 [ngClass]="{'active': currentPage === i}" (click)="changePage(i)"></div>
         </div>
         <div class="welcome-slider-page__content">
-            <ng-container *ngIf="currentPage === 1">
+            <ng-container *ngIf="currentPage === 1" >
                 <div class="slider-content">
                     <app-slide-info iconName="lungs" title="Знаете ли вы" stats="90%"
                         text="людей не дышат правильно или не используют дыхательные техники в повседневной жизни"></app-slide-info>
@@ -23,7 +23,7 @@
                     <h4>Как это исправить?</h4>
                 </app-button>
             </ng-container>
-            <ng-container *ngIf="currentPage === 3">
+            <ng-container *ngIf="currentPage === 3" >
                 <div class="slider-content">
                     <app-slide-info iconName="smile" title="Хорошая новость" color="green" stats="5" statsSub="Минут"
                         text="использования нашего приложения поможет справится со стрессом, улучшить сон и повысить энергию"></app-slide-info>
@@ -32,7 +32,7 @@
                     <h4>Звучит интересно</h4>
                 </app-button>
             </ng-container>
-            <ng-container *ngIf="currentPage === 4">
+            <ng-container *ngIf="currentPage === 4" >
                 <div class="slider-content">
                     <app-slide-slider></app-slide-slider>
                 </div>
@@ -40,7 +40,7 @@
                     <h4>Дальше</h4>
                 </app-button>
             </ng-container>
-            <ng-container *ngIf="currentPage === 5">
+            <ng-container *ngIf="currentPage === 5" >
                 <div class="slider-content --center --phone">
                     <app-tag class="slider-content__tag" tagName="Контент"></app-tag>
                     <h2 class="slider-content__title">Делаем сложное <span class="text-purple">простым</span></h2>
@@ -51,7 +51,7 @@
                     <h4>Дальше</h4>
                 </app-button>
             </ng-container>
-            <ng-container *ngIf="currentPage === 6">
+            <ng-container *ngIf="currentPage === 6" >
                 <div class="slider-content">
                     <div class="slider-content__stat">
                         <div class="slider-content__stat-info">

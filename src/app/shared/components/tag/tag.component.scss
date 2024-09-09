@@ -1,14 +1,17 @@
 :host {
     display: flex;
     justify-content: center;
-}
-.tag {
     color: var(--dark-purple);
     border: 1px solid var(--stroke-light);
-    width: max-content;
+    background: var(--main-background);
     border-radius: 28px;
+    width: max-content;
     font-weight: 300;
     line-height: 1;
+    padding: 1px 9px;
+    font-size: 12px;
+}
+.tag {
     display: flex;
     justify-content: center;
     align-items: center;
