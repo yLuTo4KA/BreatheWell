@@ -36,17 +36,16 @@ export class BreathingComponent {
       if (this.timer <= 0) {
         switch (this.breathProcess) {
           case "up":
-            this.timer = this.breathHold;
             if (this.breathHold > 0) {
               this.action = "Задержите дыхание"
             }
-
+            this.timer = this.breathHold;
             break;
           case "down":
-            this.timer = this.exhaleHold;
             if (this.exhaleHold > 0) {
               this.action = "Задержите дыхание"
             }
+            this.timer = this.exhaleHold;
             break;
           case "started":
             if (!this.start$.value) {
@@ -57,7 +56,6 @@ export class BreathingComponent {
       }
     }, 1000)
     this.start$.subscribe((response) => {
-      console.log(response);
       if (response) {
         this.startBreath();
       }
