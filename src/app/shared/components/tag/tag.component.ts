@@ -7,7 +7,6 @@ import { Component, Input } from '@angular/core';
 })
 export class TagComponent {
   @Input() tagName: string | null = null;
-  @Input() fontSize: number = 12;
   @Input() height: number = 20;
   @Input() paddingX: number = 8;
 }

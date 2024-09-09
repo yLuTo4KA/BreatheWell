@@ -7,19 +7,21 @@ import { LogoLoaderComponent } from './components/logo-loader/logo-loader.compon
 import { TagComponent } from './components/tag/tag.component';
 import { SelectButtonComponent } from './components/select-button/select-button.component';
 import { MiniButtonComponent } from './components/mini-button/mini-button.component';
+import { SettingsModalComponent } from './components/modals/settings-modal/settings-modal.component';
 
 @NgModule({
   imports: [
     CommonModule,
     MatIconModule,
   ],
-  declarations: [ ButtonComponent, LogoLoaderComponent, TagComponent, SelectButtonComponent, MiniButtonComponent],
+  declarations: [ ButtonComponent, LogoLoaderComponent, TagComponent, SelectButtonComponent, MiniButtonComponent, SettingsModalComponent],
   exports: [    
     ButtonComponent,
     LogoLoaderComponent,
     TagComponent,
     MiniButtonComponent,
-    SelectButtonComponent
+    SelectButtonComponent,
+    SettingsModalComponent
   ]
 })
 export class SharedModule {}
