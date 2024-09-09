@@ -1,0 +1,24 @@
+<div class="breathing-page page-bg-jungle">
+    <div class="breathing-page__body" *ngIf="!breathingData;else loading">
+        <div class="breathing-page__body-header">
+            <app-mini-button class="settings-button" icon="settings"></app-mini-button>
+            <app-select-button>
+                <app-mini-button icon="forest" class="select-button__icon"></app-mini-button>
+                <p class="select-button__title">Звуки леса</p>
+            </app-select-button>
+            <app-mini-button icon="close" [iconHeight]="18.75" [iconWidth]="18.75" routerLink="/home"></app-mini-button>
+        </div>
+        <div class="breathing-page__body-content">
+            <div class="breath-circle" [ngClass]="getProcessClass()" [style.--animation-speed]="currentSpeed + 's'">
+                
+            </div>
+        </div>
+        <div class="breathing-page__body-footer">foot</div>
+    </div>
+    <ng-template #loading>
+        <div class="breathing-page__loading">
+            <h4 class="text-grey breathing-page__loading-title">Расслабьтесь и займите удобное положение</h4>
+            <h4 class="text-purple breathing-page__loading-subtitle">Мы начинаем...</h4>
+        </div>
+    </ng-template>
+</div>

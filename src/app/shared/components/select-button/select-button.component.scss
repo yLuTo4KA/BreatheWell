@@ -1,0 +1,15 @@
+:host {
+    border-radius: 28px;
+    border: 1px solid var(--stroke-light);
+    padding: 4px;
+}
+.select-button {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__arrow {
+        margin-right: 12px;
+    }
+}
