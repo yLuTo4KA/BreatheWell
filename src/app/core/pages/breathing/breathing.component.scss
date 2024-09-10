@@ -94,12 +94,18 @@
         }
 
         &.process-up::before {
-            animation: expand-up var(--animation-speed, 5s) linear forwards;
+            -webkit-animation: expand-up var(--animation-speed, 5s) linear forwards; /* Для WebKit (Safari, старые версии Chrome) */
+            -moz-animation: expand-up var(--animation-speed, 5s) linear forwards;    /* Для Firefox */
+            -o-animation: expand-up var(--animation-speed, 5s) linear forwards;      /* Для старых версий Opera */
+            animation: expand-up var(--animation-speed, 5s) linear forwards; 
             animation-play-state: running;
         }
 
         &.process-down::before {
-            animation: expand-down var(--animation-speed, 5s) linear forwards;
+            -webkit-animation: expand-down var(--animation-speed, 5s) linear forwards; /* Для WebKit (Safari, старые версии Chrome) */
+            -moz-animation: expand-down var(--animation-speed, 5s) linear forwards;    /* Для Firefox */
+            -o-animation: expand-down var(--animation-speed, 5s) linear forwards;      /* Для старых версий Opera */
+            animation: expand-down var(--animation-speed, 5s) linear forwards; 
             animation-play-state: running;
         }
 
