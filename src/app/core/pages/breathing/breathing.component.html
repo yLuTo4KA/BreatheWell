@@ -1,12 +1,12 @@
 <div class="breathing-page page-bg-jungle">
     <div class="breathing-page__body" *ngIf="!breathingData;else loading">
         <div class="breathing-page__body-header">
-            <app-mini-button class="settings-button" icon="settings"></app-mini-button>
-            <app-select-button>
+            <app-mini-button class="settings-button" icon="settings" (click)="handleSettingsModal()"></app-mini-button>
+            <app-select-button (click)="handleChandeSoundModal()">
                 <app-mini-button icon="forest" class="select-button__icon"></app-mini-button>
                 <p class="select-button__title">Звуки леса</p>
             </app-select-button>
-            <app-mini-button icon="close" [iconHeight]="18.75" [iconWidth]="18.75" routerLink="/home"></app-mini-button>
+            <app-mini-button icon="close" [iconHeight]="30" [iconWidth]="30" routerLink="/home"></app-mini-button>
         </div>
         <div class="breathing-page__body-content">
             <mat-icon svgIcon="lips" [style.width.px]="32" [style.height.px]="18"></mat-icon>
@@ -14,7 +14,7 @@
                 <h2 class="breath-circle__timer">{{getTimer()}}</h2>
             </div>
             <h2 class="breath-title">{{action}}</h2>
-            <app-tag class="breath-duration" [tagName]="duration + ' мин'"></app-tag>
+            <app-tag class="breath-duration">{{duration + ' мин'}}</app-tag>
         </div>
     </div>
     <ng-template #loading>
@@ -24,3 +24,15 @@
         </div>
     </ng-template>
 </div>
+
+<app-modal [viewModal]="modals.viewSettings" (closeModalEmit)="handleSettingsModal()">
+    <h3 title>Настройки упражнения</h3>
+    <app-practice-settings></app-practice-settings>
+    <app-button footer><h4>Готово</h4></app-button>
+</app-modal>
+
+<app-modal [viewModal]="modals.viewChangeSound" (closeModalEmit)="handleChandeSoundModal()">
+    <h3 title>Фоновые звуки</h3>
+    <div class="">asd</div>
+    <app-button footer><h4>Готово</h4></app-button>
+</app-modal>

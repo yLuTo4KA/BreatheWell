@@ -1,0 +1,37 @@
+.modal {
+    position: absolute;
+    height: 100vh;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: none;
+    background-color: #00000059;
+    cursor: pointer;
+    &__wrapper {
+        background: var(--secondary-bg);
+        height: max-content;
+        border-start-start-radius: 15px;
+        border-start-end-radius: 15px;
+        padding: 24px 16px;
+        min-height: 200px;
+        overflow: auto;
+        cursor: default;
+    }
+    &__view {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    &__header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+    }
+
+    &__close {
+        background: var(--stroke-dark);
+    }
+}
