@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { boolean } from '@telegram-apps/sdk';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -7,6 +8,11 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./breathing.component.scss']
 })
 export class BreathingComponent {
+  modals = {
+    viewSettings: false,
+    viewChangeSound: false,
+  }
+
   breathingData: any | null = null;
   duration = 7;
 
@@ -22,7 +28,7 @@ export class BreathingComponent {
   timer = 3; // таймер
 
   paused = false;
-  action: string = "Приготовьтесь!";
+  action: "Приготовьтесь!" | "Вдох" | "Выдох" | "Задержите дыхание" | "Пауза" = "Приготовьтесь!";
 
   private start$ = new BehaviorSubject<boolean>(false);
 
@@ -92,7 +98,7 @@ export class BreathingComponent {
 
   async pauseOff() {
     this.paused = false;
-
+    this.action = "Приготовьтесь!";
     await this.updateTimer(this.timer);
     this.start$.next(true);
   }
@@ -106,4 +112,13 @@ export class BreathingComponent {
   getProcessClass(): string {
     return `process-${this.breathProcess}`;
   }
+
+  handleSettingsModal(): void {
+    this.modals.viewChangeSound = false;
+    this.modals.viewSettings = !this.modals.viewSettings;
+  }
+  handleChandeSoundModal(): void {
+    this.modals.viewChangeSound = !this.modals.viewChangeSound;
+  }
+
 }

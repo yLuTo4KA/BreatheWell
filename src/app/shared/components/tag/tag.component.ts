@@ -6,7 +6,4 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./tag.component.scss']
 })
 export class TagComponent {
-  @Input() tagName: string | null = null;
-  @Input() height: number = 20;
-  @Input() paddingX: number = 8;
 }

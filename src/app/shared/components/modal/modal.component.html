@@ -1,0 +1,12 @@
+<div class="modal" [class.modal__view]="viewModal" (click)="closeModal()">
+    <div class="modal__wrapper" (click)="$event.stopPropagation()">
+        <div class="modal__header">
+            <ng-content select="[title]"></ng-content>
+            <app-mini-button icon="close" class="modal__close" (click)="closeModal()"></app-mini-button>
+        </div>
+        <ng-content></ng-content>
+        <div class="modal__footer">
+            <ng-content select="footer"></ng-content>
+        </div>
+    </div>
+</div>
