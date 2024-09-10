@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BehaviorSubject, of } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-breathing',
@@ -14,127 +14,96 @@ export class BreathingComponent {
 
   breathSpeedUp = 3; // длительность вдоха
   breathSpeedDown = 4; // выдоха
-  currentSpeed: number = this.breathSpeedUp;
+  currentSpeed: number = this.breathSpeedUp; // Текущая скорость (вдох или выдох)
 
   breathHold = 2; // задержка после вдоха
-  exhaleHold = 5; // после выдоха
-
-  currentHold = this.breathHold;
+  exhaleHold = 5; // задержка после выдоха
 
   timer = 3; // таймер
-  
 
   paused = false;
-  currentTimeout: any;
-  action: string = "Приготовьтесь!"
+  action: string = "Приготовьтесь!";
 
   private start$ = new BehaviorSubject<boolean>(false);
 
-  ngOnInit() {
-    setInterval(() => {
-      if (this.paused) return;
-      this.timer--;
-      console.log(this.timer);
-      if (this.timer <= 0) {
-        switch (this.breathProcess) {
-          case "up":
-            if (this.breathHold > 0) {
-              this.action = "Задержите дыхание"
-            }
-            this.timer = this.breathHold;
-            break;
-          case "down":
-            if (this.exhaleHold > 0) {
-              this.action = "Задержите дыхание"
-            }
-            this.timer = this.exhaleHold;
-            break;
-          case "started":
-            if (!this.start$.value) {
-              this.start$.next(true);
-            }
-            break;
-        }
-      }
-    }, 1000)
+  async ngOnInit() {
+    await this.pauseOff();
     this.start$.subscribe((response) => {
       if (response) {
         this.startBreath();
       }
-    })
-
+    });
   }
 
-  startBreath(): void {
-    this.up();
+  async wait(seconds: number) {
+    return new Promise(resolve => setTimeout(resolve, seconds * 1000));
   }
 
-  setBreathTimeout(callback: () => void, delay: number): void {
-    if (this.paused) return;
-    this.currentTimeout = setTimeout(() => {
-      if (!this.paused) {
-        callback();
-      }
-    }, (delay * 1000) + (this.currentHold * 1000))
+  async startBreath() {
+    while (!this.paused) {
+      await this.up();
+      if (this.paused) break;
+      await this.hold(this.breathHold);
+      if (this.paused) break;
+      await this.down();
+      if (this.paused) break;
+      await this.hold(this.exhaleHold);
+    }
   }
 
-  up(): void {
+  async up() {
     this.breathProcess = 'up';
     this.currentSpeed = this.breathSpeedUp;
-    this.currentHold = this.breathHold;
     this.timer = this.breathSpeedUp;
-    this.action = "Вдох"
-    this.setBreathTimeout(() => {
-      this.down();
-    }, this.currentSpeed)
+    this.action = "Вдох";
+    console.log('Вдох');
+    await this.updateTimer(this.currentSpeed);
   }
 
-  down(): void {
+  async down() {
     this.breathProcess = 'down';
     this.currentSpeed = this.breathSpeedDown;
-    this.currentHold = this.exhaleHold;
     this.timer = this.breathSpeedDown;
-    this.action = "Выдох"
-    this.setBreathTimeout(() => {
-      this.up();
-    }, this.currentSpeed)
+    this.action = "Выдох";
+    console.log('Выдох');
+    await this.updateTimer(this.currentSpeed);
+  }
+
+  async hold(duration: number) {
+    if (duration > 0) {
+      this.action = "Задержите дыхание";
+      this.timer = duration;
+      await this.updateTimer(duration);
+    }
+  }
+
+  async updateTimer(duration: number) {
+    for (let i = duration; i > 0; i--) {
+      if (this.paused) return;
+      this.timer = i;
+      await this.wait(1);
+    }
   }
 
   pauseOn(): void {
     this.paused = true;
-    this.timer = 0;
-    clearTimeout(this.currentTimeout);
+    this.action = "Пауза";
   }
-  pauseOff(): void {
-    switch (this.breathProcess) {
-      case 'up':
-        if (this.paused) {
-          this.paused = false;
-          this.down();
-        }
-        break;
-      case 'down':
-        if (this.paused) {
-          this.paused = false;
-          this.up();
-        }
-        break;
-    }
+
+  async pauseOff() {
     this.paused = false;
+
+    await this.updateTimer(this.timer);
+    this.start$.next(true);
   }
 
   getTimer(): string {
     const minutes = Math.floor(this.timer / 60);
     const seconds = this.timer % 60;
-
-    const minutesDisplay = minutes
-    const secondsDisplay = seconds < 10 ? `0${seconds}` : seconds;
-
-    return `${minutesDisplay}:${secondsDisplay}`;
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   }
 
-
   getProcessClass(): string {
-    return `process-${this.breathProcess}`
+    return `process-${this.breathProcess}`;
   }
 }
