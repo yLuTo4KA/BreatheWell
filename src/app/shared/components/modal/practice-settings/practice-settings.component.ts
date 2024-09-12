@@ -37,7 +37,6 @@ export class PracticeSettingsComponent implements OnInit {
   ngOnInit(): void {
     this.practiceSub = this.breathService.getPractice().subscribe(response => {
       this.practiceData = response;
-      console.log(response);
     })
     this.modalSub = this.modalService.modalsView$.subscribe(response => {
       this.modals = response;
@@ -49,13 +48,19 @@ export class PracticeSettingsComponent implements OnInit {
 
   closeModal(): void {
     this.closeModalEvent.emit();
-    this.modalService.closeModal('practiceSettings');
+    this.closeAllSettingModal();
   }
   openPractice(): void {
     this.closeModalEvent.emit();
     this.router.navigate(['/breathing']);
+    this.closeAllSettingModal();
   }
 
+  closeAllSettingModal(): void {
+    this.modalService.closeModal('practiceSettings');
+    this.modalService.closeModal('durationSettings');
+    this.modalService.closeModal('soundSettings');
+  }
   updatePractice(practice: Practice): void {
     this.breathService.updatePractice(practice);
   }

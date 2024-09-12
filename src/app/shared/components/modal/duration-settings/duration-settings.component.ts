@@ -34,6 +34,8 @@ export class DurationSettingsComponent {
   swiperConfig = {
     initialSlide: 2
   }
+
+  private afterInit: boolean = false;
   
 
   ngOnInit(): void {
@@ -42,12 +44,13 @@ export class DurationSettingsComponent {
     })
     this.breathSub = this.breathService.breathSetting$.subscribe(response => {
       this.duration = Math.floor(response.duration / 60) - 1;
-      if(this.swiper.nativeElement) {
+      if(this.swiper.nativeElement && this.afterInit) {
         this.swiper.nativeElement.swiper.slideTo(this.duration);
       }
     })
   }
   ngAfterViewInit() {
+    this.afterInit = true;
     this.swiper.nativeElement.swiper.activeIndex = this.duration;
     this.swiper.nativeElement.swiper.on('slideChange', () => {
       const activeIndex = this.swiper.nativeElement.swiper.activeIndex;

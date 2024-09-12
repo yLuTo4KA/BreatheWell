@@ -12,6 +12,10 @@ interface AuthData {
     "user": User,
     "newUser": boolean
 }
+interface DayliData {
+    user: User,
+    success: boolean
+}
 @Injectable({
     providedIn: 'root',
 })
@@ -45,6 +49,9 @@ export class AuthService extends ApiService {
     isLoggin(): boolean {
         return !!this.getToken();
     }
+    isGetDayli(): boolean {
+        return !this.userDataSubject.value!.todayActive
+    }
 
     auth(): Observable<AuthData> {
         const url = `${this.urlPath}/local/register`;
@@ -66,6 +73,22 @@ export class AuthService extends ApiService {
                 }
             }),
             finalize(() => {
+            }),
+            catchError((error: HttpErrorResponse) => {
+                return throwError(() => error);
+            })
+        )
+    }
+
+    dayliCheck(): Observable<DayliData> {
+        const url = `${this.urlPath}/dayli-check`;
+
+        return this.get<DayliData>(url).pipe(
+            tap(response => {
+                this.setUserData(response.user);
+            }),
+            finalize(() => {
+
             }),
             catchError((error: HttpErrorResponse) => {
                 return throwError(() => error);

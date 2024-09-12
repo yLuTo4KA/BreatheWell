@@ -20,12 +20,14 @@ import { StartPageComponent } from './pages/start-page/start-page.component';
 import { HomeComponent } from './pages/home/home.component';
 import { BreathingComponent } from './pages/breathing/breathing.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DayliProgressComponent } from './pages/dayli-progress/dayli-progress.component';
+import { BuyPremiumComponent } from './pages/buy-premium/buy-premium.component';
 register();
 
 
 @NgModule({
   imports: [CommonModule,RouterModule,SharedModule, MatIconModule, TranslateModule, BrowserAnimationsModule],
-  declarations: [ShellComponent, NotAuthComponent, FooterComponent, WelcomeComponent, WelcomeSliderComponent, SlideInfoComponent, SlideSliderComponent, CtaComponent, StartPageComponent, HomeComponent, BreathingComponent],
+  declarations: [ShellComponent, NotAuthComponent, FooterComponent, WelcomeComponent, WelcomeSliderComponent, SlideInfoComponent, SlideSliderComponent, CtaComponent, StartPageComponent, HomeComponent, BreathingComponent, DayliProgressComponent, BuyPremiumComponent],
   exports: [ShellComponent, NotAuthComponent, FooterComponent, WelcomeComponent, SlideInfoComponent,SlideSliderComponent, CtaComponent, StartPageComponent, HomeComponent, BreathingComponent],
   providers: [
     {

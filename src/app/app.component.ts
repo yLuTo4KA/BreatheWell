@@ -57,5 +57,17 @@ export class AppComponent {
       'select',
       this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/select.svg")
     );
+    this.matIconRegistry.addSvgIcon(
+      'home',
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/home.svg")
+    );
+    this.matIconRegistry.addSvgIcon(
+      'menu',
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/menu.svg")
+    );
+    this.matIconRegistry.addSvgIcon(
+      'plus',
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/plus.svg")
+    );
   }
 }

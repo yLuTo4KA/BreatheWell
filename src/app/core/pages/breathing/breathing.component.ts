@@ -4,6 +4,7 @@ import { BreathService } from '../../services/breath.service';
 import { ModalService } from '../../services/modal.service';
 import { Breath } from '../../models/breath.model';
 import { ModalsView } from '../../models/modals-view.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-breathing',
@@ -13,6 +14,7 @@ import { ModalsView } from '../../models/modals-view.model';
 export class BreathingComponent {
   private breathService = inject(BreathService);
   private modalService = inject(ModalService);
+  private router = inject(Router);
   private isDestroyed = false;
 
   breathProcess: "up" | "down" | "started" | "paused" = "started"; // состояния
@@ -61,7 +63,6 @@ export class BreathingComponent {
       this.breathSetting = response;
       this.currentSpeed = response.breathDuration;
       this.currentDuration = response.duration;
-      console.log(response);
     })
     this.loading$.subscribe(async (response) => {
       if (!response) {
@@ -193,6 +194,11 @@ export class BreathingComponent {
 
   closeSoundSettings(): void {
     this.pauseOff();
+  }
+
+
+  openDayliProgress(): void {
+    this.router.navigate(['/dayli-progress']);
   }
 
   ngOnDestroy(): void {

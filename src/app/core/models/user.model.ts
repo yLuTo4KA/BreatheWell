@@ -8,5 +8,6 @@ export interface User {
     avatar: string | null,
     premium: boolean,
     lastVisit: Date,
-    tg_id: string
+    tg_id: string,
+    todayActive: boolean,
 }
