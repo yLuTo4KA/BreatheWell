@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
-import { boolean } from '@telegram-apps/sdk';
+import { Component, inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { BreathService } from '../../services/breath.service';
+import { ModalService } from '../../services/modal.service';
+import { Breath } from '../../models/breath.model';
+import { ModalsView } from '../../models/modals-view.model';
 
 @Component({
   selector: 'app-breathing',
@@ -8,37 +11,68 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./breathing.component.scss']
 })
 export class BreathingComponent {
-  modals = {
-    viewSettings: false,
-    viewChangeSound: false,
+  private breathService = inject(BreathService);
+  private modalService = inject(ModalService);
+  private isDestroyed = false;
+
+  breathProcess: "up" | "down" | "started" | "paused" = "started"; // состояния
+  breathType: "nose" | "lips" = "nose";
+
+  breathSetting: Breath = {
+    id: 0,
+    breathDuration: 3,
+    exhaleDuration: 3,
+    breathHold: 3,
+    exhaleHold: 3,
+    duration: 7 * 60,
+    sound: null
+  }
+  modal: ModalsView = {
+    practiceSettings: false,
+    soundSettings: false,
+    durationSettings: false
   }
 
-  breathingData: any | null = null;
-  duration = 7;
+  // backend data 
 
-  breathProcess: "up" | "down" | "started" = "started"; // состояния
-
-  breathSpeedUp = 3; // длительность вдоха
-  breathSpeedDown = 4; // выдоха
-  currentSpeed: number = this.breathSpeedUp; // Текущая скорость (вдох или выдох)
-
-  breathHold = 2; // задержка после вдоха
-  exhaleHold = 5; // задержка после выдоха
-
+  currentSpeed: number = this.breathSetting.breathDuration; // Текущая скорость (вдох или выдох)
+  currentDuration: number = this.breathSetting.duration;
   timer = 3; // таймер
+  startTime = 3; // отсчет до начала после паузы
 
-  paused = false;
-  action: "Приготовьтесь!" | "Вдох" | "Выдох" | "Задержите дыхание" | "Пауза" = "Приготовьтесь!";
+  paused = false; // пауза
+
+  action: "Приготовьтесь!" | "Вдох" | "Выдох" | "Задержите дыхание" | "Пауза" = "Приготовьтесь!"; // действие
+
+
+  loading$ = new BehaviorSubject<boolean>(true); // загрузка
 
   private start$ = new BehaviorSubject<boolean>(false);
 
+  private audio = new Audio();
+
+
   async ngOnInit() {
-    await this.pauseOff();
-    this.start$.subscribe((response) => {
-      if (response) {
-        this.startBreath();
+    this.isDestroyed = false;
+    this.modalService.modalsView$.subscribe(response => {
+      this.modal = response;
+    })
+    this.breathService.breathSetting$.subscribe(response => {
+      this.breathSetting = response;
+      this.currentSpeed = response.breathDuration;
+      this.currentDuration = response.duration;
+      console.log(response);
+    })
+    this.loading$.subscribe(async (response) => {
+      if (!response) {
+        await this.pauseOff();
+        this.start$.subscribe((response) => {
+          this.startBreath();
+        });
       }
-    });
+    })
+    await this.wait(1.5);
+    this.loading$.next(false);
   }
 
   async wait(seconds: number) {
@@ -46,32 +80,37 @@ export class BreathingComponent {
   }
 
   async startBreath() {
+    if (!this.isDestroyed && !this.paused) this.playAuido(this.breathSetting.sound?.soundMedia.url ?? '');
     while (!this.paused) {
+      if (this.isDestroyed) return;
       await this.up();
       if (this.paused) break;
-      await this.hold(this.breathHold);
+      if (this.isDestroyed) return;
+      await this.hold(this.breathSetting.breathHold);
       if (this.paused) break;
+      if (this.isDestroyed) return;
       await this.down();
+      if (this.isDestroyed) return;
       if (this.paused) break;
-      await this.hold(this.exhaleHold);
+      await this.hold(this.breathSetting.exhaleHold);
     }
   }
 
   async up() {
     this.breathProcess = 'up';
-    this.currentSpeed = this.breathSpeedUp;
-    this.timer = this.breathSpeedUp;
+    this.breathType = "nose";
+    this.currentSpeed = this.breathSetting.breathDuration;
+    this.timer = this.breathSetting.breathDuration;
     this.action = "Вдох";
-    console.log('Вдох');
     await this.updateTimer(this.currentSpeed);
   }
 
   async down() {
     this.breathProcess = 'down';
-    this.currentSpeed = this.breathSpeedDown;
-    this.timer = this.breathSpeedDown;
+    this.breathType = "lips";
+    this.currentSpeed = this.breathSetting.exhaleDuration;
+    this.timer = this.breathSetting.exhaleDuration;
     this.action = "Выдох";
-    console.log('Выдох');
     await this.updateTimer(this.currentSpeed);
   }
 
@@ -87,38 +126,78 @@ export class BreathingComponent {
     for (let i = duration; i > 0; i--) {
       if (this.paused) return;
       this.timer = i;
+      if (this.currentDuration > 0 && this.breathProcess == 'down' || this.breathProcess == 'up') this.currentDuration--;
+      if (this.currentDuration <= 0) {
+        this.pauseOn();
+      }
       await this.wait(1);
     }
   }
 
   pauseOn(): void {
-    this.paused = true;
-    this.action = "Пауза";
+    if (this.breathProcess !== 'paused') {
+      this.paused = true;
+      this.action = "Пауза";
+      this.breathProcess = "paused";
+      this.stopAudio();
+    }
   }
 
   async pauseOff() {
+    if ((this.modal.practiceSettings && this.modal.durationSettings) || (this.modal.practiceSettings && this.modal.soundSettings)) return;
     this.paused = false;
+    this.breathProcess = "started";
     this.action = "Приготовьтесь!";
+    this.timer = 3;
     await this.updateTimer(this.timer);
     this.start$.next(true);
   }
 
-  getTimer(): string {
-    const minutes = Math.floor(this.timer / 60);
-    const seconds = this.timer % 60;
+  getTimer(timer: number): string {
+    const minutes = Math.floor(timer / 60);
+    const seconds = timer % 60;
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   }
+
 
   getProcessClass(): string {
     return `process-${this.breathProcess}`;
   }
 
-  handleSettingsModal(): void {
-    this.modals.viewChangeSound = false;
-    this.modals.viewSettings = !this.modals.viewSettings;
+  playAuido(audioSrc: string): void {
+    this.audio.src = audioSrc;
+    this.audio.load();
+    this.audio.play();
+    this.audio.onended = () => {
+      this.audio.currentTime = 0;
+      this.audio.play();
+    };
   }
-  handleChandeSoundModal(): void {
-    this.modals.viewChangeSound = !this.modals.viewChangeSound;
+
+  stopAudio(): void {
+    this.audio.pause();
+  }
+
+  openPracticeSettings(): void {
+    this.modalService.openModal('practiceSettings');
+    this.pauseOn();
+  }
+  closePracticeSettings(): void {
+    this.modalService.closeModal('practiceSettings');
+    this.pauseOff();
+  }
+  openSoundSettings(): void {
+    this.modalService.openModal('soundSettings');
+    this.pauseOn();
+  }
+
+  closeSoundSettings(): void {
+    this.pauseOff();
+  }
+
+  ngOnDestroy(): void {
+    this.stopAudio();
+    this.isDestroyed = true;
   }
 
 }

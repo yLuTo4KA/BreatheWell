@@ -38,12 +38,24 @@ export class AppComponent {
       this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/arrowOpen.svg")
     );
     this.matIconRegistry.addSvgIcon(
+      'arrowRight',
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/arrowRight.svg")
+    );
+    this.matIconRegistry.addSvgIcon(
       'close',
       this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/close.svg")
     );
     this.matIconRegistry.addSvgIcon(
       'lips',
       this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/lips.svg")
+    );
+    this.matIconRegistry.addSvgIcon(
+      'nose',
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/nose.svg")
+    );
+    this.matIconRegistry.addSvgIcon(
+      'select',
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/select.svg")
     );
   }
 }

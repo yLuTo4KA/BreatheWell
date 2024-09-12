@@ -1,0 +1,39 @@
+<app-modal [viewModal]="modals.practiceSettings" (closeModalEmit)="closeModal()">
+    <h3 title>Настройки упражнения</h3>
+    <div class="practice-settings">
+        <p class="practice-settings__text">
+            Дыхательные упражнения
+        </p>
+        <div class="practice-settings__select">
+            <app-tag class="practice-settings__select-tag" *ngFor="let practice of practiceData" [ngClass]="{'--active': practice.id === breathSetting?.id}" (click)="updatePractice(practice)">
+                <p class="practice-settings__select-tag-icon">{{practice.iconText}}</p>
+                <p class="practice-settings__select-tag-title">{{practice.title}}</p>
+            </app-tag>
+        </div>
+        <div class="practice-settings__list">
+            <div class="practice-settings__item" (click)="openDurationModal()">
+                <p class="practice-settings__item-title">
+                    Длительность:
+                </p>
+                <div class="practice-settings__item-data">
+                    <p class="practice-settings__item-data-value">
+                        {{getDuration()}} минут
+                    </p>
+                    <mat-icon aria-hidden="false" aria-label="btn" svgIcon="arrowRight" class="mini-button__icon"></mat-icon>
+                </div>
+            </div>
+            <div class="practice-settings__item" (click)="openSoundModal()">
+                <p class="practice-settings__item-title">
+                    Фоновый звук:
+                </p>
+                <div class="practice-settings__item-data">
+                    <p class="practice-settings__item-data-value">
+                        {{breathSetting?.sound?.title}}
+                    </p>
+                    <mat-icon aria-hidden="false" aria-label="btn" svgIcon="arrowRight" class="mini-button__icon"></mat-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-button footer (click)="openPractice()"><h4>Готово</h4></app-button>
+</app-modal>

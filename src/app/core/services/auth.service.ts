@@ -4,27 +4,26 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { TelegramService } from "./telegram.service";
 import { BehaviorSubject, catchError, finalize, Observable, tap, throwError } from "rxjs";
 import { environment } from "src/environments/environments";
-import { User } from "../models/user.mode";
+import { User } from "../models/user.model";
 import { Router } from "@angular/router";
 
 interface AuthData {
-    "token": string,
-    "user": User
+    "jwt": string,
+    "user": User,
+    "newUser": boolean
 }
 @Injectable({
     providedIn: 'root',
 })
 
 export class AuthService extends ApiService {
-    private urlPath = '' as const;
+    private urlPath = 'auth' as const;
     telegramService = inject(TelegramService);
     router = inject(Router);
 
-    private loadingSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     private tokenSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(this.getToken());
     private userDataSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
 
-    loading$: Observable<boolean> = this.loadingSubject.asObservable();
     token$: Observable<string | null> = this.tokenSubject.asObservable();
     user$: Observable<User | null> = this.userDataSubject.asObservable();
 
@@ -48,7 +47,7 @@ export class AuthService extends ApiService {
     }
 
     auth(): Observable<AuthData> {
-        const url = `${this.urlPath}auth`;
+        const url = `${this.urlPath}/local/register`;
         let params;
         if (!environment.production) {
             params = {
@@ -59,17 +58,14 @@ export class AuthService extends ApiService {
                 "initData": this.telegramService.initData()
             }
         }
-        this.loadingSubject.next(true);
         return this.post<AuthData, any>(url, params).pipe(
             tap(response => {
                 if (response) {
-                    this.setToken(response.token);
+                    this.setToken(response.jwt);
                     this.setUserData(response.user);
                 }
             }),
             finalize(() => {
-                this.loadingSubject.next(false);
-                this.router.navigate(['/start']);
             }),
             catchError((error: HttpErrorResponse) => {
                 return throwError(() => error);
@@ -81,5 +77,5 @@ export class AuthService extends ApiService {
         localStorage.removeItem("token");
         this.tokenSubject.next(null);
         this.userDataSubject.next(null);
-      }
+    }
 }

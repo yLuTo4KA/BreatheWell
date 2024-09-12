@@ -1,0 +1,30 @@
+.sound-settings {
+    &__setting {
+        &-item {
+            padding: 16px;
+            border-bottom: 1px solid var(--stroke-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            &-data {
+                display: flex;
+                align-items: center;
+                &-icon {
+                    margin-right: 8px;
+                }
+            }
+            &-select {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: var(--primary-buttons);
+            }
+        }
+        &-list {
+            margin-bottom: 40px;
+            overflow: auto;
+            max-height: 50vh;
+        }
+    }
+}

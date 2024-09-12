@@ -1,0 +1,28 @@
+.duration-settings {
+    &__title {
+        width: 100%;
+        text-align: center;
+    }
+    &__content {
+        padding: 68px 0;
+        overflow: hidden;
+        margin: 16px 0;
+    }
+}
+
+.mySwiper {
+    height: 34px;
+}
+.mySwiper-slide {
+    text-align: center;
+    color: var(--secondary-text);
+    border-radius: 9px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 23px;
+    &.swiper-slide-active {
+        color: var(--primary-text);
+        background-color: var(--stroke-dark);
+    }
+}
