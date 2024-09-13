@@ -1,0 +1,50 @@
+:host {
+    width: 100%;
+}
+.calendar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    &__header {
+        margin-right: 16px;
+        position: relative;
+        &::after {
+            content: "";
+            height: 24px;
+            width: 1px;
+            background: var(--stroke-light);
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translate(16px, -50%);
+        }
+    }
+    &__body {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding-left: 18px;
+        &-item {
+            &-week_day_name {
+                margin-bottom: 5px;
+            }
+            &-day {
+                font-size: 12px;
+                color: var(--disabled);
+                width: 24px;
+                height: 24px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                line-height: 1;
+                &.--active {
+                    background: var(--primary-buttons);
+                    color: var(--primary-text);
+                }
+            }
+        
+        }
+    }
+}

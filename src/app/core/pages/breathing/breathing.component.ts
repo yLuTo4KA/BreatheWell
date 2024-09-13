@@ -5,6 +5,7 @@ import { ModalService } from '../../services/modal.service';
 import { Breath } from '../../models/breath.model';
 import { ModalsView } from '../../models/modals-view.model';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-breathing',
@@ -14,6 +15,7 @@ import { Router } from '@angular/router';
 export class BreathingComponent {
   private breathService = inject(BreathService);
   private modalService = inject(ModalService);
+  private authService = inject(AuthService);
   private router = inject(Router);
   private isDestroyed = false;
 
@@ -46,6 +48,7 @@ export class BreathingComponent {
 
   action: "Приготовьтесь!" | "Вдох" | "Выдох" | "Задержите дыхание" | "Пауза" = "Приготовьтесь!"; // действие
 
+  userActiveToday: boolean = false;
 
   loading$ = new BehaviorSubject<boolean>(true); // загрузка
 
@@ -56,6 +59,11 @@ export class BreathingComponent {
 
   async ngOnInit() {
     this.isDestroyed = false;
+    this.authService.user$.subscribe(response => {
+      if (response) {
+        this.userActiveToday = response.todayActive;
+      }
+    })
     this.modalService.modalsView$.subscribe(response => {
       this.modal = response;
     })
@@ -130,6 +138,7 @@ export class BreathingComponent {
       if (this.currentDuration > 0 && this.breathProcess == 'down' || this.breathProcess == 'up') this.currentDuration--;
       if (this.currentDuration <= 0) {
         this.pauseOn();
+        this.openDayliProgress();
       }
       await this.wait(1);
     }
@@ -196,9 +205,17 @@ export class BreathingComponent {
     this.pauseOff();
   }
 
-
   openDayliProgress(): void {
-    this.router.navigate(['/dayli-progress']);
+    if (!this.userActiveToday) {
+      this.authService.dayliCheck().subscribe(response => {
+        if (response.success) {
+          this.authService.setUserData(response.user);
+          this.router.navigate(['/dayli-progress']);
+        }
+      })
+    } else {
+      this.router.navigate(['/home']);
+    }
   }
 
   ngOnDestroy(): void {
@@ -207,3 +224,5 @@ export class BreathingComponent {
   }
 
 }
+
+

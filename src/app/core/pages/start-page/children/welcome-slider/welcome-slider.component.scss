@@ -45,11 +45,11 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: flex-end;
-        margin-bottom: 35px;
+        justify-content: center;
+        padding-top: 230px;
     }
     &.--phone {
-        background: url('../../../../../../assets/images/phone.png') top center / 75% auto no-repeat;
+        background: url('../../../../../../assets/images/phone.png') top center / 80% auto no-repeat;
     }
 
     &__img {

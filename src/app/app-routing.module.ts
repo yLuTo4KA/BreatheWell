@@ -9,7 +9,6 @@ import { StartPageComponent } from './core/pages/start-page/start-page.component
 import { BreathingComponent } from './core/pages/breathing/breathing.component';
 import { HomeComponent } from './core/pages/home/home.component';
 import { DayliProgressComponent } from './core/pages/dayli-progress/dayli-progress.component';
-import { DayliGuard } from './guards/dayli.guard';
 
 const routes: Routes = [
   {
@@ -63,7 +62,7 @@ const routes: Routes = [
   {
     path: 'dayli-progress',
     component: DayliProgressComponent,
-    canActivate: [AuthGuard, DayliGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: '**',

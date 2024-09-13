@@ -12,6 +12,7 @@ import { PracticeSettingsComponent } from './components/modal/practice-settings/
 import { SoundSettingsComponent } from './components/modal/sound-settings/sound-settings.component';
 import { DurationSettingsComponent } from './components/modal/duration-settings/duration-settings.component';
 import {register} from "swiper/element/bundle";
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 register();
 
@@ -20,7 +21,7 @@ register();
     CommonModule,
     MatIconModule
   ],
-  declarations: [ ButtonComponent, LogoLoaderComponent, TagComponent, SelectButtonComponent, MiniButtonComponent, ModalComponent, PracticeSettingsComponent, SoundSettingsComponent, DurationSettingsComponent],
+  declarations: [ ButtonComponent, LogoLoaderComponent, TagComponent, SelectButtonComponent, MiniButtonComponent, ModalComponent, PracticeSettingsComponent, SoundSettingsComponent, DurationSettingsComponent, CalendarComponent],
   exports: [    
     ButtonComponent,
     LogoLoaderComponent,
@@ -30,7 +31,8 @@ register();
     ModalComponent,
     PracticeSettingsComponent,
     SoundSettingsComponent,
-    DurationSettingsComponent
+    DurationSettingsComponent,
+    CalendarComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

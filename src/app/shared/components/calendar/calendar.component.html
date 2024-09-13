@@ -1,0 +1,12 @@
+<div class="calendar">
+    <div class="calendar__header">
+        <p>{{getYear(userLastVisit)}}</p>
+        <p>{{getMonth(userLastVisit)}}</p>
+    </div>
+    <div class="calendar__body">
+        <div class="calendar__body-item" *ngFor="let day of week; index as i">
+            <p class="calendar__body-item-week_day_name">{{dayOfWeek[i]}}</p>
+            <p class="calendar__body-item-day" [ngClass]="{'--active': isActive(day.day)}">{{day.convertedDay}}</p>
+        </div>
+    </div>
+</div>
