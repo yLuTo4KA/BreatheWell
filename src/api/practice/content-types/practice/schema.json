@@ -1,0 +1,54 @@
+{
+  "kind": "collectionType",
+  "collectionName": "practices",
+  "info": {
+    "singularName": "practice",
+    "pluralName": "practices",
+    "displayName": "Practice",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "breathDuration": {
+      "type": "integer",
+      "default": 3,
+      "required": true
+    },
+    "exhaleDuration": {
+      "type": "integer",
+      "required": true,
+      "default": 5
+    },
+    "breathHold": {
+      "type": "integer",
+      "default": 3,
+      "required": true
+    },
+    "exhaleHold": {
+      "type": "integer",
+      "default": 3,
+      "required": true
+    },
+    "duration": {
+      "type": "integer",
+      "required": true,
+      "default": 5
+    },
+    "sound": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::sound.sound"
+    },
+    "iconText": {
+      "type": "string",
+      "default": "🌙"
+    }
+  }
+}

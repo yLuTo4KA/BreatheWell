@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "prices",
+  "info": {
+    "singularName": "price",
+    "pluralName": "prices",
+    "displayName": "Price"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "price": {
+      "type": "integer",
+      "required": true,
+      "default": 5900
+    },
+    "count": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}
