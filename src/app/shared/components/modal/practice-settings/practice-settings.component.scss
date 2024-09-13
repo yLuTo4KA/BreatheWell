@@ -1,0 +1,45 @@
+.practice-settings {
+    &__text {
+        margin-bottom: 24px;
+    }
+    &__select {
+        display: flex;
+        margin-bottom: 24px - 8px;
+        &-tag {
+            margin-right: 8px;
+            margin-bottom: 8px;
+            padding: 8px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            background: var(--stroke-dark);
+            color: var(--primary-text);
+            &-icon {
+                margin-right: 8px;
+                
+                font-size: 20px;
+            }
+            &.--active {
+                border: 1px solid var(--purple);
+            }
+        }
+    }
+    &__list {
+
+    }
+    &__item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-top: 1px solid var(--stroke-light);
+        padding: 24px 0;
+        cursor: pointer;
+        &-data {
+            display: flex;
+            align-items: center;
+            color: var(--secondary-text);
+            &-value {
+                margin-right: 8px;
+            }
+        }
+    }
+}

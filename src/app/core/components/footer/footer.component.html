@@ -1,3 +1,23 @@
-<p>
-  footer works!
-</p>
+<div class="footer">
+  <div class="footer__container">
+    <router-link routerLink="/home" class="footer__link" routerLinkActive="--active">
+      <mat-icon aria-hidden="false" aria-label="home" svgIcon="home" class="footer__link-icon"></mat-icon>
+      <div class="footer__link-label">
+        Home
+      </div>
+    </router-link>
+    <div class="footer__link-button" (click)="openPracticeSettin()">
+      <mat-icon aria-hidden="false" aria-label="plus" svgIcon="plus" class="footer__link-icon"></mat-icon>
+    </div>
+    <router-link routerLink="/home" class="footer__link" routerLinkActive="--active">
+      <mat-icon aria-hidden="false" aria-label="menu" svgIcon="menu" class="footer__link-icon"></mat-icon>
+      <div class="footer__link-label">
+        Menu
+      </div>
+    </router-link>
+  </div>
+</div>
+
+<app-practice-settings></app-practice-settings>
+<app-sound-settings></app-sound-settings>
+<app-duration-settings></app-duration-settings>

@@ -1,0 +1,26 @@
+<app-modal [viewModal]="modal.soundSettings" (closeModalEmit)="closeModal()">
+    <h3 title>Фоновые звуки</h3>
+    <div class="sound-settings__setting-list">
+        <div class="sound-settings__setting-item" (click)="updateSound(null)">
+            <div class="sound-settings__setting-item-data" >
+                <img class="sound-settings__setting-item-data-icon" src="assets/icons/no-sound.svg">
+                Без звука
+            </div>
+            <div class="sound-settings__setting-item-select" *ngIf="breathSetting?.sound?.id == -1">
+                <mat-icon aria-hidden="false" aria-label="btn" svgIcon="select" class="icon"></mat-icon>
+            </div>
+        </div>
+        <div class="sound-settings__setting-item" *ngFor="let sound of soundsData" (click)="updateSound(sound)">
+            <div class="sound-settings__setting-item-data">
+                <img class="sound-settings__setting-item-data-icon" [src]="sound.iconMedia.url">
+                {{sound.title}}
+            </div>
+            <div class="sound-settings__setting-item-select" *ngIf="sound.id === breathSetting?.sound?.id">
+                <mat-icon aria-hidden="false" aria-label="btn" svgIcon="select" class="icon"></mat-icon>
+            </div>
+        </div>
+    </div>
+    <app-button footer (click)="closeModal()">
+        <h4>Готово</h4>
+    </app-button>
+</app-modal>

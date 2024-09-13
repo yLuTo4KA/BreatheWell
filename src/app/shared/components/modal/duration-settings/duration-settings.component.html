@@ -1,0 +1,13 @@
+<app-modal [viewModal]="modal.durationSettings" (closeModalEmit)="closeModal()" [viewCloseButton]="false">
+    <h3 class="duration-settings__title" title>Длительность</h3>
+    <div class="duration-settings__content">
+        <swiper-container #swiper [config]="swiperConfig" class="mySwiper" direction="vertical" pagination="false"
+            slides-per-view="1" centered-slides="true" free-mode="true" css-mode="false">
+            <swiper-slide class="mySwiper-slide" *ngFor="let duration of selectDuration">{{duration}}
+                мин</swiper-slide>
+        </swiper-container>
+    </div>
+    <app-button footer (click)="closeModal()">
+        <h4>Готово</h4>
+    </app-button>
+</app-modal>

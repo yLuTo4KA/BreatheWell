@@ -2,7 +2,7 @@
     <div class="modal__wrapper" (click)="$event.stopPropagation()">
         <div class="modal__header">
             <ng-content select="[title]"></ng-content>
-            <app-mini-button icon="close" class="modal__close" (click)="closeModal()"></app-mini-button>
+            <app-mini-button icon="close" class="modal__close" (click)="closeModal()" *ngIf="viewCloseButton"></app-mini-button>
         </div>
         <ng-content></ng-content>
         <div class="modal__footer">

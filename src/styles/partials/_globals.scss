@@ -1,8 +1,10 @@
 * {
   box-sizing: border-box;
-  
+
 }
-html, body {
+
+html,
+body {
   color: var(--primary-text);
   font-family: var(--font);
   background-color: var(--main-background);
@@ -15,48 +17,63 @@ p {
   margin: 0;
   font-weight: 300;
 }
-h1, h2, h3, h4, h5, h6 {
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
   padding: 0;
-  font-size: inherit; 
-  font-weight: normal;  
-  line-height: inherit;  
-  color: inherit;       
+  font-size: inherit;
+  font-weight: normal;
+  line-height: inherit;
+  color: inherit;
 }
 
 h1 {
   font-size: 38px;
   font-weight: 600;
 }
+
 h2 {
   font-size: 32px;
   font-weight: 500;
   line-height: 1.1;
 }
-img{
+
+img {
   display: block;
   max-width: 100%;
 }
+
 h3 {
   font-size: 24px;
   font-weight: 500;
 }
+
 h4 {
   font-size: 20px;
   font-weight: 500;
 }
-swiper-container::part(container){
+
+swiper-container::part(container) {
   overflow: visible;
 }
+
 swiper-container::part(pagination) {
   bottom: -30px;
 }
+
 swiper-container::part(bullet) {
   background-color: var(--blue-light);
 }
+
 swiper-container::part(bullet-active) {
   background-color: var(--purple);
 }
+
 :root {
   --tg-theme-bg-color: #050726;
   --tg-theme-text-color: #e5e6e8;
@@ -73,29 +90,33 @@ swiper-container::part(bullet-active) {
   --secondary-bg: #101340;
   --stroke-light: #414360;
   --stroke-dark: #1E2144;
-  --primary-buttons: #2E59FF;
+  --primary-buttons: #0A84FF;
   --secondary-text: #939AB2;
   --purple: #C997F8;
   --dark-purple: #8062CE;
   --blue-light: #B5CAFF;
-  
-  
+  --dark-elements: #080110;
+  --disabled: #767676;
+
+
 }
 
 .page {
   &-bg-jungle {
     background-image: url('../../assets/images/welcome-bg.png');
-    background-repeat: no-repeat;     
-    background-position: top center;   
-    background-size: cover;             
-    height: 100vh;                    
-    width: 100%;  
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
   }
+
   &-container {
     padding: 32px 16px 24px 16px;
     width: 100%;
     height: 100%;
     position: relative;
+
     &.--center {
       display: flex;
       justify-content: center;
@@ -103,12 +124,14 @@ swiper-container::part(bullet-active) {
       flex-direction: column;
     }
   }
+
   &-button {
     &.--fixed {
       position: sticky;
       bottom: 0;
     }
   }
+
   &-header {
     display: flex;
     flex-direction: column;
@@ -117,15 +140,18 @@ swiper-container::part(bullet-active) {
     text-align: center;
     margin-bottom: 50px;
   }
+
   &-title {
     font-size: 32px;
     font-weight: 600;
     text-align: center;
   }
+
   &-subtitle {
     font-size: 20px;
     padding: 0 10px;
   }
+
   &-info-text {
     font-size: 14px;
     color: var(--secondary-text);
@@ -140,12 +166,14 @@ router-link {
   &-img {
     margin-bottom: 15px;
   }
+
   &-title {
     font-size: 22px;
     text-align: center;
     margin-bottom: 15px;
     font-weight: bold;
   }
+
   &-subtitle {
     font-size: 14px;
     text-align: center;
@@ -157,6 +185,7 @@ router-link {
 ::-webkit-scrollbar {
   display: none;
 }
+
 .shop-page__item-level-max {
   font-weight: bold;
   color: var(--gold);
@@ -165,30 +194,43 @@ router-link {
 .bold {
   font-weight: bold;
 }
+
 .devider {
   width: 100%;
   background-image: url('../../assets/images/Devider.png');
   height: 5px;
   width: 181px;
-  background-repeat: no-repeat;     
-  background-position: center center;   
-  background-size: cover;  
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 
 .text {
   &-purple {
     color: var(--purple);
   }
+
   &-green {
     color: #68CD72;
   }
+
   &-red {
     color: #FF9BA7;
   }
+
   &-grey {
     color: var(--secondary-text);
   }
+
   &-blue-light {
     color: var(--blue-light);
   }
+}
+
+.shadow {
+  -webkit-box-shadow: 0px 0px 115px 50px rgba(94, 87, 205, 1);
+  -moz-box-shadow: 0px 0px 115px 50px rgba(94, 87, 205, 1);
+  box-shadow: 0px 0px 115px 50px rgba(94, 87, 205, 1);
+  position: absolute;
+  z-index: -1;
 }

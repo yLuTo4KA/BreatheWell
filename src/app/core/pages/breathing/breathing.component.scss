@@ -48,6 +48,10 @@
         width: 36px;
         background-color: var(--main-background);
         margin-right: 16px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     &__title {
@@ -130,7 +134,8 @@
 
     &-duration {
         color: var(--primary-text);
-        padding: 13px 33px;
+        padding: 13px 0;
+        width: 98px;
         background-color: #1E203C;
     }
 }

@@ -8,6 +8,7 @@ import { CtaComponent } from './core/pages/start-page/children/cta/cta.component
 import { StartPageComponent } from './core/pages/start-page/start-page.component';
 import { BreathingComponent } from './core/pages/breathing/breathing.component';
 import { HomeComponent } from './core/pages/home/home.component';
+import { DayliProgressComponent } from './core/pages/dayli-progress/dayli-progress.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,11 @@ const routes: Routes = [
   {
     path: 'breathing',
     component: BreathingComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'dayli-progress',
+    component: DayliProgressComponent,
     canActivate: [AuthGuard]
   },
   {

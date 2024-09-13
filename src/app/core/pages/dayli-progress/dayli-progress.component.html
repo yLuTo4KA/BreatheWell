@@ -1,0 +1,19 @@
+<div class="dayli-progress-page">
+    <div class="dayli-progress-page__header">
+        <app-tag class="dayli-progress-page__header-tag">Ваш результат</app-tag>
+        <h3 class="dayli-progress-page__header-title">
+            Поздравляем, вы только что завершили <span class="text-purple">ваше {{getCurrentDayName()}} упражнение</span>
+        </h3>
+    </div>
+    <div class="dayli-progress-page__body">
+        <div class="dayli-progress-page__day-change">
+            <h1 class="dayli-progress-page__day-change-title text-purple">1</h1>
+            <div class="shadow"></div>
+            <p class="dayli-progress-page__day-change-subtitle">день</p>
+        </div>
+        <app-calendar [userLastActive]="userData.lastActiveDate" [userLastVisit]="userData.lastVisit" [activeDays]="userData.activeDays"></app-calendar>
+        <app-button><h4>Продолжить</h4></app-button>
+    </div>
+    
+    
+</div>
