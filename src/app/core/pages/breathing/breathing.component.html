@@ -16,7 +16,7 @@
                 <h2 class="breath-circle__timer">{{getTimer(timer)}}</h2>
             </div>
             <h2 class="breath-title">{{action}}</h2>
-            <app-tag class="breath-duration">{{getTimer(currentDuration)}}</app-tag>
+            <app-tag class="breath-duration" (click)="openDurationSettings()">{{getTimer(currentDuration)}}</app-tag>
         </div>
     </div>
     <ng-template #loading>
@@ -28,5 +28,5 @@
 </div>
 
 <app-practice-settings (closeModalEvent)="closePracticeSettings()"></app-practice-settings>
-<app-sound-settings (closeModalEvent)="closeSoundSettings()"></app-sound-settings>
-<app-duration-settings></app-duration-settings>
+<app-sound-settings (closeModalEvent)="closeModal()"></app-sound-settings>
+<app-duration-settings (closeModalEvent)="closeModal()"></app-duration-settings>

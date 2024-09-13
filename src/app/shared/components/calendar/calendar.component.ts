@@ -27,7 +27,7 @@ export class CalendarComponent {
   ngOnInit(): void {
     this.week = this.getWeek(this.userLastVisit);
     this.currentDay = new Date(this.userLastVisit).getDate();
-    this.currentActiveDays = this.activeDays;
+    this.currentActiveDays = this.activeDays - 1;
   }
 
   getWeek(date: Date): WeekDays[] {

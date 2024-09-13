@@ -200,8 +200,12 @@ export class BreathingComponent {
     this.modalService.openModal('soundSettings');
     this.pauseOn();
   }
+  openDurationSettings(): void {
+    this.modalService.openModal('durationSettings');
+    this.pauseOn();
+  }
 
-  closeSoundSettings(): void {
+  closeModal(): void {
     this.pauseOff();
   }
 
