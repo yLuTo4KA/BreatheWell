@@ -8,7 +8,7 @@ bot.command('start', (ctx) => ctx.reply('ping'));
 bot.launch(
     {
         webhook: {
-            domain: 'taroai-546ac6a4db3b.herokuapp.com/payment',
+            domain: 'taroai-546ac6a4db3b.herokuapp.com/api/payment',
             path: '/telegraf/' + process.env.WEBHOOK_SECRET
         }
     }
