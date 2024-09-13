@@ -2,8 +2,9 @@
     background:linear-gradient(180deg, rgba(5, 7, 38, 0.4) 0%, #050726 27.5%, #050726 100%), url('/assets/images/dayli-banner.png') top center / 100% auto no-repeat;
     height: 100%;
     text-align: center;
-    padding: 40px 16px;
+    padding: 40px 16px 80px;
     display: flex;
+    overflow: auto;
     flex-direction: column;
     &__header {
         display: flex;
@@ -24,6 +25,13 @@
         align-items: center;
         flex: 1;
         justify-content: space-evenly;
+        &-button {
+            margin-bottom: 20px;
+        }
+        
+    }
+    &__calendar {
+        margin-bottom: 26px;
     }
     &__day-change {
         position: relative;
