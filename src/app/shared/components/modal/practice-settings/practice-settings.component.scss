@@ -4,6 +4,7 @@
     }
     &__select {
         display: flex;
+        flex-wrap: wrap;
         margin-bottom: 24px - 8px;
         &-tag {
             margin-right: 8px;
