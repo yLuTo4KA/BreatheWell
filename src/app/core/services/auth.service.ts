@@ -50,7 +50,10 @@ export class AuthService extends ApiService {
         return !!this.getToken();
     }
     isGetDayli(): boolean {
-        return !this.userDataSubject.value!.todayActive
+        return !this.userDataSubject.value!.todayActive;
+    }
+    isPremium(): boolean {
+        return this.userDataSubject.value!.premium;
     }
 
     auth(): Observable<AuthData> {
