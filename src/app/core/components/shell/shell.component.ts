@@ -51,15 +51,16 @@ export class ShellComponent implements OnInit {
   }
 
   redirectUser(): void {
-    if (this.authResponse.newUser) {
-      this.router.navigate(['/start']);
-    } else {
-      if (this.authResponse.user.premium) {
-        this.router.navigate(['/home']);
-      } else {
-        this.router.navigate(['/start/cta']);
-      }
-    }
+    this.router.navigate(['/start']);
+    // if (this.authResponse.newUser) {  // later
+    //   this.router.navigate(['/start']);
+    // } else {
+    //   if (this.authResponse.user.premium) {
+    //     this.router.navigate(['/home']);
+    //   } else {
+    //     this.router.navigate(['/start/cta']);
+    //   }
+    // }
   }
 
 
