@@ -1,5 +1,5 @@
 .dayli-progress-page {
-    background:linear-gradient(180deg, rgba(5, 7, 38, 0.4) 0%, #050726 27.5%, #050726 100%), url('../../../../assets/images/blur.png') top center / 100% auto no-repeat;
+    background:linear-gradient(180deg, rgba(5, 7, 38, 0.4) 0%, #050726 27.5%, #050726 100%), url('../../../../assets/images/dayli-banner.png') top center / 100% auto no-repeat;
     height: calc(100vh - 80px);
     text-align: center;
     padding: 0 16px;
@@ -44,7 +44,7 @@
         margin-bottom: 30px;
         &::before {
             content: "";
-            background: url('/assets/images/blur.png');
+            background: url('../../../../assets/images/blur.png');
             position: absolute;
             top: 50%;
             left: 50%;
