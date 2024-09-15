@@ -2,10 +2,82 @@
     <div class="buy-premium-page__body">
         <app-mini-button class="buy-premium-page__button-close" icon="close"></app-mini-button>
         <div class="buy-premium-page__top">
-            <h3 class="buy-premium-page__top-title">Получи доступ к курсу со <span class="text-purple">скидкой более 70%</span></h3>
+            <h3 class="buy-premium-page__top-title">Получи доступ к курсу со <span class="text-purple">скидкой более
+                    70%</span></h3>
+            <div class="buy-premium-page__benefits">
+                <div class="buy-premium-page__benefits-item">
+                    <app-benefits-item icon="cloak">Бессрочный доступ ко всем материалам курса</app-benefits-item>
+                </div>
+                <div class="buy-premium-page__benefits-item">
+                    <app-benefits-item icon="wind">Подборка уникальных дыхательных практик</app-benefits-item>
+                </div>
+                <div class="buy-premium-page__benefits-item">
+                    <app-benefits-item icon="success">Пошаговые гайды и чек листы</app-benefits-item>
+                </div>
+            </div>
+            <div class="buy-premium-page__price">
+                <div class="buy-premium-page__price-sale">
+                    <mat-icon class="buy-premium-page__price-sale-icon" svgIcon="cloak"></mat-icon>
+                    <p class="buy-premium-page__price-sale-title">Скидка активна до:</p>
+                    <h4>{{getTimer(timer)}}</h4>
+                </div>
+                <div class="buy-premium-page__price-wrapper">
+                    <div class="buy-premium-page__price-info">
+                        <h4>Начать курс</h4>
+                        <p>14 уроков + Практика</p>
+                    </div>
+                    <div class="buy-premium-page__price-amount">
+                        <app-price></app-price>
+                    </div>
+                </div>
+            </div>
+            <p class="buy-premium-page__refund">* Если передумаешь в течение первых трёх дней, вернем деньги без
+                вопросов и промедлений</p>
+            <h5>Что говорят наши пользователи...</h5>
         </div>
+        <div class="buy-premium-page__reviews">
+            <swiper-container class="reviews-slider" space-between="8" slides-per-view="1" centecentered-slides="true"
+                [pagination]="{ clickable: true }">
+                <swiper-slide class="reviews-slide">
+                    <div class="reviews-slide__avatar">
+                        <app-avatar [displayName]="'y'"></app-avatar>
+                    </div>
+                    <div class="reviews-slide__body">
+                        <p class="reviews-slide__body-text">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, obcaecati temporibus. Repudiandae aliquid rem nesciunt sit maiores minima adipisci voluptatem esse quia nihil quae quasi, est ipsa facilis eligendi cum?
+                        </p>
+                        <p>5</p>
+                    </div>
+                </swiper-slide>
+                <swiper-slide class="reviews-slide">
+                    <div class="reviews-slide__avatar">
+                        <app-avatar [displayName]="'y'"></app-avatar>
+                    </div>
+                    <div class="reviews-slide__body">
+                        <p class="reviews-slide__body-text">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, obcaecati temporibus. Repudiandae aliquid rem nesciunt sit maiores minima adipisci voluptatem esse quia nihil quae quasi, est ipsa facilis eligendi cum?
+                        </p>
+                        <p>5</p>
+                    </div>
+                </swiper-slide>
+                <swiper-slide class="reviews-slide">
+                    <div class="reviews-slide__avatar">
+                        <app-avatar [displayName]="'y'"></app-avatar>
+                    </div>
+                    <div class="reviews-slide__body">
+                        <p class="reviews-slide__body-text">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, obcaecati temporibus. Repudiandae aliquid rem nesciunt sit maiores minima adipisci voluptatem esse quia nihil quae quasi, est ipsa facilis eligendi cum?
+                        </p>
+                        <p>5</p>
+                    </div>
+                </swiper-slide>
+            </swiper-container>
+        </div>
+
     </div>
     <div class="buy-premium-page__button">
-        <app-button>Начать курс</app-button>
+        <app-button (click)="getInvoice()">
+            <h4>Начать курс</h4>
+        </app-button>
     </div>
 </div>

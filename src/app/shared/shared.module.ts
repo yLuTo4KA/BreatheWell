@@ -14,6 +14,8 @@ import { DurationSettingsComponent } from './components/modal/duration-settings/
 import {register} from "swiper/element/bundle";
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { PriceComponent } from './components/price/price.component';
+import { BenefitsItemComponent } from './components/benefits-item/benefits-item.component';
+import { AvatarComponent } from './components/avatar/avatar.component';
 
 register();
 
@@ -22,7 +24,7 @@ register();
     CommonModule,
     MatIconModule
   ],
-  declarations: [ ButtonComponent, LogoLoaderComponent, TagComponent, SelectButtonComponent, MiniButtonComponent, ModalComponent, PracticeSettingsComponent, SoundSettingsComponent, DurationSettingsComponent, CalendarComponent, PriceComponent],
+  declarations: [ ButtonComponent, LogoLoaderComponent, TagComponent, SelectButtonComponent, MiniButtonComponent, ModalComponent, PracticeSettingsComponent, SoundSettingsComponent, DurationSettingsComponent, CalendarComponent, PriceComponent, BenefitsItemComponent, AvatarComponent],
   exports: [    
     ButtonComponent,
     LogoLoaderComponent,
@@ -34,7 +36,9 @@ register();
     SoundSettingsComponent,
     DurationSettingsComponent,
     CalendarComponent,
-    PriceComponent
+    PriceComponent,
+    BenefitsItemComponent,
+    AvatarComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

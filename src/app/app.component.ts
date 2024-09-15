@@ -73,5 +73,17 @@ export class AppComponent {
       'premium',
       this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/premium.svg")
     );
+    this.matIconRegistry.addSvgIcon(
+      'cloak',
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/cloak.svg")
+    );
+    this.matIconRegistry.addSvgIcon(
+      'wind',
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/wind.svg")
+    );
+    this.matIconRegistry.addSvgIcon(
+      'success',
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/success.svg")
+    );
   }
 }

@@ -13,10 +13,11 @@
             margin-right: 5px;
         }
         &-amount {
-            color: #535353;
+            color: #939AB2;
             position: relative;
             font-size: 12px;
             font-weight: 400;
+            text-align: right;
             &::after {
                 content: "";
                 position: absolute;
@@ -27,5 +28,8 @@
                 background: #FF0000;
             }
         }
+    }
+    &__amount {
+        text-align: right;
     }
 }

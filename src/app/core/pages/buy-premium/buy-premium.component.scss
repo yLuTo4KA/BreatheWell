@@ -3,22 +3,102 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
+
     &__body {
         flex: 1;
         overflow-x: hidden;
         overflow-y: auto;
-        
+        margin-bottom: -66px;
+
     }
+
     &__top {
         padding: 16px 16px 0;
+        margin-bottom: 16px;
+
         &-title {
             margin-right: 40px;
             padding-top: 16px;
+            margin-bottom: 32px;
+        }
+
+    }
+
+    &__benefits {
+        margin-bottom: 48px;
+
+        &-item {
+            margin-bottom: 8px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
         }
     }
+
+    &__price {
+        position: relative;
+        z-index: 10;
+        margin-bottom: 16px;
+
+        &-amount {
+            border-left: 1px solid var(--stroke-light);
+            padding-left: 18px;
+        }
+
+        &-sale {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--gold-gradient);
+            padding: 8px;
+            color: var(--main-background);
+            border-start-start-radius: 8px;
+            border-start-end-radius: 8px;
+            &-icon {
+                margin-right: 10px;
+            }
+            &-title {
+                margin-right: 10px;
+                font-size: 14px;
+            }
+        }
+
+        &-wrapper {
+            background: var(--secondary-bg);
+            border-end-end-radius: 8px;
+            border-end-start-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 9.5px 16px;
+            margin: 1px;
+            position: relative;
+
+            &::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                height: calc(100% + 2px);
+                width: calc(100% + 2px);
+                background: var(--gold-gradient);
+                border-end-end-radius: 8px;
+                border-end-start-radius: 8px;
+                z-index: -1;
+                margin-left: -1px;
+            }
+        }
+    }
+    &__refund {
+        font-size: 12px;
+        color: var(--secondary-text);
+        margin-bottom: 48px;
+    }
+
     &__button {
         width: 100%;
         padding: 0 16px 16px 16px;
+        z-index: 10;
         &-close {
             position: absolute;
             top: 16px;
@@ -26,6 +106,38 @@
             background: var(--stroke-dark);
             height: 34px;
             width: 34px;
+        }
+    }
+    &__reviews {
+        margin-bottom: 120px;
+    }
+}
+
+.reviews {
+    
+    &-slider {
+        width: calc(100% - 32px);
+        min-height: 120px;
+    }
+    &-slide {
+        background: var(--stroke-light);
+        border-radius: 16px;
+        width: auto;
+        min-height: 120px;
+        height: auto;
+        padding: 16px;
+        display: flex;
+        &__avatar {
+            margin-right: 8px;
+        }
+        &__body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            &-text {
+                font-size: 12px;
+                margin-bottom: 24px;
+            }
         }
     }
 }
