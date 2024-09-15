@@ -3,6 +3,7 @@ import { PaymentService } from '../../services/payment.service';
 import { tap } from 'rxjs';
 import { initInvoice } from '@telegram-apps/sdk';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-buy-premium',
@@ -12,6 +13,7 @@ import { AuthService } from '../../services/auth.service';
 export class BuyPremiumComponent {
   private paymentService = inject(PaymentService);
   private authService = inject(AuthService);
+  private router = inject(Router);
 
   timer: number = 30 * 60;
   private timerInterval: any;
@@ -48,6 +50,7 @@ export class BuyPremiumComponent {
         invoice.open(response.url, 'url').then((status) => {
           if(status === 'paid') {
             this.authService.auth().subscribe();
+            this.router.navigate(['/home']);
           }
         })
       }

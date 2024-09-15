@@ -210,16 +210,16 @@ export class BreathingComponent {
   }
 
   openDayliProgress(): void {
-    if (!this.userActiveToday) {
+    // if (!this.userActiveToday) {
       this.authService.dayliCheck().subscribe(response => {
         if (response.success) {
           this.authService.setUserData(response.user);
           this.router.navigate(['/dayli-progress']);
         }
       })
-    } else {
-      this.router.navigate(['/home']);
-    }
+    // } else {
+    //   this.router.navigate(['/home']);
+    // }
   }
 
   ngOnDestroy(): void {
