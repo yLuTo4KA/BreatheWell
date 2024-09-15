@@ -1,0 +1,11 @@
+.benefits-item {
+    display: flex;
+    align-items: center;
+
+    &__icon {
+        margin-right: 8px;
+        color: var(--purple);
+        width: 18px;
+        height: 18px;
+    }
+}
