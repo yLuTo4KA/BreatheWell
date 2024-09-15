@@ -4,21 +4,36 @@
   "info": {
     "singularName": "price",
     "pluralName": "prices",
-    "displayName": "Price"
+    "displayName": "Price",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "price": {
+    "amount": {
       "type": "integer",
       "required": true,
       "default": 5900
     },
-    "count": {
+    "sale": {
       "type": "integer",
       "default": 0
+    },
+    "currency": {
+      "type": "enumeration",
+      "enum": [
+        "XTR"
+      ]
+    },
+    "currency_name": {
+      "type": "string",
+      "required": true,
+      "default": "stars"
+    },
+    "sale_price": {
+      "type": "integer"
     }
   }
 }

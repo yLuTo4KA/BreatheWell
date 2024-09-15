@@ -893,13 +893,19 @@ export interface ApiPricePrice extends Schema.CollectionType {
     singularName: 'price';
     pluralName: 'prices';
     displayName: 'Price';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    price: Attribute.Integer & Attribute.Required & Attribute.DefaultTo<5900>;
-    count: Attribute.Integer & Attribute.DefaultTo<0>;
+    amount: Attribute.Integer & Attribute.Required & Attribute.DefaultTo<5900>;
+    sale: Attribute.Integer & Attribute.DefaultTo<0>;
+    currency: Attribute.Enumeration<['XTR']>;
+    currency_name: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'stars'>;
+    sale_price: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
