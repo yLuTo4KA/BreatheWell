@@ -98,7 +98,7 @@ module.exports = {
         }
 
         const invoiceLink = await bot.telegram.createInvoiceLink(invoice);
-        ctx.send({url: "invoiceLink"});
+        ctx.send({url: invoiceLink});
     }
 
 
