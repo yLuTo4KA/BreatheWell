@@ -217,6 +217,7 @@ export class BreathingComponent {
           this.router.navigate(['/dayli-progress']);
         }
       })
+      this.router.navigate(['/dayli-progress']);
     // } else {
     //   this.router.navigate(['/home']);
     // }
