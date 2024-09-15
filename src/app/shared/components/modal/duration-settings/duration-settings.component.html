@@ -3,7 +3,7 @@
     <div class="duration-settings__content">
         <swiper-container #swiper [config]="swiperConfig" class="mySwiper" direction="vertical" pagination="false"
             slides-per-view="1" centered-slides="true" free-mode="true" css-mode="false">
-            <swiper-slide class="mySwiper-slide" *ngFor="let duration of selectDuration">{{duration}}
+            <swiper-slide class="mySwiper-slide" *ngFor="let duration of selectDuration" (click)="updateDuration(duration)">{{duration}}
                 мин</swiper-slide>
         </swiper-container>
     </div>
