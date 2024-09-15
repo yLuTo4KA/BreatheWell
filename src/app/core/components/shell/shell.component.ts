@@ -19,6 +19,7 @@ export class ShellComponent implements OnInit {
   tgService = inject(TelegramService);
 
   showFooter: boolean = true;
+  showPremium: boolean = true;
 
   authResponse: any;
 
@@ -30,6 +31,7 @@ export class ShellComponent implements OnInit {
     ).subscribe(() => {
       const currentUrl = this.router.url;
       this.showFooter = currentUrl !== '/notAuth' && !currentUrl.startsWith('/start') && currentUrl !== '/breathing' && currentUrl !== '/buying';
+      this.showPremium = currentUrl !== '/dayli-progress'
     });
     this.authService.deauth();
     this.authService.auth().subscribe(response => {

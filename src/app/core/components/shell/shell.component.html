@@ -2,7 +2,7 @@
   <div class="page-body">
     <router-outlet #outlet="outlet"></router-outlet>
   </div>
-  <div class="page-footer-premium" *ngIf="showFooter">
+  <div class="page-footer-premium" *ngIf="showFooter && showPremium">
     <div class="footer-premium__container" routerLink="/buying">
       <app-mini-button icon="premium" [iconHeight]="32" [iconWidth]="32" class="footer-premium__prem-icon"></app-mini-button>
       <div class="footer-premium__info">
