@@ -69,5 +69,9 @@ export class AppComponent {
       'plus',
       this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/plus.svg")
     );
+    this.matIconRegistry.addSvgIcon(
+      'premium',
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/premium.svg")
+    );
   }
 }

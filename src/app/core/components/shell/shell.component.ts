@@ -4,6 +4,7 @@ import { TelegramService } from '../../services/telegram.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { BreathService } from '../../services/breath.service';
+import { PriceService } from '../../services/price.service';
 
 @Component({
   selector: 'app-shell',
@@ -13,6 +14,7 @@ import { BreathService } from '../../services/breath.service';
 export class ShellComponent implements OnInit {
   authService = inject(AuthService);
   breathService = inject(BreathService);
+  pricesService = inject(PriceService);
 
   tgService = inject(TelegramService);
 
@@ -27,7 +29,7 @@ export class ShellComponent implements OnInit {
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
       const currentUrl = this.router.url;
-      this.showFooter = currentUrl !== '/notAuth' && !currentUrl.startsWith('/start') && currentUrl !== '/breathing';
+      this.showFooter = currentUrl !== '/notAuth' && !currentUrl.startsWith('/start') && currentUrl !== '/breathing' && currentUrl !== '/buying';
     });
     this.authService.deauth();
     this.authService.auth().subscribe(response => {
@@ -46,6 +48,12 @@ export class ShellComponent implements OnInit {
 
   getPractice(): void {
     this.breathService.getPractice().subscribe(response => {
+      this.getPrices();
+    })
+  }
+
+  getPrices(): void {
+    this.pricesService.getPrices().subscribe(response => {
       this.redirectUser();
     })
   }
@@ -62,6 +70,7 @@ export class ShellComponent implements OnInit {
     //   }
     // }
   }
+
 
 
   ngOnDestroy(): void {

@@ -2,6 +2,23 @@
   <div class="page-body">
     <router-outlet #outlet="outlet"></router-outlet>
   </div>
+  <div class="page-footer-premium" *ngIf="showFooter">
+    <div class="footer-premium__container" routerLink="/buying">
+      <app-mini-button icon="premium" [iconHeight]="32" [iconWidth]="32" class="footer-premium__prem-icon"></app-mini-button>
+      <div class="footer-premium__info">
+        <p class="footer-premium__info-title">
+          Начать курс
+        </p>
+        <p class="footer-premium__info-subtitle">
+          30 уроков
+        </p>
+      </div>
+      <div class="footer-premium__price">
+        <app-price class="footer-premium__price-container"></app-price>
+        <mat-icon svgIcon="arrowRight"></mat-icon>
+      </div>
+    </div>
+  </div>
   <div class="page-footer" *ngIf="showFooter">
     <app-footer></app-footer>
   </div>

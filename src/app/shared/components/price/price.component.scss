@@ -1,0 +1,31 @@
+.price {
+    &__old {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        &-sale {
+            background: var(--green);
+            color: #EEF0F2;
+            font-size: 10px;
+            font-weight: 300;
+            padding: 4px 6px;
+            border: none;
+            margin-right: 5px;
+        }
+        &-amount {
+            color: #535353;
+            position: relative;
+            font-size: 12px;
+            font-weight: 400;
+            &::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 50%;
+                width: 100%;
+                height: 1px;
+                background: #FF0000;
+            }
+        }
+    }
+}
