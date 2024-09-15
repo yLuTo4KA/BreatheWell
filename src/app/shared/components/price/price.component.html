@@ -1,0 +1,11 @@
+<div class="price" *ngIf="price">
+    <div class="price__old" *ngIf="price?.attributes?.sale">
+        <app-tag class="price__old-sale">-{{price.attributes.sale}}%</app-tag>
+        <div class="price__old-amount">
+            {{price.attributes.amount}} {{price.attributes.currency_name}}
+        </div>
+    </div>
+    <div class="price__amount">
+        {{getPrice(price)}}
+    </div>
+</div>

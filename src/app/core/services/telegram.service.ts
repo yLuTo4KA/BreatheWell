@@ -60,9 +60,4 @@ export class TelegramService {
   expand(): void {
     this.tg.expand();
   }
-
-  shareRefLink(refKey: string): void {
-    const url = `https://t.me/TarotsAi_bot/Tarot?startapp=${refKey}`;
-    this.utils.shareURL(url);
-  }
 }

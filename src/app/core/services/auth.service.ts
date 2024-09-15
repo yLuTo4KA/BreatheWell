@@ -53,7 +53,7 @@ export class AuthService extends ApiService {
         return !this.userDataSubject.value!.todayActive;
     }
     isPremium(): boolean {
-        return this.userDataSubject.value!.premium;
+        return !this.userDataSubject.value!.premium;
     }
 
     auth(): Observable<AuthData> {
