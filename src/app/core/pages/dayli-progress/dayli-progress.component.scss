@@ -42,18 +42,6 @@
         align-items: center;
         z-index: 10;
         margin-bottom: 30px;
-        &::before {
-            content: "";
-            background: url('../../../../assets/images/blur.png');
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-size: cover; /* Обеспечит покрытие всего блока */
-            background-position: center;
-            width: 200px;
-            height: 200px;
-        }
         &-title {
             font-size: 64px;
             font-weight: 500;
