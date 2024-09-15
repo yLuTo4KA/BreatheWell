@@ -69,7 +69,7 @@ const routes: Routes = [
   {
     path: 'buying',
     component: BuyPremiumComponent,
-    canActivate: [AuthGuard, NotPremiumGuard]
+    canActivate: [AuthGuard] // NotPremiumGuard
   },
   {
     path: '**',
