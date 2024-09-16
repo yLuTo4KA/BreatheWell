@@ -68,7 +68,7 @@ export class CalendarComponent {
 
   getMonth(date: Date): string {
     const options = { month: 'short' } as Intl.DateTimeFormatOptions;
-    let month = new Date(date).toLocaleDateString(undefined, options);
+    let month = new Date(date).toLocaleDateString('ru-RU', options);
     return month.charAt(0).toUpperCase() + month.slice(1);
   }
 
