@@ -49,7 +49,7 @@ export class BuyPremiumComponent {
         const invoice = initInvoice();
         invoice.open(response.url, 'url').then((status) => {
           if(status === 'paid') {
-            this.authService.auth().subscribe();
+            this.authService.getProfile();
             this.router.navigate(['/home']);
           }
         })

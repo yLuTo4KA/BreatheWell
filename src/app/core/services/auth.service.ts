@@ -57,7 +57,6 @@ export class AuthService extends ApiService {
     }
 
     auth(): Observable<AuthData> {
-        this.deauth();
         const url = `${this.urlPath}/local/register`;
         let params;
         if (!environment.production) {
@@ -82,6 +81,18 @@ export class AuthService extends ApiService {
                 return throwError(() => error);
             })
         )
+    }
+
+    getProfile(): void{
+        const url = `${this.urlPath}/me`;
+        this.get<User>(url).pipe(
+            tap(response => {
+                this.setUserData(response);
+            }),
+            catchError((error: HttpErrorResponse) => {
+                return throwError(() => error);
+            })
+        );
     }
 
     dayliCheck(): Observable<DayliData> {
