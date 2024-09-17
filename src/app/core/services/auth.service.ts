@@ -57,6 +57,7 @@ export class AuthService extends ApiService {
     }
 
     auth(): Observable<AuthData> {
+        this.deauth();
         const url = `${this.urlPath}/local/register`;
         let params;
         if (!environment.production) {

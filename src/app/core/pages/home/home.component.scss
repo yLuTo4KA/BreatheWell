@@ -1,0 +1,69 @@
+.home-page {
+    padding: 32px 16px;
+    position: relative;
+    z-index: 1;
+
+    &__user {
+
+        &-info {
+            display: flex;
+            margin-bottom: 16px;
+
+            &-avatar {
+                margin-right: 8px;
+            }
+
+            &-welcome {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                &-title {
+                    margin-bottom: 8px;
+                }
+            }
+            &-help-button {
+                width: 44px;
+                height: 44px;
+                background-color: var(--stroke-dark);
+            }
+        }
+    }
+    &__calendar {
+        margin-bottom: 40px;
+    }
+    &__guides {
+        margin-bottom: 32px;
+        &-title {
+            margin-bottom: 24px;
+        }
+        &-list {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 24px - 8px;
+        }
+        &-item {
+            margin-right: 8px;
+            margin-bottom: 8px;
+            padding: 8px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            background: var(--stroke-dark);
+            color: var(--primary-text);
+            &:last-child {
+                margin-right: 0;
+            }
+            &-icon {
+                margin-right: 8px;
+                
+                font-size: 20px;
+            }
+            &.--active {
+                border: 1px solid var(--purple);
+            }
+        }
+    }
+    &__suggestions {
+        margin-bottom:  32px;
+    }
+}

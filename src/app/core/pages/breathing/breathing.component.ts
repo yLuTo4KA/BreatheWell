@@ -215,9 +215,11 @@ export class BreathingComponent {
         if (response.success) {
           this.authService.setUserData(response.user);
           this.router.navigate(['/dayli-progress']);
+        } else {
+          this.router.navigate(['/dayli-progress']); // del fo prod ** nav to home!!!
         }
       })
-      this.router.navigate(['/dayli-progress']);
+  
     // } else {
     //   this.router.navigate(['/home']);
     // }

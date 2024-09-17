@@ -1,9 +1,14 @@
-<div class="buy-premium-page">
+<div class="buy-premium-page --bg-top" >
     <div class="buy-premium-page__body">
         <app-mini-button class="buy-premium-page__button-close" icon="close" routerLink="/home"></app-mini-button>
         <div class="buy-premium-page__top">
-            <h3 class="buy-premium-page__top-title">Получи доступ к курсу со <span class="text-purple">скидкой более
-                    70%</span></h3>
+            <div class="buy-premium-page__top-block">
+                <div class="buy-premium-page__top-block-wrapper">
+                    <mat-icon aria-hidden="false" aria-label="premium" svgIcon="premium" class="buy-premium-page__top-block-icon"></mat-icon>
+                </div>
+                <h3 class="buy-premium-page__top-block-title">Получи полный доступ к курсу</h3>
+                <p class="text-yellow-gradient">со скидкой более 70%</p>
+            </div>
             <div class="buy-premium-page__benefits">
                 <div class="buy-premium-page__benefits-item">
                     <app-benefits-item icon="cloak">Бессрочный доступ ко всем материалам курса</app-benefits-item>
@@ -24,7 +29,7 @@
                 <div class="buy-premium-page__price-wrapper">
                     <div class="buy-premium-page__price-info">
                         <h4>Начать курс</h4>
-                        <p>14 уроков + Практика</p>
+                        <p class="buy-premium-page__price-info-subtitle">14 уроков + Практика</p>
                     </div>
                     <div class="buy-premium-page__price-amount">
                         <app-price></app-price>

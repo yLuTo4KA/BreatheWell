@@ -1,10 +1,97 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { User } from '../../models/user.model';
+import { BreathService } from '../../services/breath.service';
+import { Practice } from '../../models/practice.model';
+import { Breath } from '../../models/breath.model';
+import { Router } from '@angular/router';
+import { SuggestSettings } from '../../models/suggest-setting.model';
 
+export interface TimeOfDay {
+  eng: "morning" | "day" | "night",
+  ru: "Доброе утро" | "Добрый день" | "Доброй ночи"
+}
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+  private authService = inject(AuthService);
+  private breathService = inject(BreathService);
+  private router = inject(Router);
 
+
+  timeOfDay: TimeOfDay = {
+    eng: "morning",
+    ru: "Доброе утро"
+  }
+  suggestSettings!: SuggestSettings;
+
+
+  userData!: User;
+  practiceData!: Practice[];
+  breathSetting: Breath = {
+    id: 0,
+    breathDuration: 3,
+    exhaleDuration: 3,
+    breathHold: 3,
+    exhaleHold: 3,
+    duration: 7 * 60,
+    sound: null
+  }
+
+
+
+  constructor() {
+
+  }
+
+  ngOnInit(): void {
+    this.authService.user$.subscribe(response => {
+      if (response) {
+        this.userData = response;
+      }
+    })
+    this.breathService.practices$.subscribe(response => {
+      if (response) {
+        this.practiceData = response;
+      }
+    })
+    this.breathService.breathSetting$.subscribe(response => {
+      if (response) {
+        this.breathSetting = response;
+      }
+    })
+    this.setTimeOfDay();
+  }
+
+  setTimeOfDay() {
+    const hour = new Date().getHours();
+    let title: string = 'morning';
+    let subtitle: string | null = null;
+    
+    if (hour >= 5 && hour < 14) {
+      this.timeOfDay = { eng: 'morning', ru: "Доброе утро" };
+      title = 'Начинаем день продуктивно';
+    } else if (hour >= 14 && hour < 19) {
+      this.timeOfDay = { eng: 'day', ru: "Добрый день" };
+      title = 'Снимаем стресс в конце дня';
+    } else {
+      this.timeOfDay = { eng: 'night', ru: "Доброй ночи" };
+      title = 'Готовимся ко сну';
+      subtitle = 'Дыхательные упражнения для крепкого сна';
+    }
+
+    this.suggestSettings = {
+      timeOfDay: this.timeOfDay.eng,
+      title,
+      subtitle
+    }
+  }
+
+  updateAndOpenPractice(practice: Practice): void {
+    this.breathService.updatePractice(practice);
+    this.router.navigate(['/breathing'])
+  }
 }

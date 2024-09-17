@@ -1,0 +1,19 @@
+
+.premium-tag {
+    background: var(--tetriary-bg);
+    border-radius: 28px;
+    height: 20px;
+    width: max-content;
+    padding: 2px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &__icon {
+        width: 16px;
+        height: 16px;
+        margin: 0 2px 3px 0;
+    }
+    &__title {
+        font-size: 12px;
+    }
+}
