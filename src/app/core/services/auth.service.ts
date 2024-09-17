@@ -83,9 +83,9 @@ export class AuthService extends ApiService {
         )
     }
 
-    getProfile(): void{
+    getProfile(): Observable<User> {
         const url = `${this.urlPath}/me`;
-        this.get<User>(url).pipe(
+        return this.get<User>(url).pipe(
             tap(response => {
                 this.setUserData(response);
             }),
@@ -94,6 +94,7 @@ export class AuthService extends ApiService {
             })
         );
     }
+
 
     dayliCheck(): Observable<DayliData> {
         const url = `${this.urlPath}/dayli-check`;

@@ -49,8 +49,10 @@ export class BuyPremiumComponent {
         const invoice = initInvoice();
         invoice.open(response.url, 'url').then((status) => {
           if(status === 'paid') {
-            this.authService.getProfile();
-            this.router.navigate(['/home']);
+            this.authService.getProfile().subscribe(() => {
+              this.router.navigate(['/home']);
+            });
+            
           }
         })
       }
