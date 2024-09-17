@@ -1,6 +1,6 @@
 <div class="slide-info">
     <div class="slide-info__img" *ngIf="iconName">
-        <mat-icon class="slide-info__img-icon" aria-hidden="false" aria-label="icon" [svgIcon]="iconName" [style.width.px]="100" [style.height.px]="100"></mat-icon>
+        <img [src]="'assets/images/' + iconName + '.png'" class="slide-info__img-icon">
         <div class="shadow"></div>
     </div>
     <h2 class="slide-info__title" *ngIf="title" [ngClass]="'text-' + color">

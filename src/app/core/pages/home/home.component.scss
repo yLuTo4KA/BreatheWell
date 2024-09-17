@@ -2,6 +2,9 @@
     padding: 32px 16px;
     position: relative;
     z-index: 1;
+    height: calc(100vh - 150px);
+    overflow-y: scroll;
+    overflow-x: hidden;
 
     &__user {
 
