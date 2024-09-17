@@ -16,6 +16,8 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { PriceComponent } from './components/price/price.component';
 import { BenefitsItemComponent } from './components/benefits-item/benefits-item.component';
 import { AvatarComponent } from './components/avatar/avatar.component';
+import { PremiumTagComponent } from './components/premium-tag/premium-tag.component';
+import { SugesstComponent } from './components/suggest/suggest.component';
 
 register();
 
@@ -24,7 +26,7 @@ register();
     CommonModule,
     MatIconModule
   ],
-  declarations: [ ButtonComponent, LogoLoaderComponent, TagComponent, SelectButtonComponent, MiniButtonComponent, ModalComponent, PracticeSettingsComponent, SoundSettingsComponent, DurationSettingsComponent, CalendarComponent, PriceComponent, BenefitsItemComponent, AvatarComponent],
+  declarations: [ ButtonComponent, LogoLoaderComponent, TagComponent, SelectButtonComponent, MiniButtonComponent, ModalComponent, PracticeSettingsComponent, SoundSettingsComponent, DurationSettingsComponent, CalendarComponent, PriceComponent, BenefitsItemComponent, AvatarComponent, PremiumTagComponent, SugesstComponent],
   exports: [    
     ButtonComponent,
     LogoLoaderComponent,
@@ -38,7 +40,9 @@ register();
     CalendarComponent,
     PriceComponent,
     BenefitsItemComponent,
-    AvatarComponent
+    AvatarComponent,
+    PremiumTagComponent,
+    SugesstComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

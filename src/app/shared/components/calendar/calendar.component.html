@@ -1,7 +1,7 @@
 <div class="calendar">
-    <div class="calendar__header">
-        <p>{{getYear(userLastVisit)}}</p>
+    <div class="calendar__header" *ngIf="yearView">
         <p>{{getMonth(userLastVisit)}}</p>
+        <p>{{getYear(userLastVisit)}}</p>
     </div>
     <div class="calendar__body">
         <div class="calendar__body-item" *ngFor="let day of week; index as i">

@@ -3,20 +3,16 @@
 }
 .calendar {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     width: 100%;
     &__header {
         margin-right: 16px;
         position: relative;
-        &::after {
-            content: "";
-            height: 24px;
-            width: 1px;
-            background: var(--stroke-light);
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translate(16px, -50%);
+        display: flex;
+        color: var(--secondary-text);
+        margin-bottom: 4px;
+        p {
+            margin-right: 4px;
         }
     }
     &__body {
@@ -24,24 +20,24 @@
         align-items: center;
         justify-content: space-between;
         width: 100%;
-        padding-left: 18px;
+        text-align: center;
         &-item {
             &-week_day_name {
                 margin-bottom: 5px;
             }
             &-day {
-                font-size: 12px;
+                font-size: 16px;
                 color: var(--disabled);
-                width: 24px;
-                height: 24px;
+                width: 30px;
+                height: 30px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 border-radius: 50%;
                 line-height: 1;
                 &.--active {
-                    background: var(--primary-buttons);
-                    color: var(--primary-text);
+                    background: var(--purple);
+                    color: var(--main-background)
                 }
             }
         

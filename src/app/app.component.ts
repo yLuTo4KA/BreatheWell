@@ -85,5 +85,9 @@ export class AppComponent {
       'success',
       this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/success.svg")
     );
+    this.matIconRegistry.addSvgIcon(
+      'help',
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/help.svg")
+    );
   }
 }

@@ -6,11 +6,6 @@
     justify-content: center;
     flex-direction: column;
     height: 100vh;
-    &::before {
-        content: url("../../../../assets/images/Gradient.png");
-        position: absolute;
-        top: 0;
-    }
     &__logo {
         z-index: 10;
     }

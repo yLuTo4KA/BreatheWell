@@ -15,6 +15,7 @@ export class CalendarComponent {
   @Input() userLastVisit!: Date;
   @Input() userLastActive!: Date | null;
   @Input() activeDays!: number;
+  @Input() yearView!: boolean;
 
   week: WeekDays[] = [];
   currentDay: number = 0;

@@ -50,6 +50,8 @@
     width: 46px;
     height: 46px;
     margin-right: 8px;
+    background: linear-gradient(90deg, #965FF2 0%, #3F73F6 100%);
+
   }
 
   &__info {
@@ -71,7 +73,7 @@
     justify-content: flex-end;
     align-items: center;
     text-align: right;
-
+    
     &-container {
       margin-right: 14px;
     }

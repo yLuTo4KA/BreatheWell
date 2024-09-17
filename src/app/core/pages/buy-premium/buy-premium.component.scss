@@ -3,6 +3,7 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
+    z-index: 10;
 
     &__body {
         flex: 1;
@@ -15,6 +16,39 @@
     &__top {
         padding: 16px 16px 0;
         margin-bottom: 16px;
+
+        &-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 33px;
+            margin-top: 16px;
+            background: url('../../../../assets/images/premium-decor.png') center top no-repeat;
+
+            &-wrapper {
+                width: 80px;
+                height: 80px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                background: #B5CAFF1A;
+                margin-bottom: 32px;
+            }
+
+            &-icon {
+                width: 50px;
+                height: 50px;
+
+
+
+            }
+
+            &-title {
+                margin-bottom: 12px;
+            }
+        }
 
         &-title {
             margin-right: 40px;
@@ -41,26 +75,40 @@
         z-index: 10;
         margin-bottom: 16px;
 
+
         &-amount {
             border-left: 1px solid var(--stroke-light);
             padding-left: 18px;
+        }
+
+        &-info {
+            &-subtitle {
+                color: var(--secondary-text);
+            }
         }
 
         &-sale {
             display: flex;
             justify-content: center;
             align-items: center;
-            background: var(--gold-gradient);
+            background: var(--yellow);
             padding: 8px;
             color: var(--main-background);
             border-start-start-radius: 8px;
             border-start-end-radius: 8px;
+
             &-icon {
                 margin-right: 10px;
             }
+
             &-title {
                 margin-right: 10px;
                 font-size: 14px;
+                font-weight: 400;
+            }
+
+            h4 {
+                font-size: 18px;
             }
         }
 
@@ -81,7 +129,7 @@
                 left: 0;
                 height: calc(100% + 2px);
                 width: calc(100% + 2px);
-                background: var(--gold-gradient);
+                background: var(--yellow);
                 border-end-end-radius: 8px;
                 border-end-start-radius: 8px;
                 z-index: -1;
@@ -89,6 +137,7 @@
             }
         }
     }
+
     &__refund {
         font-size: 12px;
         color: var(--secondary-text);
@@ -99,6 +148,7 @@
         width: 100%;
         padding: 0 16px 16px 16px;
         z-index: 10;
+
         &-close {
             position: absolute;
             top: 16px;
@@ -108,17 +158,19 @@
             width: 34px;
         }
     }
+
     &__reviews {
         margin-bottom: 120px;
     }
 }
 
 .reviews {
-    
+
     &-slider {
         width: calc(100% - 32px);
         min-height: 120px;
     }
+
     &-slide {
         background: var(--stroke-dark);
         border-radius: 16px;
@@ -127,13 +179,16 @@
         height: auto;
         padding: 16px;
         display: flex;
+
         &__avatar {
             margin-right: 8px;
         }
+
         &__body {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+
             &-text {
                 font-size: 12px;
                 margin-bottom: 24px;
