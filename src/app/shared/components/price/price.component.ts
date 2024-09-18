@@ -9,6 +9,7 @@ import { PriceService } from 'src/app/core/services/price.service';
 })
 export class PriceComponent {
   @Input() sale: boolean = false;
+  @Input() textGray: boolean = false;
 
   private priceService = inject(PriceService);
 

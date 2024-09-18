@@ -1,0 +1,47 @@
+.task-card {
+    display: flex;
+    align-items: center;
+    &__icon {
+        height: 60px;
+        width: 60px;
+        border-radius: 6px;
+        margin-right: 8px;
+        padding: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        flex-shrink: 0;
+    }
+    &__text {
+        flex: 1;
+        word-break: break-word;
+        margin-right: 16px;
+        &-title {
+            word-wrap: break-word;
+        }
+        &-subtitle {
+            color: var(--secondary-text);
+            font-size: 12px;
+            
+        }
+    }
+    &__check {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid var(--stroke-light);
+        border-radius: 50%;
+        &.--active {
+            border: 1px solid #00AB44;
+            background: #00AB441A;
+        }
+        &-icon {
+            width: 18px;
+            height: 18px;
+        }
+    }
+}

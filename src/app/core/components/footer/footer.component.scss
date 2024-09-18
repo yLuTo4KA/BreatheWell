@@ -57,6 +57,9 @@
         width: 80px;
         height: 56px;
         color: var(--secondary-text);
+        &.--active {
+            color: var(--total);
+        }
         &-icon {
             z-index: 20;
         }

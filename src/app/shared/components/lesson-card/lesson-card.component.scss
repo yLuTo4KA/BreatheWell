@@ -1,0 +1,40 @@
+.lesson-card {
+    display: flex;
+    align-items: center;
+    &__icon {
+        background: linear-gradient(180deg, #4B47FE 0%, #0C2852 100%);
+        height: 60px;
+        width: 60px;
+        border-radius: 6px;
+        margin-right: 8px;
+        padding: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        flex-shrink: 0;
+        &-duration {
+            position: absolute;
+            bottom: 4px;
+            left: 4px;
+            background: var(--stroke-dark);
+            border-radius: 28px;
+            padding: 0px 5px;
+            font-size: 10px;
+        }
+    }
+    &__text {
+        flex: 1;
+        word-break: break-word;
+        margin-right: 16px;
+        &-title {
+            word-wrap: break-word;
+        }
+        &-subtitle {
+            color: var(--secondary-text);
+            font-size: 12px;
+            
+        }
+    }
+}

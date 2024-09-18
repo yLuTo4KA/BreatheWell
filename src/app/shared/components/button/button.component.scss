@@ -7,9 +7,10 @@
 .button {
     display: flex;
     background: var(--primary-buttons);
-    border-radius: 6px;
+    border-radius: 14px;
     justify-content: center;
     text-align: center;
+    box-shadow: 0px 4px 0px 0px #003F7E;
     cursor: pointer;
     line-height: 1;
     &.--disabled {

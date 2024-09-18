@@ -21,6 +21,15 @@ export class HomeComponent implements OnInit {
   private breathService = inject(BreathService);
   private router = inject(Router);
 
+  private days = [
+    'Воскресенье',
+    'Понедельник',
+    'Вторник',
+    'Среда',
+    'Четверг',
+    'Пятница',
+    'Суббота'
+  ];
 
   timeOfDay: TimeOfDay = {
     eng: "morning",
@@ -42,7 +51,7 @@ export class HomeComponent implements OnInit {
   }
 
 
-
+  
   constructor() {
 
   }
@@ -88,6 +97,36 @@ export class HomeComponent implements OnInit {
       title,
       subtitle
     }
+  }
+
+  getDate(): any {
+    const lastVisit = new Date(this.userData.lastVisit);
+    const month = this.getMonth(lastVisit);
+    const date = lastVisit.getDate();
+    const day = lastVisit.getDay();
+
+    return `${this.days[day]}, ${date} ${month}`
+  }
+
+  getMonth(date: Date): string {
+    const monthsGenitive: any = {
+      'январь': 'Января',
+      'февраль': 'Февраля',
+      'март': 'Марта',
+      'апрель': 'Апреля',
+      'май': 'Мая',
+      'июнь': 'Июня',
+      'июль': 'Июля',
+      'август': 'Августа',
+      'сентябрь': 'Сентября',
+      'октябрь': 'Октября',
+      'ноябрь': 'Ноября',
+      'декабрь': 'Декабря'
+    };
+    const options = { month: 'long' } as Intl.DateTimeFormatOptions;
+    let month = new Date(date).toLocaleDateString('ru-RU', options);
+    month = month.charAt(0).toLowerCase() + month.slice(1);
+    return monthsGenitive[month]; 
   }
 
   updateAndOpenPractice(practice: Practice): void {

@@ -18,6 +18,9 @@ import { BenefitsItemComponent } from './components/benefits-item/benefits-item.
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { PremiumTagComponent } from './components/premium-tag/premium-tag.component';
 import { SugesstComponent } from './components/suggest/suggest.component';
+import { SectorComponent } from './components/sector/sector.component';
+import { LessonCardComponent } from './components/lesson-card/lesson-card.component';
+import { TaskCardComponent } from './components/task-card/task-card.component';
 
 register();
 
@@ -26,7 +29,7 @@ register();
     CommonModule,
     MatIconModule
   ],
-  declarations: [ ButtonComponent, LogoLoaderComponent, TagComponent, SelectButtonComponent, MiniButtonComponent, ModalComponent, PracticeSettingsComponent, SoundSettingsComponent, DurationSettingsComponent, CalendarComponent, PriceComponent, BenefitsItemComponent, AvatarComponent, PremiumTagComponent, SugesstComponent],
+  declarations: [ ButtonComponent, LogoLoaderComponent, TagComponent, SelectButtonComponent, MiniButtonComponent, ModalComponent, PracticeSettingsComponent, SoundSettingsComponent, DurationSettingsComponent, CalendarComponent, PriceComponent, BenefitsItemComponent, AvatarComponent, PremiumTagComponent, SugesstComponent, SectorComponent, LessonCardComponent, TaskCardComponent],
   exports: [    
     ButtonComponent,
     LogoLoaderComponent,
@@ -43,6 +46,9 @@ register();
     AvatarComponent,
     PremiumTagComponent,
     SugesstComponent,
+    SectorComponent,
+    LessonCardComponent,
+    TaskCardComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

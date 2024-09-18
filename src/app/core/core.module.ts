@@ -22,13 +22,16 @@ import { BreathingComponent } from './pages/breathing/breathing.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DayliProgressComponent } from './pages/dayli-progress/dayli-progress.component';
 import { BuyPremiumComponent } from './pages/buy-premium/buy-premium.component';
+import { CoursePreviewComponent } from './pages/course-preview/course-preview.component';
+import { LessonComponent } from './pages/lesson/lesson.component';
+import { MaterialsComponent } from './pages/materials/materials.component';
 register();
 
 
 @NgModule({
   imports: [CommonModule,RouterModule,SharedModule, MatIconModule, TranslateModule, BrowserAnimationsModule],
-  declarations: [ShellComponent, NotAuthComponent, FooterComponent, WelcomeComponent, WelcomeSliderComponent, SlideInfoComponent, SlideSliderComponent, CtaComponent, StartPageComponent, HomeComponent, BreathingComponent, DayliProgressComponent, BuyPremiumComponent],
-  exports: [ShellComponent, NotAuthComponent, FooterComponent, WelcomeComponent, SlideInfoComponent,SlideSliderComponent, CtaComponent, StartPageComponent, HomeComponent, BreathingComponent, BuyPremiumComponent],
+  declarations: [ShellComponent, NotAuthComponent, FooterComponent, WelcomeComponent, WelcomeSliderComponent, SlideInfoComponent, SlideSliderComponent, CtaComponent, StartPageComponent, HomeComponent, BreathingComponent, DayliProgressComponent, BuyPremiumComponent, CoursePreviewComponent, LessonComponent, MaterialsComponent],
+  exports: [ShellComponent, NotAuthComponent, FooterComponent, WelcomeComponent, SlideInfoComponent,SlideSliderComponent, CtaComponent, StartPageComponent, HomeComponent, BreathingComponent, BuyPremiumComponent, CoursePreviewComponent, LessonComponent, MaterialsComponent],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

@@ -11,6 +11,9 @@ import { HomeComponent } from './core/pages/home/home.component';
 import { DayliProgressComponent } from './core/pages/dayli-progress/dayli-progress.component';
 import { BuyPremiumComponent } from './core/pages/buy-premium/buy-premium.component';
 import { NotPremiumGuard } from './guards/not-premium.guard';
+import { MaterialsComponent } from './core/pages/materials/materials.component';
+import { CoursePreviewComponent } from './core/pages/course-preview/course-preview.component';
+import { LessonComponent } from './core/pages/lesson/lesson.component';
 
 const routes: Routes = [
   {
@@ -36,13 +39,11 @@ const routes: Routes = [
         path: 'welcome',
         component: WelcomeComponent,
         canActivate: [AuthGuard],
-        data: {animation: 'WelcomePage'}
       },
       {
         path: 'welcome-slider',
         component: WelcomeSliderComponent,
         canActivate: [AuthGuard],
-        data: {animation: 'WelcomeSliderPage'}
       },
       {
         path: 'cta',
@@ -70,6 +71,21 @@ const routes: Routes = [
     path: 'buying',
     component: BuyPremiumComponent,
     canActivate: [AuthGuard] // NotPremiumGuard
+  },
+  {
+    path: 'materials',
+    component: MaterialsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'course-preview',
+    component: CoursePreviewComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'lesson',
+    component: LessonComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '**',

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-premium-tag',
@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./premium-tag.component.scss']
 })
 export class PremiumTagComponent {
+  @Input() premium: boolean = false;
 
 }
