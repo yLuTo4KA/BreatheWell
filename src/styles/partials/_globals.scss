@@ -110,6 +110,7 @@ swiper-container::part(bullet-active) {
   --green: #00AB44;
   --tetriary-bg: #1E203C;
   --yellow: #FDBA36;
+  --total: #fff;
 
 }
 
@@ -176,12 +177,13 @@ swiper-container::part(bullet-active) {
     content: '';
       position: absolute;
       top: -400px;
-      left: 0;
-      width: 100%;
+      left: 50%;
+      width: 60%;
+      transform: translate(-50%, 0);
       height: 400px;
-      -webkit-box-shadow: 0px 5px 500px 60px rgba(79, 43, 156, 0.5);
-      -moz-box-shadow: 0px 5px 500px 60px rgba(79, 43, 156, 0.5);
-      box-shadow: 0px 5px 500px 60px rgba(79, 43, 156, 0.5);
+      -webkit-box-shadow: 0px 5px 150px 60px rgba(79, 43, 156, 0.5);
+      -moz-box-shadow: 0px 5px 150px 60px rgba(79, 43, 156, 0.5);
+      box-shadow: 0px 5px 150px 60px rgba(79, 43, 156, 0.5);
       border-radius: 50%;
       z-index: -1;
   }
@@ -259,6 +261,38 @@ router-link {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+}
+
+.reminder {
+  width: 6px;
+  height: 6px;
+  background: #9747FF;
+  border-radius: 50%;
+  position: relative;
+  margin: 5px;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 6px;
+    height: 6px;
+    border: 1px solid #9747FF99;
+    border-radius: 50%;
+    animation: reminder 2s cubic-bezier(0.12, 0.01, 0.53, 0.48) infinite;
+   
+  }
+}
+
+@keyframes reminder {
+    0% {
+      transform: translate(-50%, -50%) scale(0.8) ;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(2.4) ;
+      opacity: 0.3;
+    }
 }
 
 .shadow {

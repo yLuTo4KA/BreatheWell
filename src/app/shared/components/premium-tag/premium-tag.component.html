@@ -1,4 +1,4 @@
 <div class="premium-tag">
-    <mat-icon class="premium-tag__icon" svgIcon="premium" aria-hidden="false" aria-label="benefits"></mat-icon>
-    <p class="premium-tag__title">Premium</p>
+    <mat-icon *ngIf="premium" class="premium-tag__icon" svgIcon="premium" aria-hidden="false" aria-label="benefits"></mat-icon>
+    <p class="premium-tag__title">{{premium ? 'Premium' : 'Free аккаунт'}}</p>
 </div>

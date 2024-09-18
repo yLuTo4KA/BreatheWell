@@ -21,10 +21,12 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
+
                 &-title {
                     margin-bottom: 8px;
                 }
             }
+
             &-help-button {
                 width: 44px;
                 height: 44px;
@@ -32,19 +34,24 @@
             }
         }
     }
+
     &__calendar {
         margin-bottom: 40px;
     }
+
     &__guides {
         margin-bottom: 32px;
+
         &-title {
             margin-bottom: 24px;
         }
+
         &-list {
             display: flex;
             flex-wrap: wrap;
             margin-bottom: 24px - 8px;
         }
+
         &-item {
             margin-right: 8px;
             margin-bottom: 8px;
@@ -53,20 +60,59 @@
             cursor: pointer;
             background: var(--stroke-dark);
             color: var(--primary-text);
+
             &:last-child {
                 margin-right: 0;
             }
+
             &-icon {
                 margin-right: 8px;
-                
+
                 font-size: 20px;
             }
+
             &.--active {
                 border: 1px solid var(--purple);
             }
         }
     }
+
     &__suggestions {
-        margin-bottom:  32px;
+        margin-bottom: 32px;
+    }
+
+    &__lessons {
+        margin-bottom: 32px;
+        &-title {
+            margin-bottom: 4px;
+        }
+
+        &-date {
+            color: #FFFFFF99;
+            margin-bottom: 32px;
+        }
+
+        &-item {}
+    }
+
+    &__sector {
+        &-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+
+            h5 {
+                margin-left: 8px;
+            }
+        }
+
+    }
+    &__tasks {
+        &-item {
+            margin-bottom: 16px;
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
     }
 }

@@ -1,23 +1,26 @@
 <div class="home-page --bg-top">
     <div class="home-page__user-info">
         <div class="home-page__user-info-avatar">
-            <app-avatar [displayName]="userData.username" [width]="52" [height]="52" [photoURL]="userData.avatar"></app-avatar>
+            <app-avatar [displayName]="userData.username" [width]="52" [height]="52"
+                [photoURL]="userData.avatar"></app-avatar>
         </div>
         <div class="home-page__user-info-welcome">
             <p class="home-page__user-info-welcome-title">{{timeOfDay.ru}}, {{'yLuTo4KA'}}</p>
-            <div class="premium-tag" *ngIf="userData.premium">
-                <app-premium-tag></app-premium-tag>
+            <div class="premium-tag">
+                <app-premium-tag [premium]="userData.premium"></app-premium-tag>
             </div>
         </div>
         <app-mini-button icon="help" class="home-page__user-info-help-button"></app-mini-button>
     </div>
     <div class="home-page__calendar">
-        <app-calendar [activeDays]="userData.activeDays" [userLastActive]="userData.lastActiveDate" [userLastVisit]="userData.lastVisit" [yearView]="true"></app-calendar>
+        <app-calendar [activeDays]="userData.activeDays" [userLastActive]="userData.lastActiveDate"
+            [userLastVisit]="userData.lastVisit" [yearView]="true"></app-calendar>
     </div>
     <div class="home-page__guides">
         <h5 class="home-page__guides-title">Дыхательные упражнения</h5>
         <div class="home-page__guides-list">
-            <app-tag class="home-page__guides-item" *ngFor="let practice of practiceData" (click)="updateAndOpenPractice(practice)">
+            <app-tag class="home-page__guides-item" *ngFor="let practice of practiceData"
+                (click)="updateAndOpenPractice(practice)">
                 <p class="home-page__guides-item-icon">{{practice.iconText}}</p>
                 <p class="home-page__guides-item-title">{{practice.title}}</p>
             </app-tag>
@@ -25,6 +28,36 @@
     </div>
     <div class="home-page__suggestions">
         <app-suggest [suggestSettings]="suggestSettings"></app-suggest>
+    </div>
+    <div class="home-page__lessons">
+        <h5 class="home-page__lessons-title">Рекомендации для вас</h5>
+        <p class="home-page__lessons-date">{{getDate()}}</p>
+        <app-sector class="home-page__lessons-item">
+            <div class="home-page__sector-title">
+                <div class="reminder"></div>
+                <h5>Следующий урок</h5>
+            </div>
+            <app-lesson-card></app-lesson-card>
+        </app-sector>
+    </div>
+    <div class="home-page__tasks">
+        <app-sector class="home-page__tasks-wrapper" [border]="true">
+            <div class="home-page__sector-title">
+                <div class="reminder"></div>
+                <h5>Задания на день</h5>
+            </div>
+            <div class="home-page__tasks-list">
+                <div class="home-page__tasks-item">
+                    <app-task-card></app-task-card>
+                </div>
+                <div class="home-page__tasks-item">
+                    <app-task-card></app-task-card>
+                </div>
+                <div class="home-page__tasks-item">
+                    <app-task-card></app-task-card>
+                </div>
+            </div>
+        </app-sector>
     </div>
 
 </div>

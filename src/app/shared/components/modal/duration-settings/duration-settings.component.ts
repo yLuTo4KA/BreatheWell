@@ -42,12 +42,7 @@ export class DurationSettingsComponent {
     this.modalSub = this.modalService.modalsView$.subscribe(response => {
       this.modal = response;
     })
-    this.breathSub = this.breathService.breathSetting$.subscribe(response => {
-      this.duration = Math.floor(response.duration / 60) - 1;
-      if(this.swiper.nativeElement && this.afterInit) {
-        this.swiper.nativeElement.swiper.slideTo(this.duration);
-      }
-    })
+
   }
   ngAfterViewInit() {
     this.afterInit = true;
@@ -56,6 +51,12 @@ export class DurationSettingsComponent {
       const activeIndex = this.swiper.nativeElement.swiper.activeIndex;
       this.breathService.updateDuration(activeIndex + 1);
     })
+    this.breathSub = this.breathService.breathSetting$.subscribe(response => {
+      this.duration = Math.floor(response.duration / 60) - 1;
+      if (this.swiper?.nativeElement) {
+        this.swiper.nativeElement.swiper.slideTo(this.duration);
+      }
+    });
   }
 
   closeModal(): void {
