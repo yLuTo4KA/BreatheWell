@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-lesson-card',
@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./lesson-card.component.scss']
 })
 export class LessonCardComponent {
-
+  @Input({required: true}) title!: string;
+  @Input({required: true}) subtitle!: string;
+  @Input({required: true}) img!: string;
 }

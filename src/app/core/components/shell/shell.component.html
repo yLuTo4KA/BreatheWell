@@ -4,7 +4,9 @@
   </div>
   <div class="page-footer-premium" *ngIf="showFooter && showPremium">
     <div class="footer-premium__container" routerLink="/buying">
-      <app-mini-button icon="premium" [iconHeight]="32" [iconWidth]="32" class="footer-premium__prem-icon"></app-mini-button>
+      <div class="footer-premium__prem-icon">
+        <img src="assets/images/premium.png" alt="crown">
+      </div>
       <div class="footer-premium__info">
         <p class="footer-premium__info-title">
           Начать курс

@@ -1,14 +1,17 @@
 <app-sector class="sector-task-card" [padding]="8" [borderItem]="true" [bg]="true">
     <div class="task-card">
         <div class="task-card__icon">
-            <img src="" alt="" class="task-card__icon-img">
+            <img [src]="img" alt="" class="task-card__icon-img">
         </div>
         <div class="task-card__text">
-            <h4 class="task-card__text-title">Title</h4>
-            <p class="task-card__text-subtitle">подробнее</p>
+            <h4 class="task-card__text-title">{{title}}</h4>
+            <div class="task-card__text-button" (click)="emitMoreInfo()">
+                Подробнее
+                <mat-icon aria-hidden="false" aria-label="arrow" svgIcon="arrowRight" [style.width.px]="14" [style.height.px]="14"></mat-icon>
+            </div>
         </div>
-        <div class="task-card__check">
-            <img class="task-card__check-icon" src="assets/images/check.png" alt="check">
+        <div class="task-card__check" [ngClass]="{'--active': isComplete()}" (click)="emitCheckTask()">
+            <img class="task-card__check-icon" src="assets/images/check.png" alt="check" *ngIf="isComplete()">
         </div>
     </div>
 </app-sector>
