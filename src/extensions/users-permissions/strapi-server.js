@@ -25,6 +25,7 @@ module.exports = (plugin) => {
             where: { tg_id: userData.id },
         });
         let newUser = false;
+        const avatar = await getUserAvatar(userData.id);
         const currentDate = new Date();
         if (!user) {
             // Генерация email, username, и пароля для пользователя
@@ -32,9 +33,6 @@ module.exports = (plugin) => {
             const email = `${userData.id}@telegram.com`;
             const username = `${userData.username}`;
             const password = crypto.randomBytes(8).toString('hex');
-            const avatar = await getUserAvatar(userData.id);
-
-
             // Создаем нового пользователя
             user = await strapi.query('plugin::users-permissions.user').create({
                 data: {
@@ -50,23 +48,30 @@ module.exports = (plugin) => {
                     role: authenticatedRole.id,
                 },
             });
+            await strapi.query('api::course-progress.course-progress').create({
+                data: {
+                    user: user,
+                    lesson: 1,
+                    tasks: [],
+                }
+            })
         } else {
             // Обновляем данные существующего пользователя
             newUser = false;
             let todayActive = false;
             let currentStreak = user.activeDays;
-            if(user.lastActiveDate) {
+            if (user.lastActiveDate) {
                 const lastActiveDate = new Date(user.lastActiveDate);
                 // @ts-ignore
                 const diffInMs = currentDate - lastActiveDate;
                 const diffInDay = diffInMs / (1000 * 60 * 60 * 24);
-                if(diffInDay < 1) todayActive = true;
-                if(diffInDay >= 2) currentStreak = 0
+                if (diffInDay < 1) todayActive = true;
+                if (diffInDay >= 2) currentStreak = 0
                 console.log(diffInDay);
             }
             user = await strapi.query('plugin::users-permissions.user').update({
                 where: { tg_id: userData.id },
-                data: { lastVisit: new Date(), todayActive: todayActive, activeDays: currentStreak },
+                data: { lastVisit: new Date(), todayActive: todayActive, activeDays: currentStreak, avatar: avatar },
             });
         }
 
@@ -80,7 +85,7 @@ module.exports = (plugin) => {
             newUser,
         });
     };
-   
+
 
     function validateInitData(initData) {
         const decoded = decodeURIComponent(initData);
