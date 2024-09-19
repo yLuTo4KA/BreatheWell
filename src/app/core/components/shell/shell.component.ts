@@ -2,9 +2,10 @@ import { Component, OnInit, inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { TelegramService } from '../../services/telegram.service';
 import { NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs';
+import { filter, forkJoin } from 'rxjs';
 import { BreathService } from '../../services/breath.service';
 import { PriceService } from '../../services/price.service';
+import { CourseService } from '../../services/course.service';
 
 @Component({
   selector: 'app-shell',
@@ -15,6 +16,7 @@ export class ShellComponent implements OnInit {
   authService = inject(AuthService);
   breathService = inject(BreathService);
   pricesService = inject(PriceService);
+  courseService = inject(CourseService);
 
   tgService = inject(TelegramService);
 
@@ -36,28 +38,11 @@ export class ShellComponent implements OnInit {
     this.authService.deauth();
     this.authService.auth().subscribe(response => {
       this.authResponse = response;
-      this.getSounds();
+      forkJoin({ sounds: this.breathService.getSounds(), practices: this.breathService.getPractice(), prices: this.pricesService.getPrices(), progress: this.courseService.getUserProgress()}).subscribe(() => {
+        this.redirectUser();
+      })
     });
     this.tgService.expand();
-  }
-
-  getSounds(): void {
-    this.breathService.getSounds().subscribe(response => {
-      this.getPractice();
-    })
-    
-  }
-
-  getPractice(): void {
-    this.breathService.getPractice().subscribe(response => {
-      this.getPrices();
-    })
-  }
-
-  getPrices(): void {
-    this.pricesService.getPrices().subscribe(response => {
-      this.redirectUser();
-    })
   }
 
   redirectUser(): void {

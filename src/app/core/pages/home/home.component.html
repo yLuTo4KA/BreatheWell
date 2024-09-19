@@ -32,12 +32,12 @@
     <div class="home-page__lessons">
         <h5 class="home-page__lessons-title">Рекомендации для вас</h5>
         <p class="home-page__lessons-date">{{getDate()}}</p>
-        <app-sector class="home-page__lessons-item">
+        <app-sector class="home-page__lessons-item" *ngIf="!progressData.todayComplete">
             <div class="home-page__sector-title">
                 <div class="reminder"></div>
                 <h5>Следующий урок</h5>
             </div>
-            <app-lesson-card></app-lesson-card>
+            <app-lesson-card [title]="progressData.todayLesson.title" [subtitle]="progressData.todayLesson.description" [img]="progressData.todayLesson.lesson_preview"></app-lesson-card>
         </app-sector>
     </div>
     <div class="home-page__tasks">
@@ -47,14 +47,8 @@
                 <h5>Задания на день</h5>
             </div>
             <div class="home-page__tasks-list">
-                <div class="home-page__tasks-item">
-                    <app-task-card></app-task-card>
-                </div>
-                <div class="home-page__tasks-item">
-                    <app-task-card></app-task-card>
-                </div>
-                <div class="home-page__tasks-item">
-                    <app-task-card></app-task-card>
+                <div class="home-page__tasks-item" *ngFor="let task of progressData.todayTasks">
+                    <app-task-card [title]="task.title" [id]="task.id" [img]="task.preview_icon" [completedTasks]="progressData.completedTasks" (checkTask)="checkTask($event)"></app-task-card>
                 </div>
             </div>
         </app-sector>

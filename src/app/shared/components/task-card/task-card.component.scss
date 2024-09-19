@@ -21,10 +21,12 @@
         &-title {
             word-wrap: break-word;
         }
-        &-subtitle {
-            color: var(--secondary-text);
+        &-button {
+            color: var(--primary-buttons);
+            display: flex;
+            align-items: center;
             font-size: 12px;
-            
+            font-weight: 300;
         }
     }
     &__check {

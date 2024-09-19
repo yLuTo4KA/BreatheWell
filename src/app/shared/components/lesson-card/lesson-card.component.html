@@ -1,12 +1,12 @@
 <app-sector class="sector-lesson-card" [padding]="8" [border]="false">
     <div class="lesson-card">
         <div class="lesson-card__icon">
-            <img src="" alt="" class="lesson-card__icon-img">
+            <img [src]="img" alt="#" class="lesson-card__icon-img">
             <div class="lesson-card__icon-duration">2 min</div>
         </div>
         <div class="lesson-card__text">
-            <h4 class="lesson-card__text-title">Title</h4>
-            <p class="lesson-card__text-subtitle">subtitlesubtitlesubtitlesubtitlesubtitlesubtitlesubtitleasdsadsadsa</p>
+            <h4 class="lesson-card__text-title">{{title}}</h4>
+            <p class="lesson-card__text-subtitle">{{subtitle}}</p>
         </div>
         <mat-icon aria-hidden="false" aria-label="menu" svgIcon="arrowRight" class="icon"></mat-icon>
     </div>

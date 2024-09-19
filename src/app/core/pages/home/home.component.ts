@@ -6,6 +6,8 @@ import { Practice } from '../../models/practice.model';
 import { Breath } from '../../models/breath.model';
 import { Router } from '@angular/router';
 import { SuggestSettings } from '../../models/suggest-setting.model';
+import { Progress } from '../../models/progress.model';
+import { CourseService } from '../../services/course.service';
 
 export interface TimeOfDay {
   eng: "morning" | "day" | "night",
@@ -19,6 +21,7 @@ export interface TimeOfDay {
 export class HomeComponent implements OnInit {
   private authService = inject(AuthService);
   private breathService = inject(BreathService);
+  private courseService = inject(CourseService);
   private router = inject(Router);
 
   private days = [
@@ -50,6 +53,8 @@ export class HomeComponent implements OnInit {
     sound: null
   }
 
+  progressData!: Progress;
+
 
   
   constructor() {
@@ -70,6 +75,11 @@ export class HomeComponent implements OnInit {
     this.breathService.breathSetting$.subscribe(response => {
       if (response) {
         this.breathSetting = response;
+      }
+    })
+    this.courseService.userProgress$.subscribe(response => {
+      if(response) {
+        this.progressData = response;
       }
     })
     this.setTimeOfDay();
@@ -132,5 +142,13 @@ export class HomeComponent implements OnInit {
   updateAndOpenPractice(practice: Practice): void {
     this.breathService.updatePractice(practice);
     this.router.navigate(['/breathing'])
+  }
+
+  checkTask(taskId: number): void {
+    if(this.progressData.completedTasks.includes(taskId)) {
+      this.progressData.completedTasks = this.progressData.completedTasks.filter(id => id !== taskId)
+    } else {
+      this.progressData.completedTasks.push(taskId);
+    }
   }
 }
