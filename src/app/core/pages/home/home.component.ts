@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { SuggestSettings } from '../../models/suggest-setting.model';
 import { Progress } from '../../models/progress.model';
 import { CourseService } from '../../services/course.service';
+import { debounceTime } from 'rxjs/operators';
+import { Subject, Subscription } from 'rxjs';
 
 export interface TimeOfDay {
   eng: "morning" | "day" | "night",
@@ -19,10 +21,13 @@ export interface TimeOfDay {
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  private subscription!: Subscription;
   private authService = inject(AuthService);
   private breathService = inject(BreathService);
   private courseService = inject(CourseService);
   private router = inject(Router);
+  private updateSubjet = new Subject<void>();
+  private debounceTime = 1000;
 
   private days = [
     'Воскресенье',
@@ -56,7 +61,7 @@ export class HomeComponent implements OnInit {
   progressData!: Progress;
 
 
-  
+
   constructor() {
 
   }
@@ -78,10 +83,14 @@ export class HomeComponent implements OnInit {
       }
     })
     this.courseService.userProgress$.subscribe(response => {
-      if(response) {
+      if (response) {
         this.progressData = response;
       }
     })
+    this.updateSubjet.pipe(debounceTime(this.debounceTime)).subscribe(() => {
+      this.updateProgress();
+    })
+
     this.setTimeOfDay();
   }
 
@@ -89,7 +98,7 @@ export class HomeComponent implements OnInit {
     const hour = new Date().getHours();
     let title: string = 'morning';
     let subtitle: string | null = null;
-    
+
     if (hour >= 5 && hour < 14) {
       this.timeOfDay = { eng: 'morning', ru: "Доброе утро" };
       title = 'Начинаем день продуктивно';
@@ -136,7 +145,7 @@ export class HomeComponent implements OnInit {
     const options = { month: 'long' } as Intl.DateTimeFormatOptions;
     let month = new Date(date).toLocaleDateString('ru-RU', options);
     month = month.charAt(0).toLowerCase() + month.slice(1);
-    return monthsGenitive[month]; 
+    return monthsGenitive[month];
   }
 
   updateAndOpenPractice(practice: Practice): void {
@@ -145,10 +154,27 @@ export class HomeComponent implements OnInit {
   }
 
   checkTask(taskId: number): void {
-    if(this.progressData.completedTasks.includes(taskId)) {
+    if (this.progressData.completedTasks.includes(taskId)) {
       this.progressData.completedTasks = this.progressData.completedTasks.filter(id => id !== taskId)
     } else {
       this.progressData.completedTasks.push(taskId);
     }
+
+    // api 
+    this.updateSubjet.next();
+  }
+  updateProgress(): void {
+    this.courseService.updateTask(this.progressData.completedTasks).subscribe(response => {
+      this.progressData = response;
+    })
+  }
+  openLesson(id: number): void {
+    this.courseService.getLesson(id).subscribe(response => {
+      this.router.navigate(['/lesson-preview']);
+    })
+  }
+
+  ngOnDestroy(): void {
+    
   }
 }

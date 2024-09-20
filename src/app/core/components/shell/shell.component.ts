@@ -38,7 +38,7 @@ export class ShellComponent implements OnInit {
     this.authService.deauth();
     this.authService.auth().subscribe(response => {
       this.authResponse = response;
-      forkJoin({ sounds: this.breathService.getSounds(), practices: this.breathService.getPractice(), prices: this.pricesService.getPrices(), progress: this.courseService.getUserProgress()}).subscribe(() => {
+      forkJoin({ sounds: this.breathService.getSounds(), practices: this.breathService.getPractice(), prices: this.pricesService.getPrices(), progress: this.courseService.getUserProgress(), lessonsList: this.courseService.getLessons()}).subscribe(() => {
         this.redirectUser();
       })
     });

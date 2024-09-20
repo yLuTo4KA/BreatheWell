@@ -1,8 +1,8 @@
-<app-sector class="sector-lesson-card" [padding]="8" [border]="false">
+<app-sector class="sector-lesson-card" [padding]="8" [border]="border">
     <div class="lesson-card">
         <div class="lesson-card__icon">
             <img [src]="img" alt="#" class="lesson-card__icon-img">
-            <div class="lesson-card__icon-duration">2 min</div>
+            <div class="lesson-card__icon-duration" *ngIf="duration">{{duration}} мин</div>
         </div>
         <div class="lesson-card__text">
             <h4 class="lesson-card__text-title">{{title}}</h4>
