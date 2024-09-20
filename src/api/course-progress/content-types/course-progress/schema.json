@@ -35,6 +35,11 @@
     "lastComplete": {
       "type": "datetime",
       "required": false
+    },
+    "lesson_learned": {
+      "type": "boolean",
+      "default": false,
+      "required": true
     }
   }
 }

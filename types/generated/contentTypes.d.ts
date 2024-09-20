@@ -862,51 +862,6 @@ export interface ApiBenefitBenefit extends Schema.CollectionType {
   };
 }
 
-export interface ApiCourseCourse extends Schema.CollectionType {
-  collectionName: 'courses';
-  info: {
-    singularName: 'course';
-    pluralName: 'courses';
-    displayName: 'Course';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.RichText & Attribute.Required;
-    image: Attribute.Media<'images' | 'files' | 'audios' | 'videos'> &
-      Attribute.Required;
-    benefits: Attribute.Relation<
-      'api::course.course',
-      'oneToMany',
-      'api::benefit.benefit'
-    >;
-    lessons: Attribute.Relation<
-      'api::course.course',
-      'oneToMany',
-      'api::lesson.lesson'
-    >;
-    free: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::course.course',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::course.course',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiCourseProgressCourseProgress extends Schema.CollectionType {
   collectionName: 'course_progresses';
   info: {
@@ -938,6 +893,9 @@ export interface ApiCourseProgressCourseProgress extends Schema.CollectionType {
       Attribute.Required &
       Attribute.DefaultTo<false>;
     lastComplete: Attribute.DateTime;
+    lesson_learned: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -979,8 +937,7 @@ export interface ApiLessonLesson extends Schema.CollectionType {
       Attribute.DefaultTo<1>;
     free: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
     subtitle: Attribute.String & Attribute.Required;
-    lesson_preview: Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
-      Attribute.Required;
+    lesson_icon: Attribute.Media<'images'> & Attribute.Required;
     tasks: Attribute.Relation<
       'api::lesson.lesson',
       'oneToMany',
@@ -993,6 +950,7 @@ export interface ApiLessonLesson extends Schema.CollectionType {
       'oneToMany',
       'api::source.source'
     >;
+    lesson_preview: Attribute.Media<'images' | 'videos'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1300,7 +1258,6 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::benefit.benefit': ApiBenefitBenefit;
-      'api::course.course': ApiCourseCourse;
       'api::course-progress.course-progress': ApiCourseProgressCourseProgress;
       'api::lesson.lesson': ApiLessonLesson;
       'api::payment.payment': ApiPaymentPayment;

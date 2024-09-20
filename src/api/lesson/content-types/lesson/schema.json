@@ -39,15 +39,12 @@
       "type": "string",
       "required": true
     },
-    "lesson_preview": {
+    "lesson_icon": {
       "type": "media",
       "multiple": false,
       "required": true,
       "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
+        "images"
       ]
     },
     "tasks": {
@@ -72,6 +69,15 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::source.source"
+    },
+    "lesson_preview": {
+      "allowedTypes": [
+        "images",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
     }
   }
 }

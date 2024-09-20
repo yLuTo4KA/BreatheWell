@@ -5,8 +5,10 @@
  */
 
 const { createCoreController } = require('@strapi/strapi').factories;
+const baseUrl = process.env.BACKEND_URL || strapi.config.get('server.url');
 
 module.exports = createCoreController('api::lesson.lesson', ({ strapi }) => ({
+    
     async findOne(ctx) {
         const { id } = ctx.params;
         const user = ctx.state.user;
@@ -26,30 +28,33 @@ module.exports = createCoreController('api::lesson.lesson', ({ strapi }) => ({
                         icon: { fields: ['url', 'formats'] } // Подтягиваем иконку для бенефитов
                     }
                 },
-                image: { fields: ['url', 'formats'] },
-                sources: { fields: ['*']},
-                content_images: {fields: ['url', ['formats']]},
+                lesson_icon: { fields: ['url', 'formats'] },
+                lesson_preview: { fields: ['url', 'formats'] },
+                sources: { fields: ['*'] },
+                content_images: { fields: ['url', ['formats']] },
 
             }
         });
         if (!lesson) {
             return ctx.notFound('Урок не найден');
         }
-        if(!lesson.free) {
-            if(!user.premium) {
+        if (!lesson.free) {
+            if (!user.premium) {
                 return ctx.notFound('not auth!');
             }
         }
 
         // URL сервера для построения полного пути к изображениям
-        const baseUrl = process.env.BACKEND_URL || strapi.config.get('server.url');
-        
+       
+
         const formateData = {
             id: lesson.id,
             title: lesson.title,
             description: lesson.description,
             reading_time: lesson.reading_time,
             free: lesson.free,
+            icon: baseUrl + lesson.lesson_icon.url,
+            preview: baseUrl + lesson.lesson_preview.url,
             tasks: lesson.tasks.map(task => {
                 return {
                     id: task.id,
@@ -85,9 +90,30 @@ module.exports = createCoreController('api::lesson.lesson', ({ strapi }) => ({
 
         // Вызываем стандартный метод получения записи с `super`
 
-        
+
 
         // Возвращаем преобразованные данные
-        return { data: formateData };
+        return formateData;
     },
+    async find(ctx) {
+        try {
+            const lessons = await strapi.db.query('api::lesson.lesson').findMany({
+                populate: {
+                    lesson_icon: true
+                },
+            });
+            const formateData = lessons.map(lesson => {
+                return {
+                    id: lesson.id,
+                    title: lesson.title,
+                    subtitle: lesson.subtitle,
+                    icon: baseUrl + lesson.lesson_icon.url,
+                    free: lesson.free
+                }
+            })
+            ctx.send(formateData);
+        } catch (e) {
+            ctx.throw(500, e);
+        }
+    }
 }));
