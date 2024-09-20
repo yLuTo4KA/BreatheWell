@@ -1,0 +1,87 @@
+:host {
+    display: contents;
+}
+
+.lesson {
+    &-tag {
+        color: var(--primary-text);
+        background: var(--tetriary-bg);
+        border: 1px solid var(--stroke-dark);
+        &_icon {
+            width: 16px;
+            height: 16px;
+            margin-right: 4px;
+        }
+    }
+}
+.lesson-overview {
+    width: 100%;
+    margin: 0 auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 160px;
+}
+
+.lesson-header {
+    position: relative;
+    height: 250px;
+    border-radius: 0 0 35px 35px;
+    overflow: hidden;
+}
+
+.lesson-background {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.header-content {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 24px 16px;
+}
+
+.icon-button {
+    width: 34px;
+    height: 34px;
+    background: var(--stroke-dark);
+    border: none;
+    cursor: pointer;
+}
+
+.header-spacer {
+    flex: 1;
+}
+
+.lesson-content {
+    padding: 32px 16px;
+}
+
+.lesson-details {
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+.lesson-description {
+    margin-top: 16px;
+}
+
+.lesson-features {
+    padding-top: 32px;
+    border-top: 1px solid var(--stroke-light);
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.feature-item {
+    margin-bottom: 24px;
+}

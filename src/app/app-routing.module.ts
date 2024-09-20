@@ -14,6 +14,7 @@ import { NotPremiumGuard } from './guards/not-premium.guard';
 import { MaterialsComponent } from './core/pages/materials/materials.component';
 import { CoursePreviewComponent } from './core/pages/course-preview/course-preview.component';
 import { LessonComponent } from './core/pages/lesson/lesson.component';
+import { LessonPreviewComponent } from './core/pages/lesson-preview/lesson-preview.component';
 
 const routes: Routes = [
   {
@@ -80,6 +81,11 @@ const routes: Routes = [
   {
     path: 'course-preview',
     component: CoursePreviewComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'lesson-preview',
+    component: LessonPreviewComponent,
     canActivate: [AuthGuard]
   },
   {

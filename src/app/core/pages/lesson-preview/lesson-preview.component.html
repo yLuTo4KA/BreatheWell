@@ -1,0 +1,30 @@
+<article class="lesson-overview">
+    <header class="lesson-header">
+        <img loading="lazy" *ngIf="lesson.preview"
+            [src]="lesson.preview" alt="" class="lesson-background" />
+        <div class="header-content">
+            <app-mini-button class="icon-button" icon="back" routerLink="/home"></app-mini-button>
+            <div class="header-spacer"></div>
+        </div>
+    </header>
+    <main class="lesson-content">
+        <app-tag class="lesson-tag">
+            <mat-icon aria-hidden="false" aria-label="cloak" svgIcon="cloak" class="lesson-tag_icon"></mat-icon>
+            <p>Чтение {{lesson.reading_time}} мин</p>
+        </app-tag>
+        <section class="lesson-details">
+            <h3 class="lesson-title">{{lesson.title}}</h3>
+            <p class="lesson-description">
+                {{lesson.description}}
+            </p>
+        </section>
+        <section class="lesson-features">
+            <ul class="feature-list">
+                <li class="feature-item" *ngFor="let feature of lesson.benefits">
+                    <app-feature-item [icon]="feature.icon" [title]="feature.title" [description]="feature.description"></app-feature-item>
+                </li>
+            </ul>
+        </section> 
+        <app-button>Начать</app-button>
+    </main>
+</article>

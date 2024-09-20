@@ -89,5 +89,13 @@ export class AppComponent {
       'help',
       this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/help.svg")
     );
+    this.matIconRegistry.addSvgIcon(
+      'back',
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/back.svg")
+    );
+    this.matIconRegistry.addSvgIcon(
+      'lock',
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/lock.svg")
+    );
   }
 }

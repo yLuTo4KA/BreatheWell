@@ -1,0 +1,22 @@
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    &-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    &-content {
+        flex: 1;
+    }
+
+    &-description {
+        color: var(--secondary-text);
+        font-size: 12px;
+        line-height: 16px;
+        padding-right: 56px;
+        margin-top: 8px;
+    }
+}

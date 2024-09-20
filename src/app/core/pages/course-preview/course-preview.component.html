@@ -1,1 +1,72 @@
-<p>course-preview works!</p>
+<main class="breathing-course">
+    <header class="course-banner">
+        <div class="banner-content">
+            <nav class="banner-nav">
+                <app-mini-button class="back-button" icon="back" routerLink="/home"></app-mini-button>
+            </nav>
+            <div class="course-label">
+                <app-tag class="course-tag">Курс</app-tag>
+                <div class="progress-container">
+                    <div class="progress-circle">
+                        <svg viewBox="0 0 36 36" class="circular-chart">
+                            <path class="circle-bg" d="M18 2.0845
+                                 a 15.9155 15.9155 0 0 1 0 31.831
+                                 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <path class="circle" [attr.stroke-dasharray]="(((progress.todayLesson.id - 1) / lessonsList.length) * 100) + ', 100'" d="M18 2.0845
+                                 a 15.9155 15.9155 0 0 1 0 31.831
+                                 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        </svg>
+                        <div class="progress-text">
+                            <span>{{progress.todayLesson.id - 1}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="course-content">
+        <h3 class="course-title">Осознанное дыхание для повседневной жизни</h3>
+        <div class="course-description">
+            <h2 class="description-title">ОПИСАНИЕ КУРСА:</h2>
+            <p class="description-text">
+                Этот курс научит тебя использовать дыхание как мощный инструмент для повседневной жизни. Ты узнаешь, как
+                с помощью простых дыхательных практик снижать стресс, улучшать сон и повышать концентрацию. Все техники
+                основаны на научных исследованиях и легко применимы в любой ситуации — от напряженного рабочего дня до
+                подготовки ко сну.
+            </p>
+        </div>
+        <ul class="course-features">
+            <li class="feature-item">
+                <app-feature-item icon="assets/images/wind.png" title="Эффективные техники" description="Простые но эффективные упражнения, которые можно делать везде "></app-feature-item>
+            </li>
+            <li class="feature-item">
+                <app-feature-item icon="assets/images/atom.png" title="Научный подход" description="Используем в курсе только научно доказанные материалы и практики"></app-feature-item>
+            </li>
+            <li class="feature-item">
+                <app-feature-item icon="assets/images/sand-clock.png" title="Мгновенный результат" description="Почувствуйте положительный результат уже после первого урока"></app-feature-item>
+            </li>
+        </ul>
+        <section class="progress-section">
+            <p class="progress-title">Мой текущий прогресс</p>
+            <div class="progress-bar-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" [style.width.%]="((progress.todayLesson.id - 1) / lessonsList.length) * 100"></div>
+                </div>
+                <span class="progress-count">{{progress.todayLesson.id - 1}}/{{lessonsList.length}}</span>
+            </div>
+        </section>
+
+        <section class="lessons-section">
+            <h4 class="lessons-title">Занятия</h4>
+            <div class="lessons-list">
+                <div class="lessons-item" *ngFor="let lesson of lessonsList" [ngClass]="{ '--closed': lesson.id > progress.todayLesson.id,'--active': lesson.id < progress.todayLesson.id, '--current': lesson.id === progress.todayLesson.id}">
+                    <mat-icon svgIcon="lock" class="lessons-item-status lessons-item-status--closed"></mat-icon>
+                    <div class="lessons-item-status lessons-item-status--active"></div>
+                    <div class="lessons-item-status lessons-item-status--current"></div>
+                    <app-lesson-card [title]="lesson.title" [subtitle]="lesson.subtitle" [img]="lesson.icon" [border]="true" (click)="openLesson(lesson)"></app-lesson-card>
+                </div>
+            </div>
+        </section>
+    </section>
+</main>

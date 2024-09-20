@@ -32,6 +32,10 @@ h6 {
   font-weight: normal;
   line-height: inherit;
   color: inherit;
+  line-height: 120%;
+}
+ul, li {
+  padding-inline-start: 0;
 }
 
 h1 {
@@ -42,7 +46,7 @@ h1 {
 h2 {
   font-size: 32px;
   font-weight: 500;
-  line-height: 1.1;
+  line-height: 130%;
 }
 
 img {
