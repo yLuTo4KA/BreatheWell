@@ -26,6 +26,14 @@ export class CourseService extends ApiService {
         super(http);
     }
 
+    getLessonsCount(): number {
+        const list = this.lessonsListSubject.value;
+        if(list) {
+            return list.length;
+        }
+        return 0;
+    }
+
     setUserProgress(data: Progress): void {
         this.userProgressSubject.next(data);
     }
@@ -52,6 +60,14 @@ export class CourseService extends ApiService {
             })
         )
     }
+    learnLesson(id: number): Observable<Progress> {
+        const url = `${this.urlPath}learn-lesson`;
+        return this.post<Progress, { lessonId: number }>(url, {lessonId: id}).pipe(
+            tap(response => {
+                this.setUserProgress(response);
+            })
+        )
+    }
 
     getLesson(id: number): Observable<Lesson> {
         const url = `${this.urlPath}lessons/${id}`
@@ -61,6 +77,7 @@ export class CourseService extends ApiService {
             })
         );
     }
+
     getLessons(): Observable<LessonsList[]> {
         const url = `${this.urlPath}lessons`;
         return this.get<LessonsList[]>(url).pipe(
@@ -69,4 +86,7 @@ export class CourseService extends ApiService {
             })
         )
     }
+
+
+    
 }

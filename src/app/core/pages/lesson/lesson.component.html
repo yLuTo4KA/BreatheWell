@@ -1,1 +1,41 @@
-<p>lesson works!</p>
+<article class="lesson-container">
+    <header class="lesson-header">
+        <app-mini-button class="lesson-close" icon="close" (click)="confrimCloseModal = true"></app-mini-button>
+    </header>
+
+    <section class="lesson-content">
+        <div class="lesson-intro">
+            <h1 class="lesson-title">{{ lesson.title }}</h1>
+            <p class="lesson-subtitle">{{ lesson.subtitle }}</p>
+        </div>
+        <div class="lesson-image" *ngIf="lesson.content.image">
+            <img class="lesson-image-img" [src]="lesson.content.image" alt="#">
+        </div>
+
+        <div class="lesson-details">
+            <app-tag class="lesson-tag">
+                <mat-icon aria-hidden="false" aria-label="cloak" svgIcon="cloak" class="lesson-tag_icon"></mat-icon>
+                <p>Чтение {{lesson.reading_time}} мин</p>
+            </app-tag>
+
+            <markdown [data]="lesson.content.text"></markdown>
+
+        </div>
+
+        <hr class="divider" />
+
+        <section class="lesson-sources">
+            <h3 class="sources-title">Ссылки на источники</h3>
+            <ul class="sources-list">
+                <li *ngFor="let source of lesson.content.sources | slice:0:(showAllSources ? lesson.content.sources.length : 2); let i = index">{{i + 1 + '. '}}<a [href]="source.url">{{ source.title }}</a></li>
+            </ul>
+            <div class="link-btn" (click)="toggleShowSource()" *ngIf="lesson.content.sources.length > 2">
+                Подробнее
+                <mat-icon aria-hidden="false" aria-label="arrow" svgIcon="arrowRight" [style.width.px]="14" [style.height.px]="16"></mat-icon>
+            </div>
+        </section>
+        <hr class="divider" />
+    </section>
+    <app-button routerLink="/highlights" (click)="learnLesson()"><h4>Перейти к заданиям</h4></app-button>
+</article>
+<app-confrim-close [viewModal]="confrimCloseModal" (closeModalEmit)="confrimCloseModal = false"></app-confrim-close>

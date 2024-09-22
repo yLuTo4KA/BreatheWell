@@ -1,6 +1,9 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MarkdownModule } from 'ngx-markdown';
+
 import { NotAuthComponent } from './components/not-auth/not-auth.component';
+
 import { FooterComponent } from './components/footer/footer.component';
 import { ShellComponent } from './components/shell/shell.component';
 import { RouterModule } from '@angular/router';
@@ -26,13 +29,16 @@ import { CoursePreviewComponent } from './pages/course-preview/course-preview.co
 import { LessonComponent } from './pages/lesson/lesson.component';
 import { MaterialsComponent } from './pages/materials/materials.component';
 import { LessonPreviewComponent } from './pages/lesson-preview/lesson-preview.component';
+import { TaskDetailComponent } from './pages/task-detail/task-detail.component';
+import { TodayTasksComponent } from './pages/today-tasks/today-tasks.component';
+import { HighlightsComponent } from './pages/highlights/highlights.component';
 register();
 
 
 @NgModule({
-  imports: [CommonModule,RouterModule,SharedModule, MatIconModule, TranslateModule, BrowserAnimationsModule],
-  declarations: [ShellComponent, NotAuthComponent, FooterComponent, WelcomeComponent, WelcomeSliderComponent, SlideInfoComponent, SlideSliderComponent, CtaComponent, StartPageComponent, HomeComponent, BreathingComponent, DayliProgressComponent, BuyPremiumComponent, CoursePreviewComponent, LessonComponent, MaterialsComponent, LessonPreviewComponent],
-  exports: [ShellComponent, NotAuthComponent, FooterComponent, WelcomeComponent, SlideInfoComponent,SlideSliderComponent, CtaComponent, StartPageComponent, HomeComponent, BreathingComponent, BuyPremiumComponent, CoursePreviewComponent, LessonComponent, MaterialsComponent, LessonPreviewComponent],
+  imports: [CommonModule,RouterModule,SharedModule, MatIconModule, TranslateModule, BrowserAnimationsModule, MarkdownModule.forRoot()],
+  declarations: [ShellComponent, NotAuthComponent, FooterComponent, WelcomeComponent, WelcomeSliderComponent, SlideInfoComponent, SlideSliderComponent, CtaComponent, StartPageComponent, HomeComponent, BreathingComponent, DayliProgressComponent, BuyPremiumComponent, CoursePreviewComponent, LessonComponent, MaterialsComponent, LessonPreviewComponent, TaskDetailComponent, TodayTasksComponent, HighlightsComponent],
+  exports: [ShellComponent, NotAuthComponent, FooterComponent, WelcomeComponent, SlideInfoComponent,SlideSliderComponent, CtaComponent, StartPageComponent, HomeComponent, BreathingComponent, BuyPremiumComponent, CoursePreviewComponent, LessonComponent, MaterialsComponent, LessonPreviewComponent, TaskDetailComponent, TodayTasksComponent, HighlightsComponent],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

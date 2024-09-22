@@ -4,6 +4,7 @@ import { tap } from 'rxjs';
 import { initInvoice } from '@telegram-apps/sdk';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { CourseService } from '../../services/course.service';
 
 @Component({
   selector: 'app-buy-premium',
@@ -13,6 +14,7 @@ import { Router } from '@angular/router';
 export class BuyPremiumComponent {
   private paymentService = inject(PaymentService);
   private authService = inject(AuthService);
+  private courseService = inject(CourseService);
   private router = inject(Router);
 
   timer: number = 30 * 60;
@@ -20,6 +22,8 @@ export class BuyPremiumComponent {
 
   loading = false;
   loadingSub: any;
+
+  lessonsCount = this.courseService.getLessonsCount();
 
 
   constructor() {}

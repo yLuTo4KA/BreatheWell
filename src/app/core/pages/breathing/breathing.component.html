@@ -8,7 +8,7 @@
                 </div>
                 <p class="select-button__title">{{breathSetting.sound?.title}}</p>
             </app-select-button>
-            <app-mini-button icon="close" [iconHeight]="30" [iconWidth]="30" (click)="openDayliProgress()"></app-mini-button>
+            <app-mini-button icon="close" [iconHeight]="30" [iconWidth]="30" (click)="closePage()"></app-mini-button>
         </div>
         <div class="breathing-page__body-content">
             <mat-icon [svgIcon]="breathType" [style.width.px]="32" [style.height.px]="32"></mat-icon>
@@ -30,3 +30,4 @@
 <app-practice-settings (closeModalEvent)="closePracticeSettings()"></app-practice-settings>
 <app-sound-settings (closeModalEvent)="closeModal()"></app-sound-settings>
 <app-duration-settings (closeModalEvent)="closeModal()"></app-duration-settings>
+<app-confrim-close [viewModal]="confrimCloseModal" (closeModalEmit)="returnPage()"></app-confrim-close>

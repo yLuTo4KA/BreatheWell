@@ -15,6 +15,7 @@ import { MaterialsComponent } from './core/pages/materials/materials.component';
 import { CoursePreviewComponent } from './core/pages/course-preview/course-preview.component';
 import { LessonComponent } from './core/pages/lesson/lesson.component';
 import { LessonPreviewComponent } from './core/pages/lesson-preview/lesson-preview.component';
+import { HighlightsComponent } from './core/pages/highlights/highlights.component';
 
 const routes: Routes = [
   {
@@ -92,6 +93,11 @@ const routes: Routes = [
     path: 'lesson',
     component: LessonComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'highlights',
+    component: HighlightsComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: '**',
