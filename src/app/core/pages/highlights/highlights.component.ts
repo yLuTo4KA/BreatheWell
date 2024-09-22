@@ -21,13 +21,17 @@ export class HighlightsComponent {
     this.courseService.lesson$.subscribe(response => {
       if(response?.highlights) {
         this.highlights = response.highlights;
+        this.courseService.learnLesson(response.id).subscribe();
       }
     })
+    
   }
 
   ngAfterViewInit(): void {
     window.scrollTo(0, 0);
   }
+
+  
 
   nextSlide(): void {
     this.slide++;
