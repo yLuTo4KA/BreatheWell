@@ -53,9 +53,9 @@
       "target": "api::task.task",
       "mappedBy": "lesson"
     },
-    "content_images": {
+    "content_image": {
       "type": "media",
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "allowedTypes": [
         "images",
@@ -71,13 +71,18 @@
       "target": "api::source.source"
     },
     "lesson_preview": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
       "allowedTypes": [
         "images",
         "videos"
-      ],
-      "type": "media",
-      "multiple": false,
-      "required": true
+      ]
+    },
+    "highlights": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::highlight.highlight"
     }
   }
 }

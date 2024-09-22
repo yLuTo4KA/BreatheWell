@@ -8,7 +8,7 @@ const { createCoreController } = require('@strapi/strapi').factories;
 const baseUrl = process.env.BACKEND_URL || strapi.config.get('server.url');
 
 module.exports = createCoreController('api::lesson.lesson', ({ strapi }) => ({
-    
+
     async findOne(ctx) {
         const { id } = ctx.params;
         const user = ctx.state.user;
@@ -28,10 +28,16 @@ module.exports = createCoreController('api::lesson.lesson', ({ strapi }) => ({
                         icon: { fields: ['url', 'formats'] } // Подтягиваем иконку для бенефитов
                     }
                 },
+                highlights: {
+                    fields: ['*'],
+                    populate: {
+                        image: { fields: ['url', 'formats'] }
+                    }
+                },
                 lesson_icon: { fields: ['url', 'formats'] },
                 lesson_preview: { fields: ['url', 'formats'] },
                 sources: { fields: ['*'] },
-                content_images: { fields: ['url', ['formats']] },
+                content_image: { fields: ['url', 'formats'] },
 
             }
         });
@@ -45,11 +51,12 @@ module.exports = createCoreController('api::lesson.lesson', ({ strapi }) => ({
         }
 
         // URL сервера для построения полного пути к изображениям
-       
+
 
         const formateData = {
             id: lesson.id,
             title: lesson.title,
+            subtitle: lesson.subtitle,
             description: lesson.description,
             reading_time: lesson.reading_time,
             free: lesson.free,
@@ -72,11 +79,7 @@ module.exports = createCoreController('api::lesson.lesson', ({ strapi }) => ({
                 }
             }),
             content: {
-                images: lesson.content_images.map(image => {
-                    return {
-                        url: baseUrl + image.url
-                    }
-                }),
+                image: lesson.content_image.url ? baseUrl + lesson.content_image.url : null,
                 text: lesson.content_text,
                 sources: lesson.sources.map(source => {
                     return {
@@ -84,15 +87,21 @@ module.exports = createCoreController('api::lesson.lesson', ({ strapi }) => ({
                         url: source.url
                     }
                 })
-            }
+            },
+            highlights: lesson.highlights?.length ?
+                lesson.highlights.map(highlight => {
+                    if (highlight.id && highlight.content && highlight.image?.url) {
+                        return {
+                            id: highlight.id,
+                            content: highlight.content,
+                            img: baseUrl + highlight.image.url
+                        };
+                    } else {
+                        return null;
+                    }
+                }) : null,
 
         }
-
-        // Вызываем стандартный метод получения записи с `super`
-
-
-
-        // Возвращаем преобразованные данные
         return formateData;
     },
     async find(ctx) {
@@ -102,7 +111,7 @@ module.exports = createCoreController('api::lesson.lesson', ({ strapi }) => ({
                     lesson_icon: true
                 },
             });
-            const formateData = lessons.map(lesson => {
+            const formateData = lessons.sort((a, b) => a.id - b.id).map(lesson => {
                 return {
                     id: lesson.id,
                     title: lesson.title,
@@ -111,7 +120,7 @@ module.exports = createCoreController('api::lesson.lesson', ({ strapi }) => ({
                     free: lesson.free
                 }
             })
-            ctx.send(formateData);
+            ctx.send(formateData ?? null);
         } catch (e) {
             ctx.throw(500, e);
         }

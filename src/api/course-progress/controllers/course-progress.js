@@ -1,5 +1,6 @@
 'use strict';
 
+
 /**
  * course-progress controller
  */
@@ -90,7 +91,7 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
     
         if (!progress) {
             return ctx.notFound('Progress not found');
-        }
+        };
     
         // Проверяем, завершены ли все задачи текущего урока
         const allTasksCompleted = progress.lesson.tasks.length > 0 &&
@@ -164,6 +165,83 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
         };
     
         return formateData;
+    },
+    async learnLesson(ctx) {
+        const user = ctx.state.user;
+        const { lessonId } = ctx.request.body;
+        
+        if (!user) {
+            return ctx.badRequest('User is required');
+        }
+
+        const progress = await strapi.query('api::course-progress.course-progress').findOne({
+            where: { user },
+            populate: {
+                lesson: {
+                    fields: ['*'],
+                    populate: {
+                        tasks: {
+                            fields: ['*'],
+                        }
+                    },
+                },
+                tasks: true
+            }
+        });
+
+        console.log(progress.lesson.id);
+        console.log(lessonId);
+        if(lessonId !== progress.lesson.id) {
+            return ctx.badRequest("Lesson is not currentDay")
+        }
+        
+
+        const updatedProgress = await strapi.entityService.update('api::course-progress.course-progress', progress.id, {
+            data: {
+                lesson_learned: true
+            },
+            populate: {
+                lesson: {
+                    fields: ['*'],
+                    populate: {
+                        tasks: {
+                            fields: ['*'],
+                            populate: {
+                                preview_icon: true
+                            }
+                        },
+                        lesson_preview: true,
+                        lesson_icon: true,
+                    }
+                },
+                tasks: true
+            }
+        });
+
+        const baseUrl = process.env.BACKEND_URL || strapi.config.get('server.url');
+    
+        const formateData = {
+            todayComplete: updatedProgress.todayComplete,
+            lesson_learned: updatedProgress.lesson_learned,
+            todayLesson: {
+                id: updatedProgress.lesson.id,
+                title: updatedProgress.lesson.title,
+                description: updatedProgress.lesson.subtitle,
+                reading_time: updatedProgress.lesson.reading_time,
+                lesson_preview: baseUrl + updatedProgress.lesson.lesson_preview.url,
+                lesson_icon: baseUrl + updatedProgress.lesson.lesson_icon.url
+            },
+            todayTasks: updatedProgress.lesson.tasks.map(task => ({
+                id: task.id,
+                title: task.title,
+                description: task.description,
+                preview_icon: baseUrl + task.preview_icon.url
+            })),
+            completedTasks: updatedProgress.tasks.map(task => task.id)  // Возвращаем обновленный список выполненных задач
+        };
+
+        return formateData;
+        
     }
     
     

@@ -10,6 +10,11 @@ module.exports = {
         method: 'POST',
         path: '/complete-task',
         handler: 'course-progress.completeTask'
+      },
+      {
+        method: 'POST',
+        path: '/learn-lesson',
+        handler: 'course-progress.learnLesson'
       }
     ]
   }

@@ -913,6 +913,37 @@ export interface ApiCourseProgressCourseProgress extends Schema.CollectionType {
   };
 }
 
+export interface ApiHighlightHighlight extends Schema.CollectionType {
+  collectionName: 'highlights';
+  info: {
+    singularName: 'highlight';
+    pluralName: 'highlights';
+    displayName: 'Highlight';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    content: Attribute.RichText & Attribute.Required;
+    image: Attribute.Media<'images' | 'videos'> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::highlight.highlight',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::highlight.highlight',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiLessonLesson extends Schema.CollectionType {
   collectionName: 'lessons';
   info: {
@@ -943,7 +974,7 @@ export interface ApiLessonLesson extends Schema.CollectionType {
       'oneToMany',
       'api::task.task'
     >;
-    content_images: Attribute.Media<'images' | 'videos', true>;
+    content_image: Attribute.Media<'images' | 'videos'>;
     content_text: Attribute.RichText;
     sources: Attribute.Relation<
       'api::lesson.lesson',
@@ -951,6 +982,11 @@ export interface ApiLessonLesson extends Schema.CollectionType {
       'api::source.source'
     >;
     lesson_preview: Attribute.Media<'images' | 'videos'> & Attribute.Required;
+    highlights: Attribute.Relation<
+      'api::lesson.lesson',
+      'oneToMany',
+      'api::highlight.highlight'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1259,6 +1295,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::benefit.benefit': ApiBenefitBenefit;
       'api::course-progress.course-progress': ApiCourseProgressCourseProgress;
+      'api::highlight.highlight': ApiHighlightHighlight;
       'api::lesson.lesson': ApiLessonLesson;
       'api::payment.payment': ApiPaymentPayment;
       'api::practice.practice': ApiPracticePractice;
