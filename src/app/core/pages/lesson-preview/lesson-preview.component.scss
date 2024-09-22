@@ -7,6 +7,7 @@
         color: var(--primary-text);
         background: var(--tetriary-bg);
         border: 1px solid var(--stroke-dark);
+        min-height: 29px;
         &_icon {
             width: 16px;
             height: 16px;
@@ -80,8 +81,12 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    margin-bottom: 46px;
 }
 
 .feature-item {
     margin-bottom: 24px;
+    &:last-child {
+        margin-bottom: 0;
+    }
 }

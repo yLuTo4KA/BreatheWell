@@ -25,6 +25,8 @@ export class ShellComponent implements OnInit {
 
   authResponse: any;
 
+  lessonsCount: number = 0;
+
   constructor(private router: Router) { }
 
   ngOnInit() {
@@ -39,6 +41,7 @@ export class ShellComponent implements OnInit {
     this.authService.auth().subscribe(response => {
       this.authResponse = response;
       forkJoin({ sounds: this.breathService.getSounds(), practices: this.breathService.getPractice(), prices: this.pricesService.getPrices(), progress: this.courseService.getUserProgress(), lessonsList: this.courseService.getLessons()}).subscribe(() => {
+        this.lessonsCount = this.courseService.getLessonsCount();
         this.redirectUser();
       })
     });

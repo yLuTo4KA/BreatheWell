@@ -36,6 +36,7 @@ export class BreathingComponent {
     soundSettings: false,
     durationSettings: false
   }
+  confrimCloseModal = false;
 
   // backend data 
 
@@ -223,6 +224,15 @@ export class BreathingComponent {
     // } else {
     //   this.router.navigate(['/home']);
     // }
+  }
+
+  closePage(): void {
+    this.pauseOn();
+    this.confrimCloseModal = true;
+  }
+  returnPage(): void {
+    this.pauseOff();
+    this.confrimCloseModal = false;
   }
 
   ngOnDestroy(): void {

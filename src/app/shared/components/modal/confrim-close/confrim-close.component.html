@@ -1,0 +1,18 @@
+<div class="confrim-close" [class.view]="viewModal" >
+    <div class="confrim-close__header">
+        <app-mini-button icon="back" (click)="closeModal()" class="back-button"></app-mini-button>
+    </div>
+    <div class="confrim-close__body">
+        <img src="assets/images/mood-sadness.png" alt="sad">
+        <h2 class="text-purple">Ты уверен?</h2>
+        <p>Каждый маленький шаг укрепляет твою привычку и приближает тебя к цели. Не останавливайся сейчас — <span class="text-purple">твое дыхание уже меняет тебя к лучшему!</span></p>
+    </div>
+    <div class="confrim-close__footer">
+        <app-button (click)="closeModal()">
+            <h4>Продолжить урок</h4>
+        </app-button>
+        <div class="confrim-close__footer-btn text-grey" (click)="confrim()">
+            Выйти
+        </div>
+    </div>
+</div>

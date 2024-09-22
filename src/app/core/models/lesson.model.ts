@@ -1,9 +1,11 @@
 import { Benefit } from "./benefit.model";
 import { Task } from "./task.model";
+import { Highlight } from "./highlight.model";
 
 export interface Lesson {
     id: number,
     title: string,
+    subtitle: string,
     description: string,
     reading_time: number,
     icon: string,
@@ -12,10 +14,11 @@ export interface Lesson {
     tasks: Task[],
     benefits: Benefit[],
     content: {
-        images: {url: string}[],
+        image: string | null,
         text: string,
-        sources: {title: string, url: string}[]
-    }
+        sources: { title: string, url: string }[]
+    },
+    highlights: Highlight[] | null,
 }
 
 export interface LessonsList {

@@ -1,0 +1,12 @@
+<div class="highlights">
+    <div class="highlights-header">
+        <div class="highlights-paginator-list">
+            <div class="highlights-paginator-item" *ngFor="let highlight of highlights" [ngClass]="{'active': slide === highlight.id}" (click)="setSlide(highlight.id)"></div>
+        </div>
+        <app-mini-button icon="close" class="close-button"></app-mini-button>
+        <img [src]="highlights[slide - 1].img" alt="content">
+    </div>
+    <div class="highlights-body">
+        <markdown [data]="highlights[slide - 1].content"></markdown>
+    </div>
+</div>
