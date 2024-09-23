@@ -21,13 +21,13 @@ export interface TimeOfDay {
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  private subscription!: Subscription;
   private authService = inject(AuthService);
   private breathService = inject(BreathService);
   private courseService = inject(CourseService);
   private router = inject(Router);
   private updateSubjet = new Subject<void>();
   private debounceTime = 1000;
+  viewHelpModal: boolean = false;
 
   private days = [
     'Воскресенье',
@@ -60,6 +60,9 @@ export class HomeComponent implements OnInit {
 
   progressData!: Progress;
 
+  currentOnline: number = this.getOnline();
+  onlineInterval: any;
+
 
 
   constructor() {
@@ -91,6 +94,9 @@ export class HomeComponent implements OnInit {
       this.updateProgress();
     })
 
+    this.onlineInterval = setInterval(() => {
+      this.getOnline();
+    }, 10000)
     this.setTimeOfDay();
   }
 
@@ -116,6 +122,12 @@ export class HomeComponent implements OnInit {
       title,
       subtitle
     }
+  }
+
+  getOnline(): number {
+    const randomOnline = Math.floor(Math.random() * (1200 - 600) + 600);
+    this.currentOnline = randomOnline;
+    return randomOnline;
   }
 
   getDate(): any {
@@ -174,7 +186,11 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  toggleHelpModal(): void {
+    this.viewHelpModal = !this.viewHelpModal;
+  }
+
   ngOnDestroy(): void {
-    
+    clearInterval(this.onlineInterval);
   }
 }

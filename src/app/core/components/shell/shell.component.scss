@@ -46,11 +46,10 @@
   }
 
   &__prem-icon {
-    background: var(--secondary-bg);
+    background: var(--stroke-dark);
     width: 46px;
     height: 46px;
     margin-right: 8px;
-    background: linear-gradient(90deg, #965FF2 0%, #3F73F6 100%);
     border-radius: 50%;
     padding: 7px;
   }

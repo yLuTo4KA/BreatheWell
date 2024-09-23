@@ -16,6 +16,7 @@ import { CoursePreviewComponent } from './core/pages/course-preview/course-previ
 import { LessonComponent } from './core/pages/lesson/lesson.component';
 import { LessonPreviewComponent } from './core/pages/lesson-preview/lesson-preview.component';
 import { HighlightsComponent } from './core/pages/highlights/highlights.component';
+import { TodayTasksComponent } from './core/pages/today-tasks/today-tasks.component';
 
 const routes: Routes = [
   {
@@ -97,6 +98,11 @@ const routes: Routes = [
   {
     path: 'highlights',
     component: HighlightsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'today-tasks',
+    component: TodayTasksComponent,
     canActivate: [AuthGuard],
   },
   {

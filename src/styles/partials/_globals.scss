@@ -20,7 +20,9 @@ p {
   margin: 0;
   font-weight: 300;
 }
-a, a:active {
+
+a,
+a:active {
   margin: 0;
   padding: 0;
   color: inherit;
@@ -29,24 +31,27 @@ a, a:active {
 
 markdown h1,
 markdown h2,
-markdown h3 {
+markdown h3,
+markdown h4,
+markdown h5,
+markdown h6 {
   margin-bottom: 20px;
-  /* Отступ снизу */
-  /* Отступ сверху */
 }
+
 hr {
   border: none;
   border-top: 1px solid var(--stroke-light);
 }
-/* Отступы между абзацами */
+
 markdown p {
   margin-bottom: 15px;
-  /* Отступ снизу каждого абзаца */
 }
+
 markdown del {
   text-decoration: none;
   color: var(--purple);
 }
+
 markdown img {
   width: 100%;
   border-radius: 16px;
@@ -247,6 +252,7 @@ swiper-container::part(bullet-active) {
     z-index: -1;
   }
 }
+
 
 router-link {
   font-weight: 300;

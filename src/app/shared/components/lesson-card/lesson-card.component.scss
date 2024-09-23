@@ -1,6 +1,7 @@
 .lesson-card {
     display: flex;
     align-items: center;
+    cursor: pointer;
     &__icon {
         background: linear-gradient(180deg, #4B47FE 0%, #0C2852 100%);
         height: 60px;

@@ -5,6 +5,7 @@ import { LessonsList } from '../../models/lesson.model';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user.model';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-course-preview',
@@ -15,6 +16,7 @@ export class CoursePreviewComponent {
   private courseService = inject(CourseService);
   private authService = inject(AuthService);
   private router = inject(Router);
+  private location = inject(Location);
 
 
   progress!: Progress;
@@ -59,6 +61,10 @@ export class CoursePreviewComponent {
         this.router.navigate(['/buying'])
       }
     }
+  }
+
+  goBack(): void {
+    this.location.back();
   }
   navigateToLesson() {
     this.router.navigate(['/lesson-preview']);

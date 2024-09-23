@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CourseService } from '../../services/course.service';
 import { Lesson } from '../../models/lesson.model';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-lesson-preview',
@@ -9,6 +10,7 @@ import { Lesson } from '../../models/lesson.model';
 })
 export class LessonPreviewComponent {
   private courseService = inject(CourseService);
+  private location = inject(Location);
   lesson!: Lesson;
   
   constructor(){}
@@ -19,6 +21,9 @@ export class LessonPreviewComponent {
         this.lesson = response;
       }
     })
+  }
+  goBack(): void {
+    this.location.back();
   }
 
 }

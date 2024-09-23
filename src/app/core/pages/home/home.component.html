@@ -1,4 +1,4 @@
-<div class="home-page --bg-top">
+<div class="home-page --bg-top --bg-bottom">
     <div class="home-page__user-info">
         <div class="home-page__user-info-avatar">
             <app-avatar [displayName]="userData.username" [width]="52" [height]="52"
@@ -10,7 +10,8 @@
                 <app-premium-tag [premium]="userData.premium"></app-premium-tag>
             </div>
         </div>
-        <app-mini-button icon="help" class="home-page__user-info-help-button"></app-mini-button>
+        <app-mini-button icon="help" class="home-page__user-info-help-button"
+            (click)="toggleHelpModal()"></app-mini-button>
     </div>
     <div class="home-page__calendar">
         <app-calendar [activeDays]="userData.activeDays" [userLastActive]="userData.lastActiveDate"
@@ -32,12 +33,14 @@
     <div class="home-page__lessons" *ngIf="!progressData.todayComplete">
         <h5 class="home-page__lessons-title">Рекомендации для вас</h5>
         <p class="home-page__lessons-date">{{getDate()}}</p>
-        <app-sector class="home-page__lessons-item" *ngIf="!progressData.todayComplete" (click)="openLesson(progressData.todayLesson.id)">
+        <app-sector class="home-page__lessons-item" *ngIf="!progressData.todayComplete">
             <div class="home-page__sector-title">
                 <div class="reminder"></div>
                 <h5>Следующий урок</h5>
             </div>
-            <app-lesson-card [title]="progressData.todayLesson.title" [subtitle]="progressData.todayLesson.description" [img]="progressData.todayLesson.lesson_icon" [duration]="progressData.todayLesson.reading_time"></app-lesson-card>
+            <app-lesson-card [title]="progressData.todayLesson.title" [subtitle]="progressData.todayLesson.description"
+                [img]="progressData.todayLesson.lesson_icon" [duration]="progressData.todayLesson.reading_time"
+                (click)="openLesson(progressData.todayLesson.id)"></app-lesson-card>
         </app-sector>
     </div>
     <div class="home-page__tasks" *ngIf="progressData.lesson_learned && !progressData.todayComplete">
@@ -46,12 +49,41 @@
                 <div class="reminder"></div>
                 <h5>Задания на день</h5>
             </div>
-            <div class="home-page__tasks-list" >
+            <div class="home-page__tasks-list">
                 <div class="home-page__tasks-item" *ngFor="let task of progressData.todayTasks">
-                    <app-task-card [title]="task.title" [id]="task.id" [img]="task.preview_icon" [completedTasks]="progressData.completedTasks" (checkTask)="checkTask($event)"></app-task-card>
+                    <app-task-card [title]="task.title" [id]="task.id" [img]="task.preview_icon"
+                        [completedTasks]="progressData.completedTasks" (checkTask)="checkTask($event)"></app-task-card>
                 </div>
             </div>
         </app-sector>
     </div>
-
+    <div class="home-page__online">
+        <div class="blur-circle --left"></div>
+        <div class="blur-circle --right"></div>
+        <div class="online-content">
+            <div class="online-avatars">
+                <div class="online-avatars-item">
+                    <app-avatar [displayName]="'U'" [width]="36" [height]="36" [border]="true"></app-avatar>
+                </div>
+                <div class="online-avatars-item">
+                    <app-avatar [displayName]="'U'" [width]="36" [height]="36" [border]="true"></app-avatar>
+                </div>
+                <div class="online-avatars-item">
+                    <app-avatar [displayName]="'U'" [width]="36" [height]="36" [border]="true"></app-avatar>
+                </div>
+                <div class="online-avatars-item">
+                    <app-avatar [displayName]="'U'" [width]="36" [height]="36" [border]="true"></app-avatar>
+                </div>
+                <div class="online-avatars-item">
+                    <app-avatar [displayName]="'U'" [width]="36" [height]="36" [border]="true"></app-avatar>
+                </div>
+            </div>
+            <div class="online-stat">
+                <h1 class="online-stat-count">{{currentOnline}}</h1>
+                <p class="online-stat-desc">Людей сейчас проходят <br> курс</p>
+            </div>
+        </div>
+    </div>
 </div>
+
+<app-help-modal [viewModal]="viewHelpModal" (closeModalEvent)="toggleHelpModal()"></app-help-modal>

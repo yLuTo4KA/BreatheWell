@@ -83,6 +83,7 @@
 
     &__lessons {
         margin-bottom: 32px;
+
         &-title {
             margin-bottom: 4px;
         }
@@ -107,12 +108,68 @@
         }
 
     }
+
     &__tasks {
+        margin-bottom: 32px;
+
         &-item {
             margin-bottom: 16px;
+
             &:last-child {
                 margin-bottom: 0;
             }
         }
+    }
+
+    &__online {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: relative;
+    }
+}
+.online {
+    &-avatars {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 8px;
+        &-item {
+            margin-left: -10px;
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+    }
+    &-stat {
+        &-count {
+            color: #B48EE5;
+            margin-bottom: 8px;
+        }
+        &-desc {
+            color: #FFFFFFB2;
+            font-size: 13px;
+        }
+    }
+}
+
+.blur-circle {
+    position: absolute;
+    bottom: 150px;
+    width: 290px;
+    height: 290px;
+    border-radius: 50%;
+    background-color: #9747FF;
+    filter: blur(205px);
+    opacity: 0.7;
+    bottom: 0;
+    z-index: -1;
+    &.--right {
+        right: -25%;
+        background: #E476FF80;
+    }
+    &.--left {
+        left: -25%;
+        background: #9747FFB2;
     }
 }

@@ -1,4 +1,4 @@
-<div class="avatar"
+<div class="avatar" [ngClass]="{'--border': border}"
 [style.fontSize.px]="width / 2 - 0.8">
     <ng-container *ngIf="photoURL; else initialIcon">
         <img [class]="'avatar__image'" 

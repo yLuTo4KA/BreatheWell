@@ -24,6 +24,7 @@
             align-items: center;
             font-size: 12px;
             font-weight: 300;
+            cursor: pointer;
         }
     }
     &__check {
@@ -34,6 +35,7 @@
         align-items: center;
         border: 1px solid var(--stroke-light);
         border-radius: 50%;
+        cursor: pointer;
         &.--active {
             border: 1px solid #00AB44;
             background: #00AB441A;
