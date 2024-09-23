@@ -5,7 +5,9 @@ import { ModalService } from '../../services/modal.service';
 import { Breath } from '../../models/breath.model';
 import { ModalsView } from '../../models/modals-view.model';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth.service';import { initHapticFeedback } from '@telegram-apps/sdk';
+
+const hapticFeedback = initHapticFeedback();
 
 @Component({
   selector: 'app-breathing',
@@ -127,6 +129,7 @@ export class BreathingComponent {
   async hold(duration: number) {
     if (duration > 0) {
       this.action = "Задержите дыхание";
+      hapticFeedback.impactOccurred('medium');
       this.timer = duration;
       await this.updateTimer(duration);
     }

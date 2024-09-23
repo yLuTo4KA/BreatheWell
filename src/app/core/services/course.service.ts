@@ -33,6 +33,9 @@ export class CourseService extends ApiService {
         }
         return 0;
     }
+    getCurrentLessonId(): number | null{
+        return this.userProgressSubject.value?.todayLesson.id ?? null;
+    }
 
     setUserProgress(data: Progress): void {
         this.userProgressSubject.next(data);
