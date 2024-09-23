@@ -1,0 +1,20 @@
+.help-modal {
+    &__title {
+        line-height: 100%;
+    }
+    &__subtitle {
+        font-size: 13px;
+        font-weight: 300;
+    }
+    &__body {
+        margin-bottom: 43px;
+    }
+}
+.link-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 59px;
+    border-bottom: 1px solid var(--stroke-light);
+    cursor: pointer;
+}

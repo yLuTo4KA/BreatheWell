@@ -14,18 +14,24 @@ export class HighlightsComponent {
   private router = inject(Router);
 
   highlights!: Highlight[];
+  lessonId!: number;
+  currentLessonId!: number;
   viewConfrimModal: boolean = false;
 
   slide: number = 1;
-  currentLesson = this.courseService.getCurrentLessonId();
 
   constructor() { }
 
   ngOnInit(): void {
     this.courseService.lesson$.subscribe(response => {
-      if (response?.highlights && response.id === this.currentLesson) {
+      if (response?.highlights) {
         this.highlights = response.highlights;
-        this.courseService.learnLesson(response.id).subscribe();
+        this.lessonId = response.id;
+      }
+    })
+    this.courseService.userProgress$.subscribe(response => {
+      if (response) {
+        this.currentLessonId = response.todayLesson.id;
       }
     })
 
@@ -47,17 +53,21 @@ export class HighlightsComponent {
     this.viewConfrimModal = true;
   }
 
+  learnLesson(): void {
+    if (this.lessonId === this.currentLessonId) {
+      this.courseService.learnLesson(this.lessonId).subscribe();
+    }
+  }
   handleClick(event: MouseEvent): void {
     const x = event.clientX;
     const screenWidth = window.innerWidth;
 
     if (x >= screenWidth * 0.5) {
-      console.log(this.highlights.length);
-      console.log(this.slide);
       if (this.highlights.length > this.slide) {
         this.nextSlide();
       } else {
-        this.router.navigate(['/home'])
+        this.learnLesson();
+        this.router.navigate(['/today-tasks']);
       }
     } else {
       this.prevSlide();

@@ -3,7 +3,7 @@
         <img loading="lazy" *ngIf="lesson.preview"
             [src]="lesson.preview" alt="" class="lesson-background" />
         <div class="header-content">
-            <app-mini-button class="icon-button" icon="back" routerLink="/home"></app-mini-button>
+            <app-mini-button class="icon-button" icon="back" (click)="goBack()"></app-mini-button>
             <div class="header-spacer"></div>
         </div>
     </header>

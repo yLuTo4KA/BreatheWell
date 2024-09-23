@@ -24,9 +24,7 @@ export class LessonComponent {
     })
   }
 
-  learnLesson(): void {
-    this.subscription = this.courseService.learnLesson(this.lesson.id).subscribe();
-  }
+  
 
   toggleShowSource(): void {
     this.showAllSources = !this.showAllSources;

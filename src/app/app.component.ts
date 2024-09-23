@@ -94,6 +94,10 @@ export class AppComponent {
       this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/back.svg")
     );
     this.matIconRegistry.addSvgIcon(
+      'next',
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/next.svg")
+    );
+    this.matIconRegistry.addSvgIcon(
       'lock',
       this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/lock.svg")
     );

@@ -114,6 +114,7 @@ export class BreathingComponent {
     this.currentSpeed = this.breathSetting.breathDuration;
     this.timer = this.breathSetting.breathDuration;
     this.action = "Вдох";
+    hapticFeedback.impactOccurred('medium');
     await this.updateTimer(this.currentSpeed);
   }
 
@@ -123,6 +124,7 @@ export class BreathingComponent {
     this.currentSpeed = this.breathSetting.exhaleDuration;
     this.timer = this.breathSetting.exhaleDuration;
     this.action = "Выдох";
+    hapticFeedback.impactOccurred('medium');
     await this.updateTimer(this.currentSpeed);
   }
 

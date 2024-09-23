@@ -1,0 +1,20 @@
+<app-modal [viewModal]="viewModal" (closeModalEmit)="closeModal()" [viewCloseButton]="true">
+    <h3 class="help-modal__title" title>Помощь <br> <span class="help-modal__subtitle text-grey">Как мы можем вам помочь?</span></h3>
+    <div class="help-modal__body">
+        <div class="link-item">
+            <p>⁉️ Частые вопросы и ответы</p>
+            <mat-icon svgIcon="arrowRight"></mat-icon>
+        </div>
+        <div class="link-item">
+            <p>📋 Условия использования</p>
+            <mat-icon svgIcon="arrowRight"></mat-icon>
+        </div>
+        <div class="link-item">
+            <p>📋 Политика конфиденциальности</p>
+            <mat-icon svgIcon="arrowRight"></mat-icon>
+        </div>
+    </div>
+    <app-button footer (click)="closeModal()">
+        <h4>Напишите нам</h4>
+    </app-button>
+</app-modal>

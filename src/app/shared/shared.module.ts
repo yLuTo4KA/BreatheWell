@@ -23,6 +23,7 @@ import { LessonCardComponent } from './components/lesson-card/lesson-card.compon
 import { TaskCardComponent } from './components/task-card/task-card.component';
 import { FeatureItemComponent } from './components/feature-item/feature-item.component';
 import { ConfrimCloseComponent } from './components/modal/confrim-close/confrim-close.component';
+import { HelpModalComponent } from './components/modal/help-modal/help-modal.component';
 
 register();
 
@@ -31,7 +32,7 @@ register();
     CommonModule,
     MatIconModule
   ],
-  declarations: [ ButtonComponent, LogoLoaderComponent, TagComponent, SelectButtonComponent, MiniButtonComponent, ModalComponent, PracticeSettingsComponent, SoundSettingsComponent, DurationSettingsComponent, CalendarComponent, PriceComponent, BenefitsItemComponent, AvatarComponent, PremiumTagComponent, SugesstComponent, SectorComponent, LessonCardComponent, TaskCardComponent, FeatureItemComponent, ConfrimCloseComponent],
+  declarations: [ ButtonComponent, LogoLoaderComponent, TagComponent, SelectButtonComponent, MiniButtonComponent, ModalComponent, PracticeSettingsComponent, SoundSettingsComponent, DurationSettingsComponent, CalendarComponent, PriceComponent, BenefitsItemComponent, AvatarComponent, PremiumTagComponent, SugesstComponent, SectorComponent, LessonCardComponent, TaskCardComponent, FeatureItemComponent, ConfrimCloseComponent, HelpModalComponent],
   exports: [    
     ButtonComponent,
     LogoLoaderComponent,
@@ -52,7 +53,8 @@ register();
     LessonCardComponent,
     TaskCardComponent,
     FeatureItemComponent,
-    ConfrimCloseComponent
+    ConfrimCloseComponent,
+    HelpModalComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
