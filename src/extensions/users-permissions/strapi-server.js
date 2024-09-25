@@ -92,7 +92,7 @@ module.exports = (plugin) => {
                             data: {
                                 todayComplete: false,
                                 lesson_learned: false,
-                                lastComplete: Date.now()
+                                lastComplete: Date.now(),
                             },
                         });
                     }

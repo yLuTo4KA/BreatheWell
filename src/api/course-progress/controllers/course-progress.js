@@ -25,11 +25,12 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
                         tasks: {
                             fields: ['*'],
                             populate: {
-                                preview_icon: true
+                                preview_icon: true,
+                                task_image: true
                             }
                         },
                         lesson_preview: true,
-                        lesson_icon: true
+                        lesson_icon: true,
                     }
                 },
                 tasks: true
@@ -45,17 +46,19 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
                 description: progress.lesson.subtitle,
                 reading_time: progress.lesson.reading_time,
                 lesson_preview: baseUrl + progress.lesson.lesson_preview.url,
-                lesson_icon: baseUrl + progress.lesson.lesson_icon.url
+                icon: baseUrl + progress.lesson.lesson_icon.url
             },
             todayTasks: progress.lesson.tasks.map(task => {
                 return {
                     id: task.id,
                     title: task.title,
                     description: task.description,
-                    preview_icon: baseUrl + task.preview_icon.url
+                    preview_icon: baseUrl + task.preview_icon.url,
+                    task_image: baseUrl + task.task_image.url
                 }
             }),
-            completedTasks: progress.tasks.map(task => { return task.id })
+            completedTasks: progress.tasks.map(task => { return task.id }),
+            completedLessons: progress.completed_lessons,
         }
 
         return formateData;
@@ -100,14 +103,18 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
         
         let todayComplete = progress.todayComplete;
         let todayLesson = progress.lesson.id;
+        let completedLessons = progress.completed_lessons && progress.completed_lessons.length > 0 ? progress.completed_lessons : [];
         
-        if (allTasksCompleted && !todayComplete) {
+        if (allTasksCompleted) {
             todayComplete = true;
             const nextLesson = await strapi.query('api::lesson.lesson').findOne({
                 where: { id: { $gt: progress.lesson.id } },
                 orderBy: { id: 'asc' },
                 fields: ['id'],
             });
+            if(!completedLessons.includes(progress.lesson.id)) {
+                completedLessons.push(progress.lesson.id);
+            }
     
             if (nextLesson) {
                 todayLesson = nextLesson.id;
@@ -115,13 +122,16 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
                 console.log('Это был последний урок'); 
             }
         }
+       
     
         // Обновляем прогресс в базе данных
         const updatedProgress = await strapi.entityService.update('api::course-progress.course-progress', progress.id, {
             data: {
                 tasks: completedTasks,
                 lesson: todayLesson, 
-                todayComplete 
+                todayComplete,
+                lastComplete: progress.todayComplete ? progress.lastComplete : Date.now(),
+                completed_lessons: completedLessons, 
             },
             populate: {
                 lesson: {
@@ -153,7 +163,7 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
                 description: updatedProgress.lesson.subtitle,
                 reading_time: updatedProgress.lesson.reading_time,
                 lesson_preview: baseUrl + updatedProgress.lesson.lesson_preview.url,
-                lesson_icon: baseUrl + updatedProgress.lesson.lesson_icon.url
+                icon: baseUrl + updatedProgress.lesson.lesson_icon.url
             },
             todayTasks: updatedProgress.lesson.tasks.map(task => ({
                 id: task.id,
@@ -161,7 +171,8 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
                 description: task.description,
                 preview_icon: baseUrl + task.preview_icon.url
             })),
-            completedTasks: updatedProgress.tasks.map(task => task.id)  // Возвращаем обновленный список выполненных задач
+            completedTasks: updatedProgress.tasks.map(task => task.id),
+            completedLessons: updatedProgress.completed_lessons
         };
     
         return formateData;
@@ -229,7 +240,7 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
                 description: updatedProgress.lesson.subtitle,
                 reading_time: updatedProgress.lesson.reading_time,
                 lesson_preview: baseUrl + updatedProgress.lesson.lesson_preview.url,
-                lesson_icon: baseUrl + updatedProgress.lesson.lesson_icon.url
+                icon: baseUrl + updatedProgress.lesson.lesson_icon.url
             },
             todayTasks: updatedProgress.lesson.tasks.map(task => ({
                 id: task.id,

@@ -19,7 +19,8 @@ module.exports = createCoreController('api::lesson.lesson', ({ strapi }) => ({
                 tasks: {
                     fields: ['id', 'title', 'description'],
                     populate: {
-                        preview_icon: { fields: ['url', 'formats'] } // Подтягиваем иконку для задач
+                        preview_icon: { fields: ['url', 'formats'] },
+                        task_image: true
                     }
                 },
                 benefits: {
@@ -67,7 +68,8 @@ module.exports = createCoreController('api::lesson.lesson', ({ strapi }) => ({
                     id: task.id,
                     title: task.title,
                     description: task.description,
-                    preview_icon: baseUrl + task.preview_icon.url
+                    preview_icon: baseUrl + task.preview_icon.url,
+                    task_image: baseUrl + task.task_image.url
                 }
             }),
             benefits: lesson.benefits.map(benefit => {

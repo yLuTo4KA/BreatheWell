@@ -931,6 +931,7 @@ export interface ApiCourseProgressCourseProgress extends Schema.CollectionType {
     lesson_learned: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;
+    completed_lessons: Attribute.JSON;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
