@@ -184,6 +184,7 @@
         align-items: center;
         text-align: center;
         position: relative;
+        z-index: 10;
     }
 }
 
@@ -218,11 +219,11 @@
 .blur-circle {
     position: absolute;
     bottom: 150px;
-    width: 290px;
-    height: 290px;
+    width: 60%;
+    height: 70%;
     border-radius: 50%;
     background-color: #9747FF;
-    filter: blur(205px);
+    filter: blur(100px);
     opacity: 0.7;
     bottom: 0;
     z-index: -1;
