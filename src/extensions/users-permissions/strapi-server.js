@@ -53,6 +53,7 @@ module.exports = (plugin) => {
                     user: user,
                     lesson: 1,
                     tasks: [],
+                    completed_lessons: [],
                 }
             })
         } else {
