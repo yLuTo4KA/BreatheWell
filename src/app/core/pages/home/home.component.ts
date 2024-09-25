@@ -181,9 +181,13 @@ export class HomeComponent implements OnInit {
     })
   }
   openLesson(id: number): void {
-    this.courseService.getLesson(id).subscribe(response => {
-      this.router.navigate(['/lesson-preview']);
-    })
+    if(id >= 2 && !this.userData.premium) {
+      this.router.navigate(['/buying']);
+    } else {
+      this.courseService.getLesson(id).subscribe(response => {
+        this.router.navigate(['/lesson-preview']);
+      })
+    }
   }
 
   toggleHelpModal(): void {

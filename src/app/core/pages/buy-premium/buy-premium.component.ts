@@ -26,12 +26,12 @@ export class BuyPremiumComponent {
   lessonsCount = this.courseService.getLessonsCount();
 
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
     this.timerInterval = setInterval(() => {
       this.timer--;
-      if(this.timer <= 0) {
+      if (this.timer <= 0) {
         clearInterval(this.timerInterval);
       }
     }, 1000);
@@ -49,14 +49,17 @@ export class BuyPremiumComponent {
 
   getInvoice(): void {
     this.paymentService.getInvoice(1, 'XTR').subscribe(response => {
-      if(response && response.url) {
+      if (response && response.url) {
         const invoice = initInvoice();
         invoice.open(response.url, 'url').then((status) => {
-          if(status === 'paid') {
-            this.authService.getProfile().subscribe(() => {
-              this.router.navigate(['/home']);
+          console.log(status);
+          if (status === 'paid') {
+            this.authService.getProfile().subscribe(response => {
+              if (response) {
+                this.router.navigate(['/home']);
+              }
             });
-            
+
           }
         })
       }

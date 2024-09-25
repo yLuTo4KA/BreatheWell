@@ -17,6 +17,7 @@ import { LessonComponent } from './core/pages/lesson/lesson.component';
 import { LessonPreviewComponent } from './core/pages/lesson-preview/lesson-preview.component';
 import { HighlightsComponent } from './core/pages/highlights/highlights.component';
 import { TodayTasksComponent } from './core/pages/today-tasks/today-tasks.component';
+import { AudioLessonComponent } from './core/pages/audio-lesson/audio-lesson.component';
 
 const routes: Routes = [
   {
@@ -103,6 +104,11 @@ const routes: Routes = [
   {
     path: 'today-tasks',
     component: TodayTasksComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'audio-lesson',
+    component: AudioLessonComponent,
     canActivate: [AuthGuard],
   },
   {

@@ -58,6 +58,7 @@
     background-color: var(--stroke-dark);
     border: none;
     cursor: pointer;
+    color: var(--secondary-text);
 }
 
 .course-label {
@@ -234,6 +235,7 @@
                 left: -10px;
                 top: 50%;
                 transform: translate(0, -50%);
+                color: var(--stroke-light);
             }
 
         }

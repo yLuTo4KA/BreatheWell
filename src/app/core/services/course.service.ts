@@ -5,6 +5,7 @@ import { GetInvoice, GetInvoiceBody } from "../models/getInvoice.model";
 import { BehaviorSubject, finalize, Observable, tap } from "rxjs";
 import { Progress } from "../models/progress.model";
 import { Lesson, LessonsList } from "../models/lesson.model";
+import { AudioLesson } from "../models/audio-lessons.model";
 
 @Injectable({
     providedIn: 'root',
@@ -16,11 +17,15 @@ export class CourseService extends ApiService {
     private userProgressSubject = new BehaviorSubject<Progress | null>(null);
     private lessonSubject = new BehaviorSubject<Lesson | null>(null);
     private lessonsListSubject = new BehaviorSubject<LessonsList[] | null>(null);
+    private audioLessonsListSubject = new BehaviorSubject<AudioLesson[] | null>(null);
+    private currentAudioLessonSubject = new BehaviorSubject<AudioLesson | null>(null);
 
 
     userProgress$ = this.userProgressSubject.asObservable();
     lesson$ = this.lessonSubject.asObservable();
     lessonsList$ = this.lessonsListSubject.asObservable();
+    audioLessonsList$ = this.audioLessonsListSubject.asObservable();
+    currentAudioLesson$ = this.currentAudioLessonSubject.asObservable();
 
     constructor(http: HttpClient) {
         super(http);
@@ -33,6 +38,7 @@ export class CourseService extends ApiService {
         }
         return 0;
     }
+
     getCurrentLessonId(): number | null{
         return this.userProgressSubject.value?.todayLesson.id ?? null;
     }
@@ -40,12 +46,22 @@ export class CourseService extends ApiService {
     setUserProgress(data: Progress): void {
         this.userProgressSubject.next(data);
     }
+
     setLesson(data: Lesson): void {
         this.lessonSubject.next(data);
     }
+
     setLessonsList(data: LessonsList[]): void {
         this.lessonsListSubject.next(data);
     }
+
+    setAudioLessons(data: AudioLesson[]): void {
+        this.audioLessonsListSubject.next(data);
+    }
+    setCurrentAudioLesson(data: AudioLesson): void {
+        this.currentAudioLessonSubject.next(data);
+    }
+
     getUserProgress(): Observable<Progress> {
         const url = `${this.urlPath}course-progresses`;
         return this.get<Progress>(url).pipe(
@@ -63,6 +79,7 @@ export class CourseService extends ApiService {
             })
         )
     }
+
     learnLesson(id: number): Observable<Progress> {
         const url = `${this.urlPath}learn-lesson`;
         return this.post<Progress, { lessonId: number }>(url, {lessonId: id}).pipe(
@@ -86,6 +103,17 @@ export class CourseService extends ApiService {
         return this.get<LessonsList[]>(url).pipe(
             tap(response => {
                 this.setLessonsList(response);
+            })
+        )
+    }
+
+    getAudioLessons(): Observable<AudioLesson[]> {
+        const url = `${this.urlPath}audio-lessons`;
+        
+        return this.get<AudioLesson[]>(url).pipe(
+            tap(response => {
+                this.setAudioLessons(response);
+                this.setCurrentAudioLesson(response[0]);
             })
         )
     }

@@ -9,7 +9,7 @@
     <swiper-container class="slide-slider__swiper" [spaceBetween]="8.3" slides-per-view="auto"
     free-mode="true"
          [pagination]="{ clickable: true }">
-        <swiper-slide *ngFor="let content of contents; let index = index" class="slide-slider__swiper-slide" [ngStyle]="{'background-image': 'url(' + content.image + ')'}">
+        <swiper-slide *ngFor="let content of contents; let index = index" class="slide-slider__swiper-slide" [ngStyle]="{'background-image': 'url(' + content.image + ')'}" >
             <h4 class="slide-slider__swiper-title">
                 {{index + 1 + '. ' + content.title}}
             </h4>

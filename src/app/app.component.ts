@@ -101,5 +101,21 @@ export class AppComponent {
       'lock',
       this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/lock.svg")
     );
+    this.matIconRegistry.addSvgIcon(
+      'replay-back',
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/replay-back.svg")
+    );
+    this.matIconRegistry.addSvgIcon(
+      'replay-plus',
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/replay-plus.svg")
+    );
+    this.matIconRegistry.addSvgIcon(
+      'pause',
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/pause.svg")
+    );
+    this.matIconRegistry.addSvgIcon(
+      'play',
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/play.svg")
+    );
   }
 }
