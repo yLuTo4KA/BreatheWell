@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "ghPages": "ng build --base-href /BreatheWell/ --output-path=docs",
+    "ghPages": "ng build --base-href /BreatheWell/ --output-path=docs --configuration=production",
     "test": "ng test"
   },
   "private": true,
