@@ -66,6 +66,9 @@ export class CoursePreviewComponent {
   goBack(): void {
     this.location.back();
   }
+  lastLesson(): number {
+    return this.progress.todayLesson.id === this.lessonsList[this.lessonsList.length - 1].id ? this.progress.todayLesson.id : this.progress.todayLesson.id - 1;
+  }
   navigateToLesson() {
     this.router.navigate(['/lesson-preview']);
   }

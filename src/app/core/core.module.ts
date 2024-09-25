@@ -35,12 +35,13 @@ import { HighlightsComponent } from './pages/highlights/highlights.component';
 import { AudioLessonComponent } from './pages/audio-lesson/audio-lesson.component';
 import {MatSliderModule} from '@angular/material/slider';
 import { FormsModule } from '@angular/forms';
+import { TaskCompleteComponent } from './pages/task-complete/task-complete.component';
 register();
 
 
 @NgModule({
   imports: [CommonModule,RouterModule,SharedModule, MatIconModule, TranslateModule, BrowserAnimationsModule, MarkdownModule.forRoot(), MatSliderModule, FormsModule],
-  declarations: [ShellComponent, NotAuthComponent, FooterComponent, WelcomeComponent, WelcomeSliderComponent, SlideInfoComponent, SlideSliderComponent, CtaComponent, StartPageComponent, HomeComponent, BreathingComponent, DayliProgressComponent, BuyPremiumComponent, CoursePreviewComponent, LessonComponent, MaterialsComponent, LessonPreviewComponent, TaskDetailComponent, TodayTasksComponent, HighlightsComponent, AudioLessonComponent],
+  declarations: [ShellComponent, NotAuthComponent, FooterComponent, WelcomeComponent, WelcomeSliderComponent, SlideInfoComponent, SlideSliderComponent, CtaComponent, StartPageComponent, HomeComponent, BreathingComponent, DayliProgressComponent, BuyPremiumComponent, CoursePreviewComponent, LessonComponent, MaterialsComponent, LessonPreviewComponent, TaskDetailComponent, TodayTasksComponent, HighlightsComponent, AudioLessonComponent, TaskCompleteComponent],
   exports: [ShellComponent, NotAuthComponent, FooterComponent, WelcomeComponent, SlideInfoComponent,SlideSliderComponent, CtaComponent, StartPageComponent, HomeComponent, BreathingComponent, BuyPremiumComponent, CoursePreviewComponent, LessonComponent, MaterialsComponent, LessonPreviewComponent, TaskDetailComponent, TodayTasksComponent, HighlightsComponent],
   providers: [
     {

@@ -1,0 +1,10 @@
+<div class="task-complete --bg-top">
+    <img src="assets/images/check.png" alt="success">
+    <h3>Ты успешно выполнил задание!</h3>
+    <div class="task-complete__calendar">
+        <app-calendar [activeDays]="userData.activeDays" [userLastActive]="userData.lastActiveDate"
+            [userLastVisit]="userData.lastVisit" [yearView]="false"></app-calendar>
+    </div>
+    <p class="text-grey">Выполняй задания каждый день, чтобы дыхание стало <span class="text-purple">твоей новой привычкой. </span></p>
+    <app-button routerLink="/home"><h4>Продолжить</h4></app-button>
+</div>

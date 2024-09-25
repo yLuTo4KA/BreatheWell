@@ -6,6 +6,7 @@ import { BehaviorSubject, finalize, Observable, tap } from "rxjs";
 import { Progress } from "../models/progress.model";
 import { Lesson, LessonsList } from "../models/lesson.model";
 import { AudioLesson } from "../models/audio-lessons.model";
+import { Task } from "../models/task.model";
 
 @Injectable({
     providedIn: 'root',
@@ -19,6 +20,7 @@ export class CourseService extends ApiService {
     private lessonsListSubject = new BehaviorSubject<LessonsList[] | null>(null);
     private audioLessonsListSubject = new BehaviorSubject<AudioLesson[] | null>(null);
     private currentAudioLessonSubject = new BehaviorSubject<AudioLesson | null>(null);
+    private currentTaskSubject = new BehaviorSubject<Task | null>(null);
 
 
     userProgress$ = this.userProgressSubject.asObservable();
@@ -26,6 +28,7 @@ export class CourseService extends ApiService {
     lessonsList$ = this.lessonsListSubject.asObservable();
     audioLessonsList$ = this.audioLessonsListSubject.asObservable();
     currentAudioLesson$ = this.currentAudioLessonSubject.asObservable();
+    currentTask$ = this.currentTaskSubject.asObservable();
 
     constructor(http: HttpClient) {
         super(http);
@@ -58,8 +61,13 @@ export class CourseService extends ApiService {
     setAudioLessons(data: AudioLesson[]): void {
         this.audioLessonsListSubject.next(data);
     }
+
     setCurrentAudioLesson(data: AudioLesson): void {
         this.currentAudioLessonSubject.next(data);
+    }
+
+    setCurrentTask(task: Task): void {
+        this.currentTaskSubject.next(task);
     }
 
     getUserProgress(): Observable<Progress> {
@@ -94,6 +102,7 @@ export class CourseService extends ApiService {
         return this.get<Lesson>(url).pipe(
             tap(response => {
                 this.setLesson(response);
+                this.setCurrentTask(response.tasks[0]);
             })
         );
     }

@@ -2,7 +2,7 @@
 
 * {
   box-sizing: border-box;
-
+  line-height: 1.3;
 }
 
 .mat-mdc-slider.mat-primary {
@@ -40,6 +40,7 @@ body {
 p {
   margin: 0;
   font-weight: 300;
+  line-height: 130%;
 }
 
 a,
@@ -103,7 +104,6 @@ h6 {
   font-weight: normal;
   line-height: inherit;
   color: inherit;
-  line-height: 120%;
 }
 
 ul,
@@ -337,6 +337,9 @@ router-link {
 
   &-grey {
     color: var(--secondary-text);
+  }
+  &-default {
+    color: var(--primary-text);
   }
 
   &-blue-light {

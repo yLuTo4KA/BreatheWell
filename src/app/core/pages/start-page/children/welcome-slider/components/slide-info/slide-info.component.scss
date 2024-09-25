@@ -28,18 +28,15 @@
     }
 
     &__stats {
-        line-height: 1;
-        &_sub {
-            font-weight: 500;
-        }
+        font-size: 55px;
     }
 
     &__title {
-        margin-bottom: 24px;
+        margin-bottom: 16px;
     }
 
     &__text {
-        padding: 26px 5px 0;
+        padding: 16px 5px 0;
         font-size: 18px;
     }
 }

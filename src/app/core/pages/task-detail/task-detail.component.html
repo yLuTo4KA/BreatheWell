@@ -1,1 +1,19 @@
-<p>task-detail works!</p>
+<article class="task-detail">
+    <header class="task-detail-header">
+        <img loading="lazy" *ngIf="task?.task_image"
+            [src]="task.task_image" alt="" class="task-detail-background" />
+        <div class="header-content">
+            <app-mini-button class="icon-button" icon="close" routerLink="/home"></app-mini-button>
+        </div>
+    </header>
+    <main class="task-detail-content">
+        <div class="task-detail-text">
+            <markdown [data]="task.description"></markdown>
+        </div>
+        <app-task-card [task]="task" [completedTasks]="progress.completedTasks" (checkTask)="checkTask(task.id)"></app-task-card>
+        <router-link routerLink="/today-tasks" class="task-detail-link text-grey">
+            <p>Смотреть другие задания</p>
+            <mat-icon svgIcon="arrowRight"></mat-icon>
+        </router-link>
+    </main>
+</article>

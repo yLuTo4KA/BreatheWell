@@ -178,6 +178,9 @@ export class HomeComponent implements OnInit {
   updateProgress(): void {
     this.courseService.updateTask(this.progressData.completedTasks).subscribe(response => {
       this.progressData = response;
+      if(response.completedTasks) {
+        this.router.navigate(['task-complete']);
+      }
     })
   }
   openLesson(id: number): void {

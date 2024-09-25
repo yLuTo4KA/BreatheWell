@@ -9,7 +9,8 @@
     background-color: #00000099;
     cursor: pointer;
     &__wrapper {
-        background: var(--secondary-bg);
+        background: linear-gradient(180deg, #1B123C 0%, #050726 100%);
+
         height: max-content;
         border-start-start-radius: 35px;
         border-start-end-radius: 35px;
