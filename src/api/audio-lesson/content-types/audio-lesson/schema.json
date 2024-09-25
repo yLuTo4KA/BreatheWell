@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "audio_lessons",
+  "info": {
+    "singularName": "audio-lesson",
+    "pluralName": "audio-lessons",
+    "displayName": "Audio-lesson",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "duration": {
+      "type": "integer",
+      "required": true,
+      "default": 0
+    },
+    "free": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "image_preview": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    },
+    "audio": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

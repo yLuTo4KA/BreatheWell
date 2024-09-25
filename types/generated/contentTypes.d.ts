@@ -801,6 +801,41 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiAudioLessonAudioLesson extends Schema.CollectionType {
+  collectionName: 'audio_lessons';
+  info: {
+    singularName: 'audio-lesson';
+    pluralName: 'audio-lessons';
+    displayName: 'Audio-lesson';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    duration: Attribute.Integer & Attribute.Required & Attribute.DefaultTo<0>;
+    free: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
+    image_preview: Attribute.Media<'images' | 'videos'> & Attribute.Required;
+    audio: Attribute.Media<'videos' | 'audios'> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::audio-lesson.audio-lesson',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::audio-lesson.audio-lesson',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiBenefitBenefit extends Schema.CollectionType {
   collectionName: 'benefits';
   info: {
@@ -1293,6 +1328,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::audio-lesson.audio-lesson': ApiAudioLessonAudioLesson;
       'api::benefit.benefit': ApiBenefitBenefit;
       'api::course-progress.course-progress': ApiCourseProgressCourseProgress;
       'api::highlight.highlight': ApiHighlightHighlight;

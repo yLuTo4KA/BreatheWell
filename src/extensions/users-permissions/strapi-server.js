@@ -67,12 +67,37 @@ module.exports = (plugin) => {
                 const diffInDay = diffInMs / (1000 * 60 * 60 * 24);
                 if (diffInDay < 1) todayActive = true;
                 if (diffInDay >= 2) currentStreak = 0
-                console.log(diffInDay);
             }
             user = await strapi.query('plugin::users-permissions.user').update({
                 where: { tg_id: userData.id },
                 data: { lastVisit: new Date(), todayActive: todayActive, activeDays: currentStreak, avatar: avatar },
             });
+            const progress = await strapi.db.query('api::course-progress.course-progress').findOne({
+                where: { user: user },
+                populate: {
+                    lesson: {
+                        fields: ['*'],
+                    },
+                }
+            });
+            if (progress) {
+                const lastComplete = new Date(progress.lastComplete);
+                // @ts-ignore
+                const diffInMs = currentDate - lastComplete;
+                const diffInDay = diffInMs / (1000 * 60 * 60 * 24);
+                if (diffInDay >= 1) {
+                    if (progress && progress.todayComplete && progress.lesson_learned) {
+                        await strapi.db.query('api::course-progress.course-progress').update({
+                            where: { user: user },
+                            data: {
+                                todayComplete: false,
+                                lesson_learned: false,
+                                lastComplete: Date.now()
+                            },
+                        });
+                    }
+                }
+            }
         }
 
         // Генерация JWT токена
