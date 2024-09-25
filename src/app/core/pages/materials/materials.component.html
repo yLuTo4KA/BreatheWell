@@ -14,13 +14,13 @@
                                      a 15.9155 15.9155 0 0 1 0 31.831
                                      a 15.9155 15.9155 0 0 1 0 -31.831" />
                                 <path class="circle"
-                                    [attr.stroke-dasharray]="(((progress.todayLesson.id - 1) / lessonsList.length) * 100) + ', 100'"
+                                    [attr.stroke-dasharray]="(((progress.completedLessons.length) / lessonsList.length) * 100) + ', 100'"
                                     d="M18 2.0845
                                      a 15.9155 15.9155 0 0 1 0 31.831
                                      a 15.9155 15.9155 0 0 1 0 -31.831" />
                             </svg>
                             <div class="progress-text">
-                                <span>{{progress.todayLesson.id - 1}}</span>
+                                <span>{{progress.completedLessons.length}}</span>
                             </div>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
             <div class="materials__main-course-body">
                 <h4>Осознанное дыхание для<br>повседневной жизни</h4>
                 <div class="materials__main-course-content">
-                    <p class="text-purple">{{lessonsList.length}} занятий</p>
+                    <p class="text-grey">{{lessonsList.length}} занятий</p>
                     <app-mini-button icon="next" class="materials-button-open"
                         routerLink="/course-preview"></app-mini-button>
                 </div>

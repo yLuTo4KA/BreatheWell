@@ -1,11 +1,11 @@
 <app-sector class="sector-task-card" [padding]="8" [borderItem]="true" [bg]="true">
     <div class="task-card">
         <div class="task-card__icon">
-            <img [src]="img" alt="" class="task-card__icon-img">
+            <img [src]="task.preview_icon" alt="" class="task-card__icon-img">
         </div>
         <div class="task-card__text">
-            <p class="task-card__text-title">{{title}}</p>
-            <div class="task-card__text-button" (click)="emitMoreInfo()">
+            <p class="task-card__text-title">{{task.title}}</p>
+            <div class="task-card__text-button" (click)="moreInfo()">
                 Подробнее
                 <mat-icon aria-hidden="false" aria-label="arrow" svgIcon="arrowRight" [style.width.px]="14" [style.height.px]="14"></mat-icon>
             </div>

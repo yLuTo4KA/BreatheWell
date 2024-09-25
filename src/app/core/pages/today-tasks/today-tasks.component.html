@@ -7,7 +7,7 @@
         <p class="text-grey today-tasks__body-subtitle">Задания помеченные галочкой ✅ считаются выполненными. Для того чтобы завершить урок нужно выполнить все задания.</p>
         <div class="today-tasks__list">
             <div class="today-tasks__item" *ngFor="let task of tasks">
-                <app-task-card [title]="task.title" [id]="task.id" [img]="task.preview_icon" [completedTasks]="progress.completedTasks" (checkTask)="checkTask($event)"></app-task-card>
+                <app-task-card [task]="task" [completedTasks]="progress.completedTasks" (checkTask)="checkTask($event)"></app-task-card>
             </div>
         </div>
     </div>

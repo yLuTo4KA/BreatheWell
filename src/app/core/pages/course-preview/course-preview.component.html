@@ -12,12 +12,12 @@
                             <path class="circle-bg" d="M18 2.0845
                                  a 15.9155 15.9155 0 0 1 0 31.831
                                  a 15.9155 15.9155 0 0 1 0 -31.831" />
-                            <path class="circle" [attr.stroke-dasharray]="(((progress.todayLesson.id - 1) / lessonsList.length) * 100) + ', 100'" d="M18 2.0845
+                            <path class="circle" [attr.stroke-dasharray]="(((progress.completedLessons.length) / lessonsList.length) * 100) + ', 100'" d="M18 2.0845
                                  a 15.9155 15.9155 0 0 1 0 31.831
                                  a 15.9155 15.9155 0 0 1 0 -31.831" />
                         </svg>
                         <div class="progress-text">
-                            <span>{{progress.todayLesson.id - 1}}</span>
+                            <span>{{progress.completedLessons.length}}</span>
                         </div>
                     </div>
                 </div>
@@ -51,16 +51,16 @@
             <p class="progress-title">Мой текущий прогресс</p>
             <div class="progress-bar-container">
                 <div class="progress-bar">
-                    <div class="progress-fill" [style.width.%]="((progress.todayLesson.id - 1) / lessonsList.length) * 100"></div>
+                    <div class="progress-fill" [style.width.%]="((progress.completedLessons.length) / lessonsList.length) * 100"></div>
                 </div>
-                <span class="progress-count">{{progress.todayLesson.id - 1}}/{{lessonsList.length}}</span>
+                <span class="progress-count">{{progress.completedLessons.length}}/{{lessonsList.length}}</span>
             </div>
         </section>
 
         <section class="lessons-section">
             <h4 class="lessons-title">Занятия</h4>
             <div class="lessons-list">
-                <div class="lessons-item" *ngFor="let lesson of lessonsList" [ngClass]="{ '--closed': lesson.id > progress.todayLesson.id,'--active': lesson.id < progress.todayLesson.id, '--current': lesson.id === progress.todayLesson.id}">
+                <div class="lessons-item" *ngFor="let lesson of lessonsList" [ngClass]="{'--current': lesson.id === progress.todayLesson.id, '--closed': !progress.completedLessons.includes(lesson.id) ,'--active': progress.completedLessons.includes(lesson.id)}">
                     <mat-icon svgIcon="lock" class="lessons-item-status lessons-item-status--closed"></mat-icon>
                     <div class="lessons-item-status lessons-item-status--active"></div>
                     <div class="lessons-item-status lessons-item-status--current"></div>

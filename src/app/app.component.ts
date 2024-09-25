@@ -117,5 +117,13 @@ export class AppComponent {
       'play',
       this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/play.svg")
     );
+    this.matIconRegistry.addSvgIcon(
+      'robot',
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/robot.svg")
+    );
+    this.matIconRegistry.addSvgIcon(
+      'star',
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/star.svg")
+    );
   }
 }

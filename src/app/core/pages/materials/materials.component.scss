@@ -18,7 +18,7 @@
         &-header {
             padding: 16px;
             height: 200px;
-            background: url('../../../../assets/images/course-preview.png') no-repeat;
+            background: url('../../../../assets/images/course-preview-mini.png') no-repeat;
             background-position: center -45px;
             background-size: cover;
             border-start-start-radius: 16px;
@@ -100,7 +100,7 @@
     }
 
     &-lock {
-        background: var(--stroke-dark);
+        background: #050726;
         width: 36px;
         height: 36px;
     }

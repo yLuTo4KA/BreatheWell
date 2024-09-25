@@ -7,7 +7,7 @@
         <div class="welcome-slider-page__content">
             <ng-container *ngIf="currentPage === 1" >
                 <div class="slider-content">
-                    <app-slide-info iconName="lungs" title="Знаете ли вы" stats="90%"
+                    <app-slide-info iconName="lungs" title="Знаешь ли ты" stats="90%"
                         text="людей не дышат правильно или не используют дыхательные техники в повседневной жизни"></app-slide-info>
                 </div>
                 <app-button (click)="changePage(currentPage + 1)">
@@ -25,7 +25,7 @@
             </ng-container>
             <ng-container *ngIf="currentPage === 3" >
                 <div class="slider-content">
-                    <app-slide-info iconName="smile" title="Хорошая новость" color="green" stats="5" statsSub="Минут"
+                    <app-slide-info iconName="smile" title="Хорошая новость" color="green" stats="5" statsSub="минут"
                         text="использования нашего приложения поможет справится со стрессом, улучшить сон и повысить энергию"></app-slide-info>
                 </div>
                 <app-button (click)="changePage(currentPage + 1)">
@@ -58,15 +58,17 @@
                                 class="slider-content__stat-icon"></mat-icon>
                             <h1>83%</h1>
                         </div>
-                        <p>Excelent</p>
-                        <p>Focus</p>
+                        <p>достигли результатов</p>
                         <img class="slider-content__stat-img" src="assets/images/stat.png" alt="stat">
-                        <p class="slider-content__stat-days">14 days</p>
+                        <div class="slider-content__stat-days">
+                            <p class="text-grey">Сегодня</p>
+                            <p>Через 14 дней</p>
+                        </div>
                     </div>
                     <h2 class="slider-content__title">Вы в <span class="text-purple">надежных руках</span></h2>
                     <p class="text-grey slider-content__subtitle">Уже в течение первых 3 дней более <span
-                            class="text-blue-light">83% пользователей</span> достигли успехов в <span
-                            class="text-blue-light">снижении тревожности</span></p>
+                            class="text-default">83% пользователей</span> достигли успехов в <span
+                            class="text-default">снижении тревожности</span></p>
                 </div>
                 <app-button routerLink="/start/cta">
                     <h4>Дальше</h4>

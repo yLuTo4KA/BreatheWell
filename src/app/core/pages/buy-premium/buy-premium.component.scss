@@ -91,7 +91,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: var(--yellow);
+            background: var(--gold-gradient);
             padding: 8px;
             color: var(--main-background);
             border-start-start-radius: 8px;
@@ -179,7 +179,11 @@
         height: auto;
         padding: 16px;
         display: flex;
-
+        &__star {
+            width: 16px;
+            height: 16px;
+            margin-right: 4px;
+        }
         &__avatar {
             margin-right: 8px;
         }

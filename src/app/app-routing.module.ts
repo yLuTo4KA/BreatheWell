@@ -18,6 +18,8 @@ import { LessonPreviewComponent } from './core/pages/lesson-preview/lesson-previ
 import { HighlightsComponent } from './core/pages/highlights/highlights.component';
 import { TodayTasksComponent } from './core/pages/today-tasks/today-tasks.component';
 import { AudioLessonComponent } from './core/pages/audio-lesson/audio-lesson.component';
+import { TaskDetailComponent } from './core/pages/task-detail/task-detail.component';
+import { TaskCompleteComponent } from './core/pages/task-complete/task-complete.component';
 
 const routes: Routes = [
   {
@@ -105,6 +107,16 @@ const routes: Routes = [
     path: 'today-tasks',
     component: TodayTasksComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'task-detail',
+    component: TaskDetailComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'task-complete',
+    component: TaskCompleteComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'audio-lesson',
