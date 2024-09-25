@@ -1,0 +1,23 @@
+<div class="audio-lesson">
+    <div class="audio-lesson__content">
+        <div class="audio-lesson__header">
+            <app-mini-button class="back-button" icon="back" (click)="goBack()"></app-mini-button>
+        </div>
+        <div class="audio-lesson__body">
+            <h4 class="audio-lesson__body-title">{{audioLesson.title}}</h4>
+            <mat-slider min="0" [max]="duration" step="1"  showTickMarks discrete
+                [displayWith]="formatLabel">
+                <input [(ngModel)]="currentSliderValue" matSliderThumb (input)="onSliderChange()" >
+            </mat-slider>
+            <div class="audio-lesson__duration">
+                <p>{{formattedCurrentTime}}</p>
+                <p>{{formattedDuration}}</p>
+            </div>
+            <div class="audio-lesson__controllers">
+                <app-mini-button class="controllers-replay" icon="replay-back" (click)="handleMinusReplay()"></app-mini-button>
+                <app-mini-button class="controllers-pause" [icon]="pause ? 'play' : 'pause'" (click)="handlePause()"></app-mini-button>
+                <app-mini-button class="controllers-replay" icon="replay-plus" (click)="handlePlusReplay()"></app-mini-button>
+            </div>
+        </div>
+    </div>
+</div>

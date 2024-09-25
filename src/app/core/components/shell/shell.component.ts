@@ -34,13 +34,13 @@ export class ShellComponent implements OnInit {
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
       const currentUrl = this.router.url;
-      this.showFooter = currentUrl !== '/notAuth' && !currentUrl.startsWith('/start') && currentUrl !== '/breathing' && currentUrl !== '/buying';
+      this.showFooter = currentUrl !== '/notAuth' && !currentUrl.startsWith('/start') && currentUrl !== '/breathing' && currentUrl !== '/buying' && currentUrl !== '/audio-lesson';
       this.showPremium = currentUrl !== '/dayli-progress'
     });
     this.authService.deauth();
     this.authService.auth().subscribe(response => {
       this.authResponse = response;
-      forkJoin({ sounds: this.breathService.getSounds(), practices: this.breathService.getPractice(), prices: this.pricesService.getPrices(), progress: this.courseService.getUserProgress(), lessonsList: this.courseService.getLessons()}).subscribe(() => {
+      forkJoin({ sounds: this.breathService.getSounds(), practices: this.breathService.getPractice(), prices: this.pricesService.getPrices(), progress: this.courseService.getUserProgress(), lessonsList: this.courseService.getLessons(), audioLessons: this.courseService.getAudioLessons()}).subscribe(() => {
         this.lessonsCount = this.courseService.getLessonsCount();
         this.redirectUser();
       })

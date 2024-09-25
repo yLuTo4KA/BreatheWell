@@ -13,7 +13,9 @@
                                 <path class="circle-bg" d="M18 2.0845
                                      a 15.9155 15.9155 0 0 1 0 31.831
                                      a 15.9155 15.9155 0 0 1 0 -31.831" />
-                                <path class="circle" [attr.stroke-dasharray]="(((progress.todayLesson.id - 1) / lessonsList.length) * 100) + ', 100'" d="M18 2.0845
+                                <path class="circle"
+                                    [attr.stroke-dasharray]="(((progress.todayLesson.id - 1) / lessonsList.length) * 100) + ', 100'"
+                                    d="M18 2.0845
                                      a 15.9155 15.9155 0 0 1 0 31.831
                                      a 15.9155 15.9155 0 0 1 0 -31.831" />
                             </svg>
@@ -28,12 +30,26 @@
                 <h4>Осознанное дыхание для<br>повседневной жизни</h4>
                 <div class="materials__main-course-content">
                     <p class="text-purple">{{lessonsList.length}} занятий</p>
-                    <app-mini-button icon="next" class="materials-button-open" routerLink="/course-preview"></app-mini-button>
+                    <app-mini-button icon="next" class="materials-button-open"
+                        routerLink="/course-preview"></app-mini-button>
                 </div>
             </div>
         </div>
         <div class="materials__audio-lessons">
-
+            <h3 class="materials__audio-lessons-title">Аудиоуроки</h3>
+            <swiper-container class="materials__audio-lessons-swiper" [spaceBetween]="8.3" slides-per-view="auto" free-mode="true"
+                [pagination]="{ clickable: true }">
+                <swiper-slide *ngFor="let content of audioLessons; let index = index" class="materials__audio-lessons-slide" (click)="openAudioLesson(content)"
+                    [ngStyle]="{'background-image': 'url(' + content.preview + ')'}">
+                    <div class="materials__audio-lessons-slide-header">
+                        <app-tag class="audio-duration">{{content.duration}} мин.</app-tag>
+                        <app-mini-button class="audio-lock" icon="lock" [iconHeight]="20" [iconWidth]="20" *ngIf="isLocked(content)"></app-mini-button>
+                    </div>
+                    <p class="materials__audio-lessons-slide-title">
+                        {{content.title}}
+                    </p>
+                </swiper-slide>
+            </swiper-container>
         </div>
     </div>
 </div>

@@ -32,12 +32,15 @@ import { LessonPreviewComponent } from './pages/lesson-preview/lesson-preview.co
 import { TaskDetailComponent } from './pages/task-detail/task-detail.component';
 import { TodayTasksComponent } from './pages/today-tasks/today-tasks.component';
 import { HighlightsComponent } from './pages/highlights/highlights.component';
+import { AudioLessonComponent } from './pages/audio-lesson/audio-lesson.component';
+import {MatSliderModule} from '@angular/material/slider';
+import { FormsModule } from '@angular/forms';
 register();
 
 
 @NgModule({
-  imports: [CommonModule,RouterModule,SharedModule, MatIconModule, TranslateModule, BrowserAnimationsModule, MarkdownModule.forRoot()],
-  declarations: [ShellComponent, NotAuthComponent, FooterComponent, WelcomeComponent, WelcomeSliderComponent, SlideInfoComponent, SlideSliderComponent, CtaComponent, StartPageComponent, HomeComponent, BreathingComponent, DayliProgressComponent, BuyPremiumComponent, CoursePreviewComponent, LessonComponent, MaterialsComponent, LessonPreviewComponent, TaskDetailComponent, TodayTasksComponent, HighlightsComponent],
+  imports: [CommonModule,RouterModule,SharedModule, MatIconModule, TranslateModule, BrowserAnimationsModule, MarkdownModule.forRoot(), MatSliderModule, FormsModule],
+  declarations: [ShellComponent, NotAuthComponent, FooterComponent, WelcomeComponent, WelcomeSliderComponent, SlideInfoComponent, SlideSliderComponent, CtaComponent, StartPageComponent, HomeComponent, BreathingComponent, DayliProgressComponent, BuyPremiumComponent, CoursePreviewComponent, LessonComponent, MaterialsComponent, LessonPreviewComponent, TaskDetailComponent, TodayTasksComponent, HighlightsComponent, AudioLessonComponent],
   exports: [ShellComponent, NotAuthComponent, FooterComponent, WelcomeComponent, SlideInfoComponent,SlideSliderComponent, CtaComponent, StartPageComponent, HomeComponent, BreathingComponent, BuyPremiumComponent, CoursePreviewComponent, LessonComponent, MaterialsComponent, LessonPreviewComponent, TaskDetailComponent, TodayTasksComponent, HighlightsComponent],
   providers: [
     {

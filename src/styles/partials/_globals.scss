@@ -1,6 +1,27 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 * {
   box-sizing: border-box;
 
+}
+
+.mat-mdc-slider.mat-primary {
+  --mdc-slider-handle-color: var(--primary-text);
+  --mdc-slider-focus-handle-color: var(--primary-text);
+  --mdc-slider-hover-handle-color: var(--primary-text);
+  --mdc-slider-active-track-color: var(--primary-text);
+  --mdc-slider-inactive-track-color: var(--primary-text);
+  --mdc-slider-with-tick-marks-active-container-color: #fff;
+  --mdc-slider-with-tick-marks-inactive-container-color: var(--primary-text);
+  --mat-mdc-slider-ripple-color: var(--primary-text);
+  --mat-mdc-slider-hover-ripple-color: rgba(238, 240, 242, 0.5);
+  --mat-mdc-slider-focus-ripple-color: rgba(238, 240, 242, 0.2);
+}
+
+mat-slider {
+  .mdc-slider__tick-marks {
+    display: none !important;
+  }
 }
 
 html,

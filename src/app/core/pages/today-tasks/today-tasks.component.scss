@@ -5,29 +5,32 @@
         display: flex;
         justify-content: flex-end;
     }
+
     &__close-btn {
         width: 33px;
         height: 33px;
         background: var(--stroke-dark);
     }
+
     &__body {
         &-title {
             margin-bottom: 16px;
         }
+
         &-subtitle {
             margin-bottom: 58px;
             padding-right: 20px;
         }
     }
-    &__tasks {
-        &-list {
 
-        }
-        &-item {
-            margin-bottom: 8px;
-            &:last-child {
-                margin-bottom: 0;
-            }
+    &__list {}
+
+    &__item {
+        margin-bottom: 8px;
+
+        &:last-child {
+            margin-bottom: 0;
         }
     }
+
 }
