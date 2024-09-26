@@ -14,9 +14,7 @@
         </app-tag>
         <section class="lesson-details">
             <h3 class="lesson-title">{{lesson.title}}</h3>
-            <p class="lesson-description">
-                {{lesson.description}}
-            </p>
+            <markdown [data]="lesson.description"></markdown>
         </section>
         <section class="lesson-features">
             <ul class="feature-list">
