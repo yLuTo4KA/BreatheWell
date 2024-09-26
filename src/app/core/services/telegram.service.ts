@@ -57,6 +57,9 @@ export class TelegramService {
   initData(): string {
     return this.tg.initData;
   }
+  openTgLink(link: string): void {
+    this.utils.openLink(link);
+  }
   expand(): void {
     this.tg.expand();
   }
