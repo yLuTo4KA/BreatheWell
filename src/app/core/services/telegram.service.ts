@@ -62,6 +62,6 @@ export class TelegramService {
   }
   expand(): void {
     this.tg.expand();
-    backButton.show();
+    // backButton.show();
   }
 }
