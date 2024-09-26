@@ -84,7 +84,7 @@
 
 .audio {
     &-duration {
-        background: var(--tetriary-bg);
+        background: var(--stroke-light);
         color: var(--primary-text);
         border: none;
         padding: 4px 6px;
@@ -93,7 +93,8 @@
     }
 
     &-lock {
-        background: #050726;
+        background: var(--gold-gradient);
+        color: #080110;
         width: 36px;
         height: 36px;
     }
