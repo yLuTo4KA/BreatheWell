@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Injectable, Inject } from '@angular/core';
-import { initUtils, mockTelegramEnv, parseInitData, initBackButton } from '@telegram-apps/sdk';
+import { initUtils, mockTelegramEnv, parseInitData } from '@telegram-apps/sdk';
 const initDataRaw = new URLSearchParams([
   ['user', JSON.stringify({
     id: 99281932,
@@ -17,7 +17,6 @@ const initDataRaw = new URLSearchParams([
   ['chat_type', 'sender'],
   ['chat_instance', '8428209589180549439'],
 ]).toString();
-const [backButton] = initBackButton();
 
 mockTelegramEnv({
   themeParams: {
@@ -62,6 +61,5 @@ export class TelegramService {
   }
   expand(): void {
     this.tg.expand();
-    // backButton.show();
   }
 }
