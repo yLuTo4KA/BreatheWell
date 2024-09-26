@@ -42,7 +42,7 @@
                     [ngStyle]="{'background-image': 'url(' + content.preview + ')'}">
                     <div class="materials__audio-lessons-slide-header">
                         <app-tag class="audio-duration">{{content.duration}} мин.</app-tag>
-                        <app-mini-button class="audio-lock" icon="lock" [iconHeight]="20" [iconWidth]="20" *ngIf="isLocked(content)"></app-mini-button>
+                        <app-mini-button class="audio-lock" icon="audio-lock" [iconHeight]="20" [iconWidth]="20" *ngIf="isLocked(content)"></app-mini-button>
                     </div>
                     <p class="materials__audio-lessons-slide-title">
                         {{content.title}}
