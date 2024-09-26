@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>ProjectX2</title>
   <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script type="text/javascript">
@@ -12,7 +12,6 @@
       const tele = window.Telegram.WebApp;
       tele.ready()
       tele.expand();
-      tele.BackButton.show();
       tele.SettingsButton.show();
       tele.enableClosingConfirmation()
       tele.disableVerticalSwipes()
