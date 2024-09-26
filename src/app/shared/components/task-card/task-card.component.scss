@@ -18,11 +18,13 @@
         flex: 1;
         word-break: break-word;
         margin-right: 16px;
+        
         &-button {
             color: var(--primary-buttons);
             display: flex;
             align-items: center;
-            font-size: 12px;
+            margin-top: 4px;
+            font-size: 13px;
             font-weight: 300;
             cursor: pointer;
         }
