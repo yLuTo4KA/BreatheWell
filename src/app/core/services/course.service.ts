@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { ApiService } from "./api.service";
 import { HttpClient } from "@angular/common/http";
 import { GetInvoice, GetInvoiceBody } from "../models/getInvoice.model";
@@ -7,12 +7,14 @@ import { Progress } from "../models/progress.model";
 import { Lesson, LessonsList } from "../models/lesson.model";
 import { AudioLesson } from "../models/audio-lessons.model";
 import { Task } from "../models/task.model";
+import { Router } from "@angular/router";
 
 @Injectable({
     providedIn: 'root',
 })
 
 export class CourseService extends ApiService {
+    private router = inject(Router);
     private urlPath = '' as const;
 
     private userProgressSubject = new BehaviorSubject<Progress | null>(null);

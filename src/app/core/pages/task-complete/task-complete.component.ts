@@ -16,14 +16,15 @@ export class TaskCompleteComponent {
 
   ngOnInit(): void {
     this.authSub = this.authService.user$.subscribe(user => {
-      if(user) {
+      if (user) {
         this.userData = user;
       }
     })
+
   }
 
   ngOnDestroy(): void {
-    if(this.authSub) {
+    if (this.authSub) {
       this.authSub.unsubscribe();
     }
   }

@@ -21,7 +21,7 @@ interface DayliData {
 })
 
 export class AuthService extends ApiService {
-    private urlPath = 'auth' as const;
+    private urlPath = '' as const;
     telegramService = inject(TelegramService);
     router = inject(Router);
 
@@ -57,7 +57,7 @@ export class AuthService extends ApiService {
     }
 
     auth(): Observable<AuthData> {
-        const url = `${this.urlPath}/local/register`;
+        const url = `${this.urlPath}auth/local/register`;
         let params;
         if (!environment.production) {
             params = {
@@ -84,7 +84,7 @@ export class AuthService extends ApiService {
     }
 
     getProfile(): Observable<User> {
-        const url = `${this.urlPath}/me`;
+        const url = `${this.urlPath}users/me`;
         return this.get<User>(url).pipe(
             tap(response => {
                 this.setUserData(response);
@@ -97,7 +97,7 @@ export class AuthService extends ApiService {
 
 
     dayliCheck(): Observable<DayliData> {
-        const url = `${this.urlPath}/dayli-check`;
+        const url = `${this.urlPath}auth/dayli-check`;
 
         return this.get<DayliData>(url).pipe(
             tap(response => {

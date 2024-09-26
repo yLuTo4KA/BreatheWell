@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
 
   progressData!: Progress;
 
-  currentOnline: number = this.getOnline();
+  currentOnline: number = Math.floor(Math.random() * (1200 - 600) + 600);
   onlineInterval: any;
 
 
@@ -96,7 +96,7 @@ export class HomeComponent implements OnInit {
 
     this.onlineInterval = setInterval(() => {
       this.getOnline();
-    }, 10000)
+    }, 1000 * 15)
     this.setTimeOfDay();
   }
 
@@ -124,10 +124,14 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  getOnline(): number {
-    const randomOnline = Math.floor(Math.random() * (1200 - 600) + 600);
-    this.currentOnline = randomOnline;
-    return randomOnline;
+  getOnline(): void {
+    const randomOnline = Math.floor(Math.random() * (15 - 2) + 2);
+    const randomOperator = Math.floor(Math.random() * (3 - 1) + 1);
+    if (randomOperator === 2 || this.currentOnline >= 1200) {
+      this.currentOnline -= randomOnline;
+    } else {
+      this.currentOnline += randomOnline;
+    }
   }
 
   getDate(): any {
@@ -178,13 +182,23 @@ export class HomeComponent implements OnInit {
   updateProgress(): void {
     this.courseService.updateTask(this.progressData.completedTasks).subscribe(response => {
       this.progressData = response;
-      if(response.completedTasks) {
-        this.router.navigate(['task-complete']);
+      const completed = response.todayTasks.every(task => response.completedTasks.includes(task.id));
+      if (completed) {
+        if (this.userData.todayActive) {
+          this.router.navigate(['task-complete']);
+        } else {
+          this.authService.dayliCheck().subscribe(response => {
+            if (response.success) {
+              this.router.navigate(['task-complete']);
+            }
+          })
+        }
+
       }
     })
   }
   openLesson(id: number): void {
-    if(id >= 2 && !this.userData.premium) {
+    if (id >= 2 && !this.userData.premium) {
       this.router.navigate(['/buying']);
     } else {
       this.courseService.getLesson(id).subscribe(response => {

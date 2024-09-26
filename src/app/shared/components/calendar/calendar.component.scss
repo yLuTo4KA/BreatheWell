@@ -3,14 +3,22 @@
 }
 .calendar {
     display: flex;
-    flex-direction: column;
     width: 100%;
     &__header {
-        margin-right: 16px;
+        padding-right: 8px;
         position: relative;
         display: flex;
-        color: var(--secondary-text);
-        margin-bottom: 4px;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column-reverse;
+        &::before {
+            content: "";
+            position: absolute;
+            right: 0;
+            height: 50%;
+            width: 1px;
+            background: var(--stroke-light);
+        }
         p {
             margin-right: 4px;
         }
@@ -21,6 +29,7 @@
         justify-content: space-between;
         width: 100%;
         text-align: center;
+        padding-left: 8px;
         &-item {
             &-week_day_name {
                 margin-bottom: 5px;

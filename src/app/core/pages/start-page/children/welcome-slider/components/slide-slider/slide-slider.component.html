@@ -10,7 +10,7 @@
          [pagination]="{ clickable: true }">
         <swiper-slide *ngFor="let content of contents; let index = index" class="slide-slider__swiper-slide" [ngStyle]="{'background-image': 'url(' + content.image + ')'}" >
             <h4 class="slide-slider__swiper-title">
-                {{index + 1 + '. ' + content.title}}
+                {{content.title}}
             </h4>
             <p class="slide-slider__swiper-subtitle">
                 {{content.subtitle}}

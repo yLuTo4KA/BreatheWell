@@ -6,7 +6,7 @@
         &-list {
             display: flex;
             width: 100%;
-            margin-bottom: 30px;
+            margin-bottom: 64px;
             z-index: 999;
         }
 
@@ -71,7 +71,6 @@
         flex-direction: column;
         align-items: center;
         font-weight: 300;
-        padding-top: 18px;
         &-info {
             display: flex;
             align-items: center;

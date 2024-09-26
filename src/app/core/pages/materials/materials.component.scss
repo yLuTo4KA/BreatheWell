@@ -19,7 +19,7 @@
             padding: 16px;
             height: 200px;
             background: url('../../../../assets/images/course-preview-mini.png') no-repeat;
-            background-position: center -45px;
+            background-position: bottom;
             background-size: cover;
             border-start-start-radius: 16px;
             border-start-end-radius: 16px;
@@ -68,13 +68,6 @@
             background-position: center;
             background-repeat: no-repeat;
 
-            &:first-child {
-                margin-left: 16px;
-            }
-
-            &:last-child {
-                margin-right: 16px;
-            }
 
             &-header {
                 display: flex;
