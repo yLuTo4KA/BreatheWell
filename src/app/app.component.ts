@@ -125,5 +125,9 @@ export class AppComponent {
       'star',
       this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/star.svg")
     );
+    this.matIconRegistry.addSvgIcon(
+      'audio-lock',
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/audio-lock.svg")
+    );
   }
 }
