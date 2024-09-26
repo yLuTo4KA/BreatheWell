@@ -52,9 +52,10 @@ export class TodayTasksComponent {
 
   }
   updateProgress(): void {
+    const currentTasks = this.progress.todayTasks.map(task => task.id);
     this.courseService.updateTask(this.progress.completedTasks).subscribe(response => {
       this.progress = response;
-      const completed = response.todayTasks.every(task => response.completedTasks.includes(task.id));
+      const completed = currentTasks.every(task => response.completedTasks.includes(task));
       if (completed) {
         if (this.userData.todayActive) {
           this.router.navigate(['task-complete']);
@@ -64,8 +65,7 @@ export class TodayTasksComponent {
               this.router.navigate(['task-complete']);
             }
           })
-        }
-
+        }   
       }
     })
   }
