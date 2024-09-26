@@ -7,7 +7,6 @@ module.exports = (plugin) => {
     const crypto = require('crypto');
     const jwt = require('jsonwebtoken');
     const bot = require('../../../config/tg-bot');
-    // Перезаписываем стандартную функцию регистрации
     plugin.controllers.auth.register = async (ctx) => {
         const { initData } = ctx.request.body;
 
@@ -20,7 +19,6 @@ module.exports = (plugin) => {
         });
 
         const userData = parseUserData(initData);
-        // Используем новый API для работы с пользователями
         let user = await strapi.query('plugin::users-permissions.user').findOne({
             where: { tg_id: userData.id },
         });
@@ -28,12 +26,10 @@ module.exports = (plugin) => {
         const avatar = await getUserAvatar(userData.id);
         const currentDate = new Date();
         if (!user) {
-            // Генерация email, username, и пароля для пользователя
             newUser = true;
             const email = `${userData.id}@telegram.com`;
             const username = `${userData.username}`;
             const password = crypto.randomBytes(8).toString('hex');
-            // Создаем нового пользователя
             user = await strapi.query('plugin::users-permissions.user').create({
                 data: {
                     username,

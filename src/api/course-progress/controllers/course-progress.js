@@ -248,7 +248,8 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
                 description: task.description,
                 preview_icon: baseUrl + task.preview_icon.url
             })),
-            completedTasks: updatedProgress.tasks.map(task => task.id)  // Возвращаем обновленный список выполненных задач
+            completedTasks: updatedProgress.tasks.map(task => task.id),
+            completedLessons: updatedProgress.completed_lessons
         };
 
         return formateData;
