@@ -25,15 +25,10 @@ export class TodayTasksComponent {
   progress!: Progress;
 
   ngOnInit(): void {
-    this.courseService.lesson$.subscribe(response => {
-      if (response && response.tasks) {
-        this.tasks = response.tasks;
-        this.lessonId = response.id;
-      }
-    })
     this.courseService.userProgress$.subscribe(response => {
-      if (response) {
+      if (response && response.todayTasks) {
         this.progress = response;
+        this.tasks = response.todayTasks;
       }
     })
     this.updateSubjet.pipe(debounceTime(this.debounceTime)).subscribe(() => {
