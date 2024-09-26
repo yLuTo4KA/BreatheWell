@@ -27,7 +27,7 @@
         <section class="lesson-sources">
             <h3 class="sources-title">Ссылки на источники</h3>
             <ul class="sources-list">
-                <li *ngFor="let source of lesson.content.sources | slice:0:(showAllSources ? lesson.content.sources.length : 2); let i = index" (click="openTgLink(source.url)">{{i + 1 + '. ' + source.title}}</li>
+                <li *ngFor="let source of lesson.content.sources | slice:0:(showAllSources ? lesson.content.sources.length : 2); let i = index" (click)="openTgLink(source.url)">{{i + 1 + '. ' + source.title}}</li>
             </ul>
             <div class="link-btn" (click)="toggleShowSource()" *ngIf="lesson.content.sources.length > 2">
                 Подробнее
