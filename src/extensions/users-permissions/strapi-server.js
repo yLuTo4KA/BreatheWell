@@ -84,14 +84,17 @@ module.exports = (plugin) => {
                 const diffInDay = diffInMs / (1000 * 60 * 60 * 24);
                 if (diffInDay >= 1) {
                     if (progress && progress.todayComplete && progress.lesson_learned) {
-                        await strapi.db.query('api::course-progress.course-progress').update({
-                            where: { user: user },
-                            data: {
-                                todayComplete: false,
-                                lesson_learned: false,
-                                lastComplete: Date.now(),
-                            },
-                        });
+                        const lastLesson = await isLastLesson(progress.lesson.id)
+                        if (!lastLesson) {
+                            await strapi.db.query('api::course-progress.course-progress').update({
+                                where: { user: user },
+                                data: {
+                                    todayComplete: false,
+                                    lesson_learned: false,
+                                    lastComplete: Date.now(),
+                                },
+                            });
+                        }
                     }
                 }
             }
@@ -108,7 +111,16 @@ module.exports = (plugin) => {
         });
     };
 
+    const isLastLesson = async (currentLessonId) => {
+        // Получаем все уроки курса
+        const lessons = await strapi.db.query('api::lesson.lesson').findMany({
+            orderBy: { id: 'asc' }
+        });
 
+        // Проверяем, является ли текущий урок последним
+        const lastLesson = lessons[lessons.length - 1]; // Предполагаем, что уроки отсортированы
+        return currentLessonId === lastLesson.id;
+    };
     function validateInitData(initData) {
         const decoded = decodeURIComponent(initData);
         const arr = decoded.split('&');
