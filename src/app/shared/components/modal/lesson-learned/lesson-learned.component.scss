@@ -1,0 +1,32 @@
+.lesson-learned {
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: none;
+    position: absolute;
+    top: 0;
+    z-index: 1200;
+    padding: 24px 16px;
+    text-align: center;
+    &__body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+    }
+}
+
+.view {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: var(--main-background);
+}
+.robot {
+    width: 143px;
+    height: 120px;
+    &-wrapper {
+        margin-bottom: 64px;
+    }
+}

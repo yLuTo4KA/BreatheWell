@@ -1,7 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Injectable, Inject } from '@angular/core';
-import { initUtils, mockTelegramEnv, parseInitData, initSwipeBehavior } from '@telegram-apps/sdk';
-const [swipeBehavior] = initSwipeBehavior();
+import { initUtils, mockTelegramEnv, parseInitData } from '@telegram-apps/sdk';
 
 const initDataRaw = new URLSearchParams([
   ['user', JSON.stringify({
@@ -62,7 +61,6 @@ export class TelegramService {
     this.utils.openLink(link);
   }
   expand(): void {
-    swipeBehavior.disableVerticalSwipe();
     this.tg.expand();
   }
 }
