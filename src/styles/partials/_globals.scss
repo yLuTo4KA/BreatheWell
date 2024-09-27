@@ -50,6 +50,28 @@ a:active {
   color: inherit;
   text-decoration: none;
 }
+/* Принудительный перенос слов в параграфах и других текстовых элементах */
+p, blockquote {
+  word-wrap: break-word;
+  overflow-wrap: break-word; 
+  line-height: 130%;
+}
+
+/* Принудительный перенос внутри блоков кода */
+pre, code {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  overflow-x: auto;
+  line-height: 130%;
+}
+
+/* Пример для других текстовых блоков */
+.markdown-content {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
 
 markdown h1,
 markdown h2,
@@ -58,6 +80,7 @@ markdown h4,
 markdown h5,
 markdown h6 {
   margin-bottom: 20px;
+  line-height: 130%;
 }
 
 hr {
@@ -67,28 +90,34 @@ hr {
 
 markdown p {
   margin-bottom: 15px;
+  line-height: 130%;
+  font-size: 18px;
 }
 
 markdown del {
   text-decoration: none;
   color: var(--purple);
+  line-height: 130%;
 }
 
 markdown img {
   width: 100%;
   border-radius: 16px;
   object-fit: cover;
+  margin: 24px 0;
 }
 
 /* Отступы для списков */
 markdown ul,
 markdown ol {
   margin-bottom: 20px;
+  
 }
 
 /* Отступы между элементами списка */
 markdown li {
   margin-bottom: 10px;
+  line-height: 130%;
 }
 
 
@@ -147,6 +176,10 @@ h4 {
 
 h5 {
   font-size: 18px;
+  font-weight: 300;
+}
+h6 {
+  font-size: 16px;
   font-weight: 300;
 }
 

@@ -17,6 +17,8 @@ export class HighlightsComponent {
   lessonId!: number;
   currentLessonId!: number;
   viewConfrimModal: boolean = false;
+  viewLearnLessonModal: boolean = false;
+
 
   slide: number = 1;
 
@@ -56,7 +58,14 @@ export class HighlightsComponent {
   learnLesson(): void {
     if (this.lessonId === this.currentLessonId) {
       this.courseService.learnLesson(this.lessonId).subscribe();
+      this.viewLearnLessonModal = true;
+    } else {
+      this.router.navigate(['/today-tasks']);
     }
+  }
+  closeLearnLessonModal(): void {
+    this.viewLearnLessonModal = false;
+    this.router.navigate(['/today-tasks']);
   }
   handleClick(event: MouseEvent): void {
     const x = event.clientX;
@@ -67,7 +76,6 @@ export class HighlightsComponent {
         this.nextSlide();
       } else {
         this.learnLesson();
-        this.router.navigate(['/today-tasks']);
       }
     } else {
       this.prevSlide();
