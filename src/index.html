@@ -8,15 +8,22 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script type="text/javascript">
-  
+    (function () {
+      const tele = window.Telegram.WebApp;
+      tele.ready()
+      tele.expand();
+      tele.SettingsButton.show();
+      tele.enableClosingConfirmation()
+      tele.disableVerticalSwipes()
+    })()
   </script>
   <link rel="preload" href="assets/images/welcome-bg.png" as="image">
   <link rel="preload" href="assets/images/smile.png" as="image">
   <link rel="preload" href="assets/images/confusion.png" as="image">
-  <!-- <link rel="preload" href="assets/images/lungs.png" as="image">
+  <link rel="preload" href="assets/images/lungs.png" as="image">
   <link rel="preload" href="assets/images/phone.png" as="image">
   <link rel="preload" href="assets/images/stat.png" as="image">
-  <link rel="preload" href="assets/images/premium.png" as="image"> -->
+  <link rel="preload" href="assets/images/premium.png" as="image">
 </head>
 <body>
   <app-root></app-root>
