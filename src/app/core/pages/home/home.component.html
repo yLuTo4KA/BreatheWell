@@ -38,7 +38,7 @@
                 <div class="reminder"></div>
                 <h5>Следующий урок</h5>
             </div>
-            <app-lesson-card [title]="progressData.todayLesson.title" [subtitle]="progressData.todayLesson.description"
+            <app-lesson-card [title]="progressData.todayLesson.preview_title" [subtitle]="progressData.todayLesson.description"
                 [img]="progressData.todayLesson.icon" [duration]="progressData.todayLesson.reading_time"
                 (click)="openLesson(progressData.todayLesson.id)"></app-lesson-card>
         </app-sector>

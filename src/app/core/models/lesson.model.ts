@@ -8,6 +8,7 @@ export interface Lesson {
     subtitle: string,
     description: string,
     reading_time: number,
+    preview_title: string,
     icon: string,
     preview: string,
     free: boolean,
@@ -23,7 +24,7 @@ export interface Lesson {
 
 export interface LessonsList {
     id: number,
-    title: string,
+    preview_title: string,
     subtitle: string,
     icon: string,
     free: boolean
