@@ -57,6 +57,7 @@ module.exports = createCoreController('api::lesson.lesson', ({ strapi }) => ({
         const formateData = {
             id: lesson.id,
             title: lesson.title,
+            preview_title: lesson.preview_title,
             subtitle: lesson.subtitle,
             description: lesson.description,
             reading_time: lesson.reading_time,
@@ -116,7 +117,7 @@ module.exports = createCoreController('api::lesson.lesson', ({ strapi }) => ({
             const formateData = lessons.sort((a, b) => a.id - b.id).map(lesson => {
                 return {
                     id: lesson.id,
-                    title: lesson.title,
+                    preview_title: lesson.preview_title,
                     subtitle: lesson.subtitle,
                     icon: baseUrl + lesson.lesson_icon.url,
                     free: lesson.free

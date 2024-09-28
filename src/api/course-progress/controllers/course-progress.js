@@ -42,7 +42,7 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
             lesson_learned: progress.lesson_learned,
             todayLesson: {
                 id: progress.lesson.id,
-                title: progress.lesson.title,
+                preview_title: progress.lesson.preview_title,
                 description: progress.lesson.subtitle,
                 reading_time: progress.lesson.reading_time,
                 lesson_preview: baseUrl + progress.lesson.lesson_preview.url,
@@ -159,7 +159,7 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
             lesson_learned: updatedProgress.lesson_learned,
             todayLesson: {
                 id: updatedProgress.lesson.id,
-                title: updatedProgress.lesson.title,
+                preview_title: updatedProgress.lesson.preview_title,
                 description: updatedProgress.lesson.subtitle,
                 reading_time: updatedProgress.lesson.reading_time,
                 lesson_preview: baseUrl + updatedProgress.lesson.lesson_preview.url,
@@ -236,7 +236,7 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
             lesson_learned: updatedProgress.lesson_learned,
             todayLesson: {
                 id: updatedProgress.lesson.id,
-                title: updatedProgress.lesson.title,
+                preview_title: updatedProgress.lesson.preview_title,
                 description: updatedProgress.lesson.subtitle,
                 reading_time: updatedProgress.lesson.reading_time,
                 lesson_preview: baseUrl + updatedProgress.lesson.lesson_preview.url,

@@ -83,6 +83,10 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::highlight.highlight"
+    },
+    "preview_title": {
+      "type": "string",
+      "required": true
     }
   }
 }

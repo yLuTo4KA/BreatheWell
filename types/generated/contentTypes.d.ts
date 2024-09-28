@@ -1023,6 +1023,7 @@ export interface ApiLessonLesson extends Schema.CollectionType {
       'oneToMany',
       'api::highlight.highlight'
     >;
+    preview_title: Attribute.String & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
