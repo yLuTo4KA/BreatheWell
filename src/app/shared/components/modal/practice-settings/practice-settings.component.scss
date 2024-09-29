@@ -2,10 +2,22 @@
     &__text {
         margin-bottom: 24px;
     }
+
+
     &__select {
-        display: flex;
-        flex-wrap: wrap;
-        margin-bottom: 24px - 8px;
+        overflow-y: hidden;
+        overflow-x: auto;
+        margin-left: -16px;
+        margin-right: -16px;
+        padding-left: 16px;
+        margin-bottom: 16px;
+
+        &-list {
+            display: flex;
+            width: max-content;
+            padding-right: 16px;
+        }
+
         &-tag {
             margin-right: 8px;
             margin-bottom: 8px;
@@ -14,19 +26,21 @@
             cursor: pointer;
             background: var(--stroke-dark);
             color: var(--primary-text);
+
             &-icon {
                 margin-right: 8px;
-                
+
                 font-size: 20px;
             }
+
             &.--active {
                 border: 1px solid var(--purple);
             }
         }
     }
-    &__list {
 
-    }
+    &__list {}
+
     &__item {
         display: flex;
         align-items: center;
@@ -34,13 +48,19 @@
         border-top: 1px solid var(--stroke-light);
         padding: 24px 0;
         cursor: pointer;
+
         &-data {
             display: flex;
             align-items: center;
             color: var(--secondary-text);
+
             &-value {
                 margin-right: 8px;
             }
         }
     }
+}
+
+.hidden {
+    display: none;
 }
