@@ -38,11 +38,25 @@
     color: var(--main-background);
     height: 78px;
     display: flex;
+    position: relative;
     border-start-start-radius: 16px;
     border-start-end-radius: 16px;
     padding: 16px;
     display: flex;
     cursor: pointer;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: 50%;
+      width: 1px;
+      background: #626262;
+      @media screen and (max-width: 350px) {
+        content: none;
+      }
+    }
   }
 
   &__prem-icon {
@@ -56,7 +70,6 @@
 
   &__info {
     padding-right: 35px;
-    border-right: 1px solid #626262;
     
     &-title {
       font-weight: 500;

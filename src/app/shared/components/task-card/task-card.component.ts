@@ -2,6 +2,7 @@ import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Lesson } from 'src/app/core/models/lesson.model';
 import { Task } from 'src/app/core/models/task.model';
+import { BreathService } from 'src/app/core/services/breath.service';
 import { CourseService } from 'src/app/core/services/course.service';
 
 @Component({
@@ -16,11 +17,12 @@ export class TaskCardComponent {
   @Output() checkTask = new EventEmitter<number>();
 
   private courseService = inject(CourseService);
+  private breathService = inject(BreathService);
 
   private router = inject(Router);
 
   ngOnInit(): void {
-    if(this.lesson) {
+    if (this.lesson) {
       this.courseService.setLesson(this.lesson);
     }
   }
@@ -30,8 +32,18 @@ export class TaskCardComponent {
   }
 
   moreInfo(): void {
-    this.courseService.setCurrentTask(this.task);
-    this.router.navigate(['/task-detail']);
+    if (!this.task.audio_lesson && !this.task.practice) {
+      this.courseService.setCurrentTask(this.task);
+      this.router.navigate(['/task-detail']);
+    }
+    if(this.task.audio_lesson) {
+      this.courseService.setCurrentAudioLesson(this.task.audio_lesson);
+      this.router.navigate(['/audio-lesson']);
+    }else if(this.task.practice) {
+      console.log(this.task.practice)
+      this.breathService.updatePractice(this.task.practice);
+      this.router.navigate(['/breathing']);
+    }
   }
 
   emitCheckTask(): void {
