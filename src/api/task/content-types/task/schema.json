@@ -4,7 +4,8 @@
   "info": {
     "singularName": "task",
     "pluralName": "tasks",
-    "displayName": "Task"
+    "displayName": "Task",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -20,28 +21,38 @@
       "required": true
     },
     "preview_icon": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
       "allowedTypes": [
         "images",
         "videos"
-      ],
-      "type": "media",
-      "multiple": false,
-      "required": true
+      ]
     },
     "task_image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
       "allowedTypes": [
         "images",
         "videos"
-      ],
-      "type": "media",
-      "multiple": false,
-      "required": true
+      ]
     },
     "lesson": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::lesson.lesson",
       "inversedBy": "tasks"
+    },
+    "audio_lesson": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::audio-lesson.audio-lesson"
+    },
+    "practice": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::practice.practice"
     }
   }
 }

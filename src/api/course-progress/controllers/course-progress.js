@@ -26,7 +26,17 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
                             fields: ['*'],
                             populate: {
                                 preview_icon: true,
-                                task_image: true
+                                task_image: true,
+                                audio_lesson: {
+                                    populate: {
+                                        audio: true
+                                    }
+                                },
+                                practice: {
+                                    populate: {
+                                        sound: true
+                                    }
+                                }
                             }
                         },
                         lesson_preview: true,
@@ -54,7 +64,9 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
                     title: task.title,
                     description: task.description,
                     preview_icon: baseUrl + task.preview_icon.url,
-                    task_image: baseUrl + task.task_image.url
+                    task_image: baseUrl + task.task_image.url,
+                    audio_lesson: task.audio_lesson ? {...task.audio_lesson, audio: baseUrl + task.audio_lesson.audio.url} : null,
+                    practice: task.practice
                 }
             }),
             completedTasks: progress.tasks.map(task => { return task.id }),
@@ -66,16 +78,16 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
     async completeTask(ctx) {
         const user = ctx.state.user;
         const { completedTasks } = ctx.request.body;
-    
+
         if (!user) {
             return ctx.badRequest('User is required');
         }
-    
+
         // Проверяем, что получен массив с выполненными заданиями
         if (!Array.isArray(completedTasks)) {
             return ctx.badRequest('Array of completed tasks is required');
         }
-    
+
         // Получаем прогресс пользователя
         const progress = await strapi.query('api::course-progress.course-progress').findOne({
             where: { user },
@@ -91,20 +103,20 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
                 tasks: true
             }
         });
-    
+
         if (!progress) {
             return ctx.notFound('Progress not found');
         };
-    
+
         // Проверяем, завершены ли все задачи текущего урока
         const allTasksCompleted = progress.lesson.tasks.length > 0 &&
             progress.lesson.tasks.every(lessonTask => completedTasks.includes(lessonTask.id));
-    
-        
+
+
         let todayComplete = progress.todayComplete;
         let todayLesson = progress.lesson.id;
         let completedLessons = progress.completed_lessons && progress.completed_lessons.length > 0 ? progress.completed_lessons : [];
-        
+
         if (allTasksCompleted) {
             todayComplete = true;
             const nextLesson = await strapi.query('api::lesson.lesson').findOne({
@@ -112,26 +124,26 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
                 orderBy: { id: 'asc' },
                 fields: ['id'],
             });
-            if(!completedLessons.includes(progress.lesson.id)) {
+            if (!completedLessons.includes(progress.lesson.id)) {
                 completedLessons.push(progress.lesson.id);
             }
-    
+
             if (nextLesson) {
                 todayLesson = nextLesson.id;
             } else {
-                console.log('Это был последний урок'); 
+                console.log('Это был последний урок');
             }
         }
-       
-    
+
+
         // Обновляем прогресс в базе данных
         const updatedProgress = await strapi.entityService.update('api::course-progress.course-progress', progress.id, {
             data: {
                 tasks: completedTasks,
-                lesson: todayLesson, 
+                lesson: todayLesson,
                 todayComplete,
                 lastComplete: progress.todayComplete ? progress.lastComplete : Date.now(),
-                completed_lessons: completedLessons, 
+                completed_lessons: completedLessons,
             },
             populate: {
                 lesson: {
@@ -140,7 +152,17 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
                         tasks: {
                             fields: ['*'],
                             populate: {
-                                preview_icon: true
+                                preview_icon: true,
+                                audio_lesson: {
+                                    populate: {
+                                        audio: true
+                                    }
+                                },
+                                practice: {
+                                    populate: {
+                                        sound: true
+                                    }
+                                }
                             }
                         },
                         lesson_preview: true,
@@ -150,10 +172,10 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
                 tasks: true
             }
         });
-    
+
         // Формируем данные для ответа
         const baseUrl = process.env.BACKEND_URL || strapi.config.get('server.url');
-    
+
         const formateData = {
             todayComplete: updatedProgress.todayComplete,
             lesson_learned: updatedProgress.lesson_learned,
@@ -169,18 +191,20 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
                 id: task.id,
                 title: task.title,
                 description: task.description,
-                preview_icon: baseUrl + task.preview_icon.url
+                preview_icon: baseUrl + task.preview_icon.url,
+                audio_lesson: task.audio_lesson ? {...task.audio_lesson, audio: baseUrl + task.audio_lesson.audio.url} : null,
+                practice: task.practice
             })),
             completedTasks: updatedProgress.tasks.map(task => task.id),
             completedLessons: updatedProgress.completed_lessons
         };
-    
+
         return formateData;
     },
     async learnLesson(ctx) {
         const user = ctx.state.user;
         const { lessonId } = ctx.request.body;
-        
+
         if (!user) {
             return ctx.badRequest('User is required');
         }
@@ -200,12 +224,10 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
             }
         });
 
-        console.log(progress.lesson.id);
-        console.log(lessonId);
-        if(lessonId !== progress.lesson.id) {
+        if (lessonId !== progress.lesson.id) {
             return ctx.badRequest("Lesson is not currentDay")
         }
-        
+
 
         const updatedProgress = await strapi.entityService.update('api::course-progress.course-progress', progress.id, {
             data: {
@@ -218,7 +240,17 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
                         tasks: {
                             fields: ['*'],
                             populate: {
-                                preview_icon: true
+                                preview_icon: true,
+                                audio_lesson: {
+                                    populate: {
+                                        audio: true
+                                    }
+                                },
+                                practice: {
+                                    populate: {
+                                        sound: true
+                                    }
+                                }
                             }
                         },
                         lesson_preview: true,
@@ -230,7 +262,7 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
         });
 
         const baseUrl = process.env.BACKEND_URL || strapi.config.get('server.url');
-    
+
         const formateData = {
             todayComplete: updatedProgress.todayComplete,
             lesson_learned: updatedProgress.lesson_learned,
@@ -246,15 +278,17 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
                 id: task.id,
                 title: task.title,
                 description: task.description,
-                preview_icon: baseUrl + task.preview_icon.url
+                preview_icon: baseUrl + task.preview_icon.url,
+                audio_lesson: task.audio_lesson ? {...task.audio_lesson, audio: baseUrl + task.audio_lesson.audio.url} : null,
+                practice: task.practice
             })),
             completedTasks: updatedProgress.tasks.map(task => task.id),
             completedLessons: updatedProgress.completed_lessons
         };
 
         return formateData;
-        
+
     }
-    
-    
+
+
 }));

@@ -1288,6 +1288,7 @@ export interface ApiTaskTask extends Schema.CollectionType {
     singularName: 'task';
     pluralName: 'tasks';
     displayName: 'Task';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1301,6 +1302,16 @@ export interface ApiTaskTask extends Schema.CollectionType {
       'api::task.task',
       'manyToOne',
       'api::lesson.lesson'
+    >;
+    audio_lesson: Attribute.Relation<
+      'api::task.task',
+      'oneToOne',
+      'api::audio-lesson.audio-lesson'
+    >;
+    practice: Attribute.Relation<
+      'api::task.task',
+      'oneToOne',
+      'api::practice.practice'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
