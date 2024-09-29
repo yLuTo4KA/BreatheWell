@@ -6,7 +6,8 @@
         <div class="task-card__text">
             <p class="task-card__text-title">{{task.title}}</p>
             <div class="task-card__text-button" (click)="moreInfo()">
-                Подробнее
+                <p *ngIf="!task.audio_lesson && !task.practice">Подробнее</p>
+                <p *ngIf="task.audio_lesson || task.practice">Начать практику</p>
                 <mat-icon aria-hidden="false" aria-label="arrow" svgIcon="arrowRight" [style.width.px]="14" [style.height.px]="14"></mat-icon>
             </div>
         </div>
