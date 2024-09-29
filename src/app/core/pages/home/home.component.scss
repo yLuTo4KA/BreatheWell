@@ -91,16 +91,21 @@
     }
 
     &__guides {
-        margin-bottom: 32px;
+        margin-bottom: 24px;
 
         &-title {
             margin-bottom: 24px;
         }
+        &-wrapper {
+            overflow-y: hidden;
+            overflow-x: auto;
+            margin-left: -16px;
+            margin-right: -16px;
+            padding-left: 16px;
+        }
 
         &-list {
             display: flex;
-            flex-wrap: wrap;
-            margin-bottom: 24px - 8px;
         }
 
         &-item {
@@ -112,7 +117,7 @@
             cursor: pointer;
             background: var(--stroke-dark);
             color: var(--primary-text);
-
+            text-wrap: nowrap;
             p {
                 font-weight: 400;
             }
@@ -237,4 +242,8 @@
         left: -25%;
         background: #9747FFB2;
     }
+}
+
+.hidden {
+    display: none;
 }

@@ -5,7 +5,7 @@
                 [photoURL]="userData.avatar"></app-avatar>
         </div>
         <div class="home-page__user-info-welcome">
-            <p class="home-page__user-info-welcome-title">{{timeOfDay.ru}}, {{'yLuTo4KA'}}</p>
+            <p class="home-page__user-info-welcome-title">{{timeOfDay.ru}}, {{userData.username}}</p>
             <div class="premium-tag">
                 <app-premium-tag [premium]="userData.premium"></app-premium-tag>
             </div>
@@ -19,12 +19,21 @@
     </div>
     <div class="home-page__guides">
         <h4 class="home-page__guides-title">Дыхательные упражнения</h4>
-        <div class="home-page__guides-list">
-            <app-tag class="home-page__guides-item" *ngFor="let practice of practiceData"
-                (click)="updateAndOpenPractice(practice)">
-                <p class="home-page__guides-item-icon">{{practice.iconText}}</p>
-                <p class="home-page__guides-item-title">{{practice.title}}</p>
-            </app-tag>
+        <div class="home-page__guides-wrapper">
+            <div class="home-page__guides-list">
+                <app-tag class="home-page__guides-item" *ngFor="let practice of practiceData; let i = index"
+                    (click)="updateAndOpenPractice(practice)" [ngClass]="{'hidden': i % 2 !== 0}">
+                    <p class="home-page__guides-item-icon">{{practice.iconText}}</p>
+                    <p class="home-page__guides-item-title">{{practice.title}}</p>
+                </app-tag>
+            </div>
+            <div class="home-page__guides-list">
+                <app-tag class="home-page__guides-item" *ngFor="let practice of practiceData; let i = index"
+                    (click)="updateAndOpenPractice(practice)" [ngClass]="{'hidden': i % 2 === 0}">
+                    <p class="home-page__guides-item-icon">{{practice.iconText}}</p>
+                    <p class="home-page__guides-item-title">{{practice.title}}</p>
+                </app-tag>
+            </div>
         </div>
     </div>
     <div class="home-page__suggestions">
@@ -38,8 +47,9 @@
                 <div class="reminder"></div>
                 <h5>Следующий урок</h5>
             </div>
-            <app-lesson-card [title]="progressData.todayLesson.preview_title" [subtitle]="progressData.todayLesson.description"
-                [img]="progressData.todayLesson.icon" [duration]="progressData.todayLesson.reading_time"
+            <app-lesson-card [title]="progressData.todayLesson.preview_title"
+                [subtitle]="progressData.todayLesson.description" [img]="progressData.todayLesson.icon"
+                [duration]="progressData.todayLesson.reading_time"
                 (click)="openLesson(progressData.todayLesson.id)"></app-lesson-card>
         </app-sector>
     </div>
@@ -50,7 +60,7 @@
                 <h5>Задания на день</h5>
             </div>
             <div class="home-page__tasks-list" *ngIf="!progressData.todayComplete; else placeholder">
-                <div class="home-page__tasks-item" *ngFor="let task of progressData.todayTasks" >
+                <div class="home-page__tasks-item" *ngFor="let task of progressData.todayTasks">
                     <app-task-card [task]="task" [lesson]="progressData.todayLesson"
                         [completedTasks]="progressData.completedTasks" (checkTask)="checkTask($event)"></app-task-card>
                 </div>
@@ -60,7 +70,7 @@
                     <div class="home-page__task-placeholder-icon">
                         <img src="assets/images/check.png" alt="success">
                     </div>
-                    <p class="home-page__task-placeholder-text">Ты успешно выполнил  все задания на сегодня!</p>
+                    <p class="home-page__task-placeholder-text">Ты успешно выполнил все задания на сегодня!</p>
                 </div>
             </ng-template>
         </app-sector>
@@ -71,19 +81,24 @@
         <div class="online-content">
             <div class="online-avatars">
                 <div class="online-avatars-item">
-                    <app-avatar [displayName]="'U'" [photoURL]="'assets/images/animoji/user1.png'" [width]="36" [height]="36" [border]="true"></app-avatar>
+                    <app-avatar [displayName]="'U'" [photoURL]="'assets/images/animoji/user1.png'" [width]="36"
+                        [height]="36" [border]="true"></app-avatar>
                 </div>
                 <div class="online-avatars-item">
-                    <app-avatar [displayName]="'U'" [photoURL]="'assets/images/animoji/user2.png'" [width]="36" [height]="36" [border]="true"></app-avatar>
+                    <app-avatar [displayName]="'U'" [photoURL]="'assets/images/animoji/user2.png'" [width]="36"
+                        [height]="36" [border]="true"></app-avatar>
                 </div>
                 <div class="online-avatars-item">
-                    <app-avatar [displayName]="'U'" [photoURL]="'assets/images/animoji/user3.png'" [width]="36" [height]="36" [border]="true"></app-avatar>
+                    <app-avatar [displayName]="'U'" [photoURL]="'assets/images/animoji/user3.png'" [width]="36"
+                        [height]="36" [border]="true"></app-avatar>
                 </div>
                 <div class="online-avatars-item">
-                    <app-avatar [displayName]="'U'" [photoURL]="'assets/images/animoji/user4.png'" [width]="36" [height]="36" [border]="true"></app-avatar>
+                    <app-avatar [displayName]="'U'" [photoURL]="'assets/images/animoji/user4.png'" [width]="36"
+                        [height]="36" [border]="true"></app-avatar>
                 </div>
                 <div class="online-avatars-item">
-                    <app-avatar [displayName]="'U'" [photoURL]="'assets/images/animoji/user5.png'" [width]="36" [height]="36" [border]="true"></app-avatar>
+                    <app-avatar [displayName]="'U'" [photoURL]="'assets/images/animoji/user5.png'" [width]="36"
+                        [height]="36" [border]="true"></app-avatar>
                 </div>
             </div>
             <div class="online-stat">
