@@ -17,6 +17,7 @@
         padding: 24px 16px;
         min-height: 200px;
         overflow: auto;
+        overflow-x: hidden;
         cursor: default;
     }
     &__view {
