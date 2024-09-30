@@ -92,7 +92,7 @@ module.exports = {
             title: `BreathWell Premium`,
             description: 'Divinations token - To be able to do a tarot reading in the app',
             payload: payment.id.toString(),
-            provider_token: '',
+            provider_token: process.env.PROVIDER_TOKEN ?? '',
             currency: body.currency ? body.currency : 'XTR',
             prices: [{ label: `Premium`, amount: body.amount ? body.amount : 1900 }],
         }
