@@ -7,14 +7,14 @@ import { Progress } from "../models/progress.model";
 import { Lesson, LessonsList } from "../models/lesson.model";
 import { AudioLesson } from "../models/audio-lessons.model";
 import { Task } from "../models/task.model";
-import { Router } from "@angular/router";
+import { LoadingService } from "./loading.service";
 
 @Injectable({
     providedIn: 'root',
 })
 
 export class CourseService extends ApiService {
-    private router = inject(Router);
+    private loading = inject(LoadingService);
     private urlPath = '' as const;
 
     private userProgressSubject = new BehaviorSubject<Progress | null>(null);
@@ -101,10 +101,14 @@ export class CourseService extends ApiService {
 
     getLesson(id: number): Observable<Lesson> {
         const url = `${this.urlPath}lessons/${id}`
+        this.loading.startLoading();
         return this.get<Lesson>(url).pipe(
             tap(response => {
                 this.setLesson(response);
                 this.setCurrentTask(response.tasks[0]);
+            }),
+            finalize(() => {
+                this.loading.stopLoading();
             })
         );
     }

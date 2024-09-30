@@ -11,7 +11,6 @@ import { ModalComponent } from './components/modal/modal.component';
 import { PracticeSettingsComponent } from './components/modal/practice-settings/practice-settings.component';
 import { SoundSettingsComponent } from './components/modal/sound-settings/sound-settings.component';
 import { DurationSettingsComponent } from './components/modal/duration-settings/duration-settings.component';
-import {register} from "swiper/element/bundle";
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { PriceComponent } from './components/price/price.component';
 import { BenefitsItemComponent } from './components/benefits-item/benefits-item.component';
@@ -26,16 +25,19 @@ import { ConfrimCloseComponent } from './components/modal/confrim-close/confrim-
 import { HelpModalComponent } from './components/modal/help-modal/help-modal.component';
 import { LessonLearnedComponent } from './components/modal/lesson-learned/lesson-learned.component';
 import { SuggestLessonComponent } from './components/modal/suggest-lesson/suggest-lesson.component';
+import { TruncatePipe } from './pipes/truncate.pipe';
+import { LoadingComponent } from './components/modal/loading/loading.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-register();
 
 @NgModule({
   imports: [
     CommonModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressSpinnerModule
   ],
-  declarations: [ ButtonComponent, LogoLoaderComponent, TagComponent, SelectButtonComponent, MiniButtonComponent, ModalComponent, PracticeSettingsComponent, SoundSettingsComponent, DurationSettingsComponent, CalendarComponent, PriceComponent, BenefitsItemComponent, AvatarComponent, PremiumTagComponent, SugesstComponent, SectorComponent, LessonCardComponent, TaskCardComponent, FeatureItemComponent, ConfrimCloseComponent, HelpModalComponent, LessonLearnedComponent, SuggestLessonComponent],
-  exports: [    
+  declarations: [ButtonComponent, LogoLoaderComponent, TagComponent, SelectButtonComponent, MiniButtonComponent, ModalComponent, PracticeSettingsComponent, SoundSettingsComponent, DurationSettingsComponent, CalendarComponent, PriceComponent, BenefitsItemComponent, AvatarComponent, PremiumTagComponent, SugesstComponent, SectorComponent, LessonCardComponent, TaskCardComponent, FeatureItemComponent, ConfrimCloseComponent, HelpModalComponent, LessonLearnedComponent, SuggestLessonComponent, TruncatePipe, LoadingComponent],
+  exports: [
     ButtonComponent,
     LogoLoaderComponent,
     TagComponent,
@@ -59,7 +61,9 @@ register();
     HelpModalComponent,
     LessonLearnedComponent,
     SuggestLessonComponent,
+    TruncatePipe,
+    LoadingComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class SharedModule {}
+export class SharedModule { }

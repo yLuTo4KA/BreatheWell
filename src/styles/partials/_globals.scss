@@ -79,7 +79,7 @@ markdown h3,
 markdown h4,
 markdown h5,
 markdown h6 {
-  margin-bottom: 20px;
+  margin: 24px 0;
   line-height: 130%;
 }
 
@@ -89,9 +89,10 @@ hr {
 }
 
 markdown p {
-  margin-bottom: 15px;
+  margin: 16px 0;
   line-height: 130%;
   font-size: 18px;
+  color: #C4C8CD;
 }
 
 markdown del {
@@ -111,7 +112,7 @@ markdown img {
 markdown ul,
 markdown ol {
   margin-bottom: 20px;
-  
+  color: #C4C8CD;
 }
 
 /* Отступы между элементами списка */
@@ -246,6 +247,7 @@ swiper-container::part(bullet-active) {
     width: 100%;
     height: 100%;
     position: relative;
+    overflow: hidden;
 
     &.--center {
       display: flex;
