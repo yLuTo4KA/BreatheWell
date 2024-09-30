@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { boolean } from '@telegram-apps/sdk';
 import { ModalsView } from '../models/modals-view.model';
 import { BehaviorSubject } from 'rxjs';
 

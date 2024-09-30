@@ -3,6 +3,7 @@ import { CourseService } from '../../services/course.service';
 import { Subscription } from 'rxjs';
 import { Highlight } from '../../models/highlight.model';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-highlights',
@@ -12,6 +13,7 @@ import { Router } from '@angular/router';
 export class HighlightsComponent {
   private courseService = inject(CourseService);
   private router = inject(Router);
+  private location = inject(Location);
 
   highlights!: Highlight[];
   lessonId!: number;
@@ -50,9 +52,9 @@ export class HighlightsComponent {
     this.slide = id;
   }
 
-  handleClosePage(event: MouseEvent): void {
+  handleBack(event: MouseEvent): void {
     event.stopPropagation();
-    this.viewConfrimModal = true;
+    this.location.back();
   }
 
   learnLesson(): void {

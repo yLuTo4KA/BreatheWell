@@ -5,7 +5,7 @@
                 [photoURL]="userData.avatar"></app-avatar>
         </div>
         <div class="home-page__user-info-welcome">
-            <p class="home-page__user-info-welcome-title">{{timeOfDay.ru}}, {{userData.username}}</p>
+            <p class="home-page__user-info-welcome-title">{{timeOfDay.ru}}, {{userData.username | truncate:10}}</p>
             <div class="premium-tag">
                 <app-premium-tag [premium]="userData.premium"></app-premium-tag>
             </div>

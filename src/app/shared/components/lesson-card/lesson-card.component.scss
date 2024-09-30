@@ -27,14 +27,16 @@
     }
     &__text {
         flex: 1;
+        align-self: flex-start;
         margin-right: 16px;
         &-title {
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 5px;
         }
         &-subtitle {
             color: var(--secondary-text);
-            font-size: 12px;
+            font-size: 13px;
             
         }
     }
