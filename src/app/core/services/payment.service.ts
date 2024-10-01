@@ -18,7 +18,7 @@ export class PaymentService extends ApiService {
         super(http);
     }
 
-    getInvoice(amount: number, currency: 'XTR' | 'USD'): Observable<GetInvoice>{
+    getInvoice(amount: number, currency: 'XTR' | 'USD' | "RUB"): Observable<GetInvoice>{
         const url = `${this.urlPath}/getInvoice`;
         this.loadingSubject.next(true);
         return this.post<GetInvoice, GetInvoiceBody>(url, {amount, currency}).pipe(

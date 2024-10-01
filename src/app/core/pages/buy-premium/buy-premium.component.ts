@@ -48,7 +48,7 @@ export class BuyPremiumComponent {
   }
 
   getInvoice(): void {
-    this.paymentService.getInvoice(1, 'XTR').subscribe(response => {
+    this.paymentService.getInvoice(19000, 'RUB').subscribe(response => {
       if (response && response.url) {
         const invoice = initInvoice();
         invoice.open(response.url, 'url').then((status) => {
