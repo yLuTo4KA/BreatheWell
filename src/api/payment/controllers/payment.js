@@ -9,6 +9,10 @@ module.exports = {
 
         try {
             const update = ctx.request.body;
+            console.log('update')
+            console.log(update);
+            console.log('ctx')
+            console.log(ctx.request.body);
             if (update.pre_checkout_query) {
                 const { id, from, invoice_payload, shipping_option_id, order_info } = update.pre_checkout_query;
                 const allGoodsAvailable = true;
