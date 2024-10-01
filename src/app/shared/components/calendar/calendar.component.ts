@@ -13,13 +13,14 @@ interface WeekDays {
 })
 export class CalendarComponent {
   @Input() userLastVisit!: Date;
-  @Input() userLastActive!: Date | null;
+  @Input() todayActive!: boolean;
   @Input() activeDays!: number;
   @Input() yearView!: boolean;
 
   week: WeekDays[] = [];
   currentDay: number = 0;
   currentActiveDays: number = 0;
+  currentIndexedDay: number | null = null;
 
   dayOfWeek = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
 
@@ -28,8 +29,12 @@ export class CalendarComponent {
   ngOnInit(): void {
     this.week = this.getWeek(this.userLastVisit);
     this.currentDay = new Date(this.userLastVisit).getDate();
-    this.currentActiveDays = this.activeDays - 1;
-  
+    this.currentActiveDays = this.activeDays;
+  }
+
+  ngAfterViewInit(): void {
+    console.log(this.currentDay);
+    console.log(this.currentActiveDays);
   }
 
   getWeek(date: Date): WeekDays[] {
@@ -74,12 +79,19 @@ export class CalendarComponent {
     return month.charAt(0).toUpperCase() + month.slice(1);
   }
 
-  isActive(day: number): boolean {
-    const currentDate = new Date(this.userLastVisit);
-    const currentMonth = currentDate.getMonth();
-    const startActiveDay = this.currentDay - this.currentActiveDays;
-    return (day >= startActiveDay && day <= this.currentDay) || 
-           (currentMonth > 0 && day > 25);
+  isActive(index: number, day: number): boolean {
+    const indexedDay = index + this.currentDay;
+    if (!this.currentIndexedDay) {
+      this.currentIndexedDay = index + 2 + this.currentDay;
+    }
+    if (this.currentIndexedDay) {
+      if (this.todayActive && indexedDay === this.currentIndexedDay) {
+        return true;
+      }
+      if (indexedDay > this.currentIndexedDay - this.currentActiveDays && indexedDay < this.currentIndexedDay) {
+        return true;
+      }
+    }
+    return false;
   }
-  
 }

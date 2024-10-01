@@ -6,7 +6,7 @@
     <div class="calendar__body">
         <div class="calendar__body-item" *ngFor="let day of week; index as i">
             <p class="calendar__body-item-week_day_name">{{dayOfWeek[i]}}</p>
-            <p class="calendar__body-item-day" [ngClass]="{'--active': isActive(day.day)}">{{day.convertedDay}}</p>
+            <p class="calendar__body-item-day" [ngClass]="{'--active': isActive(i, day.day)}">{{day.convertedDay}}</p>
         </div>
     </div>
 </div>
