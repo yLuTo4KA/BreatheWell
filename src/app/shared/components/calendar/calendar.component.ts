@@ -29,6 +29,7 @@ export class CalendarComponent {
     this.week = this.getWeek(this.userLastVisit);
     this.currentDay = new Date(this.userLastVisit).getDate();
     this.currentActiveDays = this.activeDays - 1;
+  
   }
 
   getWeek(date: Date): WeekDays[] {
@@ -74,6 +75,11 @@ export class CalendarComponent {
   }
 
   isActive(day: number): boolean {
-    return day >= this.currentDay - this.currentActiveDays && day <= this.currentDay;
+    const currentDate = new Date(this.userLastVisit);
+    const currentMonth = currentDate.getMonth();
+    const startActiveDay = this.currentDay - this.currentActiveDays;
+    return (day >= startActiveDay && day <= this.currentDay) || 
+           (currentMonth > 0 && day > 25);
   }
+  
 }
