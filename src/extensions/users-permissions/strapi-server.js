@@ -74,7 +74,11 @@ module.exports = (plugin) => {
                 populate: {
                     lesson: {
                         fields: ['*'],
+                        populate: {
+                            tasks: true
+                        }
                     },
+                    tasks: true
                 }
             });
             if (progress) {
@@ -82,6 +86,13 @@ module.exports = (plugin) => {
                 // @ts-ignore
                 const diffInMs = currentDate - lastComplete;
                 const diffInDay = diffInMs / (1000 * 60 * 60 * 24);
+                const completedToday = progress.lesson.tasks.every(task => progress.tasks.some(completedTask => completedTask.id === task.id));
+                let completedLessons = progress.completed_lessons;
+                if (completedToday) {
+                    if (!completedLessons.includes(progress.lesson.id)) {
+                        completedLessons.push(progress.lesson.id);
+                    }
+                }
                 if (diffInDay >= 1) {
                     if (progress && progress.todayComplete && progress.lesson_learned) {
                         const lastLesson = await isLastLesson(progress.lesson.id)
@@ -89,9 +100,11 @@ module.exports = (plugin) => {
                             await strapi.db.query('api::course-progress.course-progress').update({
                                 where: { user: user },
                                 data: {
+                                    lesson: completedToday ? progress.lesson.id + 1 : progress.lesson.id,
                                     todayComplete: false,
                                     lesson_learned: false,
                                     lastComplete: Date.now(),
+                                    completed_lessons: completedLessons
                                 },
                             });
                         }

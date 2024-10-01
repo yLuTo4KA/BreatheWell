@@ -18,6 +18,7 @@ module.exports = {
                 const allGoodsAvailable = true;
 
                 if (allGoodsAvailable) {
+                    console.log('good! ' + id)
                     await bot.telegram.answerPreCheckoutQuery(id, true);
                 } else {
                     await bot.telegram.answerPreCheckoutQuery(id, false, "Sorry, the item you wanted is no longer available. Please choose another item.");
@@ -94,7 +95,7 @@ module.exports = {
 
         const invoice = {
             title: `BreathWell Premium`,
-            description: 'Divinations token - To be able to do a tarot reading in the app',
+            description: 'Breath well course is good!',
             payload: payment.id.toString(),
             provider_token: process.env.PROVIDER_TOKEN ?? '',
             currency: body.currency ? body.currency : 'XTR',
