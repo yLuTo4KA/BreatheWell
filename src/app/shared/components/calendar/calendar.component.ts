@@ -32,11 +32,6 @@ export class CalendarComponent {
     this.currentActiveDays = this.activeDays;
   }
 
-  ngAfterViewInit(): void {
-    console.log(this.currentDay);
-    console.log(this.currentActiveDays);
-  }
-
   getWeek(date: Date): WeekDays[] {
     const currentDate = new Date(date);
 

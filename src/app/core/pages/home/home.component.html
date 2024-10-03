@@ -53,24 +53,24 @@
                 (click)="openLesson(progressData.todayLesson.id)"></app-lesson-card>
         </app-sector>
     </div>
-    <div class="home-page__tasks" *ngIf="progressData.lesson_learned">
+    <div class="home-page__tasks" *ngIf="progressData.lesson_learned || progressData.todayComplete">
         <app-sector class="home-page__tasks-wrapper" [border]="true" [radius]="16">
             <div class="home-page__sector-title">
                 <div class="reminder"></div>
                 <h5>Задания на день</h5>
             </div>
-            <div class="home-page__tasks-list" *ngIf="!progressData.todayComplete; else placeholder">
+            <div class="home-page__tasks-list" *ngIf="!progressData.todayComplete && progressData.todayTasks.length > 0; else placeholder">
                 <div class="home-page__tasks-item" *ngFor="let task of progressData.todayTasks">
                     <app-task-card [task]="task" [lesson]="progressData.todayLesson"
                         [completedTasks]="progressData.completedTasks" (checkTask)="checkTask($event)"></app-task-card>
                 </div>
             </div>
             <ng-template #placeholder>
-                <div class="home-page__task-placeholder" *ngIf="progressData.todayComplete">
-                    <div class="home-page__task-placeholder-icon">
+                <div class="task-i-placeholder" *ngIf="progressData.todayComplete || progressData.todayTasks.length === 0">
+                    <div class="task-i-placeholder-icon">
                         <img src="assets/images/check.png" alt="success">
                     </div>
-                    <p class="home-page__task-placeholder-text">Ты успешно выполнил все задания на сегодня!</p>
+                    <p class="task-i-placeholder-text">Ты успешно выполнил все задания на сегодня!</p>
                 </div>
             </ng-template>
         </app-sector>

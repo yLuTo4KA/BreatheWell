@@ -46,11 +46,13 @@ export class CoursePreviewComponent {
   openLesson(lesson: LessonsList): void {
     if (lesson.id <= this.progress.todayLesson.id) {
       if (!lesson.free && this.userData.premium) {
-        this.courseService.getLesson(lesson.id).subscribe(response => {
-          if (response) {
-            this.navigateToLesson();
-          }
-        })
+        if((lesson.id !== this.progress.todayLesson.id && this.progress.todayComplete)) {
+          this.courseService.getLesson(lesson.id).subscribe(response => {
+            if (response) {
+              this.navigateToLesson();
+            }
+          })
+        }
       } else if (lesson.free) {
         this.courseService.getLesson(lesson.id).subscribe(response => {
           if (response) {

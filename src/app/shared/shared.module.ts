@@ -28,6 +28,7 @@ import { SuggestLessonComponent } from './components/modal/suggest-lesson/sugges
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { LoadingComponent } from './components/modal/loading/loading.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 
 
 @NgModule({
@@ -36,7 +37,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatIconModule,
     MatProgressSpinnerModule
   ],
-  declarations: [ButtonComponent, LogoLoaderComponent, TagComponent, SelectButtonComponent, MiniButtonComponent, ModalComponent, PracticeSettingsComponent, SoundSettingsComponent, DurationSettingsComponent, CalendarComponent, PriceComponent, BenefitsItemComponent, AvatarComponent, PremiumTagComponent, SugesstComponent, SectorComponent, LessonCardComponent, TaskCardComponent, FeatureItemComponent, ConfrimCloseComponent, HelpModalComponent, LessonLearnedComponent, SuggestLessonComponent, TruncatePipe, LoadingComponent],
+  declarations: [ButtonComponent, LogoLoaderComponent, TagComponent, SelectButtonComponent, MiniButtonComponent, ModalComponent, PracticeSettingsComponent, SoundSettingsComponent, DurationSettingsComponent, CalendarComponent, PriceComponent, BenefitsItemComponent, AvatarComponent, PremiumTagComponent, SugesstComponent, SectorComponent, LessonCardComponent, TaskCardComponent, FeatureItemComponent, ConfrimCloseComponent, HelpModalComponent, LessonLearnedComponent, SuggestLessonComponent, TruncatePipe, LoadingComponent, SafeHtmlPipe],
   exports: [
     ButtonComponent,
     LogoLoaderComponent,
@@ -62,6 +63,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     LessonLearnedComponent,
     SuggestLessonComponent,
     TruncatePipe,
+    SafeHtmlPipe,
     LoadingComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
