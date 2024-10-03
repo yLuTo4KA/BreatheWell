@@ -31,13 +31,13 @@ module.exports = createCoreController('api::practice.practice', ({ strapi }) => 
                 exhaleHold: attributes.exhaleHold,
                 duration: attributes.duration,
                 iconText: attributes.iconText,
-                sound: attributes.sound.data ? {
+                sound: attributes.sound && attributes.sound.data ? {
                     id: attributes.sound.data.id
                 } : null
             };
         });
 
-        // Return the transformed data with meta information
+        // Return the transformed data with meta informationx
         return { data: transformedData, meta };
     },
 }));

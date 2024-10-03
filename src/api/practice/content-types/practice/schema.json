@@ -49,6 +49,10 @@
     "iconText": {
       "type": "string",
       "default": "🌙"
+    },
+    "free": {
+      "type": "boolean",
+      "default": true
     }
   }
 }

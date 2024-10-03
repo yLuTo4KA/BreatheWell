@@ -9,16 +9,11 @@ module.exports = {
 
         try {
             const update = ctx.request.body;
-            console.log('update')
-            console.log(update);
-            console.log('ctx')
-            console.log(ctx.request.body);
             if (update.pre_checkout_query) {
                 const { id, from, invoice_payload, shipping_option_id, order_info } = update.pre_checkout_query;
                 const allGoodsAvailable = true;
 
                 if (allGoodsAvailable) {
-                    console.log('good! ' + id)
                     await bot.telegram.answerPreCheckoutQuery(id, true);
                 } else {
                     await bot.telegram.answerPreCheckoutQuery(id, false, "Sorry, the item you wanted is no longer available. Please choose another item.");

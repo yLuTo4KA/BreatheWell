@@ -43,6 +43,11 @@
         "videos",
         "audios"
       ]
+    },
+    "opens_with": {
+      "type": "integer",
+      "default": 0,
+      "required": true
     }
   }
 }

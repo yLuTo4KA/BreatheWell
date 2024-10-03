@@ -8,7 +8,6 @@ module.exports = {
             return ctx.unauthorized('You must be logged in to perform this action');
         }
 
-        console.log('Current user:', user);
         const today = new Date();
         if (user.todayActive) {
             return ctx.send({ user: user, success: false });

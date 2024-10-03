@@ -818,6 +818,7 @@ export interface ApiAudioLessonAudioLesson extends Schema.CollectionType {
     free: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
     image_preview: Attribute.Media<'images' | 'videos'> & Attribute.Required;
     audio: Attribute.Media<'videos' | 'audios'> & Attribute.Required;
+    opens_with: Attribute.Integer & Attribute.Required & Attribute.DefaultTo<0>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1110,6 +1111,7 @@ export interface ApiPracticePractice extends Schema.CollectionType {
       'api::sound.sound'
     >;
     iconText: Attribute.String & Attribute.DefaultTo<'\uD83C\uDF19'>;
+    free: Attribute.Boolean & Attribute.DefaultTo<true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

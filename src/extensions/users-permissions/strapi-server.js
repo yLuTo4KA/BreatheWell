@@ -94,7 +94,7 @@ module.exports = (plugin) => {
                     }
                 }
                 if (diffInDay >= 1) {
-                    if (progress && progress.todayComplete && progress.lesson_learned) {
+                    if (progress && progress.todayComplete) {
                         const lastLesson = await isLastLesson(progress.lesson.id)
                         if (!lastLesson) {
                             await strapi.db.query('api::course-progress.course-progress').update({
