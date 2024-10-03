@@ -5,10 +5,18 @@
     <div class="today-tasks__body">
         <h3 class="today-tasks__body-title">Твои <span class="text-purple">задания</span><br> на сегодня</h3>
         <p class="text-grey today-tasks__body-subtitle">Задания помеченные галочкой ✅ считаются выполненными. Для того чтобы завершить урок нужно выполнить все задания.</p>
-        <div class="today-tasks__list">
+        <div class="today-tasks__list" *ngIf="tasks && tasks.length > 0 && !progress.todayComplete; else placeholder">
             <div class="today-tasks__item" *ngFor="let task of tasks">
                 <app-task-card [task]="task" [completedTasks]="progress.completedTasks" (checkTask)="checkTask($event)"></app-task-card>
             </div>
         </div>
+        <ng-template #placeholder>
+            <div class="task-i-placeholder">
+                <div class="task-i-placeholder-icon">
+                    <img src="assets/images/check.png" alt="success">
+                </div>
+                <p class="task-i-placeholder-text">Ты успешно выполнил все задания на сегодня!</p>
+            </div>
+        </ng-template>
     </div>
 </div>

@@ -4,7 +4,7 @@
       <span class="lesson-type">Аудио урок</span>
     </header>
     <div class="lesson-text">
-        <h4 class="lesson-title">{{ suggestSettings.title }}</h4>
+        <h4 class="lesson-title" [innerHTML]="suggestSettings.title | safeHtml"></h4>
         <p class="lesson-subtitle" *ngIf="suggestSettings.subtitle">{{suggestSettings.subtitle}}</p>
     </div>
   </article>

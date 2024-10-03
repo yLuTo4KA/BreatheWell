@@ -9,7 +9,7 @@ import { SuggestSettings } from '../../models/suggest-setting.model';
 import { Progress } from '../../models/progress.model';
 import { CourseService } from '../../services/course.service';
 import { debounceTime } from 'rxjs/operators';
-import { Subject, Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 
 export interface TimeOfDay {
   eng: "morning" | "day" | "night",
@@ -107,10 +107,10 @@ export class HomeComponent implements OnInit {
 
     if (hour >= 5 && hour < 14) {
       this.timeOfDay = { eng: 'morning', ru: "Доброе утро" };
-      title = 'Начинаем день продуктивно';
+      title = 'Начинаем день <br> продуктивно';
     } else if (hour >= 14 && hour < 19) {
       this.timeOfDay = { eng: 'day', ru: "Добрый день" };
-      title = 'Снимаем стресс в конце дня';
+      title = 'Снимаем стресс<br> в конце дня';
     } else {
       this.timeOfDay = { eng: 'night', ru: "Доброй ночи" };
       title = 'Готовимся ко сну';

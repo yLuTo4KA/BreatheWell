@@ -7,57 +7,6 @@
     overflow-y: scroll;
     overflow-x: hidden;
 
-    &__task {
-        &-placeholder {
-            display: flex;
-            align-items: center;
-            padding: 16px;
-            background: url('../../../../assets/images/decor-mini.png') right no-repeat;
-            background-size: contain;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid var(--stroke-dark);
-            border-radius: 16px;
-
-            &-icon {
-                width: 44px;
-                height: 44px;
-                border-radius: 50%;
-                background-color: #B5CAFF1A;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin-right: 10px;
-                flex-shrink: 0;
-
-                img {
-                    width: 24px;
-                    height: 24px;
-                }
-            }
-
-            &-text {
-                padding-right: 54px;
-                font-size: 13px;
-            }
-
-            &::before {
-                content: '';
-                position: absolute;
-                bottom: -70px;
-                left: 20%;
-                width: 290px;
-                height: 100px;
-                border-radius: 50%;
-                background: linear-gradient(133.03deg, rgba(79, 43, 156, 0.5) 4.47%, rgba(78, 23, 196, 0.5) 71.45%);
-                filter: blur(60px);
-                opacity: 0.7;
-                z-index: -1;
-            }
-        }
-
-    }
-
     &__user {
 
         &-info {
@@ -81,8 +30,8 @@
             }
 
             &-help-button {
-                width: 44px;
-                height: 44px;
+                width: 34px;
+                height: 34px;
                 background-color: var(--stroke-dark);
             }
         }
