@@ -117,7 +117,7 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
         let todayLesson = progress.lesson.id;
         let completedLessons = progress.completed_lessons && progress.completed_lessons.length > 0 ? progress.completed_lessons : [];
 
-        if (allTasksCompleted) {
+        if (allTasksCompleted && progress.lesson_learned) {
             todayComplete = true;
             const nextLesson = await strapi.query('api::lesson.lesson').findOne({
                 where: { id: { $gt: progress.lesson.id } },

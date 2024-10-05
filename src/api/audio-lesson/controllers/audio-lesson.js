@@ -35,7 +35,8 @@ module.exports = createCoreController('api::audio-lesson.audio-lesson', ({ strap
                     duration: audio.duration,
                     preview: baseUrl + audio.image_preview.url,
                     audio: getAudio(audio),
-                    free: audio.free
+                    free: audio.free,
+                    opens_with: audio.opens_with
                 }
             })
             ctx.send(formateData ?? null);
