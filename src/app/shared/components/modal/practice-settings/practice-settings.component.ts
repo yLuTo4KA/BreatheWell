@@ -4,6 +4,8 @@ import { Subscription } from 'rxjs';
 import { Breath } from 'src/app/core/models/breath.model';
 import { ModalsView } from 'src/app/core/models/modals-view.model';
 import { Practice } from 'src/app/core/models/practice.model';
+import { User } from 'src/app/core/models/user.model';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { BreathService } from 'src/app/core/services/breath.service';
 import { ModalService } from 'src/app/core/services/modal.service';
 
@@ -16,10 +18,13 @@ export class PracticeSettingsComponent implements OnInit {
   private breathService = inject(BreathService);
   private modalService = inject(ModalService);
   private router = inject(Router);
+  private authService = inject(AuthService);
 
   private practiceSub!: Subscription;
   private modalSub!: Subscription;
   private breathSub!: Subscription;
+
+  userData!: User;
 
   modals: ModalsView = {
     practiceSettings: false,
@@ -44,6 +49,11 @@ export class PracticeSettingsComponent implements OnInit {
     this.breathSub = this.breathService.breathSetting$.subscribe(response => {
       this.breathSetting = response;
     })
+    this.authService.user$.subscribe(data => {
+      if(data) {
+        this.userData = data;
+      }
+    })
   }
 
   closeModal(): void {
@@ -62,7 +72,11 @@ export class PracticeSettingsComponent implements OnInit {
     this.modalService.closeModal('soundSettings');
   }
   updatePractice(practice: Practice): void {
-    this.breathService.updatePractice(practice);
+    if(!this.userData.premium && !practice.free) {
+      this.router.navigate(['/buying']);
+    }else {
+      this.breathService.updatePractice(practice);
+    }
   }
 
   getDuration(): number {

@@ -35,11 +35,14 @@ export class ShellComponent implements OnInit {
     ).subscribe(() => {
       const currentUrl = this.router.url;
       this.showFooter = currentUrl !== '/notAuth' && !currentUrl.startsWith('/start') && currentUrl !== '/breathing' && currentUrl !== '/buying' && currentUrl !== '/audio-lesson';
-      this.showPremium = currentUrl !== '/dayli-progress'
+      this.showPremium = currentUrl !== '/dayli-progress' && this.authResponse && !this.authResponse.user.premium
     });
     this.authService.deauth();
     this.authService.auth().subscribe(response => {
       this.authResponse = response;
+      this.showPremium = !response.user.premium;
+      const root = document.documentElement;
+      root.style.setProperty('--dynamic-size', response.user.premium ? '110px' : '180px');
       forkJoin({ sounds: this.breathService.getSounds(), practices: this.breathService.getPractice(), prices: this.pricesService.getPrices(), progress: this.courseService.getUserProgress(), lessonsList: this.courseService.getLessons(), audioLessons: this.courseService.getAudioLessons()}).subscribe(() => {
         this.lessonsCount = this.courseService.getLessonsCount();
         this.redirectUser();
@@ -49,16 +52,15 @@ export class ShellComponent implements OnInit {
   }
 
   redirectUser(): void {
-    this.router.navigate(['/start']);
-    // if (this.authResponse.newUser) {  // later
-    //   this.router.navigate(['/start']);
-    // } else {
-    //   if (this.authResponse.user.premium) {
-    //     this.router.navigate(['/home']);
-    //   } else {
-    //     this.router.navigate(['/start/cta']);
-    //   }
-    // }
+    if (this.authResponse.newUser) {  // later
+      this.router.navigate(['/start']);
+    } else {
+      if (this.authResponse.user.premium) {
+        this.router.navigate(['/home']);
+      } else {
+        this.router.navigate(['/start/cta']);
+      }
+    }
   }
 
 

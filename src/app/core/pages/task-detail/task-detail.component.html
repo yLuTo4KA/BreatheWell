@@ -10,7 +10,7 @@
         <div class="task-detail-text">
             <markdown [data]="task.description"></markdown>
         </div>
-        <app-task-card [task]="task" [completedTasks]="progress.completedTasks" (checkTask)="checkTask(task.id)"></app-task-card>
+        <app-task-card [task]="task" [completedTasks]="progress.completedTasks" (checkTask)="checkTask(task.id)" [lesson]="progress.todayLesson" [premium]="userData.premium"></app-task-card>
         <router-link routerLink="/today-tasks" class="task-detail-link text-grey">
             <p>Смотреть другие задания</p>
             <mat-icon svgIcon="arrowRight"></mat-icon>

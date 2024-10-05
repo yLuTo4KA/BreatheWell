@@ -1,0 +1,12 @@
+<div class="first-lesson" [class.view]="viewModal" >
+    <div class="first-lesson__header">
+        <app-mini-button icon="close" class="close" (click)="closeModal()"></app-mini-button>
+    </div>
+    <div class="first-lesson__body">
+        <app-tag class="first-lesson__tag">Практика</app-tag>
+        <h3 class="first-lesson__title">Начни свой первый урок</h3>
+        <p class="first-lesson__subtitle text-grey">Подробно о том, как дыхание может улучшить твою жизнь.</p>
+        <app-button class="first-lesson__button" (click)="openFirstLesson()"><h4>Начать</h4></app-button>
+        <a class="text-grey" (click)="closeModal()">Попробую позже</a>
+    </div>  
+</div>

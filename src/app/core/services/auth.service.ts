@@ -27,9 +27,11 @@ export class AuthService extends ApiService {
 
     private tokenSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(this.getToken());
     private userDataSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
+    private newUserSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     token$: Observable<string | null> = this.tokenSubject.asObservable();
     user$: Observable<User | null> = this.userDataSubject.asObservable();
+    newUser$: Observable<boolean> = this.newUserSubject.asObservable();
 
     constructor(http: HttpClient) {
         super(http);
@@ -73,6 +75,7 @@ export class AuthService extends ApiService {
                 if (response) {
                     this.setToken(response.jwt);
                     this.setUserData(response.user);
+                    this.newUserSubject.next(response.newUser);
                 }
             }),
             finalize(() => {

@@ -1,13 +1,13 @@
 .task-detail {
     height: 100vh;
-    padding-bottom: 180px;
+    padding-bottom: var(--dynamic-size);
     overflow-x: hidden;
     overflow-y: auto;
     &-overview {
         overflow-x: hidden;
         overflow-y: scroll;
         height: 100vh;
-        padding-bottom: 180px;
+        padding-bottom: var(--dynamic-size);
     }
     &-header {
         position: relative;

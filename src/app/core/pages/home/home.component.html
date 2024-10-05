@@ -25,6 +25,7 @@
                     (click)="updateAndOpenPractice(practice)" [ngClass]="{'hidden': i % 2 !== 0}">
                     <p class="home-page__guides-item-icon">{{practice.iconText}}</p>
                     <p class="home-page__guides-item-title">{{practice.title}}</p>
+                    <app-mini-button class="home-page__guides-item-lock" icon="lock-practice" *ngIf="!userData.premium && !practice.free" [iconWidth]="16" [iconHeight]="16"></app-mini-button>
                 </app-tag>
             </div>
             <div class="home-page__guides-list">
@@ -32,6 +33,7 @@
                     (click)="updateAndOpenPractice(practice)" [ngClass]="{'hidden': i % 2 === 0}">
                     <p class="home-page__guides-item-icon">{{practice.iconText}}</p>
                     <p class="home-page__guides-item-title">{{practice.title}}</p>
+                    <app-mini-button class="home-page__guides-item-lock" icon="lock-practice" *ngIf="!userData.premium && !practice.free" [iconWidth]="16" [iconHeight]="16"></app-mini-button>
                 </app-tag>
             </div>
         </div>
@@ -53,20 +55,24 @@
                 (click)="openLesson(progressData.todayLesson.id)"></app-lesson-card>
         </app-sector>
     </div>
-    <div class="home-page__tasks" *ngIf="progressData.lesson_learned || progressData.todayComplete">
+    <div class="home-page__tasks">
         <app-sector class="home-page__tasks-wrapper" [border]="true" [radius]="16">
             <div class="home-page__sector-title">
                 <div class="reminder"></div>
                 <h5>Задания на день</h5>
             </div>
             <div class="home-page__tasks-list" *ngIf="!progressData.todayComplete && progressData.todayTasks.length > 0; else placeholder">
+                <div class="home-page__tasks-item">
+                    <app-task-card [task]="taskLearn" [lesson]="progressData.todayLesson"
+                        [completedTasks]="progressData.completedTasks" [readLessonTask]="true" [lessonLerned]="progressData.lesson_learned" [premium]="userData.premium"></app-task-card>
+                </div>
                 <div class="home-page__tasks-item" *ngFor="let task of progressData.todayTasks">
                     <app-task-card [task]="task" [lesson]="progressData.todayLesson"
-                        [completedTasks]="progressData.completedTasks" (checkTask)="checkTask($event)"></app-task-card>
+                        [completedTasks]="progressData.completedTasks" (checkTask)="checkTask($event)" [premium]="userData.premium"></app-task-card>
                 </div>
             </div>
             <ng-template #placeholder>
-                <div class="task-i-placeholder" *ngIf="progressData.todayComplete || progressData.todayTasks.length === 0">
+                <div class="task-i-placeholder">
                     <div class="task-i-placeholder-icon">
                         <img src="assets/images/check.png" alt="success">
                     </div>

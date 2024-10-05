@@ -1,7 +1,7 @@
 .materials {
     padding: 24px 16px;
     height: 100vh;
-    padding-bottom: 180px;
+    padding-bottom: var(--dynamic-size);
     overflow-x: hidden;
     overflow-y: auto;
 
@@ -10,24 +10,35 @@
     }
 
     &__main-course {
-        min-height: 321px;
+        height: 500px;
+        position: relative;
         border-radius: 16px;
-        background: #FFFFFF0D;
-        border: 1px solid var(--stroke-dark);
+        background: #FFFFFF12;
+        border: 1px solid var(--stroke-light);
         margin-bottom: 32px;
+        
 
         &-header {
             padding: 16px;
-            height: 200px;
-            background: url('../../../../assets/images/course-preview-mini.png') no-repeat;
+            height: 400px;
+            background: linear-gradient(180deg, rgba(23, 24, 53, 0) 39.88%, #171835 100%), url('../../../../assets/images/course-preview.png') no-repeat;
             background-position: bottom;
             background-size: cover;
             border-start-start-radius: 16px;
             border-start-end-radius: 16px;
+            margin-bottom: -50px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            z-index: 10;
         }
 
         &-body {
             padding: 16px;
+            padding-bottom: 22px;
+            position: absolute;
+            bottom: 0;
+            z-index: 20;
 
         }
 
@@ -58,11 +69,12 @@
         }
 
         &-slide {
-            height: 250px;
+            height: 258px;
             width: 200px !important;
             padding: 16px;
             border-radius: 20px;
             display: flex;
+            position: relative;
             flex-direction: column;
             justify-content: space-between;
             background-size: cover;
@@ -82,7 +94,18 @@
         }
     }
 }
-
+.main-course {
+    &-length {
+        margin-bottom: 16px;
+    }
+    &-title {
+        margin-bottom: 8px;
+    }
+    &-subtitle {
+        margin-bottom: 24px;
+        font-size: 13px;
+    }
+}
 .audio {
     &-duration {
         background: var(--stroke-light);
@@ -98,6 +121,29 @@
         color: #080110;
         width: 36px;
         height: 36px;
+    }
+    &-opens-with {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: center;
+        &-tag {
+            background: #FFFFFF99;
+            border: 1px solid #FFFFFF4D;
+            color: var(--main-background);
+            font-size: 12px;
+            font-weight: 400;
+            padding: 0px 8.5px 0px 16px;
+            height: 40px;
+        }
+        &-lock {
+            width: 24px;
+            height: 24px;
+            background: var(--stroke-light);
+            margin-left: 10px;
+        }
     }
 }
 
