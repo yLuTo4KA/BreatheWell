@@ -1,6 +1,6 @@
 <div class="buy-premium-page --bg-top" >
     <div class="buy-premium-page__body">
-        <app-mini-button class="buy-premium-page__button-close" icon="close" routerLink="/home"></app-mini-button>
+        <app-mini-button class="buy-premium-page__button-close" icon="close" (click)="closePage()"></app-mini-button>
         <div class="buy-premium-page__top">
             <div class="buy-premium-page__top-block">
                 <div class="buy-premium-page__top-block-wrapper">
@@ -45,28 +45,11 @@
                 [pagination]="{ clickable: true }">
                 <swiper-slide class="reviews-slide">
                     <div class="reviews-slide__avatar">
-                        <app-avatar [displayName]="'y'"></app-avatar>
+                        <app-avatar [displayName]="'y'" [photoURL]="'assets/images/animoji/user1.png'"></app-avatar>
                     </div>
                     <div class="reviews-slide__body">
                         <p class="reviews-slide__body-text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, obcaecati temporibus. Repudiandae aliquid rem nesciunt sit maiores minima adipisci voluptatem esse quia nihil quae quasi, est ipsa facilis eligendi cum?
-                        </p>
-                        <div class="review-slide__stars-list">
-                            <mat-icon svgIcon="star" class="reviews-slide__star"></mat-icon>
-                            <mat-icon svgIcon="star" class="reviews-slide__star"></mat-icon>
-                            <mat-icon svgIcon="star" class="reviews-slide__star"></mat-icon>
-                            <mat-icon svgIcon="star" class="reviews-slide__star"></mat-icon>
-                            <mat-icon svgIcon="star" class="reviews-slide__star"></mat-icon>
-                        </div>
-                    </div>
-                </swiper-slide>
-               <swiper-slide class="reviews-slide">
-                    <div class="reviews-slide__avatar">
-                        <app-avatar [displayName]="'y'"></app-avatar>
-                    </div>
-                    <div class="reviews-slide__body">
-                        <p class="reviews-slide__body-text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, obcaecati temporibus. Repudiandae aliquid rem nesciunt sit maiores minima adipisci voluptatem esse quia nihil quae quasi, est ipsa facilis eligendi cum?
+                            Ребята, реально помогли! Теперь стресс не давит так сильно, дыхание стало моим спасением. Напоминания, просто находка, раньше постоянно забывал...
                         </p>
                         <div class="review-slide__stars-list">
                             <mat-icon svgIcon="star" class="reviews-slide__star"></mat-icon>
@@ -79,11 +62,62 @@
                 </swiper-slide>
                 <swiper-slide class="reviews-slide">
                     <div class="reviews-slide__avatar">
-                        <app-avatar [displayName]="'y'"></app-avatar>
+                        <app-avatar [displayName]="'y'" [photoURL]="'assets/images/animoji/user2.png'"></app-avatar>
                     </div>
                     <div class="reviews-slide__body">
                         <p class="reviews-slide__body-text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, obcaecati temporibus. Repudiandae aliquid rem nesciunt sit maiores minima adipisci voluptatem esse quia nihil quae quasi, est ipsa facilis eligendi cum?
+                            В основном использую упражнения перед сном и пока доволен. В целом, эффект довольно быстро можно заметить.
+                        </p>
+                        <div class="review-slide__stars-list">
+                            <mat-icon svgIcon="star" class="reviews-slide__star"></mat-icon>
+                            <mat-icon svgIcon="star" class="reviews-slide__star"></mat-icon>
+                            <mat-icon svgIcon="star" class="reviews-slide__star"></mat-icon>
+                            <mat-icon svgIcon="star" class="reviews-slide__star"></mat-icon>
+                            <mat-icon svgIcon="star" class="reviews-slide__star"></mat-icon>
+                        </div>
+                    </div>
+                </swiper-slide>
+                <swiper-slide class="reviews-slide">
+                    <div class="reviews-slide__avatar">
+                        <app-avatar [displayName]="'y'" [photoURL]="'assets/images/animoji/user3.png'"></app-avatar>
+                    </div>
+                    <div class="reviews-slide__body">
+                        <p class="reviews-slide__body-text">
+                            Особенно люблю аудио уроки, они реально расслабляют. Есть неплохой элемент погружения и ощущения от практики усиливает.
+                        </p>
+                        <div class="review-slide__stars-list">
+                            <mat-icon svgIcon="star" class="reviews-slide__star"></mat-icon>
+                            <mat-icon svgIcon="star" class="reviews-slide__star"></mat-icon>
+                            <mat-icon svgIcon="star" class="reviews-slide__star"></mat-icon>
+                            <mat-icon svgIcon="star" class="reviews-slide__star"></mat-icon>
+                            <mat-icon svgIcon="star" class="reviews-slide__star"></mat-icon>
+                        </div>
+                    </div>
+                </swiper-slide>
+                <swiper-slide class="reviews-slide">
+                    <div class="reviews-slide__avatar">
+                        <app-avatar [displayName]="'y'" [photoURL]="'assets/images/animoji/user4.png'"></app-avatar>
+                    </div>
+                    <div class="reviews-slide__body">
+                        <p class="reviews-slide__body-text">
+                            Много классных практик. Приятная музыка, есть голосовое сопровождение. Подробно описано, для чего именно нужно каждое упражнение.
+                        </p>
+                        <div class="review-slide__stars-list">
+                            <mat-icon svgIcon="star" class="reviews-slide__star"></mat-icon>
+                            <mat-icon svgIcon="star" class="reviews-slide__star"></mat-icon>
+                            <mat-icon svgIcon="star" class="reviews-slide__star"></mat-icon>
+                            <mat-icon svgIcon="star" class="reviews-slide__star"></mat-icon>
+                            <mat-icon svgIcon="star" class="reviews-slide__star"></mat-icon>
+                        </div>
+                    </div>
+                </swiper-slide>
+                <swiper-slide class="reviews-slide">
+                    <div class="reviews-slide__avatar">
+                        <app-avatar [displayName]="'y'" [photoURL]="'assets/images/animoji/user5.png'"></app-avatar>
+                    </div>
+                    <div class="reviews-slide__body">
+                        <p class="reviews-slide__body-text">
+                            Впервые узнал о дыхательных практиках на этом курсе. Ум стал ясным и активным, хватает сил справляться со стрессом и двигаться вперёд по важным направлениям.
                         </p>
                         <div class="review-slide__stars-list">
                             <mat-icon svgIcon="star" class="reviews-slide__star"></mat-icon>
@@ -104,3 +138,5 @@
         </app-button>
     </div>
 </div>
+
+<app-first-lesson [viewModal]="viewFirstLessonModal" (closeModalEmit)="closeFirstLesson()" (openFirstLessonEmit)="openFirstLesson()"></app-first-lesson>

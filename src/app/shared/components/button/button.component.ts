@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
 export class ButtonComponent {
   @Input() small: boolean = false;
   @Input() paddingX: number = 5;
-  @Input() paddingY: number = 12;
+  @Input() paddingY: number = 14;
   @Input() disabled: boolean = false;
 
   

@@ -1,6 +1,6 @@
 .highlights {
     height: 100vh;
-    padding-bottom: 180px;
+    padding-bottom: var(--dynamic-size);
     overflow-x: hidden;
     overflow-y: auto;
     height: 100%;

@@ -53,11 +53,13 @@ export class MaterialsComponent {
   };
 
   openAudioLesson(lesson: AudioLesson): void {
-    if(this.isLocked(lesson)) {
+    if (this.isLocked(lesson)) {
       this.router.navigate(['/buying']);
-    }else {
-      this.courseService.setCurrentAudioLesson(lesson);
-      this.router.navigate(['/audio-lesson']);
+    } else {
+      if (lesson.opens_with < this.progress.todayLesson.id) {
+        this.courseService.setCurrentAudioLesson(lesson);
+        this.router.navigate(['/audio-lesson']);
+      }
     }
   }
 }

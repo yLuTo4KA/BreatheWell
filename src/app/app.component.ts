@@ -129,5 +129,9 @@ export class AppComponent {
       'audio-lock',
       this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/audio-lock.svg")
     );
+    this.matIconRegistry.addSvgIcon(
+      'lock-practice',
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/lock-practice.svg")
+    );
   }
 }

@@ -5,6 +5,8 @@ import { initInvoice } from '@telegram-apps/sdk';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { CourseService } from '../../services/course.service';
+import { LoadingService } from '../../services/loading.service';
+import { Progress } from '../../models/progress.model';
 
 @Component({
   selector: 'app-buy-premium',
@@ -16,6 +18,9 @@ export class BuyPremiumComponent {
   private authService = inject(AuthService);
   private courseService = inject(CourseService);
   private router = inject(Router);
+  private loadingService = inject(LoadingService);
+
+  viewFirstLessonModal: boolean = false;
 
   timer: number = 30 * 60;
   private timerInterval: any;
@@ -23,6 +28,7 @@ export class BuyPremiumComponent {
   loading = false;
   loadingSub: any;
 
+  newUser: boolean = false;
   lessonsCount = this.courseService.getLessonsCount();
 
 
@@ -39,6 +45,7 @@ export class BuyPremiumComponent {
     this.loadingSub = this.paymentService.loading$.subscribe(response => {
       this.loading = response;
     })
+    this.authService.newUser$.subscribe(data => this.newUser = data);
   }
 
   getTimer(timer: number) {
@@ -51,24 +58,46 @@ export class BuyPremiumComponent {
     this.paymentService.getInvoice(19000, 'RUB').subscribe(response => {
       if (response && response.url) {
         const invoice = initInvoice();
+        this.loadingService.startLoading();
         invoice.open(response.url, 'url').then((status) => {
-          console.log(status);
           if (status === 'paid') {
             this.authService.getProfile().subscribe(response => {
               if (response) {
-                this.router.navigate(['/home']);
+                this.closePage();
               }
             });
 
           }
+        }).finally(() => {
+          this.loadingService.stopLoading();
         })
       }
     })
+  }
+
+  closePage(): void {
+    if(this.newUser) {
+      this.viewFirstLessonModal = true;
+    }else {
+      this.router.navigate(['/home']);
+    }
+  }
+  openFirstLesson(): void {
+    this.courseService.getLesson(1).subscribe(response => {
+      if (response) {
+        this.router.navigate(['/lesson-preview']);
+      }
+    })
+  }
+  closeFirstLesson(): void {
+    this.viewFirstLessonModal = false;
+    this.router.navigate(['/home']);
   }
 
   ngOnDestroy(): void {
     if (this.timerInterval) {
       clearInterval(this.timerInterval);
     }
+    this.loadingService.stopLoading();
   }
 }

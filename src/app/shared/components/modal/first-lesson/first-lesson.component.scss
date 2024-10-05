@@ -1,0 +1,48 @@
+.first-lesson {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    background: linear-gradient(180deg, rgba(5, 7, 38, 0) 0%, #050726 77%), url('../../../../../assets/images/first-lesson.png')  top center / 100% 85% no-repeat, var(--main-background);
+    padding: 24px 16px;
+    display: none;
+    text-align: center;
+
+    &__header {
+        display: flex;
+        justify-content: flex-end;
+    }
+    &__body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    &__tag {
+        margin-bottom: 32px;
+    }
+    &__title {
+        margin-bottom: 16px;
+    }
+    &__subtitle {
+        margin-bottom: 48px;
+        font-size: 18px;
+    }
+    &__button {
+        margin-bottom: 24px;
+    }
+}
+
+.close {
+    background: var(--stroke-dark);
+    width: 34px;
+    height: 34px;
+}
+
+.view {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

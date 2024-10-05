@@ -29,6 +29,7 @@ import { TruncatePipe } from './pipes/truncate.pipe';
 import { LoadingComponent } from './components/modal/loading/loading.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
+import { FirstLessonComponent } from './components/modal/first-lesson/first-lesson.component';
 
 
 @NgModule({
@@ -37,7 +38,7 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
     MatIconModule,
     MatProgressSpinnerModule
   ],
-  declarations: [ButtonComponent, LogoLoaderComponent, TagComponent, SelectButtonComponent, MiniButtonComponent, ModalComponent, PracticeSettingsComponent, SoundSettingsComponent, DurationSettingsComponent, CalendarComponent, PriceComponent, BenefitsItemComponent, AvatarComponent, PremiumTagComponent, SugesstComponent, SectorComponent, LessonCardComponent, TaskCardComponent, FeatureItemComponent, ConfrimCloseComponent, HelpModalComponent, LessonLearnedComponent, SuggestLessonComponent, TruncatePipe, LoadingComponent, SafeHtmlPipe],
+  declarations: [ButtonComponent, LogoLoaderComponent, TagComponent, SelectButtonComponent, MiniButtonComponent, ModalComponent, PracticeSettingsComponent, SoundSettingsComponent, DurationSettingsComponent, CalendarComponent, PriceComponent, BenefitsItemComponent, AvatarComponent, PremiumTagComponent, SugesstComponent, SectorComponent, LessonCardComponent, TaskCardComponent, FeatureItemComponent, ConfrimCloseComponent, HelpModalComponent, LessonLearnedComponent, SuggestLessonComponent, TruncatePipe, LoadingComponent, SafeHtmlPipe, FirstLessonComponent],
   exports: [
     ButtonComponent,
     LogoLoaderComponent,
@@ -64,6 +65,7 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
     SuggestLessonComponent,
     TruncatePipe,
     SafeHtmlPipe,
+    FirstLessonComponent,
     LoadingComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

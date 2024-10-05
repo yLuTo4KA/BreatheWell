@@ -10,6 +10,7 @@ import { Progress } from '../../models/progress.model';
 import { CourseService } from '../../services/course.service';
 import { debounceTime } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { Task } from '../../models/task.model';
 
 export interface TimeOfDay {
   eng: "morning" | "day" | "night",
@@ -62,6 +63,14 @@ export class HomeComponent implements OnInit {
 
   currentOnline: number = Math.floor(Math.random() * (1200 - 600) + 600);
   onlineInterval: any;
+  
+  taskLearn: Task = {
+    id: 99999,
+    title: 'Прочитать урок',
+    description: '',
+    preview_icon: '',
+    task_image: ''
+  };
 
 
 
@@ -96,7 +105,7 @@ export class HomeComponent implements OnInit {
 
     this.onlineInterval = setInterval(() => {
       this.getOnline();
-    }, 1000 * 15)
+    }, 1000 * 30)
     this.setTimeOfDay();
   }
 
@@ -127,7 +136,7 @@ export class HomeComponent implements OnInit {
   getOnline(): void {
     const randomOnline = Math.floor(Math.random() * (15 - 2) + 2);
     const randomOperator = Math.floor(Math.random() * (3 - 1) + 1);
-    if (randomOperator === 2 || this.currentOnline >= 1200) {
+    if (randomOperator === 2 || this.currentOnline >= 1200 && this.currentOnline > 600) {
       this.currentOnline -= randomOnline;
     } else {
       this.currentOnline += randomOnline;
@@ -165,8 +174,12 @@ export class HomeComponent implements OnInit {
   }
 
   updateAndOpenPractice(practice: Practice): void {
-    this.breathService.updatePractice(practice);
-    this.router.navigate(['/breathing'])
+    if (!this.userData.premium && !practice.free) {
+      this.router.navigate(['/buying']);
+    } else {
+      this.breathService.updatePractice(practice);
+      this.router.navigate(['/breathing'])
+    }
   }
 
   checkTask(taskId: number): void {
@@ -193,7 +206,7 @@ export class HomeComponent implements OnInit {
               this.router.navigate(['task-complete']);
             }
           })
-        }   
+        }
       }
     })
   }

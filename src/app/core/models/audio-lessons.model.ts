@@ -4,5 +4,6 @@ export interface AudioLesson {
     preview: string,
     duration: number,
     audio: string,
-    free: boolean
+    free: boolean,
+    opens_with: number
 }

@@ -3,7 +3,7 @@
         <h3>Мой курс</h3>
     </div>
     <div class="materials__body">
-        <div class="materials__main-course" routerLink="/course-preview">
+        <div class="materials__main-course">
             <div class="materials__main-course-header">
                 <div class="course-label">
                     <app-tag class="course-tag">Курс</app-tag>
@@ -27,11 +27,10 @@
                 </div>
             </div>
             <div class="materials__main-course-body">
-                <h4>Осознанное дыхание для<br>повседневной жизни</h4>
-                <div class="materials__main-course-content">
-                    <p class="text-grey">{{lessonsList.length}} занятий</p>
-                    <app-mini-button icon="next" class="materials-button-open"></app-mini-button>
-                </div>
+                <p class="main-course-length text-purple">{{lessonsList.length}} занятий</p>
+                <h4 class="main-course-title">Осознанное дыхание для<br>повседневной жизни</h4>
+                <p class="main-course-subtitle text-grey">Дыхательные практики для снижения стресса, повышения энергии и внутренней гармонии</p>
+                <app-button routerLink="/course-preview" [paddingY]="14"><h4>Начать сейчас</h4></app-button>
             </div>
         </div>
         <div class="materials__audio-lessons">
@@ -43,6 +42,12 @@
                     <div class="materials__audio-lessons-slide-header">
                         <app-tag class="audio-duration">{{content.duration}} мин.</app-tag>
                         <app-mini-button class="audio-lock" icon="audio-lock" [iconHeight]="20" [iconWidth]="20" *ngIf="isLocked(content)"></app-mini-button>
+                    </div>
+                    <div class="audio-opens-with" *ngIf="content.opens_with > progress.todayLesson.id">
+                        <app-tag class="audio-opens-with-tag">
+                            <p>{{'Доступно с ' + content.opens_with + ' урока'}}</p>
+                            <app-mini-button class="audio-opens-with-lock" icon="lock-practice" [iconWidth]="16" [iconHeight]="16"></app-mini-button>
+                        </app-tag>
                     </div>
                     <p class="materials__audio-lessons-slide-title">
                         {{content.title}}

@@ -7,6 +7,7 @@ export interface Practice {
     exhaleHold: number,
     duration: number,
     iconText: string,
+    free: boolean,
     sound: {
         id: number;
     }

@@ -24,6 +24,14 @@ export class TodayTasksComponent {
   lessonId!: number;
   progress!: Progress;
 
+  taskLearn: Task = {
+    id: 99999,
+    title: 'Прочитать урок',
+    description: '',
+    preview_icon: '',
+    task_image: ''
+  };
+
   ngOnInit(): void {
     this.courseService.userProgress$.subscribe(response => {
       if (response && response.todayTasks) {
