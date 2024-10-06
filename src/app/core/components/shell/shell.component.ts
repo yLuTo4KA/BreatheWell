@@ -48,6 +48,11 @@ export class ShellComponent implements OnInit {
         this.redirectUser();
       })
     });
+    this.authService.user$.subscribe(response => {
+      if(response) {
+        this.authResponse.user = response;
+      }
+    })
     this.tgService.expand();
   }
 
