@@ -46,13 +46,17 @@
       "relation": "oneToOne",
       "target": "api::sound.sound"
     },
-    "iconText": {
-      "type": "string",
-      "default": "🌙"
-    },
     "free": {
       "type": "boolean",
       "default": true
+    },
+    "icon": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
     }
   }
 }

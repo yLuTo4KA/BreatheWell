@@ -1110,8 +1110,8 @@ export interface ApiPracticePractice extends Schema.CollectionType {
       'oneToOne',
       'api::sound.sound'
     >;
-    iconText: Attribute.String & Attribute.DefaultTo<'\uD83C\uDF19'>;
     free: Attribute.Boolean & Attribute.DefaultTo<true>;
+    icon: Attribute.Media<'images'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

@@ -5,14 +5,15 @@
  */
 
 const { createCoreController } = require('@strapi/strapi').factories;
-
+const baseUrl = process.env.BACKEND_URL || strapi.config.get('server.url');
 module.exports = createCoreController('api::practice.practice', ({ strapi }) => ({
     async find(ctx) {
         // Set default query parameters for population
         ctx.query = {
             ...ctx.query,
             populate: {
-                sound: { fields: ['id'] }
+                sound: { fields: ['id'] },
+                icon: true
             }
         };
 
@@ -22,6 +23,7 @@ module.exports = createCoreController('api::practice.practice', ({ strapi }) => 
         // Transform the data to include only required fields
         const transformedData = data.map(item => {
             const attributes = item.attributes;
+            console.log(attributes.icon)
             return {
                 id: item.id,
                 title: attributes.title,
@@ -30,7 +32,7 @@ module.exports = createCoreController('api::practice.practice', ({ strapi }) => 
                 breathHold: attributes.breathHold,
                 exhaleHold: attributes.exhaleHold,
                 duration: attributes.duration,
-                iconText: attributes.iconText,
+                icon: baseUrl + attributes.icon.data?.attributes?.url,
                 free: attributes.free,
                 sound: attributes.sound && attributes.sound.data ? {
                     id: attributes.sound.data.id
