@@ -1,7 +1,9 @@
 export interface User {
     activeDays: number,
+    prevActiveDays: number,
     blocked: boolean,
     lastActiveDate: Date | null,
+    prevActiveDate: Date | null,
     id: number | string,
     username: string,
     language_code: string,
