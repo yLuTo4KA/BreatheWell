@@ -31,7 +31,9 @@ export class BreathingComponent {
     breathHold: 3,
     exhaleHold: 3,
     duration: 7 * 60,
-    sound: null
+    sound: null,
+    breath_type: 'Nose',
+    exhale_type: 'Mouth'
   }
   modal: ModalsView = {
     practiceSettings: false,
@@ -110,7 +112,7 @@ export class BreathingComponent {
 
   async up() {
     this.breathProcess = 'up';
-    this.breathType = "nose";
+    this.breathType = this.breathSetting.breath_type === "Nose" ? "nose" : "lips";
     this.currentSpeed = this.breathSetting.breathDuration;
     this.timer = this.breathSetting.breathDuration;
     this.action = "Вдох";
@@ -120,7 +122,7 @@ export class BreathingComponent {
 
   async down() {
     this.breathProcess = 'down';
-    this.breathType = "lips";
+    this.breathType = this.breathSetting.exhale_type === "Nose" ? "nose" : "lips";
     this.currentSpeed = this.breathSetting.exhaleDuration;
     this.timer = this.breathSetting.exhaleDuration;
     this.action = "Выдох";
