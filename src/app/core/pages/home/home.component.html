@@ -23,7 +23,7 @@
             <div class="home-page__guides-list">
                 <app-tag class="home-page__guides-item" *ngFor="let practice of practiceData; let i = index"
                     (click)="updateAndOpenPractice(practice)" [ngClass]="{'hidden': i % 2 !== 0}">
-                    <p class="home-page__guides-item-icon">{{practice.iconText}}</p>
+                    <img [src]="practice.icon" class="home-page__guides-item-icon">
                     <p class="home-page__guides-item-title">{{practice.title}}</p>
                     <app-mini-button class="home-page__guides-item-lock" icon="lock-practice" *ngIf="!userData.premium && !practice.free" [iconWidth]="16" [iconHeight]="16"></app-mini-button>
                 </app-tag>
@@ -31,7 +31,7 @@
             <div class="home-page__guides-list">
                 <app-tag class="home-page__guides-item" *ngFor="let practice of practiceData; let i = index"
                     (click)="updateAndOpenPractice(practice)" [ngClass]="{'hidden': i % 2 === 0}">
-                    <p class="home-page__guides-item-icon">{{practice.iconText}}</p>
+                    <img [src]="practice.icon" class="home-page__guides-item-icon">
                     <p class="home-page__guides-item-title">{{practice.title}}</p>
                     <app-mini-button class="home-page__guides-item-lock" icon="lock-practice" *ngIf="!userData.premium && !practice.free" [iconWidth]="16" [iconHeight]="16"></app-mini-button>
                 </app-tag>
