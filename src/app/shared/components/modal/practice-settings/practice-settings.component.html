@@ -8,7 +8,7 @@
             <div class="practice-settings__select-list">
                 <app-tag class="practice-settings__select-tag" *ngFor="let practice of practiceData; let i = index"
                     [ngClass]="{'--active': practice.id === breathSetting?.id, 'hidden': i % 2 !== 0}" (click)="updatePractice(practice)">
-                    <p class="practice-settings__select-tag-icon">{{practice.iconText}}</p>
+                    <img [src]="practice.icon" class="practice-settings__select-tag-icon">
                     <p class="practice-settings__select-tag-title">{{practice.title}}</p>
                     <app-mini-button class="practice-settings__select-tag-lock" icon="lock-practice" *ngIf="!userData.premium && !practice.free" [iconWidth]="16" [iconHeight]="16"></app-mini-button>
                 </app-tag>
@@ -16,7 +16,7 @@
             <div class="practice-settings__select-list">
                 <app-tag class="practice-settings__select-tag" *ngFor="let practice of practiceData; let i = index"
                     [ngClass]="{'--active': practice.id === breathSetting?.id, 'hidden': i % 2 === 0}" (click)="updatePractice(practice)">
-                    <p class="practice-settings__select-tag-icon">{{practice.iconText}}</p>
+                    <img [src]="practice.icon" class="practice-settings__select-tag-icon">
                     <p class="practice-settings__select-tag-title">{{practice.title}}</p>
                     <app-mini-button class="practice-settings__select-tag-lock" icon="lock-practice" *ngIf="!userData.premium && !practice.free" [iconWidth]="16" [iconHeight]="16"></app-mini-button>
                 </app-tag>

@@ -75,18 +75,19 @@ export class CalendarComponent {
   }
 
   isActive(index: number, day: number): boolean {
-    const indexedDay = index + this.currentDay;
-    if (!this.currentIndexedDay) {
-      this.currentIndexedDay = index + 2 + this.currentDay;
+    if(day === this.currentDay && this.todayActive) {
+      return true;
     }
-    if (this.currentIndexedDay) {
-      if (this.todayActive && indexedDay === this.currentIndexedDay) {
+    if (day > this.currentDay - this.activeDays && day < this.currentDay) {
+      return true;
+    }
+    if(day > this.currentDay && day > this.week[this.week.length - 1].day) {
+      const bigday = day + this.currentDay;
+      if(day > bigday - this.activeDays && day < bigday) {
         return true;
       }
-      if (indexedDay > this.currentIndexedDay - this.currentActiveDays && indexedDay < this.currentIndexedDay) {
-        return true;
-      }
+
     }
-    return false;
+    return false
   }
 }
