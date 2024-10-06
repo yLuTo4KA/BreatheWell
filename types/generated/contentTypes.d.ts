@@ -784,6 +784,8 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     todayActive: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;
+    prevActiveDays: Attribute.Integer & Attribute.DefaultTo<0>;
+    prevActiveDate: Attribute.DateTime;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

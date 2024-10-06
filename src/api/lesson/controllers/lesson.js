@@ -74,7 +74,7 @@ module.exports = createCoreController('api::lesson.lesson', ({ strapi }) => ({
                     title: task.title,
                     description: task.description,
                     preview_icon: baseUrl + task.preview_icon.url,
-                    task_image: baseUrl + task.task_image.url,
+                    task_image: baseUrl + task.task_image?.url,
                     audio_lesson: task.audio_lesson,
                     practice: task.practice
                 }

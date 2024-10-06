@@ -16,7 +16,7 @@ module.exports = {
 
         const updatedUser = await strapi.query('plugin::users-permissions.user').update({
             where: { id: user.id },
-            data: { lastActiveDate: today, todayActive: true, activeDays: currentActiveDays + 1 },
+            data: { lastActiveDate: today, prevActiveDate: today, todayActive: true, activeDays: currentActiveDays + 1 },
         });
 
         ctx.send({user: updatedUser, success: true});

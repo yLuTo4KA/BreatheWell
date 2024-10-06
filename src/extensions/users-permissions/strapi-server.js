@@ -57,17 +57,25 @@ module.exports = (plugin) => {
             newUser = false;
             let todayActive = false;
             let currentStreak = user.activeDays;
+            let prevStreak = user.prevActiveDays;
             if (user.lastActiveDate) {
                 const lastActiveDate = new Date(user.lastActiveDate);
                 // @ts-ignore
                 const diffInMs = currentDate - lastActiveDate;
                 const diffInDay = diffInMs / (1000 * 60 * 60 * 24);
                 if (diffInDay < 1) todayActive = true;
-                if (diffInDay >= 2) currentStreak = 0
+                if (diffInDay >= 2) {
+                    prevStreak = user.activeDays;
+                    currentStreak = 0;
+                }
+                if (diffInDay > 7) {
+                    prevStreak = 0;
+                }
             }
+
             user = await strapi.query('plugin::users-permissions.user').update({
                 where: { tg_id: userData.id },
-                data: { lastVisit: new Date(), todayActive: todayActive, activeDays: currentStreak, avatar: avatar },
+                data: {lastVisit: new Date(), todayActive: todayActive, activeDays: currentStreak, prevActiveDays: prevStreak, avatar: avatar },
             });
             const progress = await strapi.db.query('api::course-progress.course-progress').findOne({
                 where: { user: user },

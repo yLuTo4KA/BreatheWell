@@ -1,6 +1,5 @@
 'use strict';
 
-
 /**
  * course-progress controller
  */
@@ -14,7 +13,6 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
         if (!user) {
             return ctx.badRequest('User is required');
         }
-
 
         const progress = await strapi.query('api::course-progress.course-progress').findOne({
             where: { user },
@@ -47,7 +45,11 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
             },
         });
 
-        const formateData = {
+        if (!progress) {
+            return ctx.notFound('Progress not found');
+        }
+
+        const formatData = {
             todayComplete: progress.todayComplete,
             lesson_learned: progress.lesson_learned,
             todayLesson: {
@@ -55,26 +57,27 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
                 preview_title: progress.lesson.preview_title,
                 description: progress.lesson.subtitle,
                 reading_time: progress.lesson.reading_time,
-                lesson_preview: baseUrl + progress.lesson.lesson_preview.url,
-                icon: baseUrl + progress.lesson.lesson_icon.url
+                lesson_preview: progress.lesson.lesson_preview ? baseUrl + progress.lesson.lesson_preview.url : null,
+                icon: progress.lesson.lesson_icon ? baseUrl + progress.lesson.lesson_icon.url : null
             },
             todayTasks: progress.lesson.tasks.map(task => {
                 return {
                     id: task.id,
                     title: task.title,
                     description: task.description,
-                    preview_icon: baseUrl + task.preview_icon.url,
-                    task_image: baseUrl + task.task_image.url,
-                    audio_lesson: task.audio_lesson ? {...task.audio_lesson, audio: baseUrl + task.audio_lesson.audio.url} : null,
+                    preview_icon: task.preview_icon ? baseUrl + task.preview_icon.url : null,
+                    task_image: task.task_image ? baseUrl + task.task_image.url : null,
+                    audio_lesson: task.audio_lesson ? { ...task.audio_lesson, audio: task.audio_lesson.audio ? baseUrl + task.audio_lesson.audio.url : null } : null,
                     practice: task.practice
                 }
             }),
-            completedTasks: progress.tasks.map(task => { return task.id }),
+            completedTasks: progress.tasks.map(task => task.id),
             completedLessons: progress.completed_lessons,
-        }
+        };
 
-        return formateData;
+        return formatData;
     },
+
     async completeTask(ctx) {
         const user = ctx.state.user;
         const { completedTasks } = ctx.request.body;
@@ -106,12 +109,11 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
 
         if (!progress) {
             return ctx.notFound('Progress not found');
-        };
+        }
 
         // Проверяем, завершены ли все задачи текущего урока
         const allTasksCompleted = progress.lesson.tasks.length > 0 &&
             progress.lesson.tasks.every(lessonTask => completedTasks.includes(lessonTask.id));
-
 
         let todayComplete = progress.todayComplete;
         let todayLesson = progress.lesson.id;
@@ -134,7 +136,6 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
                 console.log('Это был последний урок');
             }
         }
-
 
         // Обновляем прогресс в базе данных
         const updatedProgress = await strapi.entityService.update('api::course-progress.course-progress', progress.id, {
@@ -174,9 +175,7 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
         });
 
         // Формируем данные для ответа
-        const baseUrl = process.env.BACKEND_URL || strapi.config.get('server.url');
-
-        const formateData = {
+        const formatData = {
             todayComplete: updatedProgress.todayComplete,
             lesson_learned: updatedProgress.lesson_learned,
             todayLesson: {
@@ -184,23 +183,24 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
                 preview_title: updatedProgress.lesson.preview_title,
                 description: updatedProgress.lesson.subtitle,
                 reading_time: updatedProgress.lesson.reading_time,
-                lesson_preview: baseUrl + updatedProgress.lesson.lesson_preview.url,
-                icon: baseUrl + updatedProgress.lesson.lesson_icon.url
+                lesson_preview: updatedProgress.lesson.lesson_preview ? baseUrl + updatedProgress.lesson.lesson_preview.url : null,
+                icon: updatedProgress.lesson.lesson_icon ? baseUrl + updatedProgress.lesson.lesson_icon.url : null
             },
             todayTasks: updatedProgress.lesson.tasks.map(task => ({
                 id: task.id,
                 title: task.title,
                 description: task.description,
-                preview_icon: baseUrl + task.preview_icon.url,
-                audio_lesson: task.audio_lesson ? {...task.audio_lesson, audio: baseUrl + task.audio_lesson.audio.url} : null,
+                preview_icon: task.preview_icon ? baseUrl + task.preview_icon.url : null,
+                audio_lesson: task.audio_lesson ? { ...task.audio_lesson, audio: task.audio_lesson.audio ? baseUrl + task.audio_lesson.audio.url : null } : null,
                 practice: task.practice
             })),
             completedTasks: updatedProgress.tasks.map(task => task.id),
             completedLessons: updatedProgress.completed_lessons
         };
 
-        return formateData;
+        return formatData;
     },
+
     async learnLesson(ctx) {
         const user = ctx.state.user;
         const { lessonId } = ctx.request.body;
@@ -225,9 +225,8 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
         });
 
         if (lessonId !== progress.lesson.id) {
-            return ctx.badRequest("Lesson is not currentDay")
+            return ctx.badRequest("Lesson is not currentDay");
         }
-
 
         const updatedProgress = await strapi.entityService.update('api::course-progress.course-progress', progress.id, {
             data: {
@@ -261,9 +260,7 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
             }
         });
 
-        const baseUrl = process.env.BACKEND_URL || strapi.config.get('server.url');
-
-        const formateData = {
+        const formatData = {
             todayComplete: updatedProgress.todayComplete,
             lesson_learned: updatedProgress.lesson_learned,
             todayLesson: {
@@ -271,24 +268,21 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
                 preview_title: updatedProgress.lesson.preview_title,
                 description: updatedProgress.lesson.subtitle,
                 reading_time: updatedProgress.lesson.reading_time,
-                lesson_preview: baseUrl + updatedProgress.lesson.lesson_preview.url,
-                icon: baseUrl + updatedProgress.lesson.lesson_icon.url
+                lesson_preview: updatedProgress.lesson.lesson_preview ? baseUrl + updatedProgress.lesson.lesson_preview.url : null,
+                icon: updatedProgress.lesson.lesson_icon ? baseUrl + updatedProgress.lesson.lesson_icon.url : null
             },
             todayTasks: updatedProgress.lesson.tasks.map(task => ({
                 id: task.id,
                 title: task.title,
                 description: task.description,
-                preview_icon: baseUrl + task.preview_icon.url,
-                audio_lesson: task.audio_lesson ? {...task.audio_lesson, audio: baseUrl + task.audio_lesson.audio.url} : null,
+                preview_icon: task.preview_icon ? baseUrl + task.preview_icon.url : null,
+                audio_lesson: task.audio_lesson ? { ...task.audio_lesson, audio: task.audio_lesson.audio ? baseUrl + task.audio_lesson.audio.url : null } : null,
                 practice: task.practice
             })),
             completedTasks: updatedProgress.tasks.map(task => task.id),
             completedLessons: updatedProgress.completed_lessons
         };
 
-        return formateData;
-
+        return formatData;
     }
-
-
 }));

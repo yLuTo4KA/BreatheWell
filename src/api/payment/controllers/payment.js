@@ -9,6 +9,10 @@ module.exports = {
 
         try {
             const update = ctx.request.body;
+            if (update.message && update.message.text === '/start') {
+                const userId = update.message.from.id;
+                await bot.telegram.sendMessage(userId, `Добро пожаловать!`);
+            }
             if (update.pre_checkout_query) {
                 const { id, from, invoice_payload, shipping_option_id, order_info } = update.pre_checkout_query;
                 const allGoodsAvailable = true;
