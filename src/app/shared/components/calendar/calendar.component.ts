@@ -78,12 +78,12 @@ export class CalendarComponent {
     if(day === this.currentDay && this.todayActive) {
       return true;
     }
-    if (day > this.currentDay - this.activeDays && day < this.currentDay) {
+    if (day > this.currentDay - this.activeDays - (this.todayActive ? 0 : 1) && day < this.currentDay) {
       return true;
     }
     if(day > this.currentDay && day > this.week[this.week.length - 1].day) {
       const bigday = day + this.currentDay;
-      if(day > bigday - this.activeDays && day < bigday) {
+      if(day > bigday - this.activeDays - (this.todayActive ? 0 : 1) && day < bigday) {
         return true;
       }
 
