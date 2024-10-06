@@ -3,11 +3,6 @@ const axios = require('axios');
 
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
-bot.start((ctx) => {
-    // Отправка сообщения
-    ctx.reply('Добро пожаловать! Я ваш бот. Вот вам картинка!');
-
-});
 
 const checkServerReady = async () => {
     try {
