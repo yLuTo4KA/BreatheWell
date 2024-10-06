@@ -56,6 +56,8 @@ export class HomeComponent implements OnInit {
     breathHold: 3,
     exhaleHold: 3,
     duration: 7 * 60,
+    breath_type: "Nose",
+    exhale_type: "Mouth",
     sound: null
   }
 

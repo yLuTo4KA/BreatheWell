@@ -38,7 +38,9 @@ export class BreathService extends ApiService {
         breathHold: 3,
         exhaleHold: 3,
         duration: 7 * 60,
-        sound: null
+        sound: null,
+        breath_type: "Nose",
+        exhale_type: "Mouth"
     }
     private noSound: Sound = {
         id: -1,
@@ -133,7 +135,9 @@ export class BreathService extends ApiService {
             exhaleDuration: practice.exhaleDuration,
             breathHold: practice.breathHold,
             exhaleHold: practice.exhaleHold,
-            duration: practice.duration * 60
+            duration: practice.duration * 60,
+            breath_type: practice.breath_type,
+            exhale_type: practice.exhale_type
         }
         this.breathSetting$.next(updateData);
     }
