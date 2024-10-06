@@ -51,11 +51,29 @@
       "default": true
     },
     "icon": {
-      "allowedTypes": [
-        "images"
-      ],
       "type": "media",
       "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "exhale_type": {
+      "type": "enumeration",
+      "enum": [
+        "Nose",
+        "Mouth"
+      ],
+      "default": "Mouth",
+      "required": true
+    },
+    "breath_type": {
+      "type": "enumeration",
+      "enum": [
+        "Nose",
+        "Mouth"
+      ],
+      "default": "Nose",
       "required": true
     }
   }

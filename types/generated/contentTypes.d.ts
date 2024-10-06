@@ -1112,6 +1112,12 @@ export interface ApiPracticePractice extends Schema.CollectionType {
     >;
     free: Attribute.Boolean & Attribute.DefaultTo<true>;
     icon: Attribute.Media<'images'> & Attribute.Required;
+    exhale_type: Attribute.Enumeration<['Nose', 'Mouth']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'Mouth'>;
+    breath_type: Attribute.Enumeration<['Nose', 'Mouth']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'Nose'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1297,9 +1303,9 @@ export interface ApiTaskTask extends Schema.CollectionType {
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    description: Attribute.RichText & Attribute.Required;
+    description: Attribute.RichText;
     preview_icon: Attribute.Media<'images' | 'videos'> & Attribute.Required;
-    task_image: Attribute.Media<'images' | 'videos'> & Attribute.Required;
+    task_image: Attribute.Media<'images' | 'videos'>;
     lesson: Attribute.Relation<
       'api::task.task',
       'manyToOne',

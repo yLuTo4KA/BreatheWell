@@ -34,6 +34,8 @@ module.exports = createCoreController('api::practice.practice', ({ strapi }) => 
                 duration: attributes.duration,
                 icon: baseUrl + attributes.icon.data?.attributes?.url,
                 free: attributes.free,
+                breath_type: attributes.breath_type,
+                exhale_type: attributes.exhale_type,
                 sound: attributes.sound && attributes.sound.data ? {
                     id: attributes.sound.data.id
                 } : null

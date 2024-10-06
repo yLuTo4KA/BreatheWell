@@ -18,7 +18,7 @@
     },
     "description": {
       "type": "richtext",
-      "required": true
+      "required": false
     },
     "preview_icon": {
       "type": "media",
@@ -32,7 +32,7 @@
     "task_image": {
       "type": "media",
       "multiple": false,
-      "required": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "videos"
