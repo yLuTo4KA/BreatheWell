@@ -84,6 +84,7 @@ export class HomeComponent implements OnInit {
     this.authService.user$.subscribe(response => {
       if (response) {
         this.userData = response;
+        console.log(response);
       }
     })
     this.breathService.practices$.subscribe(response => {

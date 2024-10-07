@@ -15,10 +15,13 @@ export class CalendarComponent {
   @Input() userLastVisit!: Date;
   @Input() todayActive!: boolean;
   @Input() activeDays!: number;
+  @Input() prevActiveDays!: number;
+  @Input() prevActiveDate!: Date | null;
   @Input() yearView!: boolean;
 
   week: WeekDays[] = [];
   currentDay: number = 0;
+  prevActiveDay: number = 0;
   currentActiveDays: number = 0;
   currentIndexedDay: number | null = null;
 
@@ -30,6 +33,9 @@ export class CalendarComponent {
     this.week = this.getWeek(this.userLastVisit);
     this.currentDay = new Date(this.userLastVisit).getDate();
     this.currentActiveDays = this.activeDays;
+    if(this.prevActiveDate) {
+      this.prevActiveDay = new Date(this.prevActiveDate).getDate();
+    }
   }
 
   getWeek(date: Date): WeekDays[] {
@@ -75,15 +81,16 @@ export class CalendarComponent {
   }
 
   isActive(index: number, day: number): boolean {
+
     if(day === this.currentDay && this.todayActive) {
       return true;
     }
-    if (day > this.currentDay - this.activeDays - (this.todayActive ? 0 : 1) && day < this.currentDay) {
+    if ((day > this.currentDay - this.activeDays - (this.todayActive ? 0 : 1) && day < this.currentDay) || (day >= this.prevActiveDay - this.prevActiveDays && day <= this.prevActiveDay)) {
       return true;
     }
     if(day > this.currentDay && day > this.week[this.week.length - 1].day) {
       const bigday = day + this.currentDay;
-      if(day > bigday - this.activeDays - (this.todayActive ? 0 : 1) && day < bigday) {
+      if((day > bigday - this.activeDays - (this.todayActive ? 0 : 1) && day < bigday) || (day > (day + this.prevActiveDay) - this.prevActiveDays) && day < day + this.prevActiveDay) {
         return true;
       }
 

@@ -56,7 +56,7 @@ export class MaterialsComponent {
     if (this.isLocked(lesson)) {
       this.router.navigate(['/buying']);
     } else {
-      if (lesson.opens_with < this.progress.todayLesson.id) {
+      if (lesson.opens_with <= this.progress.todayLesson.id) {
         this.courseService.setCurrentAudioLesson(lesson);
         this.router.navigate(['/audio-lesson']);
       }
