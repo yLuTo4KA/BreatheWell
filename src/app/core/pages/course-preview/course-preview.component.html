@@ -60,7 +60,7 @@
         <section class="lessons-section">
             <h4 class="lessons-title">Занятия</h4>
             <div class="lessons-list">
-                <div class="lessons-item" *ngFor="let lesson of lessonsList" [ngClass]="{'--current': lesson.id === progress.todayLesson.id && !progress.todayComplete , '--closed': (!progress.completedLessons.includes(lesson.id) && lesson.id !== progress.todayLesson.id || progress.todayComplete),'--active': progress.completedLessons.includes(lesson.id)}">
+               <div class="lessons-item" *ngFor="let lesson of lessonsList" [ngClass]="getLessonStatus(lesson)"> 
                     <mat-icon svgIcon="lock" class="lessons-item-status lessons-item-status--closed"></mat-icon>
                     <div class="lessons-item-status lessons-item-status--active"></div>
                     <div class="lessons-item-status lessons-item-status--current"></div>

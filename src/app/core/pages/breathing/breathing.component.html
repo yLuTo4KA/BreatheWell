@@ -15,7 +15,12 @@
             <div class="breath-circle" [ngClass]="getProcessClass()" [style.--animation-speed]="currentSpeed + 's'">
                 <h2 class="breath-circle__timer">{{getTimer(timer)}}</h2>
             </div>
-            <h2 class="breath-title">{{action}}</h2>
+            <div class="breath-actions">
+                <h2 class="breath-actions__title">{{action}}</h2>
+                <p class="breath-actions__action text-grey" *ngIf="action !== 'Приготовьтесь!'">
+                    {{getActionText(action)}}
+                </p>
+            </div>
             <app-tag class="breath-duration" (click)="openDurationSettings()">{{getTimer(currentDuration)}}</app-tag>
         </div>
     </div>

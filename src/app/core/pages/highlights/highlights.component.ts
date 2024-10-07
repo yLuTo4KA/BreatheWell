@@ -28,7 +28,7 @@ export class HighlightsComponent {
   progressData!: Progress;
 
 
-  slide: number = 1;
+  slide: number = 0;
 
   constructor() { }
 
@@ -99,12 +99,12 @@ export class HighlightsComponent {
     const screenWidth = window.innerWidth;
 
     if (x >= screenWidth * 0.5) {
-      if (this.highlights.length > this.slide) {
+      if (this.highlights.length - 1 > this.slide) {
         this.nextSlide();
       } else {
         this.learnLesson();
       }
-    } else {
+    } else if(this.slide >= 1){
       this.prevSlide();
     }
   }
