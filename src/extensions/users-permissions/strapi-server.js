@@ -65,7 +65,9 @@ module.exports = (plugin) => {
                 const diffInDay = diffInMs / (1000 * 60 * 60 * 24);
                 if (diffInDay < 1) todayActive = true;
                 if (diffInDay >= 2) {
-                    prevStreak = user.activeDays;
+                    if(user.activeDays >= 1) {
+                        prevStreak = user.activeDays;
+                    }
                     currentStreak = 0;
                 }
                 if (diffInDay > 7) {

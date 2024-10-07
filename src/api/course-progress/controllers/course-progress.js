@@ -1,5 +1,7 @@
 'use strict';
 
+const bot = require('../../../../config/tg-bot');
+
 /**
  * course-progress controller
  */
@@ -121,6 +123,11 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
 
         if (allTasksCompleted && progress.lesson_learned) {
             todayComplete = true;
+            const imageUrl = 'https://breathwell.space/uploads/lesson_complete_b37becad8c.png';
+            await bot.telegram.sendPhoto(user.id, imageUrl, {
+                caption: `Так держать! \n\nТы прошел сегодняшний урок и выполнил все задания к нему. На сегодня все, возвращайся завтра и начни новый урок.`,
+                parse_mode: 'Markdown'
+            });
             const nextLesson = await strapi.query('api::lesson.lesson').findOne({
                 where: { id: { $gt: progress.lesson.id } },
                 orderBy: { id: 'asc' },
