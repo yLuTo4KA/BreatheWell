@@ -50,7 +50,9 @@ export class ShellComponent implements OnInit {
     });
     this.authService.user$.subscribe(response => {
       if(response) {
-        this.authResponse.user = response;
+        if(this.authResponse && this.authResponse.user) {
+          this.authResponse.user = response;
+        }
       }
     })
     this.tgService.expand();
