@@ -88,9 +88,11 @@ export class AuthService extends ApiService {
 
     getProfile(): Observable<User> {
         const url = `${this.urlPath}users/me`;
+        console.log(url);
         return this.get<User>(url).pipe(
             tap(response => {
                 this.setUserData(response);
+                console.log(response);
             }),
             catchError((error: HttpErrorResponse) => {
                 return throwError(() => error);

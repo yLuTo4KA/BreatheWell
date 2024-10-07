@@ -52,6 +52,9 @@ export class ShellComponent implements OnInit {
       if(response) {
         if(this.authResponse && this.authResponse.user) {
           this.authResponse.user = response;
+          this.showPremium = !response.premium;
+          const root = document.documentElement;
+          root.style.setProperty('--dynamic-size', response.premium ? '110px' : '180px');
         }
       }
     })
