@@ -46,13 +46,14 @@ export class CoursePreviewComponent {
   openLesson(lesson: LessonsList): void {
     if (lesson.id <= this.progress.todayLesson.id) {
       if (!lesson.free && this.userData.premium) {
-        if((lesson.id !== this.progress.todayLesson.id && this.progress.todayComplete)) {
-          this.courseService.getLesson(lesson.id).subscribe(response => {
-            if (response) {
-              this.navigateToLesson();
-            }
-          })
+        if(lesson.id === this.progress.todayLesson.id && this.progress.todayComplete) {
+          return;
         }
+        this.courseService.getLesson(lesson.id).subscribe(response => {
+          if (response) {
+            this.navigateToLesson();
+          }
+        })
       } else if (lesson.free) {
         this.courseService.getLesson(lesson.id).subscribe(response => {
           if (response) {
@@ -70,6 +71,15 @@ export class CoursePreviewComponent {
   }
   lastLesson(): number {
     return this.progress.todayLesson.id === this.lessonsList[this.lessonsList.length - 1].id ? this.progress.todayLesson.id : this.progress.todayLesson.id - 1;
+  }
+  getLessonStatus(lesson: LessonsList): {[key: string]: boolean} {
+    if(lesson.id === this.progress.todayLesson.id && !this.progress.todayComplete) {
+      return {'--current': true};
+    }
+    if(this.progress.completedLessons.includes(lesson.id)) {
+      return {'--active': true};
+    }
+    return {'--closed': true};
   }
   navigateToLesson() {
     this.router.navigate(['/lesson-preview']);

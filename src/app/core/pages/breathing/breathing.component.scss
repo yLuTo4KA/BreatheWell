@@ -6,7 +6,7 @@
         padding: 16px;
         padding-bottom: 0;
         text-align: center;
-        
+
         &-header {
             display: flex;
             justify-content: space-between;
@@ -52,6 +52,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+
         img {
             width: 24px;
             height: 24px;
@@ -64,86 +65,93 @@
 }
 
 .breath {
-    &-circle {
-        width: 300px;
-        height: 300px;
-        background: #FFFFFF0D;
-        border: 1px solid #FFFFFF1A;
+    &-actions {
+        &__title {
+            font-size: 28px;
+            margin-bottom: 16px;
+        }
+    }
+
+&-circle {
+    width: 300px;
+    height: 300px;
+    background: #FFFFFF0D;
+    border: 1px solid #FFFFFF1A;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 120px;
+        height: 120px;
+        background: #fff;
+        z-index: 100;
         border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-
-        &::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 120px;
-            height: 120px;
-            background: #fff;
-            z-index: 100;
-            border-radius: 50%;
-            -webkit-box-shadow: 0px 0px 25px 2px #fff;
-            -moz-box-shadow: 0px 0px 25px 2px #fff;
-            box-shadow: 0px 0px 25px 2px #fff;
-        }
-
-        &::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(1);
-            width: 120px;
-            height: 120px;
-            background: radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0) 49%, rgba(255, 255, 255, 0.5) 100%);
-            z-index: 50;
-            border-radius: 50%;
-            animation: none;
-            
-        }
-
-        &.process-up::before {
-            -webkit-animation: expand-up var(--animation-speed, 5s) linear forwards;
-            /* Для WebKit (Safari, старые версии Chrome) */
-            -moz-animation: expand-up var(--animation-speed, 5s) linear forwards;
-            /* Для Firefox */
-            -o-animation: expand-up var(--animation-speed, 5s) linear forwards;
-            /* Для старых версий Opera */
-            animation: expand-up var(--animation-speed, 5s) linear forwards;
-            animation-play-state: running;
-        }
-
-        &.process-down::before {
-            -webkit-animation: expand-down var(--animation-speed, 5s) linear forwards;
-            /* Для WebKit (Safari, старые версии Chrome) */
-            -moz-animation: expand-down var(--animation-speed, 5s) linear forwards;
-            /* Для Firefox */
-            -o-animation: expand-down var(--animation-speed, 5s) linear forwards;
-            /* Для старых версий Opera */
-            animation: expand-down var(--animation-speed, 5s) linear forwards;
-            animation-play-state: running;
-        }
-
-        &__timer {
-            font-size: 30px;
-            font-weight: 500;
-            z-index: 500;
-            color: #000;
-        }
+        -webkit-box-shadow: 0px 0px 25px 2px #fff;
+        -moz-box-shadow: 0px 0px 25px 2px #fff;
+        box-shadow: 0px 0px 25px 2px #fff;
     }
 
-    &-duration {
-        color: var(--primary-text);
-        padding: 10.5px 0;
-        width: 104px;
-        height: 44px;
-        background-color: #1E203C;
-        font-size: 18px;
+    &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(1);
+        width: 120px;
+        height: 120px;
+        background: radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0) 49%, rgba(255, 255, 255, 0.5) 100%);
+        z-index: 50;
+        border-radius: 50%;
+        animation: none;
+
     }
+
+    &.process-up::before {
+        -webkit-animation: expand-up var(--animation-speed, 5s) linear forwards;
+        /* Для WebKit (Safari, старые версии Chrome) */
+        -moz-animation: expand-up var(--animation-speed, 5s) linear forwards;
+        /* Для Firefox */
+        -o-animation: expand-up var(--animation-speed, 5s) linear forwards;
+        /* Для старых версий Opera */
+        animation: expand-up var(--animation-speed, 5s) linear forwards;
+        animation-play-state: running;
+    }
+
+    &.process-down::before {
+        -webkit-animation: expand-down var(--animation-speed, 5s) linear forwards;
+        /* Для WebKit (Safari, старые версии Chrome) */
+        -moz-animation: expand-down var(--animation-speed, 5s) linear forwards;
+        /* Для Firefox */
+        -o-animation: expand-down var(--animation-speed, 5s) linear forwards;
+        /* Для старых версий Opera */
+        animation: expand-down var(--animation-speed, 5s) linear forwards;
+        animation-play-state: running;
+    }
+
+    &__timer {
+        font-size: 30px;
+        font-weight: 500;
+        z-index: 500;
+        color: #000;
+    }
+}
+
+&-duration {
+    color: var(--primary-text);
+    padding: 10.5px 0;
+    width: 104px;
+    height: 44px;
+    background-color: #1E203C;
+    font-size: 18px;
+}
 }
 
 

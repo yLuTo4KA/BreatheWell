@@ -1,13 +1,13 @@
 <div class="highlights" (click)="handleClick($event)">
     <div class="highlights-header">
         <div class="highlights-paginator-list">
-            <div class="highlights-paginator-item" *ngFor="let highlight of highlights" [ngClass]="{'active': slide === highlight.id}" (click)="setSlide(highlight.id); $event.stopPropagation()"></div>
+            <div class="highlights-paginator-item" *ngFor="let highlight of highlights; let i = index" [ngClass]="{'active': slide === i}" (click)="setSlide(i); $event.stopPropagation()"></div>
         </div>
         <app-mini-button icon="back" class="back-button" (click)="handleBack($event)"></app-mini-button>
-        <img [src]="highlights[slide - 1].img" alt="content">
+        <img [src]="highlights[slide].img" alt="content">
     </div>
     <div class="highlights-body">
-        <markdown [data]="highlights[slide - 1].content"></markdown>
+        <markdown [data]="highlights[slide].content"></markdown>
     </div>
 </div>
 
