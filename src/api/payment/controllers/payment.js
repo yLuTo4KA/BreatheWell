@@ -64,7 +64,7 @@ module.exports = {
                     });
                 }
                 const imageUrl = 'https://breathwell.space/uploads/premium_buy_1b60db3d3c.png';
-                await bot.telegram.sendPhoto(user.id, imageUrl, {
+                await bot.telegram.sendPhoto(user.tg_id, imageUrl, {
                     caption: `Поздравляю, ты успешно оплатил Премиум доступ к курсу! \n\nТеперь тебе доступен полный функционал приложения, включая уроки, ежедневные задания и аудио практики.`,
                     parse_mode: 'Markdown'
                 });
