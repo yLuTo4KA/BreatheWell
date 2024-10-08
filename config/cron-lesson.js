@@ -1,7 +1,7 @@
 const bot = require("./tg-bot");
 
 module.exports = {
-    "59 21 * * *": async ({ strapi }) => {
+    "08 22 * * *": async ({ strapi }) => {
         try {
             const incompleteUsers = await strapi.db.query('api::course-progress.course-progress').findMany({
                 where: {
@@ -25,7 +25,7 @@ module.exports = {
                         reply_markup: {
                             inline_keyboard: [
                               [
-                                { text: 'Начать урок', url: `https://t.me/${process.env.BOT_NAME}/${process.env.BOT_START}?lesson=${progress.lesson.id}` }
+                                { text: 'Начать урок', url: `https://t.me/${process.env.BOT_NAME}/${process.env.BOT_START}?startapp=${progress.lesson.id}` }
                               ]
                             ]
                           }
