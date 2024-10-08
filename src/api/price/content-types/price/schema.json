@@ -24,7 +24,8 @@
     "currency": {
       "type": "enumeration",
       "enum": [
-        "XTR"
+        "XTR",
+        "RUB"
       ]
     },
     "currency_name": {

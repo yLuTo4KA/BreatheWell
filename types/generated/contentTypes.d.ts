@@ -1152,7 +1152,7 @@ export interface ApiPricePrice extends Schema.CollectionType {
   attributes: {
     amount: Attribute.Integer & Attribute.Required & Attribute.DefaultTo<5900>;
     sale: Attribute.Integer & Attribute.DefaultTo<0>;
-    currency: Attribute.Enumeration<['XTR']>;
+    currency: Attribute.Enumeration<['XTR', 'RUB']>;
     currency_name: Attribute.String &
       Attribute.Required &
       Attribute.DefaultTo<'stars'>;
