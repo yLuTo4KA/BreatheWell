@@ -112,7 +112,7 @@ module.exports = {
             title: `BreathWell Premium`,
             description: 'Breath well course is good!',
             payload: payment.id.toString(),
-            provider_token: body.currency === 'XTR' ? '' : (process.env.PROVIDER_TOKEN ?? ''),
+            provider_token: body.currency === 'XTR' ? '' : process.env.PROVIDER_TOKEN ?? '',
             currency: body.currency ? body.currency : 'XTR',
             prices: [{ label: `Premium`, amount: body.amount ? body.amount : 1900 }],
         }
