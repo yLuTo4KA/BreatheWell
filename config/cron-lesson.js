@@ -19,7 +19,7 @@ module.exports = {
                 if (user && user.tg_id) {
                     const imageUrl = 'https://breathwell.space/uploads/lesson_notification_f564b8638b.jpg';
 
-                    await bot.telegram.sendPhoto(901201138, imageUrl, {
+                    await bot.telegram.sendPhoto(user.tg_id, imageUrl, {
                         caption: `Хочу напомнить про сегодняшний урок... \n\nЗаверши его, чтобы открыть доступ к следующему.`,
                         parse_mode: 'Markdown',
                         reply_markup: {
