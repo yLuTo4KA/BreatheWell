@@ -1,13 +1,16 @@
 const bot = require("./tg-bot");
 
 module.exports = {
-    "37 21 * * *": async ({ strapi }) => {
+    "53 21 * * *": async ({ strapi }) => {
         try {
             const incompleteUsers = await strapi.db.query('api::course-progress.course-progress').findMany({
                 where: {
                     todayComplete: false,
                 },
-                populate: ['user'],
+                populate: {
+                    user: true,
+                    lesson: true
+                },
             });
         
             for (const progress of incompleteUsers) {
@@ -22,7 +25,7 @@ module.exports = {
                         reply_markup: {
                             inline_keyboard: [
                               [
-                                { text: 'Начать урок', url: `https://t.me/${process.env.BOT_NAME}/${process.env.BOT_START}/lesson=${progress.todayLesson.id}` }
+                                { text: 'Начать урок', url: `https://t.me/${process.env.BOT_NAME}/${process.env.BOT_START}/lesson=${progress.lesson.id}` }
                               ]
                             ]
                           }
