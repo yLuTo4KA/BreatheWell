@@ -1,7 +1,7 @@
 const bot = require("./tg-bot");
 
 module.exports = {
-    "08 22 * * *": async ({ strapi }) => {
+    "* */5 * * *": async ({ strapi }) => {
         try {
             const incompleteUsers = await strapi.db.query('api::course-progress.course-progress').findMany({
                 where: {
@@ -12,10 +12,9 @@ module.exports = {
                     lesson: true
                 },
             });
-        
             for (const progress of incompleteUsers) {
                 const user = progress.user;
-
+                console.log(progress.lesson);
                 if (user && user.tg_id) {
                     const imageUrl = 'https://breathwell.space/uploads/lesson_notification_f564b8638b.jpg';
 
