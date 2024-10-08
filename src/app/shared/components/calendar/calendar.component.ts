@@ -87,14 +87,14 @@ export class CalendarComponent {
 
   isActive(index: number, day: number): boolean {
 
-    if(day === this.lastActiveDay && this.todayActive) {
+    if(day === this.lastActiveDay  && this.todayActive) {
       return true;
     }
-    if ((day > this.lastActiveDay - this.activeDays - (this.todayActive ? 0 : 1) && day < this.lastActiveDay) || (day > this.prevActiveDay - this.prevActiveDays && day <= this.prevActiveDay)) {
+    if ((day > this.currentDay - this.activeDays - (this.todayActive ? 0 : 1) && day < this.currentDay) || (day > this.prevActiveDay - this.prevActiveDays && day <= this.prevActiveDay)) {
       return true;
     }
-    if(day > this.lastActiveDay && day > this.week[this.week.length - 1].day) {
-      const bigday = day + this.lastActiveDay;
+    if(day > this.currentDay && day > this.week[this.week.length - 1].day) {
+      const bigday = day + this.currentDay;
       if((day > bigday - this.activeDays - (this.todayActive ? 0 : 1) && day < bigday) || (day > (day + this.prevActiveDay) - this.prevActiveDays) && day < day + this.prevActiveDay) {
         return true;
       }
