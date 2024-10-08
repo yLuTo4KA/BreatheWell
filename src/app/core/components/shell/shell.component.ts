@@ -67,7 +67,7 @@ export class ShellComponent implements OnInit {
       localStorage.removeItem("lesson");
       this.courseService.getLesson(+lesson).subscribe(response => {
         if(response) {
-          this.router.navigate(['/lesson']);
+          this.router.navigate(['/lesson-preview']);
         }
       });
       return;
