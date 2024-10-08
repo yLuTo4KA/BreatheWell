@@ -6,7 +6,7 @@ export interface Price {
         "updatedAt": string | Date,
         "publishedAt": string | Date,
         "sale": number,
-        "currency": "XTR",
+        "currency": "XTR" | "RUB",
         "currency_name"?: string,
         "sale_price"?: number,
     }

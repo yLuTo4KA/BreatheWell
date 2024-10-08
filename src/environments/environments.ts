@@ -9,7 +9,7 @@ export const environment = {
             updatedAt: "2024-09-14T22:39:14.857Z",
             publishedAt: "2024-09-14T22:19:55.971Z",
             sale: 70,
-            currency: "XTR",
+            currency: "RUB",
             amount: 5900,
             currency_name: "stars",
             sale_price: 1900

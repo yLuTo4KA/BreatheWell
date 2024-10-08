@@ -7,6 +7,9 @@ import { Router } from '@angular/router';
 import { CourseService } from '../../services/course.service';
 import { LoadingService } from '../../services/loading.service';
 import { Progress } from '../../models/progress.model';
+import { PriceService } from '../../services/price.service';
+import { Price } from '../../models/price.model';
+import { environment } from 'src/environments/environments';
 
 @Component({
   selector: 'app-buy-premium',
@@ -15,10 +18,13 @@ import { Progress } from '../../models/progress.model';
 })
 export class BuyPremiumComponent {
   private paymentService = inject(PaymentService);
+  private priceService = inject(PriceService);
   private authService = inject(AuthService);
   private courseService = inject(CourseService);
   private router = inject(Router);
   private loadingService = inject(LoadingService);
+  
+  public price: Price = environment.defaultPrice as Price;
 
   viewFirstLessonModal: boolean = false;
 
@@ -46,6 +52,7 @@ export class BuyPremiumComponent {
       this.loading = response;
     })
     this.authService.newUser$.subscribe(data => this.newUser = data);
+    this.price = this.priceService.getPrice('RUB');
   }
 
   getTimer(timer: number) {
@@ -55,7 +62,7 @@ export class BuyPremiumComponent {
   }
 
   getInvoice(): void {
-    this.paymentService.getInvoice(19000, 'RUB').subscribe(response => {
+    this.paymentService.getInvoice(this.price.attributes.amount, this.price.attributes.currency).subscribe(response => {
       if (response && response.url) {
         const invoice = initInvoice();
         this.loadingService.startLoading();
