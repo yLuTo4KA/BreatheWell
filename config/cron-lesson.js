@@ -1,7 +1,7 @@
 const bot = require("./tg-bot");
 
 module.exports = {
-    "3 23 * * *": async ({ strapi }) => {
+    "42 22 * * *": async ({ strapi }) => {
         try {
             const incompleteUsers = await strapi.db.query('api::course-progress.course-progress').findMany({
                 where: {
