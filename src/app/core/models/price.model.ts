@@ -8,6 +8,6 @@ export interface Price {
         "sale": number,
         "currency": "XTR" | "RUB",
         "currency_name"?: string,
-        "sale_price"?: number,
+        "sale_price": number,
     }
 }

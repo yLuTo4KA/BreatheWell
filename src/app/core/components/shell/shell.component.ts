@@ -27,6 +27,8 @@ export class ShellComponent implements OnInit {
 
   lessonsCount: number = 0;
 
+  todayLesson: number = 0;
+
   constructor(private router: Router) { }
 
   ngOnInit() {
@@ -43,8 +45,11 @@ export class ShellComponent implements OnInit {
       this.showPremium = !response.user.premium;
       const root = document.documentElement;
       root.style.setProperty('--dynamic-size', response.user.premium ? '110px' : '180px');
-      forkJoin({ sounds: this.breathService.getSounds(), practices: this.breathService.getPractice(), prices: this.pricesService.getPrices(), progress: this.courseService.getUserProgress(), lessonsList: this.courseService.getLessons(), audioLessons: this.courseService.getAudioLessons() }).subscribe(() => {
+      forkJoin({ sounds: this.breathService.getSounds(), practices: this.breathService.getPractice(), prices: this.pricesService.getPrices(), progress: this.courseService.getUserProgress(), lessonsList: this.courseService.getLessons(), audioLessons: this.courseService.getAudioLessons() }).subscribe((response) => {
         this.lessonsCount = this.courseService.getLessonsCount();
+        if(response) {
+          this.todayLesson = response.progress.todayLesson.id;
+        }
         this.redirectUser();
       })
     });
@@ -65,11 +70,15 @@ export class ShellComponent implements OnInit {
     const lesson = localStorage.getItem("lesson");
     if(lesson) {
       localStorage.removeItem("lesson");
-      this.courseService.getLesson(+lesson).subscribe(response => {
-        if(response) {
-          this.router.navigate(['/lesson-preview']);
-        }
-      });
+      if(+lesson === this.todayLesson) {
+        this.courseService.getLesson(+lesson).subscribe(response => {
+          if(response) {
+            this.router.navigate(['/lesson-preview']);
+          }
+        });
+      } else {
+        this.router.navigate(['/home']);
+      }
       return;
     }
     if (this.authResponse.newUser) {  // later
