@@ -62,7 +62,7 @@ export class BuyPremiumComponent {
   }
 
   getInvoice(): void {
-    this.paymentService.getInvoice(this.price.attributes.amount, this.price.attributes.currency).subscribe(response => {
+    this.paymentService.getInvoice(this.price.attributes.sale > 0 ? this.price.attributes.sale_price * 100 : this.price.attributes.amount * 100, this.price.attributes.currency).subscribe(response => {
       if (response && response.url) {
         const invoice = initInvoice();
         this.loadingService.startLoading();
