@@ -52,6 +52,10 @@ export class TelegramService {
   constructor(@Inject(DOCUMENT) private _document: any) {
     this.window = this._document.defaultView;
     this.tg = this.window!.Telegram.WebApp;
+    let startParam = this.tg.initDataUnsafe.start_param;
+    if(startParam) {
+      localStorage.setItem('lesson', startParam);     
+    }
   }
 
   initData(): string {

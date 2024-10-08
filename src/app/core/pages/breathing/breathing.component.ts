@@ -250,7 +250,7 @@ export class BreathingComponent {
     if(action === 'Выдох') {
       return `Выдыхайте медленно через ${this.breathSetting.exhale_type === 'Nose' ? 'нос' : 'рот'}`;
     }
-    return `Задержите дыхание и приготовьтесь ${this.breathProcess === 'down' ? 'делать вдох' : 'выдыхать'}`
+    return `Приготовьтесь ${this.breathProcess === 'down' ? 'делать вдох' : 'выдыхать'}`
   }
   ngOnDestroy(): void {
     this.stopAudio();

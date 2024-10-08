@@ -16,7 +16,7 @@ export class PriceComponent {
   public price: Price | null = null;
 
   ngOnInit(): void {
-    this.price = this.priceService.getPrice('XTR');
+    this.price = this.priceService.getPrice('RUB');
   }
 
   getPrice(price: Price): string {

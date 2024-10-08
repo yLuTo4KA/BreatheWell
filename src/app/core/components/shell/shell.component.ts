@@ -43,14 +43,14 @@ export class ShellComponent implements OnInit {
       this.showPremium = !response.user.premium;
       const root = document.documentElement;
       root.style.setProperty('--dynamic-size', response.user.premium ? '110px' : '180px');
-      forkJoin({ sounds: this.breathService.getSounds(), practices: this.breathService.getPractice(), prices: this.pricesService.getPrices(), progress: this.courseService.getUserProgress(), lessonsList: this.courseService.getLessons(), audioLessons: this.courseService.getAudioLessons()}).subscribe(() => {
+      forkJoin({ sounds: this.breathService.getSounds(), practices: this.breathService.getPractice(), prices: this.pricesService.getPrices(), progress: this.courseService.getUserProgress(), lessonsList: this.courseService.getLessons(), audioLessons: this.courseService.getAudioLessons() }).subscribe(() => {
         this.lessonsCount = this.courseService.getLessonsCount();
         this.redirectUser();
       })
     });
     this.authService.user$.subscribe(response => {
-      if(response) {
-        if(this.authResponse && this.authResponse.user) {
+      if (response) {
+        if (this.authResponse && this.authResponse.user) {
           this.authResponse.user = response;
           this.showPremium = !response.premium;
           const root = document.documentElement;
@@ -62,6 +62,16 @@ export class ShellComponent implements OnInit {
   }
 
   redirectUser(): void {
+    const lesson = localStorage.getItem("lesson");
+    if(lesson) {
+      localStorage.removeItem("lesson");
+      this.courseService.getLesson(+lesson).subscribe(response => {
+        if(response) {
+          this.router.navigate(['/lesson']);
+        }
+      });
+      return;
+    }
     if (this.authResponse.newUser) {  // later
       this.router.navigate(['/start']);
     } else {

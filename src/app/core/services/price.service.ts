@@ -26,7 +26,7 @@ export class PriceService extends ApiService {
         super(http);
     }
 
-    getPrice(currency: "XTR"): Price {
+    getPrice(currency: "XTR" | "RUB"): Price {
         const price = this.pricesSubject.value.find(item => item.attributes.currency === currency) || environment.defaultPrice as Price;
         return price;
     }
