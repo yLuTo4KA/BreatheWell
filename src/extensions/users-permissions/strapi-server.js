@@ -95,7 +95,7 @@ module.exports = (plugin) => {
                 const lastComplete = new Date(progress.lastComplete);
                 // @ts-ignore
                 const diffInMs = currentDate - lastComplete;
-                const diffInDay = diffInMs / (1000 * 60 * 60 * 24);
+                const diffInDay = diffInMs / (1000 * 60 * 60 * 12);
                 const completedToday = progress.lesson.tasks.every(task => progress.tasks.some(completedTask => completedTask.id === task.id));
                 let completedLessons = progress.completed_lessons;
                 if (completedToday) {
