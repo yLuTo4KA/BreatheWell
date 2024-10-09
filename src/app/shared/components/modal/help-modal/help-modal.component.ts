@@ -20,4 +20,7 @@ export class HelpModalComponent {
   openTgLink(link: string, instantView: boolean = true) {
     this.tgService.openTgLink(link, instantView);
   }
+  openTelegramLink(link: string) {
+    this.tgService.openTelegramLink(link);
+  }
 }
