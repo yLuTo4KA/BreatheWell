@@ -1,9 +1,4 @@
 const bot = require('../../../../config/tg-bot');
-const YooKassa = require('yookassa');
-
-
-
-
 
 
 module.exports = {
