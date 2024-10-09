@@ -17,7 +17,7 @@ export class HelpModalComponent {
     this.closeModalEvent.emit();
   }
 
-  openTgLink(link: string) {
-    this.tgService.openTgLink(link, true);
+  openTgLink(link: string, instantView: boolean = true) {
+    this.tgService.openTgLink(link, instantView);
   }
 }

@@ -177,6 +177,7 @@
         margin-bottom: 8px;
         padding-left: 16px;
         position: relative;
+        z-index: 0;
 
         &:last-child {
             &::after {
@@ -192,8 +193,9 @@
             background-position: right;
             background-size: 10px 10px;
             background-repeat: repeat-y;
-            height: 80%;
+            height: 90%;
             left: 0;
+            z-index: -1;
             top: calc(50% + 10px);
         }
 
@@ -204,23 +206,25 @@
         &-status {
             display: none;
             position: relative;
+            overflow: hidden;
 
             &--active {
                 position: absolute;
-                width: 20px;
-                height: 20px;
+                width: 21px;
+                height: 21px;
                 left: -10px;
                 top: 50%;
                 border: 2px solid var(--blue-light);
                 border-radius: 50%;
                 transform: translate(0, -50%);
+                
 
             }
 
             &--current {
                 position: absolute;
-                width: 20px;
-                height: 20px;
+                width: 21px;
+                height: 21px;
                 left: -10px;
                 top: 50%;
                 border: 2px solid var(--blue-light);
@@ -230,8 +234,8 @@
 
             &--closed {
                 position: absolute;
-                width: 20px;
-                height: 20px;
+                width: 21px;
+                height: 21px;
                 left: -10px;
                 top: 50%;
                 transform: translate(0, -50%);

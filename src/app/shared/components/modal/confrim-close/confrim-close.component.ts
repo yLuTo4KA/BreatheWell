@@ -9,7 +9,9 @@ import { Router } from '@angular/router';
 export class ConfrimCloseComponent {
   private router = inject(Router);
   @Input() viewModal: boolean = true;
+  @Input() afterBreath: boolean = false;
   @Output() closeModalEmit = new EventEmitter<void>();
+  @Output() nextOpenEmit = new EventEmitter<void>();
 
 
   closeModal(): void {
@@ -18,6 +20,10 @@ export class ConfrimCloseComponent {
 
   confrim(): void {
     this.closeModalEmit.emit();
-    this.router.navigate(['/home']);
+    if (this.afterBreath) {
+      this.nextOpenEmit.emit();
+    } else {
+      this.router.navigate(['/home']);
+    }
   }
 }
