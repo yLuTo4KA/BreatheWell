@@ -1,4 +1,11 @@
 const bot = require('../../../../config/tg-bot');
+const YooKassa = require('yookassa');
+
+
+
+
+
+
 module.exports = {
     async telegraf(ctx) {
         const { secret } = ctx.params;
@@ -12,17 +19,17 @@ module.exports = {
             if (update.message && update.message.text === '/start') {
                 const userId = update.message.from.id;
                 const imageUrl = 'https://breathwell.space/uploads/welcome_b444b0c832.jpg';
-    
+
                 await bot.telegram.sendPhoto(userId, imageUrl, {
                     caption: `*Давай дышать вместе! 🌬️*\n\nПриветствую тебя 👋 Ты оказался в нужном месте, чтобы открыть в себе новую суперспособность — твоё дыхание.\n\nПредставь, что у тебя всегда под рукой есть секретный инструмент против стресса и усталости. Да-да, это твое дыхание! И я уверен, что ты даже не представляешь, насколько оно мощное. Вместе мы будем учиться простым, но невероятно полезным техникам, которые помогут тебе чувствовать себя спокойнее, собраннее и заряжаться энергией буквально на ходу.\n\nЭто не просто упражнения — это твой новый друг, который всегда готов поддержать, где бы ты ни был. Давай начнем, я тебе всё покажу!`,
                     parse_mode: 'Markdown',
                     reply_markup: {
                         inline_keyboard: [
-                          [
-                            { text: 'Начать', url: `https://t.me/${process.env.BOT_NAME}/${process.env.BOT_START}` }
-                          ]
+                            [
+                                { text: 'Начать', url: `https://t.me/${process.env.BOT_NAME}/${process.env.BOT_START}` }
+                            ]
                         ]
-                      }
+                    }
                 });
             }
             if (update.pre_checkout_query) {
@@ -115,10 +122,57 @@ module.exports = {
             provider_token: body.currency === 'XTR' ? '' : process.env.PROVIDER_TOKEN ?? '',
             currency: body.currency ? body.currency : 'XTR',
             prices: [{ label: `Premium`, amount: body.amount ? body.amount : 1900 }],
+            need_email: true,
+            send_email_to_provider: true,
+            email: 'kipsa25@mail.ru'
         }
 
         const invoiceLink = await bot.telegram.createInvoiceLink(invoice);
-        ctx.send({url: invoiceLink});
+        // const yooKassa = new YooKassa({
+        //     shopId: process.env.SHOP_ID,
+        //     secretKey: process.env.SECRET_SHOP,
+        // });
+        // async function createPayment() {
+        //     console.log(process.env.SHOP_ID);
+        //     console.log(process.env.SECRET_SHOP);
+        //     const payment = await yooKassa.createPayment({
+        //         amount: {
+        //             value: '100.00',
+        //             currency: 'RUB',
+        //         },
+        //         confirmation: {
+        //             type: 'redirect',
+        //             return_url: 'http://localhost:4200',
+        //         },
+        //         receipt: {
+        //             customer: {
+        //               email: user.email, // email покупателя (обязательно)
+        //             },
+        //             items: [
+        //               {
+        //                 description: 'Premium status BreatheWell',
+        //                 quantity: '1.00',
+        //                 amount: {
+        //                   value: '100.00',
+        //                   currency: 'RUB',
+        //                 },
+        //                 vat_code: 1, // Ставка НДС 20%
+        //                 payment_subject: 'commodity', // Указываем, что это товар
+        //                 payment_mode: 'full_payment', // Полная оплата (обязательно)
+        //               },
+        //             ],
+        //           },
+        //         description: 'Premium status BreatheWell',
+        //         notification_url: 'https://breathewell.space/api/telegraf/' + process.env.WEBHOOK_SECRET,
+        //     });
+
+        //     console.log(payment);
+        //     return payment;
+        // }
+
+        // const link = createPayment();
+
+        ctx.send({ url: invoiceLink});
     }
 
 
