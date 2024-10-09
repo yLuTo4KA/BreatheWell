@@ -6,6 +6,7 @@ import { filter, forkJoin } from 'rxjs';
 import { BreathService } from '../../services/breath.service';
 import { PriceService } from '../../services/price.service';
 import { CourseService } from '../../services/course.service';
+import { Lesson } from '../../models/lesson.model';
 
 @Component({
   selector: 'app-shell',
@@ -27,7 +28,7 @@ export class ShellComponent implements OnInit {
 
   lessonsCount: number = 0;
 
-  todayLesson: number = 0;
+  todayLesson!: Lesson;
 
   constructor(private router: Router) { }
 
@@ -48,7 +49,7 @@ export class ShellComponent implements OnInit {
       forkJoin({ sounds: this.breathService.getSounds(), practices: this.breathService.getPractice(), prices: this.pricesService.getPrices(), progress: this.courseService.getUserProgress(), lessonsList: this.courseService.getLessons(), audioLessons: this.courseService.getAudioLessons() }).subscribe((response) => {
         this.lessonsCount = this.courseService.getLessonsCount();
         if(response) {
-          this.todayLesson = response.progress.todayLesson.id;
+          this.todayLesson = response.progress.todayLesson;
         }
         this.redirectUser();
       })
@@ -70,7 +71,7 @@ export class ShellComponent implements OnInit {
     const lesson = localStorage.getItem("lesson");
     if(lesson) {
       localStorage.removeItem("lesson");
-      if(+lesson === this.todayLesson) {
+      if(+lesson === this.todayLesson.id && this.todayLesson.free ? true : this.authResponse.user.premium) {
         this.courseService.getLesson(+lesson).subscribe(response => {
           if(response) {
             this.router.navigate(['/lesson-preview']);
