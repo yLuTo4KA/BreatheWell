@@ -19,7 +19,7 @@ module.exports = {
                     reply_markup: {
                         inline_keyboard: [
                           [
-                            { text: 'Начать урок', url: `https://t.me/${process.env.BOT_NAME}/${process.env.BOT_START}` }
+                            { text: 'Начать', url: `https://t.me/${process.env.BOT_NAME}/${process.env.BOT_START}` }
                           ]
                         ]
                       }
