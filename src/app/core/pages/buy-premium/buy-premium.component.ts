@@ -36,6 +36,7 @@ export class BuyPremiumComponent {
 
   newUser: boolean = false;
   lessonsCount = this.courseService.getLessonsCount();
+  progress!: Progress;
 
 
   constructor() { }
@@ -53,6 +54,11 @@ export class BuyPremiumComponent {
     })
     this.authService.newUser$.subscribe(data => this.newUser = data);
     this.price = this.priceService.getPrice('RUB');
+    this.courseService.userProgress$.subscribe(response => {
+      if(response) {
+        this.progress = response;
+      }
+    })
   }
 
   getTimer(timer: number) {
@@ -83,7 +89,7 @@ export class BuyPremiumComponent {
   }
 
   closePage(): void {
-    if(this.newUser) {
+    if(this.newUser || !this.progress.completedLessons.includes(1)) {
       this.viewFirstLessonModal = true;
     }else {
       this.router.navigate(['/home']);

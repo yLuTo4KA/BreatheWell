@@ -35,4 +35,4 @@
 <app-practice-settings (closeModalEvent)="closePracticeSettings()"></app-practice-settings>
 <app-sound-settings (closeModalEvent)="closeModal()"></app-sound-settings>
 <app-duration-settings (closeModalEvent)="closeModal()"></app-duration-settings>
-<app-confrim-close [viewModal]="confrimCloseModal" (closeModalEmit)="returnPage()"></app-confrim-close>
+<app-confrim-close [viewModal]="confrimCloseModal" (closeModalEmit)="returnPage()" [afterBreath]="true" (nextOpenEmit)="navToHome()"></app-confrim-close>

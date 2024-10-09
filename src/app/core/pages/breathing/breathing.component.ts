@@ -5,7 +5,7 @@ import { ModalService } from '../../services/modal.service';
 import { Breath } from '../../models/breath.model';
 import { ModalsView } from '../../models/modals-view.model';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';import { initHapticFeedback } from '@telegram-apps/sdk';
+import { AuthService } from '../../services/auth.service'; import { initHapticFeedback } from '@telegram-apps/sdk';
 
 const hapticFeedback = initHapticFeedback();
 
@@ -54,6 +54,7 @@ export class BreathingComponent {
   action: "Приготовьтесь!" | "Вдох" | "Выдох" | "Задержите дыхание" | "Пауза" = "Приготовьтесь!"; // действие
 
   userActiveToday: boolean = false;
+  userPremium: boolean = false;
 
   loading$ = new BehaviorSubject<boolean>(true); // загрузка
 
@@ -67,6 +68,7 @@ export class BreathingComponent {
     this.authService.user$.subscribe(response => {
       if (response) {
         this.userActiveToday = response.todayActive;
+        this.userPremium = response.premium;
       }
     })
     this.modalService.modalsView$.subscribe(response => {
@@ -218,19 +220,26 @@ export class BreathingComponent {
   }
 
   openDayliProgress(): void {
-    // if (!this.userActiveToday) {
+    if (!this.userActiveToday) {
       this.authService.dayliCheck().subscribe(response => {
         if (response.success) {
           this.authService.setUserData(response.user);
           this.router.navigate(['/dayli-progress']);
         } else {
-          this.router.navigate(['/dayli-progress']); // del fo prod ** nav to home!!!
+          this.navToHome();
         }
       })
-  
-    // } else {
-    //   this.router.navigate(['/home']);
-    // }
+    } else {
+      this.navToHome();
+    }
+  }
+
+  navToHome(): void {
+    if(this.userPremium) {
+      this.router.navigate(['/home']);
+    }else {
+      this.router.navigate(['/buying']);
+    }
   }
 
   closePage(): void {
@@ -244,10 +253,10 @@ export class BreathingComponent {
 
 
   getActionText(action: "Вдох" | "Выдох" | "Задержите дыхание" | "Пауза"): string {
-    if(action === "Вдох") {
+    if (action === "Вдох") {
       return `Вдыхайте медленно и глубоко через ${this.breathSetting.breath_type === 'Nose' ? 'нос' : 'рот'}`;
     }
-    if(action === 'Выдох') {
+    if (action === 'Выдох') {
       return `Выдыхайте медленно через ${this.breathSetting.exhale_type === 'Nose' ? 'нос' : 'рот'}`;
     }
     return `Приготовьтесь ${this.breathProcess === 'down' ? 'делать вдох' : 'выдыхать'}`
