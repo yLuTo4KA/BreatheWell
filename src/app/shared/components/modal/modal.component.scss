@@ -7,6 +7,7 @@
     z-index: 1000;
     display: none;
     background-color: #00000099;
+    overflow: hidden;
     cursor: pointer;
     &__wrapper {
         background: linear-gradient(180deg, #1B123C 0%, #050726 100%);

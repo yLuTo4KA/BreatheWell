@@ -2,6 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Injectable, Inject } from '@angular/core';
 import { initUtils, mockTelegramEnv, parseInitData } from '@telegram-apps/sdk';
 
+
 const initDataRaw = new URLSearchParams([
   ['user', JSON.stringify({
     id: 99281932,
@@ -66,6 +67,9 @@ export class TelegramService {
   }
   openTelegramLink(link: string) {
     this.utils.openTelegramLink(link);
+  }
+  closeTg(): void {
+    this.tg.close();
   }
   expand(): void {
     this.tg.expand();
