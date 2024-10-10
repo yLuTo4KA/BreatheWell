@@ -19,23 +19,33 @@ module.exports = {
 
         try {
             const update = ctx.request.body;
-            if(update.event === 'payment.succeeded' || update.event === 'payment.waiting_for_capture' || update.event === 'payment.canceled') {
+            if (update.event === 'payment.succeeded' || update.event === 'payment.waiting_for_capture' || update.event === 'payment.canceled') {
                 const paymentId = update.object.id;
                 const userId = update.object.metadata.userId;
+                const status = update.object.status;
                 console.log(paymentId);
                 console.log(userId);
 
-                if(update.event === 'payment.waiting_for_capture') {
-                    console.log('CAPTURE!!!');
+                if (update.event === 'payment.waiting_for_capture') {
                     await yooKassa.capturePayment(paymentId);
                 }
-                if(update.event === 'payment.succeeded') {
-                    console.log('Sucess!!!');
+                if (update.event === 'payment.succeeded') {
+                    await strapi.query('plugin::users-permissions.user').update({
+                        where: { tg_id: userId },
+                        data: { premium: true }
+                    });
+                    const imageUrl = 'https://breathwell.space/uploads/premium_buy_256b9236be.jpg';
+                    await bot.telegram.sendPhoto(userId, imageUrl, {
+                        caption: `Поздравляю, ты успешно оплатил Премиум доступ к курсу! \n\nТеперь тебе доступен полный функционал приложения, включая уроки, ежедневные задания и аудио практики.`,
+                        parse_mode: 'Markdown'
+                    });
                 }
-                if(update.event === 'payment.canceled') {
+                if (update.event === 'payment.canceled') {
                     console.log('canceled');
                 }
-                console.log(update);
+
+                await this.updatePayment(userId, status);
+                ctx.send('OK');
             }
 
             if (update.message && update.message.text === '/start') {
@@ -110,11 +120,11 @@ module.exports = {
                 });
 
             }
-             else {
+            else {
                 console.error('Invalid update data:', update);
             }
 
-            ctx.send('123');
+            ctx.send('OK');
         } catch (e) {
             console.error('Error handling payment or pre-checkout query:', e.message);
             ctx.send('Internal error', 500);
@@ -162,7 +172,7 @@ module.exports = {
             if (!user) {
                 return ctx.unauthorized('You must be logged in to perform this action');
             }
-           
+
             async function createPayment() {
                 const yoPay = await yooKassa.createPayment({
                     amount: {
@@ -206,7 +216,7 @@ module.exports = {
             const payment = await strapi.query('api::payment.payment').create({
                 data: {
                     total_amount: +paymentData.amount.value,
-                    currency: +paymentData.amount.currency,
+                    currency: paymentData.amount.currency,
                     status: paymentData.status,
                     payment_date: paymentData.created_at,
                     email: body.email,
@@ -220,7 +230,21 @@ module.exports = {
             ctx.send('error', 404)
         }
 
+    },
+
+
+    async updatePayment(userId, status) {
+        const existingPayment = await strapi.query('api::payment.payment').findOne({
+            where: { user: userId },
+        });
+        if (existingPayment) {
+            // Обновляем существующую запись
+            await strapi.query('api::payment.payment').update({
+                where: { id: existingPayment.id },
+                data: {
+                    status: status
+                }
+            });
+        }
     }
-
-
 };
