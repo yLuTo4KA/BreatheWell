@@ -11,16 +11,20 @@ export class ModalComponent {
   @Output() closeModalEmit = new EventEmitter<void>();
 
   ngOnInit(): void {
-    this.setScreenHeight();
+    this.setContainerHeight();
   }
 
   @HostListener('window:resize')
   onResize() {
-    this.setScreenHeight();
+    this.setContainerHeight();
   }
-  private setScreenHeight(): void {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+  private setContainerHeight(): void {
+    const height = window.innerHeight;
+    const container = document.querySelector('.modal') as HTMLElement;
+    if (container) {
+      container.style.height = `${height}px`; // Устанавливаем высоту контейнера
+    }
   }
   closeModal(): void {
     this.closeModalEmit.emit();
