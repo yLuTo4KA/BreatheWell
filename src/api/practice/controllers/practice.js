@@ -23,7 +23,6 @@ module.exports = createCoreController('api::practice.practice', ({ strapi }) => 
         // Transform the data to include only required fields
         const transformedData = data.map(item => {
             const attributes = item.attributes;
-            console.log(attributes.icon)
             return {
                 id: item.id,
                 title: attributes.title,

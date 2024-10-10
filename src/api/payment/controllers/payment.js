@@ -20,8 +20,6 @@ module.exports = {
         try {
             const update = ctx.request.body;
             if(update.event === 'payment.succeeded' || update.event === 'payment.waiting_for_capture' || update.event === 'payment.canceled') {
-                const paymentId = update.data.id;
-                const userId = update.metadata.userId
                 console.log(update);
             }
 
