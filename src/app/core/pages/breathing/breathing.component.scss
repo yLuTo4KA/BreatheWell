@@ -43,6 +43,10 @@
 }
 
 .select-button {
+    &-wrap {
+        display: flex;
+        align-items: center;
+    }
     &__icon {
         height: 36px;
         width: 36px;
