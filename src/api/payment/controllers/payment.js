@@ -37,14 +37,20 @@ module.exports = {
                     const imageUrl = 'https://breathwell.space/uploads/premium_buy_256b9236be.jpg';
                     await bot.telegram.sendPhoto(userId, imageUrl, {
                         caption: `Поздравляю, ты успешно оплатил Премиум доступ к курсу! \n\nТеперь тебе доступен полный функционал приложения, включая уроки, ежедневные задания и аудио практики.`,
-                        parse_mode: 'Markdown'
+                        parse_mode: 'Markdown',
+                        reply_markup: {
+                            inline_keyboard: [
+                                [
+                                    { text: 'Начать курс', url: `https://t.me/${process.env.BOT_NAME}/${process.env.BOT_START}` }
+                                ]
+                            ]
+                        }
                     });
+                    await this.updatePayment(paymentId, status);
                 }
                 if (update.event === 'payment.canceled') {
-                    console.log('canceled');
+                    await this.updatePayment(paymentId, status);
                 }
-
-                await this.updatePayment(paymentId, status);
                 ctx.send('OK');
             }
 
@@ -112,7 +118,14 @@ module.exports = {
                 const imageUrl = 'https://breathwell.space/uploads/premium_buy_256b9236be.jpg';
                 await bot.telegram.sendPhoto(user.tg_id, imageUrl, {
                     caption: `Поздравляю, ты успешно оплатил Премиум доступ к курсу! \n\nТеперь тебе доступен полный функционал приложения, включая уроки, ежедневные задания и аудио практики.`,
-                    parse_mode: 'Markdown'
+                    parse_mode: 'Markdown',
+                    reply_markup: {
+                        inline_keyboard: [
+                            [
+                                { text: 'Начать курс', url: `https://t.me/${process.env.BOT_NAME}/${process.env.BOT_START}` }
+                            ]
+                        ]
+                    }
                 });
                 await strapi.query('plugin::users-permissions.user').update({
                     where: { tg_id: userId },
