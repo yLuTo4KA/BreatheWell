@@ -19,6 +19,12 @@ module.exports = {
 
         try {
             const update = ctx.request.body;
+            if(update.event === 'payment.succeeded' || update.event === 'payment.waiting_for_capture' || update.event === 'payment.canceled') {
+                const paymentId = update.data.id;
+                const userId = update.metadata.userId
+                console.log(update);
+            }
+
             if (update.message && update.message.text === '/start') {
                 const userId = update.message.from.id;
                 const imageUrl = 'https://breathwell.space/uploads/welcome_b444b0c832.jpg';
@@ -90,16 +96,6 @@ module.exports = {
                     data: { premium: true }
                 });
 
-            }else if(update.type == 'notification' && update.object.id && update.object.paid) {
-                if(update.object.status == 'waiting_for_capture') {
-                    const capture = await yooKassa.capturePayment(update.object.id, {
-                        amount: {
-                            value: +update.object.amount.value,
-                            currency: 'RUB',
-                        }
-                    });
-                    console.log(capture);
-                }
             }
              else {
                 console.error('Invalid update data:', update);
