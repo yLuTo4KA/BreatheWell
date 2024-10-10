@@ -20,6 +20,21 @@ module.exports = {
         try {
             const update = ctx.request.body;
             if(update.event === 'payment.succeeded' || update.event === 'payment.waiting_for_capture' || update.event === 'payment.canceled') {
+                const paymentId = update.object.id;
+                const userId = update.object.metadata.userId;
+                console.log(paymentId);
+                console.log(userId);
+
+                if(update.event === 'payment.waiting_for_capture') {
+                    console.log('CAPTURE!!!');
+                    await yooKassa.capturePayment(paymentId);
+                }
+                if(update.event === 'payment.succeeded') {
+                    console.log('Sucess!!!');
+                }
+                if(update.event === 'payment.canceled') {
+                    console.log('canceled');
+                }
                 console.log(update);
             }
 
