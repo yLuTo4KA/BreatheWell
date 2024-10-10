@@ -44,7 +44,7 @@ module.exports = {
                     console.log('canceled');
                 }
 
-                await this.updatePayment(userId, status);
+                await this.updatePayment(paymentId, status);
                 ctx.send('OK');
             }
 
@@ -233,18 +233,12 @@ module.exports = {
     },
 
 
-    async updatePayment(userId, status) {
-        const existingPayment = await strapi.query('api::payment.payment').findOne({
-            where: { user: userId },
+    async updatePayment(paymentId, status) {
+        await strapi.query('api::payment.payment').update({
+            where: { payment_id: paymentId },
+            data: {
+                status: status
+            }
         });
-        if (existingPayment) {
-            // Обновляем существующую запись
-            await strapi.query('api::payment.payment').update({
-                where: { id: existingPayment.id },
-                data: {
-                    status: status
-                }
-            });
-        }
     }
 };
