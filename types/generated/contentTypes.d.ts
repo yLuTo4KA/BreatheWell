@@ -1068,6 +1068,8 @@ export interface ApiPaymentPayment extends Schema.CollectionType {
       'oneToOne',
       'plugin::users-permissions.user'
     >;
+    email: Attribute.Email & Attribute.Required;
+    payment_id: Attribute.UID;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

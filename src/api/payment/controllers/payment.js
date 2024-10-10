@@ -1,4 +1,9 @@
 const bot = require('../../../../config/tg-bot');
+const YooKassa = require('yookassa');
+
+
+
+
 
 
 module.exports = {
@@ -106,6 +111,7 @@ module.exports = {
                 currency: body.currency ? body.currency : 'XTR',
                 status: 'Pending',
                 payment_date: date,
+                email: user.email,
                 user: user.id
             }
         });
@@ -114,60 +120,86 @@ module.exports = {
             title: `BreathWell Premium`,
             description: 'Breath well course is good!',
             payload: payment.id.toString(),
-            provider_token: body.currency === 'XTR' ? '' : process.env.PROVIDER_TOKEN ?? '',
+            provider_token: '',
             currency: body.currency ? body.currency : 'XTR',
             prices: [{ label: `Premium`, amount: body.amount ? body.amount : 1900 }],
             need_email: true,
-            send_email_to_provider: true,
-            email: 'kipsa25@mail.ru'
+            send_email_to_provider: true
         }
 
         const invoiceLink = await bot.telegram.createInvoiceLink(invoice);
-        // const yooKassa = new YooKassa({
-        //     shopId: process.env.SHOP_ID,
-        //     secretKey: process.env.SECRET_SHOP,
-        // });
-        // async function createPayment() {
-        //     console.log(process.env.SHOP_ID);
-        //     console.log(process.env.SECRET_SHOP);
-        //     const payment = await yooKassa.createPayment({
-        //         amount: {
-        //             value: '100.00',
-        //             currency: 'RUB',
-        //         },
-        //         confirmation: {
-        //             type: 'redirect',
-        //             return_url: 'http://localhost:4200',
-        //         },
-        //         receipt: {
-        //             customer: {
-        //               email: user.email, // email покупателя (обязательно)
-        //             },
-        //             items: [
-        //               {
-        //                 description: 'Premium status BreatheWell',
-        //                 quantity: '1.00',
-        //                 amount: {
-        //                   value: '100.00',
-        //                   currency: 'RUB',
-        //                 },
-        //                 vat_code: 1, // Ставка НДС 20%
-        //                 payment_subject: 'commodity', // Указываем, что это товар
-        //                 payment_mode: 'full_payment', // Полная оплата (обязательно)
-        //               },
-        //             ],
-        //           },
-        //         description: 'Premium status BreatheWell',
-        //         notification_url: 'https://breathewell.space/api/telegraf/' + process.env.WEBHOOK_SECRET,
-        //     });
 
-        //     console.log(payment);
-        //     return payment;
-        // }
+        ctx.send({ url: invoiceLink });
+    },
 
-        // const link = createPayment();
+    async getYoInvoice(ctx, next) {
+        try {
+            const user = ctx.state.user;
+            const body = ctx.request.body;
+            if (!user) {
+                return ctx.unauthorized('You must be logged in to perform this action');
+            }
+            const yooKassa = new YooKassa({
+                shopId: process.env.SHOP_ID,
+                secretKey: process.env.SECRET_SHOP,
+            });
+            async function createPayment() {
+                const yoPay = await yooKassa.createPayment({
+                    amount: {
+                        value: body.amount,
+                        currency: 'RUB',
+                    },
+                    confirmation: {
+                        type: 'redirect',
+                        return_url: `https://t.me/breathwellbot/BreathWell`,
+                    },
+                    receipt: {
+                        customer: {
+                            email: body.email, // email покупателя (обязательно)
+                        },
+                        items: [
+                            {
+                                description: 'Premium status BreatheWell',
+                                quantity: '1.00',
+                                amount: {
+                                    value: '100.00',
+                                    currency: 'RUB',
+                                },
+                                vat_code: 1, // Ставка НДС 20%
+                                payment_subject: 'commodity', // Указываем, что это товар
+                                payment_mode: 'full_payment', // Полная оплата (обязательно)
+                            },
+                        ],
 
-        ctx.send({ url: invoiceLink});
+                    },
+                    description: 'Premium status BreatheWell',
+                    metadata: {
+                        userId: user.tg_id,
+                    },
+                    test: true
+                });
+
+                return yoPay;
+            }
+            const paymentData = await createPayment();
+
+            const payment = await strapi.query('api::payment.payment').create({
+                data: {
+                    total_amount: +paymentData.amount.value,
+                    currency: +paymentData.amount.currency,
+                    status: paymentData.status,
+                    payment_date: paymentData.created_at,
+                    email: body.email,
+                    payment_id: paymentData.id,
+                    user: user.id
+                }
+            });
+
+            ctx.send({ url: paymentData.confirmation.confirmation_url });
+        } catch (e) {
+            ctx.send('error', 404)
+        }
+
     }
 
 
