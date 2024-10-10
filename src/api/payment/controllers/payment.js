@@ -151,7 +151,7 @@ module.exports = {
                     },
                     confirmation: {
                         type: 'redirect',
-                        return_url: `https://breathwell.space`,
+                        return_url: `https://t.me/breathwellbot/BreathWell`,
                     },
                     receipt: {
                         customer: {
