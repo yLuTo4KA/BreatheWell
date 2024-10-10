@@ -1,6 +1,9 @@
 const bot = require('../../../../config/tg-bot');
 const YooKassa = require('yookassa');
-
+const yooKassa = new YooKassa({
+    shopId: process.env.SHOP_ID,
+    secretKey: process.env.SECRET_SHOP,
+});
 
 
 
@@ -87,7 +90,18 @@ module.exports = {
                     data: { premium: true }
                 });
 
-            } else {
+            }else if(update.type == 'notification' && update.object.id && update.object.paid) {
+                if(update.object.status == 'waiting_for_capture') {
+                    const capture = await yooKassa.capturePayment(update.object.id, {
+                        amount: {
+                            value: +update.object.amount.value,
+                            currency: 'RUB',
+                        }
+                    });
+                    console.log(capture);
+                }
+            }
+             else {
                 console.error('Invalid update data:', update);
             }
 
@@ -139,10 +153,7 @@ module.exports = {
             if (!user) {
                 return ctx.unauthorized('You must be logged in to perform this action');
             }
-            const yooKassa = new YooKassa({
-                shopId: process.env.SHOP_ID,
-                secretKey: process.env.SECRET_SHOP,
-            });
+           
             async function createPayment() {
                 const yoPay = await yooKassa.createPayment({
                     amount: {
