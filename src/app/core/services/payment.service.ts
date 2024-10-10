@@ -21,10 +21,19 @@ export class PaymentService extends ApiService {
     getInvoice(amount: number, currency: 'XTR' | 'USD' | "RUB"): Observable<GetInvoice>{
         const url = `${this.urlPath}/getInvoice`;
         this.loadingSubject.next(true);
-        return this.post<GetInvoice, GetInvoiceBody>(url, {amount, currency}).pipe(
+        return this.post<GetInvoice, GetInvoiceBody>(url, {amount, currency: currency}).pipe(
             finalize(() => {
                 this.loadingSubject.next(false);
             })
         );
+    }
+    getYoInvoice(amount: number, email: string): Observable<GetInvoice>{
+        const url = `${this.urlPath}/getYoInvoice`;
+        this.loadingSubject.next(true);
+        return this.post<GetInvoice, GetInvoiceBody>(url, {amount, email: email}).pipe(
+            finalize(() => {
+                this.loadingSubject.next(false);
+            })
+        )
     }
 }

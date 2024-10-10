@@ -1,0 +1,22 @@
+<app-modal [viewModal]="viewModal" (closeModalEmit)="closeModal()">
+    <h3 title>Почта для оплаты</h3>
+    <div class="get-mail__body">
+      <mat-form-field class="get-mail__input-wrapper">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex.pat@example.com">
+        
+        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+          Пожалуйста введите настоящую почту
+        </mat-error>
+        
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+          <strong>*Обязательное поле</strong>
+        </mat-error>
+        
+      </mat-form-field>
+    </div>
+    <app-button footer (click)="buy()">
+      <h4>Приобрести</h4>
+    </app-button>
+  </app-modal>
+  
