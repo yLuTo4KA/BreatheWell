@@ -28,10 +28,9 @@ module.exports = {
             updatedUser = await strapi.query('plugin::users-permissions.user').update({
                 where: { id: user.id },
                 data: {
-                    lastActiveDate: today,
-                    prevActiveDate: today,
                     todayActive: true,
                     activeDays: user.activeDays + 1,
+                    
                 },
             });
         } else {
@@ -39,6 +38,8 @@ module.exports = {
             updatedUser = await strapi.query('plugin::users-permissions.user').update({
                 where: { id: user.id },
                 data: {
+                    lastActiveDate: today,
+                    prevActiveDate: today,
                     todayActive: true,
                     activeDays: user.activeDays + 1,
                 },
