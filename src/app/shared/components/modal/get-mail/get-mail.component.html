@@ -3,7 +3,7 @@
     <div class="get-mail__body">
       <mat-form-field class="get-mail__input-wrapper">
         <mat-label>Email</mat-label>
-        <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex.pat@example.com">
+        <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex.pat@example.com" (keyup.enter)="buy()" (blur)="scroll()">
         
         <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
           Пожалуйста введите настоящую почту
