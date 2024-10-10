@@ -4,5 +4,6 @@ export interface GetInvoice {
 
 export interface GetInvoiceBody {
     amount: number,
-    currency: "XTR" | "USD" | "RUB"
+    currency?: "XTR" | "USD" | "RUB",
+    email?: string
 }

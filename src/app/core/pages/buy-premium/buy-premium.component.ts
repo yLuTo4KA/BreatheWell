@@ -10,6 +10,7 @@ import { Progress } from '../../models/progress.model';
 import { PriceService } from '../../services/price.service';
 import { Price } from '../../models/price.model';
 import { environment } from 'src/environments/environments';
+import { TelegramService } from '../../services/telegram.service';
 
 @Component({
   selector: 'app-buy-premium',
@@ -20,6 +21,7 @@ export class BuyPremiumComponent {
   private paymentService = inject(PaymentService);
   private priceService = inject(PriceService);
   private authService = inject(AuthService);
+  private tgService = inject(TelegramService);
   private courseService = inject(CourseService);
   private router = inject(Router);
   private loadingService = inject(LoadingService);
@@ -27,6 +29,7 @@ export class BuyPremiumComponent {
   public price: Price = environment.defaultPrice as Price;
 
   viewFirstLessonModal: boolean = false;
+  viewGetEmailModal: boolean = false;
 
   timer: number = 30 * 60;
   private timerInterval: any;
@@ -68,7 +71,15 @@ export class BuyPremiumComponent {
   }
 
   getInvoice(): void {
-    this.paymentService.getInvoice(this.price.attributes.sale > 0 ? this.price.attributes.sale_price * 100 : this.price.attributes.amount * 100, this.price.attributes.currency).subscribe(response => {
+      if(this.price.attributes.currency === 'XTR') {
+        this.getTgInvoice(); // Оплата stars
+      } else {
+        this.viewGetEmailModal = true;
+      }
+  }
+
+  getTgInvoice(): void {
+    this.paymentService.getInvoice(this.price.attributes.sale > 0 ? this.price.attributes.sale_price : this.price.attributes.amount, this.price.attributes.currency).subscribe(response => {
       if (response && response.url) {
         const invoice = initInvoice();
         this.loadingService.startLoading();
@@ -84,6 +95,14 @@ export class BuyPremiumComponent {
         }).finally(() => {
           this.loadingService.stopLoading();
         })
+      }
+    })
+  }
+
+  getYoInvoice(email: string): void {
+    this.paymentService.getYoInvoice(this.price.attributes.sale > 0 ? this.price.attributes.sale_price : this.price.attributes.amount, email).subscribe(response => {
+      if(response && response.url) {
+        this.tgService.openTgLink(response.url);
       }
     })
   }
@@ -105,6 +124,10 @@ export class BuyPremiumComponent {
   closeFirstLesson(): void {
     this.viewFirstLessonModal = false;
     this.router.navigate(['/home']);
+  }
+
+  closeGetEmailModal(): void {
+    this.viewGetEmailModal = false;
   }
 
   ngOnDestroy(): void {

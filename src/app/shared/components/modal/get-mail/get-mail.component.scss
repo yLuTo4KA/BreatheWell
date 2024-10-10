@@ -1,0 +1,11 @@
+.get-mail {
+    &__input-wrapper {
+        width: 100%;
+        border-radius: 16px;
+        margin-bottom: 24px;
+    }
+}
+
+mat-form-field ~ .mdc-text-field--filled {
+    background-color: red;
+}

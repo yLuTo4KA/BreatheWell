@@ -2,6 +2,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from './components/button/button.component';
 import { MatIconModule } from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 import { LogoLoaderComponent } from './components/logo-loader/logo-loader.component';
 import { TagComponent } from './components/tag/tag.component';
@@ -30,15 +32,20 @@ import { LoadingComponent } from './components/modal/loading/loading.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { FirstLessonComponent } from './components/modal/first-lesson/first-lesson.component';
+import { GetMailComponent } from './components/modal/get-mail/get-mail.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   imports: [
     CommonModule,
     MatIconModule,
-    MatProgressSpinnerModule
+    MatInputModule,
+    MatProgressSpinnerModule,
+    MatFormFieldModule,
+    ReactiveFormsModule
   ],
-  declarations: [ButtonComponent, LogoLoaderComponent, TagComponent, SelectButtonComponent, MiniButtonComponent, ModalComponent, PracticeSettingsComponent, SoundSettingsComponent, DurationSettingsComponent, CalendarComponent, PriceComponent, BenefitsItemComponent, AvatarComponent, PremiumTagComponent, SugesstComponent, SectorComponent, LessonCardComponent, TaskCardComponent, FeatureItemComponent, ConfrimCloseComponent, HelpModalComponent, LessonLearnedComponent, SuggestLessonComponent, TruncatePipe, LoadingComponent, SafeHtmlPipe, FirstLessonComponent],
+  declarations: [ButtonComponent, LogoLoaderComponent, TagComponent, SelectButtonComponent, MiniButtonComponent, ModalComponent, PracticeSettingsComponent, SoundSettingsComponent, DurationSettingsComponent, CalendarComponent, PriceComponent, BenefitsItemComponent, AvatarComponent, PremiumTagComponent, SugesstComponent, SectorComponent, LessonCardComponent, TaskCardComponent, FeatureItemComponent, ConfrimCloseComponent, HelpModalComponent, LessonLearnedComponent, SuggestLessonComponent, TruncatePipe, LoadingComponent, SafeHtmlPipe, FirstLessonComponent, GetMailComponent],
   exports: [
     ButtonComponent,
     LogoLoaderComponent,
@@ -66,7 +73,8 @@ import { FirstLessonComponent } from './components/modal/first-lesson/first-less
     TruncatePipe,
     SafeHtmlPipe,
     FirstLessonComponent,
-    LoadingComponent
+    LoadingComponent,
+    GetMailComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
