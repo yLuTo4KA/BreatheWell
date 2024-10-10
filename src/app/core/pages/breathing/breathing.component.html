@@ -3,10 +3,20 @@
         <div class="breathing-page__body-header">
             <app-mini-button class="settings-button" icon="settings" (click)="openPracticeSettings()"></app-mini-button>
             <app-select-button (click)="openSoundSettings()">
-                <div class="select-button__icon">
-                    <img alt="icon" [src]="breathSetting.sound?.iconMedia?.url">
+                <div class="select-button-wrap" *ngIf="breathSetting.sound;  else elseBlock">
+                    <div class="select-button__icon">
+                        <img alt="icon" [src]="breathSetting.sound.iconMedia.url">
+                    </div>
+                    <p class="select-button__title">{{breathSetting.sound!.title | truncate:14}}</p>
                 </div>
-                <p class="select-button__title">{{breathSetting.sound!.title | truncate:14}}</p>
+                <ng-template #elseBlock>
+                    <div class="select-button-wrap">
+                        <div class="select-button__icon">
+                            <img alt="no-sound" src="assets/icons/no-sound.svg">
+                        </div>
+                        <p class="select-button__title">Без звука</p>
+                    </div>
+                </ng-template>
             </app-select-button>
             <app-mini-button icon="close" [iconHeight]="30" [iconWidth]="30" (click)="closePage()"></app-mini-button>
         </div>
@@ -35,4 +45,5 @@
 <app-practice-settings (closeModalEvent)="closePracticeSettings()"></app-practice-settings>
 <app-sound-settings (closeModalEvent)="closeModal()"></app-sound-settings>
 <app-duration-settings (closeModalEvent)="closeModal()"></app-duration-settings>
-<app-confrim-close [viewModal]="confrimCloseModal" (closeModalEmit)="returnPage()" [afterBreath]="true" (nextOpenEmit)="navToHome()"></app-confrim-close>
+<app-confrim-close [viewModal]="confrimCloseModal" (closeModalEmit)="returnPage()" [afterBreath]="true"
+    (nextOpenEmit)="navToHome()"></app-confrim-close>

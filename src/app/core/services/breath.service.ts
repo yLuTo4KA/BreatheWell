@@ -21,7 +21,7 @@ interface PracticeResponse {
 
 export class BreathService extends ApiService {
     private urlPath: string = '' as const;
-    
+
 
     private soundsSubject: BehaviorSubject<Sound[] | null> = new BehaviorSubject<Sound[] | null>(null);
     private practicesSubject: BehaviorSubject<Practice[] | null> = new BehaviorSubject<Practice[] | null>(null);
@@ -126,8 +126,15 @@ export class BreathService extends ApiService {
     }
 
     updatePractice(practice: Practice): void {
-        const sound = this.soundsSubject.getValue()?.find((item) => item.id === practice.sound.id) ?? null;
-
+        // Получаем массив звуков из soundsSubject
+        const sounds = this.soundsSubject.getValue();
+    
+        // Находим звук, если он существует
+        const sound = practice.sound && practice.sound.id
+            ? sounds?.find(item => item.id === practice.sound.id) ?? null
+            : null;
+    
+        // Создаем объект для обновления
         const updateData: Breath = {
             sound,
             id: practice.id,
@@ -138,9 +145,12 @@ export class BreathService extends ApiService {
             duration: practice.duration * 60,
             breath_type: practice.breath_type,
             exhale_type: practice.exhale_type
-        }
+        };
+    
+        // Отправляем данные обновления
         this.breathSetting$.next(updateData);
     }
+    
 
 
 }
