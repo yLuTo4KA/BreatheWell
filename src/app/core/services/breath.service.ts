@@ -40,7 +40,9 @@ export class BreathService extends ApiService {
         duration: 7 * 60,
         sound: null,
         breath_type: "Nose",
-        exhale_type: "Mouth"
+        exhale_type: "Mouth",
+        breathText: null,
+        exhaleText: null
     }
     private noSound: Sound = {
         id: -1,
@@ -144,7 +146,9 @@ export class BreathService extends ApiService {
             exhaleHold: practice.exhaleHold,
             duration: practice.duration * 60,
             breath_type: practice.breath_type,
-            exhale_type: practice.exhale_type
+            exhale_type: practice.exhale_type,
+            breathText: practice.breathText,
+            exhaleText: practice.exhaleText
         };
     
         // Отправляем данные обновления

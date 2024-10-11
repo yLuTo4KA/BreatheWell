@@ -7,6 +7,8 @@ export interface Practice {
     exhaleHold: number,
     breath_type: "Nose" | "Mouth",
     exhale_type: "Nose" | "Mouth",
+    breathText: string | null,
+    exhaleText: string | null,
     duration: number,
     icon: string,
     free: boolean,

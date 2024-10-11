@@ -9,5 +9,7 @@ export interface Breath {
     duration: number,
     breath_type: "Nose" | "Mouth",
     exhale_type: "Nose" | "Mouth",
+    breathText: string | null,
+    exhaleText: string | null,
     sound: Sound | null,
 }
