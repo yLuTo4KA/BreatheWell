@@ -1122,6 +1122,8 @@ export interface ApiPracticePractice extends Schema.CollectionType {
     breath_type: Attribute.Enumeration<['Nose', 'Mouth']> &
       Attribute.Required &
       Attribute.DefaultTo<'Nose'>;
+    breathText: Attribute.String;
+    exhaleText: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

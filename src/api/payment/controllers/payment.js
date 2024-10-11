@@ -213,6 +213,7 @@ module.exports = {
                                 payment_mode: 'full_payment', // Полная оплата (обязательно)
                             },
                         ],
+                        email: body.email
 
                     },
                     description: 'Premium status BreatheWell',

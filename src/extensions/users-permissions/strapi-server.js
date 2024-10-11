@@ -55,33 +55,10 @@ module.exports = (plugin) => {
         } else {
             // Обновляем данные существующего пользователя
             newUser = false;
-            let todayActive = false;
-            let currentStreak = user.activeDays;
-            let prevStreak = user.prevActiveDays;
-            const prevActiveDate = new Date(user.prevActiveDate);
-            
-            if (user.lastActiveDate) {
-                const lastActiveDate = new Date(user.lastActiveDate);
-                // @ts-ignore
-                const diffInMs = currentDate - lastActiveDate;
-                const diffInDay = diffInMs / (1000 * 60 * 60 * 24);
-                if (diffInDay < 1) todayActive = true;
-                if (diffInDay >= 2) {
-                    if(user.activeDays >= 1) {
-                        prevStreak = user.activeDays;
-                        prevActiveDate.setDate(prevActiveDate.getDate() - diffInDay)
-                    }
-                    currentStreak = 0;
-                }
-                if (diffInDay > 7) {
-                    prevStreak = 0;
-
-                }
-            }
 
             user = await strapi.query('plugin::users-permissions.user').update({
                 where: { tg_id: userData.id },
-                data: {lastVisit: new Date(), todayActive: todayActive, activeDays: currentStreak, prevActiveDays: prevStreak, prevActiveDate: prevActiveDate, avatar: avatar },
+                data: {lastVisit: new Date(), avatar: avatar },
             });
             const progress = await strapi.db.query('api::course-progress.course-progress').findOne({
                 where: { user: user },
@@ -101,24 +78,26 @@ module.exports = (plugin) => {
                 const diffInMs = currentDate - lastComplete;
                 const diffInDay = diffInMs / (1000 * 60 * 60 * 12);
                 const completedToday = progress.lesson.tasks.every(task => progress.tasks.some(completedTask => completedTask.id === task.id));
+                const lastLesson = await isLastLesson(progress.lesson.id)
                 let completedLessons = progress.completed_lessons;
+                let lessonLearned = progress.lesson_learned;
+                console.log(lessonLearned);
+                let lesson = progress.lesson.id;
                 if (completedToday) {
                     if (!completedLessons.includes(progress.lesson.id)) {
                         completedLessons.push(progress.lesson.id);
+                        lessonLearned = false;
+                        lesson = lastLesson ? lesson : lesson + 1;
                     }
                 }
                 if (diffInDay >= 1) {
                     if (progress && progress.todayComplete) {
-                        const lastLesson = await isLastLesson(progress.lesson.id)
-                        const lesson = !lastLesson ? progress.lesson.id + 1 : progress.lesson.id;
-                        const completedLessons = progress.completed_lessons;
-                        completedLessons.push(lesson);
                             await strapi.db.query('api::course-progress.course-progress').update({
                                 where: { user: user },
                                 data: {
                                     lesson: lesson,
                                     todayComplete: false,
-                                    lesson_learned: false,
+                                    lesson_learned: lessonLearned,
                                     lastComplete: Date.now(),
                                     completed_lessons: completedLessons
                                 },
@@ -126,6 +105,7 @@ module.exports = (plugin) => {
                         
                     }
                 }
+                
             }
         }
 

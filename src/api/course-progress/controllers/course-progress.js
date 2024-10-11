@@ -60,7 +60,8 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
                 description: progress.lesson.subtitle,
                 reading_time: progress.lesson.reading_time,
                 lesson_preview: progress.lesson.lesson_preview ? baseUrl + progress.lesson.lesson_preview.url : null,
-                icon: progress.lesson.lesson_icon ? baseUrl + progress.lesson.lesson_icon.url : null
+                icon: progress.lesson.lesson_icon ? baseUrl + progress.lesson.lesson_icon.url : null,
+                free: progress.lesson.free
             },
             todayTasks: progress.lesson.tasks.map(task => {
                 return {
@@ -70,7 +71,7 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
                     preview_icon: task.preview_icon ? baseUrl + task.preview_icon.url : null,
                     task_image: task.task_image ? baseUrl + task.task_image.url : null,
                     audio_lesson: task.audio_lesson ? { ...task.audio_lesson, audio: task.audio_lesson.audio ? baseUrl + task.audio_lesson.audio.url : null } : null,
-                    practice: task.practice
+                    practice: task.practice,
                 }
             }),
             completedTasks: progress.tasks.map(task => task.id),
@@ -120,8 +121,9 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
         let todayComplete = progress.todayComplete;
         let todayLesson = progress.lesson.id;
         let completedLessons = progress.completed_lessons && progress.completed_lessons.length > 0 ? progress.completed_lessons : [];
+        let lessonLearned = progress.lesson_learned;
 
-        if (allTasksCompleted && progress.lesson_learned) {
+        if (allTasksCompleted && lessonLearned) {
             todayComplete = true;
             const imageUrl = 'https://breathwell.space/uploads/lesson_complete_434866ecb1.jpg';
             await bot.telegram.sendPhoto(user.tg_id, imageUrl, {
@@ -139,6 +141,7 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
 
             if (nextLesson) {
                 todayLesson = nextLesson.id;
+                lessonLearned = false
             } else {
                 console.log('Это был последний урок');
             }
@@ -149,6 +152,7 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
             data: {
                 tasks: completedTasks,
                 lesson: todayLesson,
+                lesson_learned: lessonLearned,
                 todayComplete,
                 lastComplete: progress.todayComplete ? progress.lastComplete : Date.now(),
                 completed_lessons: completedLessons,
@@ -191,7 +195,8 @@ module.exports = createCoreController('api::course-progress.course-progress', ({
                 description: updatedProgress.lesson.subtitle,
                 reading_time: updatedProgress.lesson.reading_time,
                 lesson_preview: updatedProgress.lesson.lesson_preview ? baseUrl + updatedProgress.lesson.lesson_preview.url : null,
-                icon: updatedProgress.lesson.lesson_icon ? baseUrl + updatedProgress.lesson.lesson_icon.url : null
+                icon: updatedProgress.lesson.lesson_icon ? baseUrl + updatedProgress.lesson.lesson_icon.url : null,
+                free: updatedProgress.lesson.free
             },
             todayTasks: updatedProgress.lesson.tasks.map(task => ({
                 id: task.id,

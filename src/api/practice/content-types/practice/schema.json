@@ -75,6 +75,12 @@
       ],
       "default": "Nose",
       "required": true
+    },
+    "breathText": {
+      "type": "string"
+    },
+    "exhaleText": {
+      "type": "string"
     }
   }
 }
