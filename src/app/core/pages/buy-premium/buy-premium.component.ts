@@ -103,10 +103,11 @@ export class BuyPremiumComponent {
     this.loadingService.startLoading();
     this.paymentService.getYoInvoice(this.price.attributes.sale > 0 ? this.price.attributes.sale_price : this.price.attributes.amount, email).subscribe(response => {
       if(response && response.url) {
-        this.tgService.openTgLink(response.url, true);
+        this.tgService.openTgLink(response.url);
         setTimeout(() => {
+          this.loadingService.stopLoading();
           this.tgService.closeTg();
-        }, 10000)
+        }, 5000)
       }
     })
   }
