@@ -205,7 +205,7 @@ module.exports = {
                                 description: 'Premium status BreatheWell',
                                 quantity: '1.00',
                                 amount: {
-                                    value: '100.00',
+                                    value: body.amount,
                                     currency: 'RUB',
                                 },
                                 vat_code: 1, // Ставка НДС 20%
@@ -214,13 +214,11 @@ module.exports = {
                             },
                         ],
                         email: body.email
-
                     },
                     description: 'Premium status BreatheWell',
                     metadata: {
                         userId: user.tg_id,
                     },
-                    test: true
                 });
 
                 return yoPay;
@@ -241,7 +239,7 @@ module.exports = {
 
             ctx.send({ url: paymentData.confirmation.confirmation_url });
         } catch (e) {
-            ctx.send('error', 404)
+            ctx.send(e, 404)
         }
 
     },
