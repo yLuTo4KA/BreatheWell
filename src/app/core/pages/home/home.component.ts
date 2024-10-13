@@ -241,6 +241,8 @@ export class HomeComponent implements OnInit {
       this.courseService.setCurrentAudioLesson(audioLesson);
       if(audioLesson.audio && audioLesson.audio.trim() !== '') {
         this.router.navigate(['/audio-lesson']);
+      } else {
+        this.router.navigate(['/buying']);
       }
     }
   }
