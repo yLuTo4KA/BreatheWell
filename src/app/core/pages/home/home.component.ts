@@ -11,6 +11,7 @@ import { CourseService } from '../../services/course.service';
 import { debounceTime } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Task } from '../../models/task.model';
+import { AudioLesson } from '../../models/audio-lessons.model';
 
 export interface TimeOfDay {
   eng: "morning" | "day" | "night",
@@ -62,6 +63,7 @@ export class HomeComponent implements OnInit {
     breathText: null,
     exhaleText: null
   }
+  audioLessons!: AudioLesson[];
 
   progressData!: Progress;
 
@@ -101,6 +103,11 @@ export class HomeComponent implements OnInit {
     this.courseService.userProgress$.subscribe(response => {
       if (response) {
         this.progressData = response;
+      }
+    });
+    this.courseService.audioLessonsList$.subscribe(response => {
+      if(response) {
+        this.audioLessons = response;
       }
     })
     this.updateSubjet.pipe(debounceTime(this.debounceTime)).subscribe(() => {
@@ -226,6 +233,16 @@ export class HomeComponent implements OnInit {
 
   toggleHelpModal(): void {
     this.viewHelpModal = !this.viewHelpModal;
+  }
+
+  openAudioLesson(title: string): void {
+    const audioLesson = this.audioLessons.find(item => item.title === title);
+    if(audioLesson) {
+      this.courseService.setCurrentAudioLesson(audioLesson);
+      if(audioLesson.audio && audioLesson.audio.trim() !== '') {
+        this.router.navigate(['/audio-lesson']);
+      }
+    }
   }
 
   ngOnDestroy(): void {
