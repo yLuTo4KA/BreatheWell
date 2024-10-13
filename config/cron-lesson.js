@@ -64,7 +64,7 @@ module.exports = {
                 for (const user of users) {
                     let currentStreak = user.activeDays;
                     let prevStreak = user.prevActiveDays;
-                    const prevActiveDate = new Date(user.prevActiveDate);
+                    const prevActiveDate = new Date(user.lastActiveDate);
 
                     if (user.lastActiveDate) {
                         const lastActiveDate = new Date(user.lastActiveDate);
@@ -75,9 +75,6 @@ module.exports = {
                         if (diffInDay > 1) {
                             if (user.activeDays >= 1) {
                                 prevStreak = user.activeDays;
-                                prevActiveDate.setDate(prevActiveDate.getDate() - Math.floor(diffInDay))
-                                console.log(diffInDay);
-                                console.log(prevActiveDate.getDate());
                             }
                             currentStreak = 0;
                         }
