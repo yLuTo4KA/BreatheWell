@@ -59,7 +59,6 @@ export class TaskCardComponent {
         this.courseService.setCurrentAudioLesson(this.task.audio_lesson);
         this.router.navigate(['/audio-lesson']);
       }else if(this.task.practice) {
-        console.log(this.task.practice)
         this.breathService.updatePractice(this.task.practice);
         this.router.navigate(['/breathing']);
       }
@@ -69,6 +68,7 @@ export class TaskCardComponent {
   }
 
   emitCheckTask(): void {
+    console.log(this.lesson);
     if(this.lesson && (this.lesson.free || (this.premium && !this.lesson.free))) {
       this.checkTask.emit(this.task.id);
     } else {

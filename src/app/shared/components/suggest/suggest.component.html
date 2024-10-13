@@ -1,4 +1,13 @@
 <article class="audio-lesson" [ngClass]="suggestSettings.timeOfDay">
+    <img src="assets/images/home-banner.jpg" alt="Продуктивный день" class="background-image" />
+    <header>
+      <span class="lesson-type">Аудио урок</span>
+    </header>
+    <div class="lesson-text">
+        <h4 class="lesson-title">Справляемся со<br> стрессом</h4>
+    </div>
+  </article>
+  <!-- <article class="audio-lesson" [ngClass]="suggestSettings.timeOfDay">
     <img [src]="'assets/images/suggest-' + suggestSettings.timeOfDay + '.png'" alt="Продуктивный день" class="background-image" />
     <header>
       <span class="lesson-type">Аудио урок</span>
@@ -7,4 +16,4 @@
         <h4 class="lesson-title" [innerHTML]="suggestSettings.title | safeHtml"></h4>
         <p class="lesson-subtitle" *ngIf="suggestSettings.subtitle">{{suggestSettings.subtitle}}</p>
     </div>
-  </article>
+  </article> -->

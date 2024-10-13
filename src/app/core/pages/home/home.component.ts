@@ -58,7 +58,9 @@ export class HomeComponent implements OnInit {
     duration: 7 * 60,
     breath_type: "Nose",
     exhale_type: "Mouth",
-    sound: null
+    sound: null,
+    breathText: null,
+    exhaleText: null
   }
 
   progressData!: Progress;

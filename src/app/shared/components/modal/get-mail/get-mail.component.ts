@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 
@@ -24,5 +24,9 @@ export class GetMailComponent {
     } else {
       this.emailFormControl.markAsTouched();
     }
+  }
+
+  scroll(): void {
+    window.scroll(0, 0);
   }
 }

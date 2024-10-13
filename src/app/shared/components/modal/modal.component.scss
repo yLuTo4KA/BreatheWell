@@ -38,3 +38,13 @@
         background: var(--stroke-dark);
     }
 }
+
+.smallButton {
+    .modal__header {
+        align-items: flex-start;
+    }
+    .modal__close {
+        width: 34px;
+        height: 34px;
+    }
+}

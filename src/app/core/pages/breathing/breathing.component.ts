@@ -33,7 +33,9 @@ export class BreathingComponent {
     duration: 7 * 60,
     sound: null,
     breath_type: 'Nose',
-    exhale_type: 'Mouth'
+    exhale_type: 'Mouth',
+    breathText: null,
+    exhaleText: null
   }
   modal: ModalsView = {
     practiceSettings: false,
@@ -254,10 +256,10 @@ export class BreathingComponent {
 
   getActionText(action: "Вдох" | "Выдох" | "Задержите дыхание" | "Пауза"): string {
     if (action === "Вдох") {
-      return `Вдыхайте медленно и глубоко через ${this.breathSetting.breath_type === 'Nose' ? 'нос' : 'рот'}`;
+      return this.breathSetting.breathText ? this.breathSetting.breathText : `Вдыхайте медленно и глубоко через ${this.breathSetting.breath_type === 'Nose' ? 'нос' : 'рот'}`;
     }
     if (action === 'Выдох') {
-      return `Выдыхайте медленно через ${this.breathSetting.exhale_type === 'Nose' ? 'нос' : 'рот'}`;
+      return this.breathSetting.exhaleText ? this.breathSetting.exhaleText : `Выдыхайте медленно через ${this.breathSetting.exhale_type === 'Nose' ? 'нос' : 'рот'}`;
     }
     return `Приготовьтесь ${this.breathProcess === 'down' ? 'делать вдох' : 'выдыхать'}`
   }

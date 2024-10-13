@@ -1,22 +1,24 @@
-<app-modal [viewModal]="viewModal" (closeModalEmit)="closeModal()">
-    <h3 title>Почта для оплаты</h3>
+<app-modal [viewModal]="viewModal" (closeModalEmit)="closeModal()" [smallButton]="true">
+    <h3 class="get-mail__title" title>Введите ваш email<br>
+        <span class="get-mail__subtitle text-grey">Отправим туда чек об оплате</span>
+    </h3>
     <div class="get-mail__body">
-      <mat-form-field class="get-mail__input-wrapper">
-        <mat-label>Email</mat-label>
-        <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex.pat@example.com">
-        
-        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-          Пожалуйста введите настоящую почту
-        </mat-error>
-        
-        <mat-error *ngIf="emailFormControl.hasError('required')">
-          <strong>*Обязательное поле</strong>
-        </mat-error>
-        
-      </mat-form-field>
+        <mat-form-field class="get-mail__input-wrapper">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex.pat@example.com"
+                (keyup.enter)="buy()" (blur)="scroll()">
+
+            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                Пожалуйста введите настоящую почту
+            </mat-error>
+
+            <mat-error *ngIf="emailFormControl.hasError('required')">
+                <strong>*Обязательное поле</strong>
+            </mat-error>
+
+        </mat-form-field>
     </div>
     <app-button footer (click)="buy()">
-      <h4>Приобрести</h4>
+        <h4>Перейти к оплате</h4>
     </app-button>
-  </app-modal>
-  
+</app-modal>

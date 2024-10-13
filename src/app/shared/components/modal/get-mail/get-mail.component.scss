@@ -1,4 +1,13 @@
 .get-mail {
+    &__title {
+        line-height: 100%;
+    }
+    &__subtitle {
+        font-size: 12px;
+    }
+    &__body {
+        padding-top: 16px;
+    }
     &__input-wrapper {
         width: 100%;
         border-radius: 16px;

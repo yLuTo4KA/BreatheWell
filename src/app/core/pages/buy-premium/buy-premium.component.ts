@@ -105,8 +105,9 @@ export class BuyPremiumComponent {
       if(response && response.url) {
         this.tgService.openTgLink(response.url);
         setTimeout(() => {
+          this.loadingService.stopLoading();
           this.tgService.closeTg();
-        }, 3000)
+        }, 5000)
       }
     })
   }

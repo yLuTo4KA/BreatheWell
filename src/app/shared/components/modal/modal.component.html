@@ -1,4 +1,4 @@
-<div class="modal" [class.modal__view]="viewModal" (click)="closeModal()">
+<div class="modal" [class.modal__view]="viewModal" [class.smallButton]="smallButton" (click)="closeModal()">
     <div class="modal__wrapper" (click)="$event.stopPropagation()">
         <div class="modal__header">
             <ng-content select="[title]"></ng-content>
