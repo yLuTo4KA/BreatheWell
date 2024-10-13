@@ -31,17 +31,17 @@ export class TaskCardComponent {
   }
 
   isComplete(): boolean {
-    if(this.readLessonTask) {
+    if (this.readLessonTask) {
       return this.lessonLerned;
     }
     return this.completedTasks.includes(this.task.id);
   }
 
   moreInfo(): void {
-    if(this.readLessonTask && this.lesson) {
-      if(this.lesson.free || this.premium && !this.lesson.free) {
+    if (this.readLessonTask && this.lesson) {
+      if (this.lesson.free || this.premium && !this.lesson.free) {
         this.courseService.getLesson(this.lesson.id).subscribe(response => {
-          if(response) {
+          if (response) {
             this.router.navigate(['/lesson-preview']);
           }
         });
@@ -50,17 +50,20 @@ export class TaskCardComponent {
       }
       return;
     }
-    if(this.lesson && (this.lesson.free || (this.premium && !this.lesson.free))) {
+    if (this.lesson && (this.lesson.free || (this.premium && !this.lesson.free))) {
       if (!this.task.audio_lesson && !this.task.practice) {
         this.courseService.setCurrentTask(this.task);
         this.router.navigate(['/task-detail']);
       }
-      if(this.task.audio_lesson) {
+      if (this.task.audio_lesson && (this.task.audio_lesson.free || (this.premium && !this.task.audio_lesson.free))) {
         this.courseService.setCurrentAudioLesson(this.task.audio_lesson);
         this.router.navigate(['/audio-lesson']);
-      }else if(this.task.practice) {
+
+      } else if (this.task.practice && (this.task.practice.free || (this.premium && !this.task.practice.free))) {
         this.breathService.updatePractice(this.task.practice);
         this.router.navigate(['/breathing']);
+      } else {
+        this.router.navigate(['/buying']);
       }
     } else {
       this.router.navigate(['/buying']);
@@ -69,12 +72,12 @@ export class TaskCardComponent {
 
   emitCheckTask(): void {
     console.log(this.lesson);
-    if(this.lesson && (this.lesson.free || (this.premium && !this.lesson.free))) {
+    if (this.lesson && (this.lesson.free || (this.premium && !this.lesson.free))) {
       this.checkTask.emit(this.task.id);
     } else {
       this.router.navigate(['/buying']);
     }
-      
+
   }
 
 }

@@ -30,7 +30,7 @@ export class BreathingComponent {
     exhaleDuration: 3,
     breathHold: 3,
     exhaleHold: 3,
-    duration: 7 * 60,
+    duration: 3 * 60,
     sound: null,
     breath_type: 'Nose',
     exhale_type: 'Mouth',

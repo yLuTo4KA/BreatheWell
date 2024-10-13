@@ -37,7 +37,7 @@ export class BreathService extends ApiService {
         exhaleDuration: 4,
         breathHold: 3,
         exhaleHold: 3,
-        duration: 7 * 60,
+        duration: 3 * 60,
         sound: null,
         breath_type: "Nose",
         exhale_type: "Mouth",
@@ -101,7 +101,7 @@ export class BreathService extends ApiService {
             map(response => response.data),
             tap(practices => {
                 this.practicesSubject.next(practices);
-                this.updatePractice(practices[0]);
+                this.updatePractice(practices[0], 3);
             }),
             finalize(() => {
             }),
@@ -127,9 +127,10 @@ export class BreathService extends ApiService {
         this.breathSetting$.next(updatedBreathSettings);
     }
 
-    updatePractice(practice: Practice): void {
+    updatePractice(practice: Practice, duration?: number): void {
         // Получаем массив звуков из soundsSubject
         const sounds = this.soundsSubject.getValue();
+        const practiceDuration = duration ? duration : practice.duration;
     
         // Находим звук, если он существует
         const sound = practice.sound && practice.sound.id
@@ -144,7 +145,7 @@ export class BreathService extends ApiService {
             exhaleDuration: practice.exhaleDuration,
             breathHold: practice.breathHold,
             exhaleHold: practice.exhaleHold,
-            duration: practice.duration * 60,
+            duration: practiceDuration * 60,
             breath_type: practice.breath_type,
             exhale_type: practice.exhale_type,
             breathText: practice.breathText,
