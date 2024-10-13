@@ -43,7 +43,9 @@ module.exports = createCoreController('api::practice.practice', ({ strapi }) => 
             };
         });
 
+        const sortedData = transformedData.sort((a, b) => (b.free - a.free));
+
         // Return the transformed data with meta informationx
-        return { data: transformedData, meta };
+        return { data: sortedData, meta };
     },
 }));
