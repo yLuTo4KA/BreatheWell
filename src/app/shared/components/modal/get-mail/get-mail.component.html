@@ -1,6 +1,6 @@
 <app-modal [viewModal]="viewModal" (closeModalEmit)="closeModal()" [smallButton]="true">
     <h3 class="get-mail__title" title>Введите ваш email<br>
-        <span class="get-mail__subtitle text-grey">*Отправим туда чек об оплате</span>
+        <span class="get-mail__subtitle text-grey">Отправим туда чек об оплате</span>
     </h3>
     <div class="get-mail__body">
         <mat-form-field class="get-mail__input-wrapper">
@@ -19,6 +19,6 @@
         </mat-form-field>
     </div>
     <app-button footer (click)="buy()">
-        <h4>Приобрести</h4>
+        <h4>Перейти к оплате</h4>
     </app-button>
 </app-modal>
