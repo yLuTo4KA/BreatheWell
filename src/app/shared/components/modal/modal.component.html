@@ -1,5 +1,5 @@
-<div class="modal" [class.modal__view]="viewModal" [class.smallButton]="smallButton" (click)="closeModal()">
-    <div class="modal__wrapper" (click)="$event.stopPropagation()">
+<div class="modal" [class.modal--view]="viewModal" [class.modal--no-view]="!isVisible" [class.smallButton]="smallButton" (click)="closeModal()">
+    <div class="modal__wrapper" [class.modal__wrapper--view]="isVisible" [class.modal__wrapper--no-view]="!isVisible" (click)="$event.stopPropagation()">
         <div class="modal__header">
             <ng-content select="[title]"></ng-content>
             <app-mini-button icon="close" class="modal__close" (click)="closeModal()" *ngIf="viewCloseButton"></app-mini-button>

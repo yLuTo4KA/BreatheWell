@@ -5,13 +5,22 @@
     left: 0;
     right: 0;
     z-index: 1000;
+    opacity: 0;
     display: none;
     background-color: #00000099;
     overflow: hidden;
     cursor: pointer;
+    &--view {
+        display: flex;
+        flex-direction: column-reverse;
+        animation: viewModal 0.3s ease forwards;
+    }
+    &--no-view {
+        animation: noViewModal 0.3s ease forwards;
+    }
+
     &__wrapper {
         background: linear-gradient(180deg, #1B123C 0%, #050726 100%);
-
         height: max-content;
         border-start-start-radius: 35px;
         border-start-end-radius: 35px;
@@ -20,10 +29,14 @@
         overflow: auto;
         overflow-x: hidden;
         cursor: default;
-    }
-    &__view {
-        display: flex;
-        flex-direction: column-reverse;
+
+        &--no-view {
+            animation: slideDown 0.5s ease forwards;
+        }
+
+        &--view {
+            animation: slideUp 0.5s ease forwards;
+        }
     }
 
     &__header {
@@ -43,8 +56,54 @@
     .modal__header {
         align-items: flex-start;
     }
+
     .modal__close {
         width: 34px;
         height: 34px;
+    }
+}
+
+
+@keyframes viewModal {
+ 0%, 1% {
+    opacity: 0;
+ }
+ 100% {
+    opacity: 1;
+ }
+}
+@keyframes noViewModal {
+    0%, 1% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+@keyframes slideUp {
+
+    0%,
+    1% {
+        transform: translateY(100%);
+        /* Начало анимации - за пределами экрана */
+    }
+
+    100% {
+        transform: translateY(0);
+        /* В конечном положении */
+    }
+}
+
+@keyframes slideDown {
+
+    0%,
+    1% {
+        transform: translateY(0);
+        /* Начало анимации - за пределами экрана */
+    }
+
+    100% {
+        transform: translateY(100%);
+        /* В конечном положении */
     }
 }
