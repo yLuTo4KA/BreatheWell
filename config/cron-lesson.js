@@ -48,7 +48,7 @@ module.exports = {
             console.error('Ошибка отправки сообщений: ', error);
         }
     },
-    "59 23 * * *": async ({ strapi }) => {
+    "1 0 * * *": async ({ strapi }) => {
         try {
             const currentDate = new Date();
             let page = 1;
@@ -64,18 +64,21 @@ module.exports = {
                 for (const user of users) {
                     let currentStreak = user.activeDays;
                     let prevStreak = user.prevActiveDays;
-                    const prevActiveDate = new Date(user.prevActiveDate);
+                    let prevActiveDate = new Date(user.prevActiveDate);
+                    let lastActiveDate = new Date(user.lastActiveDate);
 
                     if (user.lastActiveDate) {
-                        const lastActiveDate = new Date(user.lastActiveDate);
+                        const lastActiveDay = lastActiveDate.getDay();
+                        const currentDay = currentDate.getDay();
                         // @ts-ignore
                         const diffInMs = currentDate - lastActiveDate;
                         const diffInDay = diffInMs / (1000 * 60 * 60 * 24);
-                        console.log(diffInDay);
-                        if (diffInDay > 1) {
+                        if (lastActiveDay + 1 < currentDay) {
+                            console.log('day')
                             if (user.activeDays >= 1) {
                                 prevStreak = user.activeDays;
-                                prevActiveDate.setDate(user.lastActiveDate);
+                                prevActiveDate = new Date(user.lastActiveDate);
+                                lastActiveDate = new Date(currentDate);
                             }
                             currentStreak = 0;
                         }
@@ -85,7 +88,7 @@ module.exports = {
                     }
                     await strapi.query('plugin::users-permissions.user').update({
                         where: { id: user.id },
-                        data: { todayActive: false, activeDays: currentStreak, prevActiveDays: prevStreak, prevActiveDate: prevActiveDate },
+                        data: { todayActive: false, activeDays: currentStreak, prevActiveDays: prevStreak, prevActiveDate: prevActiveDate, lastActiveDate: lastActiveDate},
                     });
                 }
 
