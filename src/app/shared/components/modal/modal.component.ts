@@ -11,13 +11,16 @@ export class ModalComponent {
   @Input() smallButton: boolean = false;
   @Output() closeModalEmit = new EventEmitter<void>();
 
-  isVisible: boolean = this.viewModal;
+  isVisible: boolean = false;
 
-
+  ngOnChanges() {
+    if(this.viewModal) {
+      this.isVisible = this.viewModal
+    }
+  }
   closeModal(): void {
     this.isVisible = false;
     setTimeout(() => {
-      this.isVisible = this.viewModal;
       this.closeModalEmit.emit();
     }, 300)
   }
