@@ -10,11 +10,13 @@
     background-color: #00000099;
     overflow: hidden;
     cursor: pointer;
+
     &--view {
         display: flex;
         flex-direction: column-reverse;
         animation: viewModal 0.3s ease forwards;
     }
+
     &--no-view {
         animation: noViewModal 0.3s ease forwards;
     }
@@ -31,10 +33,12 @@
         cursor: default;
 
         &--no-view {
+            -webkit-animation: slideDown 0.5s ease forwards;
             animation: slideDown 0.5s ease forwards;
         }
 
         &--view {
+            -webkit-animation: slideUp 0.5s ease forwards;
             animation: slideUp 0.5s ease forwards;
         }
     }
@@ -65,26 +69,34 @@
 
 
 @keyframes viewModal {
- 0%, 1% {
-    opacity: 0;
- }
- 100% {
-    opacity: 1;
- }
-}
-@keyframes noViewModal {
-    0%, 1% {
+
+    0%,
+    1% {
+        opacity: 0;
+    }
+
+    100% {
         opacity: 1;
     }
+}
+
+@keyframes noViewModal {
+
+    0%,
+    1% {
+        opacity: 1;
+    }
+
     100% {
         opacity: 0;
     }
 }
+
 @keyframes slideUp {
 
     0%,
     1% {
-        transform: translateY(100%);
+        transform: translateY(1000px);
         /* Начало анимации - за пределами экрана */
     }
 
@@ -103,7 +115,7 @@
     }
 
     100% {
-        transform: translateY(100%);
+        transform: translateY(1000px);
         /* В конечном положении */
     }
 }
