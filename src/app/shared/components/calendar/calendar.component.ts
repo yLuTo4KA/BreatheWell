@@ -89,7 +89,7 @@ export class CalendarComponent {
     if(day === this.lastActiveDay  && this.todayActive) {
       return true;
     }
-    if ((day > this.currentDay - this.activeDays - (this.todayActive ? 0 : 1) && day < this.currentDay && this.lastActiveDay > day) || (day > this.prevActiveDay - this.prevActiveDays && day <= this.prevActiveDay)) {
+    if ((day > this.currentDay - this.activeDays - (this.todayActive ? 0 : 1) && day < this.currentDay && this.lastActiveDay >= day) || (day > this.prevActiveDay - this.prevActiveDays && day <= this.prevActiveDay)) {
       return true;
     }
     if(day > this.currentDay && day > this.week[this.week.length - 1].day) {
