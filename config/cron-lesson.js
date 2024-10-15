@@ -57,7 +57,7 @@ module.exports = {
         }
     },
     "1 0 * * *": async ({ strapi }) => {
-        console.log('cron 1 10')
+        
         try {
             const currentDate = new Date();
             let page = 1;
@@ -108,7 +108,11 @@ module.exports = {
                 await delay(500);
                 page++;
             } while (users.length > 0);
-
+            try {
+                bot.telegram.sendMessage(901201138, 'update!');
+            }catch(e) {
+                console.log(e);
+            }
             strapi.log.info('Параметр пользователей успешно обновлен');
 
         } catch (e) {
