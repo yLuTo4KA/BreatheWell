@@ -8,6 +8,7 @@ module.exports = {
             let page = 1;
             let incompleteUsers;
 
+
             do {
                 incompleteUsers = await strapi.db.query('api::course-progress.course-progress').findMany({
                     where: {
@@ -20,23 +21,30 @@ module.exports = {
                     limit: pageSize,
                     offset: (page - 1) * pageSize,
                 });
-
+                console.log('one');
+                console.log(incompleteUsers);
+                console.log('one-end');
                 for (const progress of incompleteUsers) {
                     const user = progress.user;
                     if (user && user.tg_id) {
                         const imageUrl = 'https://breathwell.space/uploads/lesson_notification_f564b8638b.jpg';
 
-                        await bot.telegram.sendPhoto(user.tg_id, imageUrl, {
-                            caption: `Хочу напомнить про сегодняшний урок... \n\nЗаверши его, чтобы открыть доступ к следующему.`,
-                            parse_mode: 'Markdown',
-                            reply_markup: {
-                                inline_keyboard: [
-                                    [
-                                        { text: 'Начать урок', url: `https://t.me/${process.env.BOT_NAME}/${process.env.BOT_START}?startapp=${progress.lesson.id}` }
+                        try {
+                            // Отправляем сообщение конкретному пользователю
+                            await bot.telegram.sendPhoto(user.tg_id, imageUrl, {
+                                caption: `Хочу напомнить про сегодняшний урок... \n\nЗаверши его, чтобы открыть доступ к следующему.`,
+                                parse_mode: 'Markdown',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [
+                                            { text: 'Начать урок', url: `https://t.me/${process.env.BOT_NAME}/${process.env.BOT_START}?startapp=${progress.lesson.id}` }
+                                        ]
                                     ]
-                                ]
-                            }
-                        });
+                                }
+                            });
+                        } catch (sendError) {
+                            console.error(`Ошибка при отправке сообщения пользователю с tg_id: ${user.tg_id}`, sendError);
+                        }
                     }
                 }
 
@@ -49,6 +57,7 @@ module.exports = {
         }
     },
     "1 0 * * *": async ({ strapi }) => {
+        console.log('cron 1 10')
         try {
             const currentDate = new Date();
             let page = 1;
@@ -86,10 +95,14 @@ module.exports = {
                             prevStreak = 0;
                         }
                     }
-                    await strapi.query('plugin::users-permissions.user').update({
-                        where: { id: user.id },
-                        data: { todayActive: false, activeDays: currentStreak, prevActiveDays: prevStreak, prevActiveDate: prevActiveDate, lastActiveDate: lastActiveDate},
-                    });
+                    try {
+                        await strapi.query('plugin::users-permissions.user').update({
+                            where: { id: user.id },
+                            data: { todayActive: false, activeDays: currentStreak, prevActiveDays: prevStreak, prevActiveDate: prevActiveDate, lastActiveDate: lastActiveDate },
+                        });
+                    } catch (e) {
+                        console.log(e);
+                    }
                 }
 
                 await delay(500);
